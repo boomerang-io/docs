@@ -17,7 +17,7 @@ In tests, this has taken from 5 - 10 seconds of additional time.
 
 ## Are there any time limits defined or that can be set?
 
-We do not yet have customizable limits or timeouts implemented in Flow.
+Yes, time limits are defined as part of the team quotas set by the team owner or administrator.
 
 ## Can I create my own Tasks?
 

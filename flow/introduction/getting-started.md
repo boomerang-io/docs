@@ -5,22 +5,20 @@ order: 2
 
 # Getting Started
 
-After gaining access, users will be presented with the Personal Workflows screen. This is your sandbox and allows you to create workflows, as long as you are within your quotas.
+After gaining access, users will be presented with the Home screen showing your teams, and allowing you to create a new team.
 
-You can start creating Personal Workflows using the **Create a new Workflow** tile on the Workflows screen. This opens a modal that allows you to **Start from scratch** or **Import a Workflow**.
-
-## Workflow Templates
-
-You can also click the **Templates** button in the top right and create a workflow from Template. This is a great way to get started with proven workflows.
+Once you have a team you can start creating Workflows using the **Create a new Workflow** tile on the Workflows screen. This opens a modal that allows you to **Start from scratch** or **Import a Workflow**.
 
 ## Team Creation
 
 Teams can be created in two ways:
 
-1. By a user with Administrator rights, who can then map users to a team.
-2. Through the APIs
+1. By any user through the UI.
+2. Via the API.
 
-> When integrated with IBM Consulting<sup>®</sup> Essentials, Boomerang Flow integrates with your Essentials teams. Ensure you have access to a team or create a new team and request access to Boomerang Flow.
+## Workflow Templates
+
+You can also click the **Templates** button in the top right and create a workflow from Template. This is a great way to get started with proven workflows.
 
 ## Need help?
 

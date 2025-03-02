@@ -5,13 +5,13 @@ order: 1
 
 # Overview
 
-Modernize and supercharge your automation with a powerful no-code event driven Workflow automation tool, built cloud native on top of Kubernetes<sup>®</sup>. It enables new ways of approaching your business Tasks or combine with existing tools to extend your current workloads.
+Modernize and supercharge your automation with a powerful no-code event driven Workflow automation tool. It enables new ways of approaching your business Tasks or combine with existing tools to extend your current workloads.
 
-Supporting the no-code paradigm with out-of-the-box Tasks, Boomerang Flow offers extensibility to bring your own Tasks, while providing custom container support.
+Supporting the no-code paradigm with out-of-the-box Tasks, and offering extensibility to bring your own Tasks, while providing custom container support for the more advanced use cases.
 
 Create your next Workflow to produce an end-to-end process that executes a series of Tasks.
 
-> **Note**: Boomerang Flow is an open source project part of Boomerang-io.
+> **Note**: Boomerang Flow is an open source project part of Boomerang-io, built cloud native on top of Kubernetes<sup>®</sup>
 
 ## Benefits
 

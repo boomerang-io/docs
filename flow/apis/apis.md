@@ -3,7 +3,7 @@ title: APIs
 order: 4
 ---
 
-# API Architecture
+# Overview & Authentication
 
 Boomerang Flow exposes a series of RESTFul APIs that allows the query and management of teams, users, and workflows as well as drive extensibility.
 
