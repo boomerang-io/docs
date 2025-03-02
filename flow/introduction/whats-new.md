@@ -5,9 +5,11 @@ order: 3
 
 # What's new
 
-Get a quick overview of what has been added, changed, improved, or deprecated in version 3.12.0 released 8th November 2022.
+Get a quick overview of what has been added, changed, improved, or deprecated in version 4.0 (coming soon). 4.0 beta 2 released March 2025.
 
-> You can find all the associated versions for this release on our [GitHub Release](https://github.com/boomerang-io/roadmap/releases/tag/3.12.0) as well as install via our Helm chart
+> If upgrading from a prior version, we recommend running the Loader directly against the Database as the data migration can take up to 30 minutes.
+
+You can find all the associated versions for this release on our [GitHub Release](https://github.com/boomerang-io/community/releases/tag/4.0.0-beta.1) as well as install via our Helm chart
 
 ## Workflow
 
