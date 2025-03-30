@@ -3,22 +3,38 @@ title: Getting Started
 order: 2
 ---
 
-# Getting Started
+# Getting Started 🚀
 
-After gaining access, users will be presented with the Home screen showing your teams, and allowing you to create a new team.
+Follow these steps to get up and running in no time.
 
-Once you have a team you can start creating Workflows using the **Create a new Workflow** tile on the Workflows screen. This opens a modal that allows you to **Start from scratch** or **Import a Workflow**.
+## 1. Create an Account
 
-## Team Creation
+You can either:
 
-Teams can be created in two ways:
+- Use the [Backstop.dev Cloud](backstop.dev/signup) – Sponsored with a free tier.
+- Self-Host – Install Boomerang Flow on your own infrastructure.
 
-1. By any user through the UI.
-2. Via the API.
+## 2. Create Your First Team
 
-## Workflow Templates
+- Click Create Team.
+- Fill in a name and hit Create.
 
-You can also click the **Templates** button in the top right and create a workflow from Template. This is a great way to get started with proven workflows.
+![Create Team](./assets/backstop-create-team.gif)
+
+## 3. Create Your First Workflow from a Template
+
+- Select the Hello World template and add it to your team.
+
+## 4. Run and View Your Workflow
+
+- On the Teams Workflow screen, find the Hello World workflow and select Run It.
+- Enter the required input and click Run and View.
+
+## 5. View the Run
+
+🎉 Congratulations! You should now see the Run Page, where you can track the current state of your workflow in real-time.
+
+🚀 Ready to build more? Explore our Fundamentals or Guides!
 
 ## Need help?
 

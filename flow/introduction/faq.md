@@ -5,6 +5,20 @@ order: 5
 
 # Frequently asked questions
 
+## What are Tasks and Workflows?
+
+- Tasks are a discrete piece of work .e.g. making a HTTP request. They are the base unit of execution in Flow.
+- Workflows are a series of Tasks connected together.
+- Workflows form and are executed as a directed acyclic graph (DAG).
+
+### Tasks
+
+Tasks can be split into three distinct types. See [Getting To Know Tasks](../fundamentals/tasks) for more information.
+
+- System Tasks: are logic based Tasks that influence the DAG.
+- Template Tasks: are Tasks that perform a function and can be verified out-of-the box, are community-provided, and managed through Task Manager (in the Admin interface).
+- Custom Task: a custom Task allows a bring-your-own container to run in place of a Task and executes any custom logic.
+
 ## How long does a Workflow take to execute?
 
 A Workflow can take any amount of time. A Workflow generally starts executing a Task within three seconds. A simple Workflow with a single Task usually takes less then 15 seconds end-to-end.
@@ -25,3 +39,12 @@ Yes. There are two ways this can be done
 
 1. You can bring your own containers and run them through the use of the **Custom** Task in the Workflow Editor.
 2. You can define a Team Task and use that in your Workflow. These Tasks can also be imported from the Tekton Task Hub.
+
+## What is a DAG?
+
+- The core concept of Flow. It is how we represent Tasks and their relationships and dependencies that determine how a Workflow executes.
+- It's a graph. Think vertices and edges between them.
+- It's directed. Edges between vertices have an orientation or direction.
+- It's acyclic. You can't end end up where you started in an execution.
+- DAGs have a number of applications across a number of disciplines. For our purposes, it is used for scheduling the Tasks in a Workflow.
+- Learn some more about [graph theory](https://en.wikipedia.org/wiki/Graph_theory) and [DAGs](https://en.wikipedia.org/wiki/Directed_acyclic_graph) via Wikipedia.

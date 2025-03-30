@@ -3,55 +3,33 @@ title: Overview
 order: 1
 ---
 
-# Overview
+# Welcome to Boomerang Flow
 
-Modernize and supercharge your automation with a powerful no-code event driven Workflow automation tool. It enables new ways of approaching your business Tasks or combine with existing tools to extend your current workloads.
+Boomerang Flow is the easiest way to build, automate, and optimize workflows - without writing a single line of code... unless you really want to! With our fully extensible model, you can bring a script, bring a container, or write your own tasks from scratch.
 
-Supporting the no-code paradigm with out-of-the-box Tasks, and offering extensibility to bring your own Tasks, while providing custom container support for the more advanced use cases.
+Whether you're a solo operator or managing a team, our intuitive drag-and-drop builder helps you streamline repetitive tasks, integrate with your favourite tools, and ensure everything runs smoothly.
 
-Create your next Workflow to produce an end-to-end process that executes a series of Tasks.
+Create workflows composed of reusable logic that you define, using our tasks for automatically retriable steps and human-in-the-loop flows using actions or wait for event.
 
-> **Note**: Boomerang Flow is an open source project part of Boomerang-io, built cloud native on top of Kubernetes<sup>®</sup>
+## Why use Boomerang Flow?
 
-## Benefits
+✅ Automate with Ease – Build workflows visually without coding. Just drag, drop, and connect.
 
-- No-code drag-and-drop UI editor for creating Workflows.
-- Cloud native from the ground up, with no overhead from legacy implementations.
-- Cloud agnostic and can be run in any Kubernetes environment.
-- Events based on [CloudEvents](https://cloudevents.io) and [NATS](https://nats.io).
-- Triggers in any of four easy methods: manual, webhook, schedule, or custom event.
-- Parallel processing of Tasks, decisions, dynamic storage, and parameterization.
-- Tasks that are executed as [Kubernetes jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/).
-- Workflow change logs and versioning that provide the ability to roll back to any prior revision.
-- Activity detail with per-execution records that detail the executed Workflow and Tasks. Logs, status, and output properties are all available.
-- Dynamic insights over time that can be filtered per team, Workflow or a combination thereof.
+✅ Powerful Integrations – Connect with any APIs effortlessly.
 
-## What are Tasks and Workflows?
+✅ Reliable Execution – Runs are queued and reliably executed to ensure stability.
 
-- Tasks are a discrete piece of work .e.g. making a HTTP request. They are the base unit of execution in Flow.
-- Workflows are a series of Tasks connected together.
-- Workflows form and are executed as a directed acyclic graph (DAG).
+✅ Flexible Triggers – Start workflows manually, on a schedule, via API, or from event-driven sources.
 
-### Tasks
+✅ Scalable & Secure – Designed for teams and enterprises with access control, logging, and monitoring.
 
-Tasks can be split into three distinct types. See [Getting To Know Tasks](../fundamentals/tasks) for more information.
+✅ Detailed Runs & Insights – View each workflow run in detail, including logs, execution history, and step-by-step progress for easy troubleshooting.
 
-- System Tasks: are logic based Tasks that influence the DAG.
-- Template Tasks: are Tasks that perform a function and can be verified out-of-the box, are community-provided, and managed through Task Manager (in the Admin interface).
-- Custom Task: a custom Task allows a bring-your-own container to run in place of a Task and executes any custom logic.
+✅ Fully Extensible – Bring your own task using the open-source Tekton.dev model or write custom code packaged as a BYO container.
 
-## Wait, what is a DAG again?
+### Use Cases
 
-- The core concept of Flow. It is how we represent Tasks and their relationships and dependencies that determine how a Workflow executes.
-- It's a graph. Think vertices and edges between them.
-- It's directed. Edges between vertices have an orientation or direction.
-- It's acyclic. You can't end end up where you started in an execution.
-- DAGs have a number of applications across a number of disciplines. For our purposes, it is used for scheduling the Tasks in a Workflow.
-- Learn some more about [graph theory](https://en.wikipedia.org/wiki/Graph_theory) and [DAGs](https://en.wikipedia.org/wiki/Directed_acyclic_graph) via Wikipedia.
-
-## Use Cases
-
-There are plenty of ways to use Boomerang Flow, it is all about save people time either by automating repetitive or low value Tasks and increasing your productivity.
+It is all about saving people time through automating repetitive or low value Tasks and increasing your productivity.
 
 - Employee Onboarding - Send, track, and automatically action access requests for new employees
 - Git Bot - Manage issue and PR responses and categorizations
@@ -60,34 +38,97 @@ There are plenty of ways to use Boomerang Flow, it is all about save people time
 - Operations - Implement runbook automation and issue remediation
 - Syncing Systems - Send data between systems as events happen to ensure tools and access stay in sync
 
-## Getting To Know
+## Ready to Automate? Get Started Quickly 🎯
 
-The following describes the main functionality split and navigation within Boomerang Flow.
+<docs-cards>
+  <a href="/introduction/getting-started" aria-label="Getting Started">
+    <docs-card>
+      <h4 class="text-blue-brand">New here?</h4>
+      <p>Follow our 5-step Quick Start guide to build your first workflow in minutes!</p>
+    </docs-card>
+  </a>
+  <a href="/introduction/faq" aria-label="Frequently Asked Questions">
+    <docs-card>
+      <h4 class="text-blue-brand">New here?</h4>
+      <p>Get answers to your questions!</p>
+    </docs-card>
+  </a>
+</docs-cards>
 
-- [Workflows](../fundamentals/workflows) - create, view, and manage your personal and team workflows from a centralized location.
-- [Activity](../fundamentals/activity) - view the real-time status, logs, outputs, and run times of your workflow activity past and present as well as diving deep into the individual workflows.
-- [Actions](../fundamentals/actions) - access your manual actions and respond to needed approvals.
-- [Insights](../fundamentals/insights) - view metrics and statistics on Workflow executions over time, showing peak execution periods, average run times, and percentage of success and failures.
-- [Schedules](../fundamentals/schedules) - view, create, and manage your Workflow Schedules with a Calendar based view.
-- [Manage](../fundamentals/manage) - provides ability for teams to set set team parameters, define team tasks, create API tokens, and define approval groups.
-- [Administer](../fundamentals/administer) - provides ability for Administrators to control the instance of Boomerang Flow.
+## Learn the Concepts
 
-### Supporting Functionality
+Master the basics with our Fundamentals or by reading our Frequently Asked Questions.
 
-The following are additional areas of functionality that may be access through the above functional areas or affect them.
+<docs-cards>
+  <a href="../fundamentals/workflows" aria-label="Workflows">
+    <docs-card>
+      <h4 class="text-blue-brand">Workflows</h4>
+      <p>Create, view, and manage your personal and team workflows from a centralized location</p>
+    </docs-card>
+  </a>
+  <a href="../fundamentals/activity" aria-label="Activity">
+    <docs-card>
+      <h4 class="text-blue-brand">Activity</h4>
+      <p>View the real-time status, logs, outputs, and run times of your workflow activity past and present as well as diving deep into the individual workflows.</p>
+    </docs-card>
+  </a>
+  <a href="../fundamentals/actions" aria-label="Actions">
+    <docs-card>
+      <h4 class="text-blue-brand">Actions</h4>
+      <p>Access your manual actions and respond to needed approvals.</p>
+    </docs-card>
+  </a>
+  <a href="../fundamentals/insights" aria-label="Insights">
+    <docs-card>
+      <h4 class="text-blue-brand">Insights</h4>
+      <p>View metrics and statistics on Workflow executions over time, showing peak execution periods, average run times, and percentage of success and failures.</p>
+    </docs-card>
+  </a>
+  <a href="../fundamentals/schedules" aria-label="Schedules">
+    <docs-card>
+      <h4 class="text-blue-brand">Schedules</h4>
+      <p>View, create, and manage your Workflow Schedules with a Calendar based view.</p>
+    </docs-card>
+  </a>
+  <a href="../fundamentals/manage" aria-label="Manage your Team">
+    <docs-card>
+      <h4 class="text-blue-brand">Manage your Team</h4>
+      <p>Provides ability for teams to manage users, set team parameters, define team tasks, create API tokens, and define approval groups.</p>
+    </docs-card>
+  </a>
+  <a href="../fundamentals/administer" aria-label="Administer">
+    <docs-card>
+      <h4 class="text-blue-brand">Administer</h4>
+      <p>Provides ability for Administrators to control the instance of Boomerang Flow.</p>
+    </docs-card>
+  </a>
+</docs-cards>
 
-- [Workflow Editor](../guides/workflow-editor) - visually draw and edit your Workflow with drag-and drop Tasks from the palette.
-- [Quotas](../fundamentals/quotas) - allocate a team quotas for executing and managing Workflows.
-- [Parameters](../fundamentals/parameters) - input and output to your Workflow or tasks to help pass information.
-- [Triggers](../fundamentals/triggers) - understanding what can cause a Workflow to execute.
+## Explore by Feature
 
-### Navigation
+Looking for specific capabilities? Our Guides walk you through key features like managing workflows, defining custom tasks, and optimizing execution.
 
-The menu is the primary navigation tool for Boomerang Flow. It is located to the top left in the header.
+<docs-cards>
+  <a href="../guides/create" aria-label="Create a new Workflow">
+    <docs-card>
+      <h4 class="text-blue-brand">Create a new Workflow</h4>
+      <p>Understand how to create a new workflow through the visual editor</p>
+    </docs-card>
+  </a>
+</docs-cards>
 
-![Boomerang Flow Navigation](./assets/img/navigating.png)
+## Getting help
 
-## Sponsored Organizations
+We’d love to hear from you or give you a hand getting started. Here are some ways to get in touch with us.
+
+- [Community](https://github.com/boomerang-io/community) - Learn more about the Boomerang Flow community and how to get involved
+- [Slack](https://join.slack.com/t/boomerang-io/shared_invite/zt-pxo2yw2o-c3~6YvWkKNrKIwhIBAKhaw) - Join our community and chat with us in real-time
+- [GitHub Issues](https://github.com/features/issues) - Report bugs, request features, or contribute to the project
+- [GitHub Project Board](https://github.com/orgs/boomerang-io/projects/4/views/1) - See what we’re working on and what’s coming next
+
+## Sponsors & Contributors
+
+> **Note**: Boomerang Flow is an open source project part of Boomerang-io, built cloud native on top of Kubernetes<sup>®</sup>
 
 ### IBM Consulting Advantage
 
@@ -97,6 +138,4 @@ At installation time, you can configure whether to run Boomerang Flow in standal
 
 ### Backstop
 
-The team behind Backstop are some of the original creators of Boomerang Flow and continue to support the Open Source community, as well as providing the [Try Me](https://www.useboomerang.io/try) environment.
-
-They also provide a free tier of their managed service and benefits for the open source community.
+The team behind Backstop are some of the original creators of Boomerang Flow and continue to support the Open Source community. They also provide a free tier of their managed service and benefits for the open source community - [Try it out](https://www.backstop.dev/signup)!

@@ -5,36 +5,26 @@ order: 3
 
 # What's new
 
-Get a quick overview of what has been added, changed, improved, or deprecated in version 4.0 (coming soon). 4.0 beta 2 released March 2025.
+You can find what has been added, changed, improved, or deprecated for this release on our [GitHub Release](https://github.com/boomerang-io/community/releases/tag/4.0.0)
+
+# Known Issues
 
 > If upgrading from a prior version, we recommend running the Loader directly against the Database as the data migration can take up to 30 minutes.
 
-You can find all the associated versions for this release on our [GitHub Release](https://github.com/boomerang-io/community/releases/tag/4.0.0-beta.1) as well as install via our Helm chart
+## Tasks & Task Manager
 
-## Workflow
+- We don't yet support Tekton<sup>®</sup> Task Resources or multi-step tasks.
+- We don't yet support Tekton<sup>®</sup> Parameter references such as SecretKeyRef and ConfigMapRef
 
-- Resolved issue with setting of output parameters on workflows with multiple set output parameter tasks by refactoring output properties to allow for more reliable saving
-- Fixed output parameters being shown without quotes on output
+# Deprecations
 
-## Tasks & Extensions
+The following table describes the deprecations, when they are announced, and when they will be fully removed.
 
-- Fixed import task yaml error
-
-## APIs & Events
-
-- Added a new API `workflow/teams/{teamId}/workflows`
-- Speed up `/teams` API performance when team list is large in size
-
-## Management & Administration
-
-- Resolved issue with Admins not able to view all workflows
-
-## Installing
-
-- Tekton is no longer tighly coupled with a Boomerang Flow installation. See [Deprecations](../introduction/known-issues-limitations#deprecations). We now recommend Tekton 0.29 or above.
-
-## Stablity and Security
-
-- Fixed issue with not being able to open any pages with flow.client.web versions 3.10.0 and 3.11.0
-- Increased a number of minor dependent package versions across all parts of the solution thanks to Snyk and Dependabot.
-- Documented how to contribute to the [Flow Loader project](https://github.com/boomerang-io/flow.loader)
+| Feature                                   | Announcement Date or Release | Removal Date or Release | Comments                                                                                                                                                                                                                                                     |
+| ----------------------------------------- | ---------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| System Tokens                             | 3.12                         | 4.0                     | Replaced by the new API Tokens.                                                                                                                                                                                                                              |
+| Embbedded Tekton Helm Chart               | 3.12                         | 3.12                    | Removed as an option with our update to recommending that installation is completed with Tekton 0.29 or above. The CD Foundation Helm Chart no longer supported the latest versions and using the Operator installation method is now recommended by Tekton. |
+| Properties Syntax and Terminology         | 3.1                          | 3.4                     | Replaced by Parameters and backwards compatibility supported until 3.4                                                                                                                                                                                       |
+| Create Task from JSON                     | 3.2                          | 3.2                     | Replaced by the ability to create from YAML as part of the Tekton Task adoption                                                                                                                                                                              |
+| Elasticsearch<sup>®</sup> log integration | 3.3                          | 3.3                     | Removed as an option for log integration.                                                                                                                                                                                                                    |
+| Lifecycle Worker                          | 3.3                          | 3.3                     | Removed as an option custom integration or lifecycle watcher.                                                                                                                                                                                                |
