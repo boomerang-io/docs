@@ -7,18 +7,19 @@ order: 3
 
 Activity allows you to view each individual execution of a Workflow. Each time you execute a Workflow, an activity is associated with this execution. The system keeps information on Workflow status, Workflow duration, Task status, Task duration, output properties, and logs.
 
+There are three ways to access the Activity page:
+
+- Select **View Activity** from the overflow menu on any Workflow to access the Activity page, filtered to that specific Workflow.
+- Select **Run and View** from the Run Workflow modal to access the Activity of a specific execution.
+- Navigate to 'Activity' in the left-hand navigation to access a full list of all Activities.
+
 ## Activity snapshot
-
-Select **View Activity** from the overflow menu on any Workflow to access the Activity page.
-
-![Workflow dropdown](./assets/img/workflow-tile-dropdown.png)
 
 The Activity page provides you with a snapshot breakdown with the ability to filter by:
 
-- status
-- team
 - Workflow
-- trigger method
+- status
+- trigger
 - date range
 
 ![View Activity](./assets/img/workflow-view-activity.png)

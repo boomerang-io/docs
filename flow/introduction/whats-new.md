@@ -1,22 +1,15 @@
 ---
 title: What's New
-order: 3
+order: 4
 ---
 
 # What's new
 
-You can find what has been added, changed, improved, or deprecated for this release on our [GitHub Release](https://github.com/boomerang-io/community/releases/tag/4.0.0)
+We have completely rebuilt Boomerang Flow from the ground up to provide a more robust, scalable, and secure platform for building, automating, and optimizing workflows. This release includes a new user interface, new features, and a new architecture that is designed to be more extensible and easier to maintain.
 
-# Known Issues
+[View the full release notes on GitHub](https://github.com/boomerang-io/community/releases/tag/4.0.0) where you can find what has been added, changed, improved, or deprecated in each release.
 
-> If upgrading from a prior version, we recommend running the Loader directly against the Database as the data migration can take up to 30 minutes.
-
-## Tasks & Task Manager
-
-- We don't yet support Tekton<sup>®</sup> Task Resources or multi-step tasks.
-- We don't yet support Tekton<sup>®</sup> Parameter references such as SecretKeyRef and ConfigMapRef
-
-# Deprecations
+## Deprecations
 
 The following table describes the deprecations, when they are announced, and when they will be fully removed.
 

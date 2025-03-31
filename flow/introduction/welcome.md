@@ -3,7 +3,7 @@ title: Overview
 order: 1
 ---
 
-# Welcome to Boomerang Flow
+# Welcome to Boomerang Flow 👋
 
 Boomerang Flow is the easiest way to build, automate, and optimize workflows - without writing a single line of code... unless you really want to! With our fully extensible model, you can bring a script, bring a container, or write your own tasks from scratch.
 
