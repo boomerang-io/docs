@@ -27,17 +27,6 @@ Create workflows composed of reusable logic that you define, using our tasks for
 
 ✅ Fully Extensible – Bring your own task using the open-source Tekton.dev model or write custom code packaged as a BYO container.
 
-### Use Cases
-
-It is all about saving people time through automating repetitive or low value Tasks and increasing your productivity.
-
-- Employee Onboarding - Send, track, and automatically action access requests for new employees
-- Git Bot - Manage issue and PR responses and categorizations
-- Report Generation - Integrate and collate data from multiple sources into a cohesive scorecard
-- Incident Management - Help resolve issues with automatic routing and acknowledgement
-- Operations - Implement runbook automation and issue remediation
-- Syncing Systems - Send data between systems as events happen to ensure tools and access stay in sync
-
 ## Ready to Automate? Get Started Quickly 🎯
 
 <docs-cards>
@@ -49,7 +38,7 @@ It is all about saving people time through automating repetitive or low value Ta
   </a>
   <a href="/introduction/faq" aria-label="Frequently Asked Questions">
     <docs-card>
-      <h4 class="text-blue-brand">New here?</h4>
+      <h4 class="text-blue-brand">FAQ</h4>
       <p>Get answers to your questions!</p>
     </docs-card>
   </a>
@@ -138,4 +127,4 @@ At installation time, you can configure whether to run Boomerang Flow in standal
 
 ### Backstop
 
-The team behind Backstop are some of the original creators of Boomerang Flow and continue to support the Open Source community. They also provide a free tier of their managed service and benefits for the open source community - [Try it out](https://www.backstop.dev/signup)!
+The team behind Backstop are some of the original creators of Boomerang Flow and continue to support the Open Source community. They also provide a free tier of their managed service and benefits for the open source community - [Try it out](https://useboomerang.io/flow/try)!

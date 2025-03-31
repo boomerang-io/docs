@@ -5,6 +5,17 @@ order: 5
 
 # Frequently asked questions
 
+## What are the Use Cases
+
+It is all about saving people time through automating repetitive or low value Tasks and increasing your productivity.
+
+- Employee Onboarding - Send, track, and automatically action access requests for new employees
+- Git Bot - Manage issue and PR responses and categorizations
+- Report Generation - Integrate and collate data from multiple sources into a cohesive scorecard
+- Incident Management - Help resolve issues with automatic routing and acknowledgement
+- Operations - Implement runbook automation and issue remediation
+- Syncing Systems - Send data between systems as events happen to ensure tools and access stay in sync
+
 ## What are Tasks and Workflows?
 
 - Tasks are a discrete piece of work .e.g. making a HTTP request. They are the base unit of execution in Flow.
