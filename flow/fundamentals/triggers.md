@@ -61,4 +61,16 @@ The response for execution status will contain the overall execution status and 
 
 ## Events
 
+Enable Event based triggers is similar to Webhook, however specifically for Cloud Events. It allows you to filter out the specific events sent to the system. This is useful for triggering workflows based on specific events that occur in your system or third-party services.
+
+For example, you can trigger a workflow when a new issue is created in your issue tracker or when a new user signs up for your service.
+
+![Webhook Triggers](./assets/img/workflow-triggers-events.png)
+
 See the [eventing architecture](../architecture/eventing) for more information.
+
+## GitHub (_beta_)
+
+The GitHub Trigger allows you to trigger a workflow when a valid GitHub Event is received based on the specific events you select.
+
+For example, you can trigger a workflow when a new issue is created or a commit is made on a repository.
