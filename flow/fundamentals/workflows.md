@@ -1,6 +1,6 @@
 ---
 title: Workflows
-order: 1
+order: 2
 ---
 
 # Workflows

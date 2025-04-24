@@ -1,27 +1,25 @@
 ---
 title: Insights
-order: 4
+order: 5
 ---
 
 # Insights
 
-View powerful metrics and real-time statistics on Workflow executions over time, showing peak execution periods, average run times, and percentage of success and failures.
-
-> Note: Insights is currently a team based feature and doesn't provide any information about Personal Workflows
+View powerful metrics and real-time statistics on Workflow runs over time, showing peak run periods, average run times, and percentage of success and failures.
 
 To access, select **Insights** from the menu in the upper left corner of the page.
 
-![Insights Menu](./assets/img/insights-menu.png)
+![Insights](./assets/img/insights.png)
 
 ## Filters
 
-You can filter by a combination of Team and Workflow as well as adjust the time period.
+You can filter by a combination of Workflow and status as well as adjust the time range.
 
 ## Metrics
 
 Insights includes the following metrics:
 
-- number of executions
+- number of runs
   - Total
   - By top 5 Workflows
 - runtime durations
@@ -34,7 +32,3 @@ Insights includes the following metrics:
 - plot of Execution time
 
 > Note: narrowing the filters to a particular workflow will change some of the graphs
-
-_In the future_, we aim to show execution cost and performance related information.
-
-![Designer Overview](./assets/img/insights.png)

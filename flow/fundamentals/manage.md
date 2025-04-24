@@ -1,9 +1,9 @@
 ---
-title: Manage
-order: 10
+title: Team Management
+order: 11
 ---
 
-# Manage
+# Managing your Team
 
 ## Team Parameters
 

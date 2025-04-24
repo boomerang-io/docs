@@ -1,13 +1,13 @@
 ---
 title: Tasks
-order: 7
+order: 8
 ---
 
 # Tasks and Task Manager
 
-When in the Workflow editor, notice the collapsible task palette on the left side of the Editor page.
+When in the Workflow Editor, notice the collapsible task palette on the left side of the Canvas.
 
-Tasks are split into different expendable categories. Individual Tasks can be dragged and dropped on the Editor's graphical interface. From there, you connect Tasks together in a left-to-right flow. Click the pencil icon on any Task to access configuration parameters for a Task.
+Tasks are split into expendable categories. Individual Tasks can be dragged and dropped on the Canvas, from there, you connect Tasks together in a left-to-right flow. Click the pencil icon on any Task to access configuration parameters for a Task.
 
 ## Task Manager
 

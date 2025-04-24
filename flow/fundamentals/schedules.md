@@ -1,13 +1,11 @@
 ---
 title: Schedules
-order: 5
+order: 6
 ---
 
 # Schedules
 
-> **Note**: Schedules is currently in **beta**.
-
-A centralised place to manage all Schedules for all your Workflows in one location with the occurences of these Schedules visible on a Calendar. You can also view Schedules specific for a Workflow in the Workflow Editor Schedules tab.
+A centralised calendar assistant for your Workflows. A place to manage all Schedules for all your Workflows in one location. You can also view Schedules specific for a Workflow in the Workflow Editor Schedules tab.
 
 Schedules allow you to
 
@@ -17,15 +15,17 @@ Schedules allow you to
 
 Schedules can be paused individually or the Schedule trigger can be disabled which will pause all Schedules. If the Schedule trigger is disabled, when enabled again it will only enable those Schedules that were previously active, respecting all prior pauses.
 
-![Schedules](./assets/img/schedules-home.png)
+![Schedules](./assets/img/schedules.png)
 
 ## Filters
 
-You can filter by a combination of Scope, Team, Workflow, Status, or Date range.
+You can filter by a combination of Workflow, Status, or Date range.
 
 ## Type
 
 There are three types of Schedule: Run Once, Recurring, and Recurring via cron expression.
+
+![Schedules Type](./assets/img/schedules-edittype.png)
 
 ### Run Once
 
@@ -63,7 +63,7 @@ Cron schedule syntax
 
 To generate Cron schedule expressions, you can use web tools like [crontab.guru](https://https://crontab.guru/). For Quartz Cron expressions you can use web tools like [cronmaker](http://www.cronmaker.com/).
 
-Please note that the `1 1 1 1 1` expression does not work with Flow's scheduling system
+> Please note that the `1 1 1 1 1` expression does not work with the scheduling system
 
 ## System Task
 

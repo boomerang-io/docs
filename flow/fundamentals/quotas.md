@@ -1,31 +1,32 @@
 ---
 title: Quotas
-order: 8
+order: 10
 ---
 
 # Quotas
 
-Quotas help provide limits and enforce governance as to what you can do. There are separate quotas for Personal Workflows vs Team Workflows.
+Quotas help provide limits and enforce governance as to what you can do.
 
-| Quota                 | Purpose                                                                   | Personal Default        | Team Default            |
-| --------------------- | ------------------------------------------------------------------------- | ----------------------- | ----------------------- |
-| Number of Workflows   | Number of Workflows that can be created for this team.                    | 10                      | 10                      |
-| Number of Executions  | Number of executions per month across all Workflows for this Team         | 100 per month           | 100 per month           |
-| Concurrent Workflows  | Max number of Workflows able to run at the same time.                     | 4 Workflows             | 4 Workflows             |
-| Storage Size Capacity | The maximum number of workspace storage that can be created               | 5GB per Workflow        | 5GB per Workflow        |
-| Execution Time        | Maximum amount of time that a single Workflow can take for one execution. | 30 minutes per Workflow | 30 minutes per Workflow |
+| Quota                             | Purpose                                                                           | Default             |
+| --------------------------------- | --------------------------------------------------------------------------------- | ------------------- |
+| Number of Workflows               | Number of Workflows that can be created for this team.                            | 25                  |
+| Number of Runs                    | Number of runs (executions) per month across all Workflows for this Team          | 300 per month       |
+| Run Duration                      | Maximum amount of time that a single Workflow can take for one execution.         | 120 minutes per Run |
+| Concurrent Runs                   | Max number of Workflows able to run at the same time.                             | 4                   |
+| Workspace Capacity - Per Workflow | Workspace size limit for each Workflow using persistent storage on this Team.     | 2GB per Workflow    |
+| Workspace Capacity - Per Run      | Workspace size limit for each Workflow Run using persistent storage on this Team. | 2GB per Workflow    |
 
 > **Note**: Quotas are set by the Administrator. If you have a concern about your allotted amounts, contact an Administrator.
 
-## Administering Quotas
+## Managing Quotas
 
-To Administer team quotas:
+To Manage a teams quotas:
 
-1. In the Flow application, select **Administer** | **Team Quotas** from the Admin dropdown in the upper left of the page.
-2. Select the desired team.
+1. Select **Manage Team** > **Team Quotas** from the hamburger menu in the upper left of the page.
+2. Edit the desired quota.
 
-![Administering Quotas](./assets/img/quotas.png)
+![Managing Quotas](./assets/img/quotas.png)
 
 ## Adjusting Quota Defaults
 
-You can adjust the defaults assigned to Personal or Team quotas in Administer > Settings
+You can adjust the defaults assigned in **Administer** > **Settings** > **Team Quotas**
