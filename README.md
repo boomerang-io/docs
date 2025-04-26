@@ -18,6 +18,14 @@ This is based on the [Remix Docs Template](https://github.com/boomerang-io/remix
 
 Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on how to contribute to this repository.
 
+### Generating the API docs
+
+To update the API docs, run the following LLM command along with the API spec
+
+```
+As a technical writer using the following Swagger API spec, generate markdown documents that can be inserted into the API section of the documentation
+```
+
 ## License
 
 This repository is licensed under the [Apache License, Version 2.0](LICENSE).

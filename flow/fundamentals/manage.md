@@ -1,6 +1,6 @@
 ---
 title: Team Management
-order: 11
+order: 12
 ---
 
 # Managing your Team

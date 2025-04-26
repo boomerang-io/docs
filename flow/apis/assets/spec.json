@@ -1,0 +1,5570 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Boomerang Flow - Workflow Service",
+    "description": "Cloud-native Workflow automation",
+    "version": "4.1.0"
+  },
+  "servers": [
+    { "url": "http://localhost:8081", "description": "Generated server url" }
+  ],
+  "tags": [
+    {
+      "name": "Workflow Management",
+      "description": "Create, list, and manage your Workflows."
+    },
+    {
+      "name": "Triggers for Events, Topics, and Webhooks",
+      "description": "Listen for Events or Webhook requests to trigger Workflows and provide the ability to resolve Wait For Event TaskRuns."
+    },
+    {
+      "name": "Actions Management",
+      "description": "Create and manage Manual and Approval Actions."
+    },
+    {
+      "name": "Task Management",
+      "description": "Create and manage the team based Task definitions."
+    },
+    {
+      "name": "TaskRun Management",
+      "description": "View, Start, Stop, and Update Status of your Task Runs."
+    },
+    {
+      "name": "Parameters",
+      "description": "Create, Update, and Delete global parameters available to all Teams and Workflows."
+    },
+    {
+      "name": "Team Management",
+      "description": "Manage Teams, Team Members, Quotas, ApprovalGroups and Parameters."
+    },
+    {
+      "name": "Workflow Template Management",
+      "description": "Create, List, and Manage your Workflows."
+    },
+    {
+      "name": "System",
+      "description": "Register the instance, retrieve context and navigation, and manage global admin areas."
+    },
+    {
+      "name": "Schedule Management",
+      "description": "Provide the ability to create and update Schedules."
+    },
+    {
+      "name": "Task Management",
+      "description": "Create and Manage the global Task definitions."
+    },
+    {
+      "name": "Integrations",
+      "description": "Handles the integrations with 3rd parties such as Slack and GitHub."
+    },
+    {
+      "name": "Insights Management",
+      "description": "Provide the ability to search and retrieve Insights."
+    },
+    {
+      "name": "User Management",
+      "description": "List, Create, update and delete Users."
+    },
+    { "name": "Token Management", "description": "Create and retrieve Tokens" },
+    {
+      "name": "WorkflowRun Management",
+      "description": "Submit requests to execute Workflows and provide the ability to search and retrieve Workflow activities."
+    }
+  ],
+  "paths": {
+    "/api/v2/workflowtemplate": {
+      "put": {
+        "tags": ["Workflow Template Management"],
+        "summary": "Update, replace, or create new, Workflow Template",
+        "operationId": "apply",
+        "parameters": [
+          {
+            "name": "replace",
+            "in": "query",
+            "description": "Replace existing version",
+            "required": false,
+            "schema": { "type": "boolean", "default": false }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkflowTemplate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowTemplate" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowTemplate" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Workflow Template Management"],
+        "summary": "Create a new Workflow Template",
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkflowTemplate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowTemplate" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowTemplate" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflowrun/{workflowRunId}/start": {
+      "put": {
+        "tags": ["WorkflowRun Management"],
+        "summary": "Start WorkflowRun execution. The WorkflowRun has to already have been queued.",
+        "operationId": "start",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "ID of WorkflowRun to Start",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkflowRunRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflowrun/{workflowRunId}/retry": {
+      "put": {
+        "tags": ["WorkflowRun Management"],
+        "summary": "Retry WorkflowRun execution.",
+        "operationId": "retry",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "ID of WorkflowRun to Retry.",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkflowRunRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflowrun/{workflowRunId}/finalize": {
+      "put": {
+        "tags": ["WorkflowRun Management"],
+        "summary": "End a WorkflowRun",
+        "operationId": "finalize",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "ID of WorkflowRun to Finalize",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflow": {
+      "put": {
+        "tags": ["Workflow Management"],
+        "summary": "Update, replace, or create new, Workflow",
+        "operationId": "applyWorkflow",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "replace",
+            "in": "query",
+            "description": "Replace existing version",
+            "required": false,
+            "schema": { "type": "boolean", "default": false }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Workflow" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Workflow" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Workflow" } }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Workflow Management"],
+        "summary": "Create a new workflow",
+        "operationId": "createWorkflow",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Workflow" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Workflow" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Workflow" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflow/{workflow}/compose": {
+      "get": {
+        "tags": ["Workflow Management"],
+        "summary": "Convert workflow to compose model for UI Designer and detailed Activity screens.",
+        "operationId": "compose",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflow",
+            "in": "path",
+            "description": "Workflow reference",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Workflow Version",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowCanvas" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowCanvas" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Workflow Management"],
+        "summary": "Update, replace, or create new, Workflow for Canvas",
+        "operationId": "applyCanvas",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "replace",
+            "in": "query",
+            "description": "Replace existing version",
+            "required": false,
+            "schema": { "type": "boolean", "default": false }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkflowCanvas" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowCanvas" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowCanvas" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/task/{name}": {
+      "get": {
+        "tags": ["Task Management"],
+        "summary": "Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.",
+        "operationId": "get_2_1",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Task",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Task Version",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Task Management"],
+        "summary": "Update, replace, or create new using Tekton Task YAML",
+        "description": "The name must only contain alphanumeric and - characeters. If the name exists, apply will create a new version.",
+        "operationId": "apply_1_1",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Task",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "replace",
+            "in": "query",
+            "description": "Replace existing version",
+            "required": false,
+            "schema": { "type": "boolean", "default": false }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Task" }
+            },
+            "application/x-yaml": {
+              "schema": { "$ref": "#/components/schemas/TektonTask" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Task Management"],
+        "summary": "Delete a Team Task",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Task",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "400": { "description": "Bad Request" },
+          "204": { "description": "OK" }
+        }
+      }
+    },
+    "/api/v2/team/{team}/schedule": {
+      "put": {
+        "tags": ["Schedule Management"],
+        "summary": "Apply a Schedule.",
+        "operationId": "updateSchedule",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkflowSchedule" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowSchedule" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Schedule Management"],
+        "summary": "Create a Schedule.",
+        "operationId": "createSchedule",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkflowSchedule" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowSchedule" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/action": {
+      "put": {
+        "tags": ["Actions Management"],
+        "summary": "Provide an update for an Action",
+        "operationId": "action",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ActionRequest" }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/v2/task/{name}": {
+      "get": {
+        "tags": ["Task Management"],
+        "summary": "Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.",
+        "operationId": "get_4_1",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Task",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Task Version",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Task Management"],
+        "summary": "Update, replace, or create new using Tekton Task YAML",
+        "description": "The name must only contain alphanumeric and - characeters. If the name exists, apply will create a new version.",
+        "operationId": "apply_1_2",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Task",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "replace",
+            "in": "query",
+            "description": "Replace existing version",
+            "required": false,
+            "schema": { "type": "boolean", "default": false }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Task" }
+            },
+            "application/x-yaml": {
+              "schema": { "$ref": "#/components/schemas/TektonTask" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/settings": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Retrieve Boomerang Flow Settings",
+        "operationId": "getAppConfiguration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Setting" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Setting" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["System"],
+        "summary": "Update Boomerang Flow Settings",
+        "operationId": "updateSettings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/Setting" }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Setting" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Setting" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/parameters": {
+      "get": {
+        "tags": ["Parameters"],
+        "summary": "Get all global Params",
+        "operationId": "getAll",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AbstractParam" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AbstractParam" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Parameters"],
+        "operationId": "update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AbstractParam" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AbstractParam" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Parameters"],
+        "summary": "Create new global Param",
+        "operationId": "create_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AbstractParam" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AbstractParam" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AbstractParam" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/global-params": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Get all global Params",
+        "operationId": "getAll_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AbstractParam" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AbstractParam" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["System"],
+        "operationId": "update_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AbstractParam" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AbstractParam" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["System"],
+        "summary": "Create new global Param",
+        "operationId": "create_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AbstractParam" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AbstractParam" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AbstractParam" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/activate": {
+      "put": {
+        "tags": ["System"],
+        "summary": "Register and activate an installation of Flow",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OneTimeCode" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "boolean" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "type": "boolean" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/webhook": {
+      "post": {
+        "tags": ["Triggers for Events, Topics, and Webhooks"],
+        "summary": "Trigger WorkflowRun via Webhook.",
+        "operationId": "acceptWebhookEvent",
+        "parameters": [
+          {
+            "name": "workflow",
+            "in": "query",
+            "description": "Workflow reference the request relates to",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": { "$ref": "#/components/schemas/JsonNode" }
+            },
+            "application/json; charset=utf-8": {
+              "schema": { "$ref": "#/components/schemas/JsonNode" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/token": {
+      "post": {
+        "tags": ["Token Management"],
+        "summary": "Create Token",
+        "operationId": "createToken",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TokenCreateRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/TokenCreateResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team": {
+      "post": {
+        "tags": ["Team Management"],
+        "summary": "Create new team",
+        "operationId": "createTeam",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TeamRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Team" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Team" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflow/{workflow}/submit": {
+      "post": {
+        "tags": ["Workflow Management"],
+        "summary": "Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.",
+        "operationId": "submitWorkflow",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflow",
+            "in": "path",
+            "description": "Workflow reference",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Start the WorkflowRun immediately after submission",
+            "required": false,
+            "schema": { "type": "boolean", "default": false }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkflowSubmitRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflow/{workflow}/duplicate": {
+      "post": {
+        "tags": ["Workflow Management"],
+        "summary": "Duplicates the workflow.",
+        "operationId": "duplicateWorkflow",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflow",
+            "in": "path",
+            "description": "Workflow reference",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Workflow" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/task": {
+      "post": {
+        "tags": ["Task Management"],
+        "summary": "Create a new Task Template using Tekton Task YAML",
+        "description": "The name needs to be unique and must only contain alphanumeric and - characeters.",
+        "operationId": "create_1_1",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Task" }
+            },
+            "application/x-yaml": {
+              "schema": { "$ref": "#/components/schemas/TektonTask" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/task/validate": {
+      "post": {
+        "tags": ["Task Management"],
+        "operationId": "validateYaml",
+        "requestBody": {
+          "content": {
+            "application/x-yaml": {
+              "schema": { "$ref": "#/components/schemas/TektonTask" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/team/validate-name": {
+      "post": {
+        "tags": ["Team Management"],
+        "summary": "Validate team name and check uniqueness.",
+        "operationId": "validateTeamName",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TeamNameCheckRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          },
+          "422": {
+            "description": "Name is already taken",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/task": {
+      "post": {
+        "tags": ["Task Management"],
+        "summary": "Create a new Task using Tekton Task YAML",
+        "description": "The name needs to be unique and must only contain alphanumeric and - characeters.",
+        "operationId": "create_1_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Task" }
+            },
+            "application/x-yaml": {
+              "schema": { "$ref": "#/components/schemas/TektonTask" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/task/validate": {
+      "post": {
+        "tags": ["Task Management"],
+        "operationId": "validateYaml_1",
+        "requestBody": {
+          "content": {
+            "application/x-yaml": {
+              "schema": { "$ref": "#/components/schemas/TektonTask" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/integration/slack/interactivity": {
+      "post": {
+        "tags": ["Integrations"],
+        "summary": "Receive Slack Interactivity",
+        "operationId": "receiveSlackInteractivity",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/integration/slack/events": {
+      "post": {
+        "tags": ["Integrations"],
+        "summary": "Receive Slack Events",
+        "operationId": "receiveSlackEvent",
+        "parameters": [
+          {
+            "name": "x-slack-request-timestamp",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "x-slack-signature",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/JsonNode" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/integration/slack/commands": {
+      "post": {
+        "tags": ["Integrations"],
+        "summary": "Receive Slack Slash Commands",
+        "operationId": "receiveSlackCommand",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/integration/github/unlink": {
+      "post": {
+        "tags": ["Integrations"],
+        "summary": "Unlinks the GitHub Installation ID from a Team",
+        "operationId": "githubUnlink",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GHLinkRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/integration/github/link": {
+      "post": {
+        "tags": ["Integrations"],
+        "summary": "Links the GitHub Installation ID with a Team",
+        "operationId": "githubLink",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GHLinkRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/event": {
+      "post": {
+        "tags": ["Triggers for Events, Topics, and Webhooks"],
+        "operationId": "acceptEvent_1",
+        "parameters": [
+          {
+            "name": "workflow",
+            "in": "query",
+            "description": "The Workflow the request relates to",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "type": "string" } },
+            "application/cloudevents+json;charset=utf-8": {
+              "schema": { "$ref": "#/components/schemas/CloudEvent" }
+            },
+            "application/cloudevents+json; charset=utf-8": {
+              "schema": { "$ref": "#/components/schemas/CloudEvent" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/callback": {
+      "get": {
+        "tags": ["Triggers for Events, Topics, and Webhooks"],
+        "operationId": "acceptWaitForEvent_1",
+        "parameters": [
+          {
+            "name": "workflowrun",
+            "in": "query",
+            "description": "The WorkflowRun the request relates to",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "topic",
+            "in": "query",
+            "description": "The topic to publish to",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The status to set for the WaitForEvent TaskRun. Succeeded | Failed.",
+            "required": false,
+            "schema": { "type": "string", "default": "succeeded" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "tags": ["Triggers for Events, Topics, and Webhooks"],
+        "operationId": "acceptWaitForEvent",
+        "parameters": [
+          {
+            "name": "workflowrun",
+            "in": "query",
+            "description": "The WorkflowRun the request relates to",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "topic",
+            "in": "query",
+            "description": "The topic to publish to",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The status to set for the WaitForEvent TaskRun. Succeeded | Failed.",
+            "required": false,
+            "schema": { "type": "string", "default": "succeeded" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": { "$ref": "#/components/schemas/JsonNode" }
+            },
+            "application/json; charset=utf-8": {
+              "schema": { "$ref": "#/components/schemas/JsonNode" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/user/{userId}": {
+      "get": {
+        "tags": ["User Management"],
+        "summary": "Get a Users details",
+        "operationId": "getUserByID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/User" } }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/User" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User Management"],
+        "summary": "Delete a Boomerang Flow user",
+        "operationId": "deleteFlowUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
+      },
+      "patch": {
+        "tags": ["User Management"],
+        "summary": "Update a Boomerang Flow Users details",
+        "operationId": "apply_1",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/v2/team/{team}": {
+      "get": {
+        "tags": ["Team Management"],
+        "summary": "Get team",
+        "operationId": "getTeam",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Team as owner reference.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Team" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Team" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Team Management"],
+        "summary": "Delete a team",
+        "operationId": "deleteWorkflow_1",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "ID of Team",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "400": { "description": "Bad Request" },
+          "204": { "description": "OK" }
+        }
+      },
+      "patch": {
+        "tags": ["Team Management"],
+        "summary": "Patch or update a team",
+        "operationId": "updateTeam",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "ID of Team",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TeamRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Team" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Team" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/profile": {
+      "get": {
+        "tags": ["User Management"],
+        "summary": "Get your Profile",
+        "operationId": "getProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/UserProfile" }
+              }
+            }
+          },
+          "404": {
+            "description": "Instance not activated. Profile locked.",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/UserProfile" }
+              }
+            }
+          },
+          "423": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/UserProfile" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["User Management"],
+        "summary": "Patch your Profile",
+        "operationId": "updateProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "OK" },
+          "404": { "description": "Instance not activated. Profile locked." },
+          "423": { "description": "OK" }
+        }
+      }
+    },
+    "/api/v2/workflowtemplate/{name}": {
+      "get": {
+        "tags": ["Workflow Template Management"],
+        "summary": "Retrieve a Workflow Template",
+        "description": "Retrieve a version of the Workflow Template. Defaults to latest. Optionally without Tasks",
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Workflow Template",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Workflow Template Version",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32" }
+          },
+          {
+            "name": "withTasks",
+            "in": "query",
+            "description": "Include Tasks",
+            "required": false,
+            "schema": { "type": "boolean", "default": true }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowTemplate" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowTemplate" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Workflow Template Management"],
+        "summary": "Delete a Workflow Template",
+        "operationId": "deleteWorkflow",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Workflow Template",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "400": { "description": "Bad Request" },
+          "204": { "description": "OK" }
+        }
+      }
+    },
+    "/api/v2/workflowtemplate/query": {
+      "get": {
+        "tags": ["Workflow Template Management"],
+        "summary": "Search for Workflow Templates",
+        "operationId": "query",
+        "parameters": [
+          {
+            "name": "labels",
+            "in": "query",
+            "description": "List of url encoded labels. For example Organization=Boomerang,customKey=test would be encoded as Organization%3DBoomerang,customKey%3Dtest)",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "names",
+            "in": "query",
+            "description": "List of WorkflowTemplate names to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "mongodb-email-query-results"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Ascending (ASC) or Descending (DESC) sort on creationDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Optional[ASC]",
+              "enum": ["ASC", "DESC"]
+            },
+            "example": "ASC"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowTemplateResponsePage"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowTemplateResponsePage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/user/query": {
+      "get": {
+        "tags": ["User Management"],
+        "summary": "Search for Users",
+        "operationId": "getUsers",
+        "parameters": [
+          {
+            "name": "labels",
+            "in": "query",
+            "description": "List of url encoded labels. For example Organization=Boomerang,customKey=test would be encoded as Organization%3DBoomerang,customKey%3Dtest)",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "List of statuses to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "active,inactive"
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "List of ids to filter for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 0
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ascending or Descending (default) order",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Optional[DESC]",
+              "enum": ["ASC", "DESC"]
+            },
+            "example": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "The element to sort on",
+            "required": false,
+            "schema": { "type": "string", "default": "Optional[name]" },
+            "example": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageUser" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageUser" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/token/query": {
+      "get": {
+        "tags": ["Token Management"],
+        "summary": "Search for Tokens",
+        "operationId": "query_1",
+        "parameters": [
+          {
+            "name": "types",
+            "in": "query",
+            "description": "List of types to filter for. Defaults to all.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["session", "user", "team", "workflow", "global"]
+              }
+            }
+          },
+          {
+            "name": "principals",
+            "in": "query",
+            "description": "List of principals to filter for. Based on the types you are querying for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 0
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ascending (ASC) or Descending (DESC) sort order on creationDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Optional[ASC]",
+              "enum": ["ASC", "DESC"]
+            },
+            "example": "ASC"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "The element to sort onr",
+            "required": false,
+            "schema": { "type": "string", "default": "Optional[creationDate]" },
+            "example": 0
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search from in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1677589200000
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search to in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1680267600000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageToken" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflowrun/{workflowRunId}": {
+      "get": {
+        "tags": ["WorkflowRun Management"],
+        "summary": "Retrieve a specific WorkflowRun.",
+        "operationId": "get_1",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "ID of WorkflowRun",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "withTasks",
+            "in": "query",
+            "description": "Include Task Runs in the response",
+            "required": false,
+            "schema": { "type": "boolean", "default": true }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflowrun/query": {
+      "get": {
+        "tags": ["WorkflowRun Management"],
+        "summary": "Search for WorkflowRuns",
+        "operationId": "query_2",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "labels",
+            "in": "query",
+            "description": "List of url encoded labels. For example Organization=Boomerang,customKey=test would be encoded as Organization%3DBoomerang,customKey%3Dtest)",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "List of statuses to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "succeeded,skipped"
+          },
+          {
+            "name": "phase",
+            "in": "query",
+            "description": "List of phases to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "completed,finalized"
+          },
+          {
+            "name": "workflowruns",
+            "in": "query",
+            "description": "List of WorkflowRun IDs to filter for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "workflows",
+            "in": "query",
+            "description": "List of Workflow IDs to filter for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "triggers",
+            "in": "query",
+            "description": "List of Triggers to filter for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 0
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ascending (ASC) or Descending (DESC) sort order on creationDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Optional[ASC]",
+              "enum": ["ASC", "DESC"]
+            },
+            "example": "ASC"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search from in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1677589200000
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search to in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1680267600000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PageWorkflowRun" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PageWorkflowRun" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflowrun/count": {
+      "get": {
+        "tags": ["WorkflowRun Management"],
+        "summary": "Retrieve a summary of WorkflowRuns by Status.",
+        "operationId": "count",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "labels",
+            "in": "query",
+            "description": "List of url encoded labels. For example Organization=Boomerang,customKey=test would be encoded as Organization%3DBoomerang,customKey%3Dtest)",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "workflows",
+            "in": "query",
+            "description": "List of Workflow IDs  to filter for. Does not validate the IDs provided. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "63d3656ca845957db7d25ef0,63a3e732b0496509a7f1d763"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search from in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1677589200000
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search to in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1680267600000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRunCount" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRunCount" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflow/{workflow}": {
+      "get": {
+        "tags": ["Workflow Management"],
+        "summary": "Retrieve a Workflow",
+        "description": "Retrieve a version of the Workflow. Defaults to latest. Optionally without Tasks",
+        "operationId": "getWorkflow",
+        "parameters": [
+          {
+            "name": "workflow",
+            "in": "path",
+            "description": "Workflow reference",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Workflow Version",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32" }
+          },
+          {
+            "name": "withTasks",
+            "in": "query",
+            "description": "Include Workflow Tasks",
+            "required": false,
+            "schema": { "type": "boolean", "default": true }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Workflow" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Workflow" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Workflow Management"],
+        "summary": "Delete a workflow",
+        "operationId": "deleteWorkflow_2",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflow",
+            "in": "path",
+            "description": "Workflow reference",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "400": { "description": "Bad Request" },
+          "204": { "description": "OK" }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflow/{workflow}/export": {
+      "get": {
+        "tags": ["Workflow Management"],
+        "summary": "Export the Workflow as JSON.",
+        "operationId": "export",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflow",
+            "in": "path",
+            "description": "Workflow reference",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "type": "string", "format": "binary" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflow/{workflow}/changelog": {
+      "get": {
+        "tags": ["Workflow Management"],
+        "summary": "Retrieve the changlog",
+        "description": "Retrieves each versions changelog and returns them all as a list.",
+        "operationId": "getChangelog",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflow",
+            "in": "path",
+            "description": "Workflow reference",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ChangeLogVersion" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ChangeLogVersion" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflow/{workflow}/available-parameters": {
+      "get": {
+        "tags": ["Workflow Management"],
+        "summary": "Retrieve the parameters.",
+        "operationId": "getAvailableParameters",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflow",
+            "in": "path",
+            "description": "Workflow reference",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflow/query": {
+      "get": {
+        "tags": ["Workflow Management"],
+        "summary": "Search for Workflows",
+        "operationId": "queryWorkflows",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "labels",
+            "in": "query",
+            "description": "List of url encoded labels. For example Organization=Boomerang,customKey=test would be encoded as Organization%3DBoomerang,customKey%3Dtest)",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "List of statuses to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "active,inactive"
+          },
+          {
+            "name": "workflows",
+            "in": "query",
+            "description": "List of workflows to filter for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Ascending (ASC) or Descending (DESC) sort on creationDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Optional[ASC]",
+              "enum": ["ASC", "DESC"]
+            },
+            "example": "ASC"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponsePage"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponsePage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/task/{name}/changelog": {
+      "get": {
+        "tags": ["Task Management"],
+        "summary": "Retrieve the changlog",
+        "description": "Retrieves each versions changelog and returns them all as a list.",
+        "operationId": "getChangelog_1",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Task",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ChangeLogVersion" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ChangeLogVersion" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/task/query": {
+      "get": {
+        "tags": ["Task Management"],
+        "summary": "Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates",
+        "operationId": "queryTaskTemplates",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "labels",
+            "in": "query",
+            "description": "List of url encoded labels. For example Organization=Boomerang,customKey=test would be encoded as Organization%3DBoomerang,customKey%3Dtest)",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "List of statuses to filter for.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string" },
+              "default": { "empty": false, "present": true }
+            },
+            "example": "active,inactive"
+          },
+          {
+            "name": "names",
+            "in": "query",
+            "description": "List of Task Names  to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "switch,event-wait"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Ascending (ASC) or Descending (DESC) sort on creationDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Optional[ASC]",
+              "enum": ["ASC", "DESC"]
+            },
+            "example": "ASC"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/TaskResponsePage" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/TaskResponsePage" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/schedule/{scheduleId}": {
+      "get": {
+        "tags": ["Schedule Management"],
+        "summary": "Retrieve a Schedule.",
+        "operationId": "get_2",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowSchedule" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Schedule Management"],
+        "summary": "Delete a Schedule.",
+        "operationId": "deleteSchedule",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/team/{team}/schedule/query": {
+      "get": {
+        "tags": ["Schedule Management"],
+        "summary": "Search for Schedules",
+        "operationId": "query_3",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "List of statuses to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "active,archived"
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "description": "List of types to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "cron,advancedCron"
+          },
+          {
+            "name": "workflows",
+            "in": "query",
+            "description": "List of workflows to filter for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32", "default": 10 },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32", "default": 0 },
+            "example": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageWorkflowSchedule"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/schedule/calendars": {
+      "get": {
+        "tags": ["Schedule Management"],
+        "summary": "Retrieve Calendars for Schedules by Dates.",
+        "operationId": "getCalendarsForSchedules",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "schedules",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowScheduleCalendar"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/insights": {
+      "get": {
+        "tags": ["Insights Management"],
+        "summary": "Retrieve insights for a team.",
+        "operationId": "getTeamInsights",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "workflows",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRunInsight" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRunInsight" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/action/{actionId}": {
+      "get": {
+        "tags": ["Actions Management"],
+        "summary": "Retrieve a specific Action by Id",
+        "operationId": "get_3",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "actionId",
+            "in": "path",
+            "description": "ID of Action",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Action" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Action" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/action/summary": {
+      "get": {
+        "tags": ["Actions Management"],
+        "summary": "Get Actions Summary",
+        "operationId": "summary",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflows",
+            "in": "query",
+            "description": "List of workflows to filter for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search from in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1677589200000
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search to in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1680267600000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/ActionSummary" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/ActionSummary" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/action/query": {
+      "get": {
+        "tags": ["Actions Management"],
+        "summary": "Search for Actions",
+        "operationId": "query_4",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "description": "List of types to filter for. Defaults to all.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "enum": ["approval", "manual"] }
+            },
+            "example": "manual,approval"
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "List of statuses to filter for. Defaults to all.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["approved", "submitted", "rejected", "cancelled"]
+              }
+            },
+            "example": "approved,rejected,submitted"
+          },
+          {
+            "name": "workflows",
+            "in": "query",
+            "description": "List of workflows to filter for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32", "default": 10 },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32", "default": 0 },
+            "example": 0
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ascending or Descending (default) order",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Optional[DESC]",
+              "enum": ["ASC", "DESC"]
+            },
+            "example": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "The element to sort on",
+            "required": false,
+            "schema": { "type": "string", "default": "Optional[creationDate]" },
+            "example": 0
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search from in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1677589200000
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The unix timestamp / date to search to in milliseconds since epoch",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 1680267600000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageAction" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageAction" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/roles": {
+      "get": {
+        "tags": ["Team Management"],
+        "operationId": "getRoles",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Role" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/quotas/default": {
+      "get": {
+        "tags": ["Team Management"],
+        "operationId": "getDefaultQuotas",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Quotas" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/query": {
+      "get": {
+        "tags": ["Team Management"],
+        "summary": "Search for Teams",
+        "operationId": "getTeams",
+        "parameters": [
+          {
+            "name": "labels",
+            "in": "query",
+            "description": "List of url encoded labels. For example Organization=Boomerang,customKey=test would be encoded as Organization%3DBoomerang,customKey%3Dtest)",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "List of statuses to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "active,inactive"
+          },
+          {
+            "name": "teams",
+            "in": "query",
+            "description": "List of Team names to filter for.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "my-amazing-team,boomerangs-return"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 0
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ascending or Descending (default) order",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Optional[DESC]",
+              "enum": ["ASC", "DESC"]
+            },
+            "example": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "The element to sort on",
+            "required": false,
+            "schema": { "type": "string", "default": "Optional[name]" },
+            "example": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageTeam" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageTeam" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/taskrun/{taskRunId}/log": {
+      "get": {
+        "tags": ["TaskRun Management"],
+        "summary": "Retrieve a TaskRuns log from a specific WorkflowRun.",
+        "operationId": "streamTaskRunLog",
+        "parameters": [
+          {
+            "name": "taskRunId",
+            "in": "path",
+            "description": "Id of TaskRun",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreamingResponseBody"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreamingResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/task/{name}/changelog": {
+      "get": {
+        "tags": ["Task Management"],
+        "summary": "Retrieve the changlog",
+        "description": "Retrieves each versions changelog and returns them all as a list.",
+        "operationId": "getChangelog_2",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Task",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ChangeLogVersion" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ChangeLogVersion" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/task/query": {
+      "get": {
+        "tags": ["Task Management"],
+        "summary": "Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates",
+        "operationId": "query_5",
+        "parameters": [
+          {
+            "name": "labels",
+            "in": "query",
+            "description": "List of url encoded labels. For example Organization=Boomerang,customKey=test would be encoded as Organization%3DBoomerang,customKey%3Dtest)",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "List of statuses to filter for.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string" },
+              "default": { "empty": false, "present": true }
+            },
+            "example": "active,inactive"
+          },
+          {
+            "name": "names",
+            "in": "query",
+            "description": "List of Task Names  to filter for. Defaults to all.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } },
+            "example": "switch,event-wait"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Result Size",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 10
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" },
+            "example": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Ascending (ASC) or Descending (DESC) sort on creationDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Optional[ASC]",
+              "enum": ["ASC", "DESC"]
+            },
+            "example": "ASC"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/TaskResponsePage" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/TaskResponsePage" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/schedule/validate-cron": {
+      "get": {
+        "tags": ["Schedule Management"],
+        "summary": "Validate a Schedules CRON.",
+        "operationId": "validateCron",
+        "parameters": [
+          {
+            "name": "cron",
+            "in": "query",
+            "description": "A CRON expression to validate",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CronValidationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/navigation": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Retrieve navigation.",
+        "operationId": "getNavigation",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "query",
+            "description": "Team as owner reference",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Navigation" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/integration": {
+      "get": {
+        "tags": ["Integrations"],
+        "summary": "Retrieve the integrations and their status within a Team",
+        "operationId": "get_4",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Integration" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Integration" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/integration/slack/install": {
+      "get": {
+        "tags": ["Integrations"],
+        "summary": "Install URL Redirect",
+        "operationId": "installSlack",
+        "responses": {
+          "302": {
+            "description": "Found",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/integration/slack/auth": {
+      "get": {
+        "tags": ["Integrations"],
+        "summary": "Receive Slack Oauth2 request",
+        "operationId": "receiveSlackAuth",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/integration/github/installation": {
+      "get": {
+        "tags": ["Integrations"],
+        "summary": "Retrieve the installation ID and store against a team",
+        "operationId": "githubInstall",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32" }
+          },
+          {
+            "name": "team",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/features": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Retrieve feature flags.",
+        "operationId": "getFlowFeatures",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Features" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Features" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/context": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Retrieve this instances context, features, and navigation.",
+        "operationId": "getHeaderNavigation",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/HeaderNavigationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/token/{id}": {
+      "delete": {
+        "tags": ["Token Management"],
+        "summary": "Delete Token",
+        "operationId": "deleteToken",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the Token",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/workflowrun/{workflowRunId}/cancel": {
+      "delete": {
+        "tags": ["WorkflowRun Management"],
+        "summary": "Cancel a WorkflowRun",
+        "operationId": "cancel",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Owning team name.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "ID of WorkflowRun to Cancel",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/WorkflowRun" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/team/{team}/quotas": {
+      "delete": {
+        "tags": ["Team Management"],
+        "operationId": "resetQuotas",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Team as owner reference.",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/team/{team}/parameters/{name}": {
+      "delete": {
+        "tags": ["Team Management"],
+        "operationId": "deleteParameters",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Team as owner reference.",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/team/{team}/members": {
+      "delete": {
+        "tags": ["Team Management"],
+        "operationId": "removeMembers",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Team as owner reference.",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "my-amazing-team"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/TeamMember" }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/team/{team}/leave": {
+      "delete": {
+        "tags": ["Team Management"],
+        "operationId": "leave",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Team as owner reference.",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/team/{team}/approvers": {
+      "delete": {
+        "tags": ["Team Management"],
+        "operationId": "deleteApproverGroup",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "description": "Team as owner reference.",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v2/parameters/{name}": {
+      "delete": {
+        "tags": ["Parameters"],
+        "summary": "Delete specific global Param",
+        "operationId": "delete_1",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/v2/global-params/{key}": {
+      "delete": {
+        "tags": ["System"],
+        "summary": "Delete specific global Param",
+        "operationId": "delete_2",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AbstractParam": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "label": { "type": "string" },
+          "type": { "type": "string" },
+          "minValueLength": { "type": "integer", "format": "int32" },
+          "maxValueLength": { "type": "integer", "format": "int32" },
+          "options": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/KeyValuePair" }
+          },
+          "required": { "type": "boolean" },
+          "placeholder": { "type": "string" },
+          "helpertext": { "type": "string" },
+          "language": { "type": "string" },
+          "disabled": { "type": "boolean" },
+          "value": { "type": "object" },
+          "readOnly": { "type": "boolean" },
+          "hiddenValue": { "type": "boolean" },
+          "default": { "type": "object" }
+        }
+      },
+      "ChangeLog": {
+        "type": "object",
+        "properties": {
+          "author": { "type": "string" },
+          "reason": { "type": "string" },
+          "date": { "type": "string", "format": "date-time" }
+        }
+      },
+      "KeyValuePair": {
+        "type": "object",
+        "properties": {
+          "key": { "type": "string" },
+          "value": { "type": "string" }
+        }
+      },
+      "ResultSpec": {
+        "type": "object",
+        "properties": {
+          "description": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      },
+      "RunParam": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "value": { "type": "object" }
+        }
+      },
+      "TaskWorkspace": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "optional": { "type": "boolean" },
+          "mountPath": { "type": "string" }
+        }
+      },
+      "WorkflowTask": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "start",
+              "end",
+              "template",
+              "custom",
+              "generic",
+              "decision",
+              "approval",
+              "setwfproperty",
+              "manual",
+              "eventwait",
+              "acquirelock",
+              "releaselock",
+              "runworkflow",
+              "runscheduledworkflow",
+              "script",
+              "setwfstatus",
+              "sleep"
+            ]
+          },
+          "timeout": { "type": "integer", "format": "int64" },
+          "dependencies": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowTaskDependency" }
+          },
+          "taskRef": { "type": "string" },
+          "taskVersion": { "type": "integer", "format": "int32" },
+          "upgradesAvailable": { "type": "boolean" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunParam" }
+          },
+          "results": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ResultSpec" }
+          },
+          "workspaces": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaskWorkspace" }
+          },
+          "unknownFields": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          }
+        }
+      },
+      "WorkflowTaskDependency": {
+        "type": "object",
+        "properties": {
+          "taskRef": { "type": "string" },
+          "decisionCondition": { "type": "string" },
+          "executionCondition": {
+            "type": "string",
+            "enum": ["always", "success", "failure"]
+          }
+        }
+      },
+      "WorkflowTemplate": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "displayName": { "type": "string" },
+          "version": { "type": "integer", "format": "int32" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "timeout": { "type": "integer", "format": "int64" },
+          "retries": { "type": "integer", "format": "int64" },
+          "description": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AbstractParam" }
+          },
+          "tasks": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowTask" }
+          },
+          "icon": { "type": "string" },
+          "markdown": { "type": "string" },
+          "changelog": { "$ref": "#/components/schemas/ChangeLog" },
+          "workspaces": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowWorkspace" }
+          },
+          "upgradesAvailable": { "type": "boolean" },
+          "unknownFields": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          }
+        }
+      },
+      "WorkflowWorkspace": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "type": { "type": "string" },
+          "optional": { "type": "boolean" },
+          "spec": { "type": "object" }
+        }
+      },
+      "WorkflowRunRequest": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunParam" }
+          },
+          "workspaces": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowWorkspace" }
+          },
+          "timeout": { "type": "integer", "format": "int64" },
+          "retries": { "type": "integer", "format": "int64" },
+          "debug": { "type": "boolean" }
+        }
+      },
+      "RunResult": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "value": { "type": "object" }
+        }
+      },
+      "TaskEnvVar": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "value": { "type": "string" }
+        }
+      },
+      "TaskRun": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "start",
+              "end",
+              "template",
+              "custom",
+              "generic",
+              "decision",
+              "approval",
+              "setwfproperty",
+              "manual",
+              "eventwait",
+              "acquirelock",
+              "releaselock",
+              "runworkflow",
+              "runscheduledworkflow",
+              "script",
+              "setwfstatus",
+              "sleep"
+            ]
+          },
+          "name": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "startTime": { "type": "string", "format": "date-time" },
+          "duration": { "type": "integer", "format": "int64" },
+          "timeout": { "type": "integer", "format": "int64" },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunParam" }
+          },
+          "results": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunResult" }
+          },
+          "workspaces": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaskWorkspace" }
+          },
+          "spec": { "$ref": "#/components/schemas/TaskRunSpec" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "notstarted",
+              "ready",
+              "running",
+              "waiting",
+              "succeeded",
+              "failed",
+              "invalid",
+              "skipped",
+              "cancelled",
+              "timedout"
+            ]
+          },
+          "phase": {
+            "type": "string",
+            "enum": ["pending", "running", "completed", "finalized"]
+          },
+          "statusMessage": { "type": "string" },
+          "taskRef": { "type": "string" },
+          "taskVersion": { "type": "integer", "format": "int32" },
+          "workflowRef": { "type": "string" },
+          "workflowRevisionRef": { "type": "string" },
+          "workflowRunRef": { "type": "string" },
+          "workflowName": { "type": "string" }
+        }
+      },
+      "TaskRunSpec": {
+        "type": "object",
+        "properties": {
+          "arguments": { "type": "array", "items": { "type": "string" } },
+          "command": { "type": "array", "items": { "type": "string" } },
+          "envs": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaskEnvVar" }
+          },
+          "image": { "type": "string" },
+          "script": { "type": "string" },
+          "workingDir": { "type": "string" },
+          "debug": { "type": "boolean" },
+          "timeout": { "type": "integer", "format": "int32" },
+          "deletion": {
+            "type": "string",
+            "enum": ["Never", "OnSuccess", "Always"]
+          }
+        }
+      },
+      "WorkflowRun": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "notstarted",
+              "ready",
+              "running",
+              "waiting",
+              "succeeded",
+              "failed",
+              "invalid",
+              "skipped",
+              "cancelled",
+              "timedout"
+            ]
+          },
+          "phase": {
+            "type": "string",
+            "enum": ["pending", "running", "completed", "finalized"]
+          },
+          "startTime": { "type": "string", "format": "date-time" },
+          "duration": { "type": "integer", "format": "int64" },
+          "statusMessage": { "type": "string" },
+          "timeout": { "type": "integer", "format": "int64" },
+          "retries": { "type": "integer", "format": "int64" },
+          "workflowRef": { "type": "string" },
+          "workflowRevisionRef": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunParam" }
+          },
+          "tasks": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaskRun" }
+          },
+          "debug": { "type": "boolean" },
+          "workflowName": { "type": "string" },
+          "workflowVersion": { "type": "integer", "format": "int32" },
+          "trigger": { "type": "string" },
+          "initiatedByRef": { "type": "string" },
+          "results": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunResult" }
+          },
+          "workspaces": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowWorkspace" }
+          },
+          "awaitingApproval": { "type": "boolean" }
+        }
+      },
+      "Trigger": {
+        "type": "object",
+        "properties": {
+          "enabled": { "type": "boolean" },
+          "conditions": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TriggerCondition" }
+          }
+        }
+      },
+      "TriggerCondition": {
+        "type": "object",
+        "properties": {
+          "field": { "type": "string" },
+          "operation": {
+            "type": "string",
+            "enum": ["equals", "matches", "in"]
+          },
+          "value": { "type": "string" },
+          "values": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "Workflow": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "inactive"] },
+          "version": { "type": "integer", "format": "int32" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "timeout": { "type": "integer", "format": "int64" },
+          "retries": { "type": "integer", "format": "int64" },
+          "description": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AbstractParam" }
+          },
+          "tasks": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowTask" }
+          },
+          "changelog": { "$ref": "#/components/schemas/ChangeLog" },
+          "icon": { "type": "string" },
+          "markdown": { "type": "string" },
+          "upgradesAvailable": { "type": "boolean" },
+          "triggers": { "$ref": "#/components/schemas/WorkflowTrigger" },
+          "workspaces": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowWorkspace" }
+          },
+          "unknownFields": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          }
+        }
+      },
+      "WorkflowTrigger": {
+        "type": "object",
+        "properties": {
+          "manual": { "$ref": "#/components/schemas/Trigger" },
+          "schedule": { "$ref": "#/components/schemas/Trigger" },
+          "webhook": { "$ref": "#/components/schemas/Trigger" },
+          "event": { "$ref": "#/components/schemas/Trigger" },
+          "github": { "$ref": "#/components/schemas/Trigger" }
+        }
+      },
+      "CanvasEdge": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "type": { "type": "string" },
+          "data": { "$ref": "#/components/schemas/CanvasEdgeData" }
+        }
+      },
+      "CanvasEdgeData": {
+        "type": "object",
+        "properties": {
+          "decisionCondition": { "type": "string" },
+          "executionCondition": {
+            "type": "string",
+            "enum": ["always", "success", "failure"]
+          }
+        }
+      },
+      "CanvasNode": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "position": { "$ref": "#/components/schemas/CanvasNodePosition" },
+          "data": { "$ref": "#/components/schemas/CanvasNodeData" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "start",
+              "end",
+              "template",
+              "custom",
+              "generic",
+              "decision",
+              "approval",
+              "setwfproperty",
+              "manual",
+              "eventwait",
+              "acquirelock",
+              "releaselock",
+              "runworkflow",
+              "runscheduledworkflow",
+              "script",
+              "setwfstatus",
+              "sleep"
+            ]
+          }
+        }
+      },
+      "CanvasNodeData": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunParam" }
+          },
+          "results": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ResultSpec" }
+          },
+          "taskRef": { "type": "string" },
+          "taskVersion": { "type": "integer", "format": "int32" },
+          "upgradesAvailable": { "type": "boolean" }
+        }
+      },
+      "CanvasNodePosition": {
+        "type": "object",
+        "properties": { "x": { "type": "number" }, "y": { "type": "number" } }
+      },
+      "WorkflowCanvas": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "inactive"] },
+          "version": { "type": "integer", "format": "int32" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "changelog": { "$ref": "#/components/schemas/ChangeLog" },
+          "icon": { "type": "string" },
+          "description": { "type": "string" },
+          "markdown": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "timeout": { "type": "integer", "format": "int64" },
+          "retries": { "type": "integer", "format": "int64" },
+          "upgradesAvailable": { "type": "boolean" },
+          "triggers": { "$ref": "#/components/schemas/WorkflowTrigger" },
+          "workspaces": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowWorkspace" }
+          },
+          "config": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AbstractParam" }
+          },
+          "unknownFields": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "nodes": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CanvasNode" }
+          },
+          "edges": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CanvasEdge" }
+          }
+        }
+      },
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "displayName": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "start",
+              "end",
+              "template",
+              "custom",
+              "generic",
+              "decision",
+              "approval",
+              "setwfproperty",
+              "manual",
+              "eventwait",
+              "acquirelock",
+              "releaselock",
+              "runworkflow",
+              "runscheduledworkflow",
+              "script",
+              "setwfstatus",
+              "sleep"
+            ]
+          },
+          "version": { "type": "integer", "format": "int32" },
+          "status": { "type": "string", "enum": ["active", "inactive"] },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "verified": { "type": "boolean" },
+          "description": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "changelog": { "$ref": "#/components/schemas/ChangeLog" },
+          "category": { "type": "string" },
+          "spec": { "$ref": "#/components/schemas/TaskSpec" },
+          "icon": { "type": "string" }
+        }
+      },
+      "TaskSpec": {
+        "type": "object",
+        "properties": {
+          "arguments": { "type": "array", "items": { "type": "string" } },
+          "command": { "type": "array", "items": { "type": "string" } },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AbstractParam" }
+          },
+          "envs": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaskEnvVar" }
+          },
+          "image": { "type": "string" },
+          "results": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ResultSpec" }
+          },
+          "script": { "type": "string" },
+          "workingDir": { "type": "string" }
+        }
+      },
+      "Metadata": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          }
+        }
+      },
+      "ParamSpec": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string", "enum": ["string", "array", "object"] },
+          "description": { "type": "string" },
+          "unknownFields": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "default": { "type": "object" }
+        }
+      },
+      "Spec": {
+        "type": "object",
+        "properties": {
+          "description": { "type": "string" },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ParamSpec" }
+          },
+          "steps": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Step" }
+          },
+          "timeout": {
+            "type": "object",
+            "properties": {
+              "seconds": { "type": "integer", "format": "int64" },
+              "negative": { "type": "boolean" },
+              "nano": { "type": "integer", "format": "int32" },
+              "zero": { "type": "boolean" },
+              "units": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "dateBased": { "type": "boolean" },
+                    "timeBased": { "type": "boolean" },
+                    "durationEstimated": { "type": "boolean" }
+                  }
+                }
+              },
+              "positive": { "type": "boolean" }
+            }
+          },
+          "results": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ResultSpec" }
+          }
+        }
+      },
+      "Step": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "image": { "type": "string" },
+          "script": { "type": "string" },
+          "workingDir": { "type": "string" },
+          "env": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaskEnvVar" }
+          },
+          "command": { "type": "array", "items": { "type": "string" } },
+          "args": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "TektonTask": {
+        "type": "object",
+        "properties": {
+          "apiVersion": { "type": "string" },
+          "kind": { "type": "string" },
+          "metadata": { "$ref": "#/components/schemas/Metadata" },
+          "spec": { "$ref": "#/components/schemas/Spec" }
+        }
+      },
+      "WorkflowSchedule": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "workflowRef": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "type": {
+            "type": "string",
+            "enum": ["runOnce", "cron", "advancedCron"]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "trigger_disabled",
+              "error",
+              "completed",
+              "deleted"
+            ]
+          },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "cronSchedule": { "type": "string" },
+          "dateSchedule": { "type": "string", "format": "date-time" },
+          "timezone": { "type": "string" },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunParam" }
+          },
+          "nextScheduleDate": { "type": "string", "format": "date-time" }
+        }
+      },
+      "ActionRequest": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "comments": { "type": "string" },
+          "approved": { "type": "boolean" }
+        }
+      },
+      "Setting": {
+        "type": "object",
+        "properties": {
+          "config": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SettingConfig" }
+          },
+          "description": { "type": "string" },
+          "id": { "type": "string" },
+          "key": { "type": "string" },
+          "lastModiifed": { "type": "string", "format": "date-time" },
+          "name": { "type": "string" },
+          "tool": { "type": "string" },
+          "type": { "type": "string", "enum": ["AppsList", "ValuesList"] }
+        }
+      },
+      "SettingConfig": {
+        "type": "object",
+        "properties": {
+          "key": { "type": "string" },
+          "description": { "type": "string" },
+          "defaultValue": { "type": "string" },
+          "label": { "type": "string" },
+          "type": { "type": "string" },
+          "minValueLength": { "type": "integer", "format": "int32" },
+          "maxValueLength": { "type": "integer", "format": "int32" },
+          "options": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/KeyValuePair" }
+          },
+          "required": { "type": "boolean" },
+          "placeholder": { "type": "string" },
+          "helperText": { "type": "string" },
+          "language": { "type": "string" },
+          "disabled": { "type": "boolean" },
+          "value": { "type": "string" },
+          "readOnly": { "type": "boolean" },
+          "hiddenValue": { "type": "boolean" }
+        }
+      },
+      "OneTimeCode": {
+        "type": "object",
+        "properties": { "otc": { "type": "string" } }
+      },
+      "JsonNode": { "type": "object" },
+      "TokenCreateRequest": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["session", "user", "team", "workflow", "global"]
+          },
+          "name": { "type": "string" },
+          "principal": { "type": "string" },
+          "description": { "type": "string" },
+          "expirationDate": { "type": "string", "format": "date-time" },
+          "permissions": { "type": "array", "items": { "type": "string" } },
+          "role": { "type": "string" }
+        }
+      },
+      "TokenCreateResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["session", "user", "team", "workflow", "global"]
+          },
+          "token": { "type": "string" },
+          "expirationDate": { "type": "string", "format": "date-time" }
+        }
+      },
+      "ApproverGroupRequest": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "approvers": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "Quotas": {
+        "type": "object",
+        "properties": {
+          "maxWorkflowCount": { "type": "integer", "format": "int32" },
+          "maxWorkflowRunMonthly": { "type": "integer", "format": "int32" },
+          "maxWorkflowStorage": { "type": "integer", "format": "int32" },
+          "maxWorkflowRunStorage": { "type": "integer", "format": "int32" },
+          "maxWorkflowRunDuration": { "type": "integer", "format": "int32" },
+          "maxConcurrentRuns": { "type": "integer", "format": "int32" }
+        }
+      },
+      "TeamMember": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "email": { "type": "string" },
+          "name": { "type": "string" },
+          "role": { "type": "string" }
+        }
+      },
+      "TeamRequest": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "displayName": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "inactive"] },
+          "type": {
+            "type": "string",
+            "enum": ["personal", "hobby", "pro", "enterprise", "system"]
+          },
+          "externalRef": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "parameters": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AbstractParam" }
+          },
+          "quotas": { "$ref": "#/components/schemas/Quotas" },
+          "members": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TeamMember" }
+          },
+          "approverGroups": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ApproverGroupRequest" }
+          }
+        }
+      },
+      "ApproverGroup": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "approvers": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TeamMember" }
+          }
+        }
+      },
+      "CurrentQuotas": {
+        "type": "object",
+        "properties": {
+          "maxWorkflowCount": { "type": "integer", "format": "int32" },
+          "maxWorkflowRunMonthly": { "type": "integer", "format": "int32" },
+          "maxWorkflowStorage": { "type": "integer", "format": "int32" },
+          "maxWorkflowRunStorage": { "type": "integer", "format": "int32" },
+          "maxWorkflowRunDuration": { "type": "integer", "format": "int32" },
+          "maxConcurrentRuns": { "type": "integer", "format": "int32" },
+          "currentWorkflowCount": { "type": "integer", "format": "int32" },
+          "currentRuns": { "type": "integer", "format": "int32" },
+          "currentConcurrentRuns": { "type": "integer", "format": "int32" },
+          "currentRunTotalDuration": { "type": "integer", "format": "int32" },
+          "currentRunMedianDuration": { "type": "integer", "format": "int32" },
+          "monthlyResetDate": { "type": "string", "format": "date-time" }
+        }
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "displayName": { "type": "string" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "status": { "type": "string", "enum": ["active", "inactive"] },
+          "externalRef": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "parameters": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AbstractParam" }
+          },
+          "quotas": { "$ref": "#/components/schemas/CurrentQuotas" },
+          "members": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TeamMember" }
+          },
+          "workflows": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowSummary" }
+          },
+          "approverGroups": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ApproverGroup" }
+          }
+        }
+      },
+      "WorkflowSummary": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "inactive"] },
+          "version": { "type": "integer", "format": "int32" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "icon": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      },
+      "WorkflowSubmitRequest": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "annotations": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          },
+          "params": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunParam" }
+          },
+          "workspaces": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowWorkspace" }
+          },
+          "timeout": { "type": "integer", "format": "int64" },
+          "retries": { "type": "integer", "format": "int64" },
+          "debug": { "type": "boolean" },
+          "workflowVersion": { "type": "integer", "format": "int32" },
+          "trigger": {
+            "type": "string",
+            "enum": [
+              "manual",
+              "schedule",
+              "webhook",
+              "event",
+              "github",
+              "engine",
+              "task"
+            ]
+          }
+        }
+      },
+      "TeamNameCheckRequest": {
+        "type": "object",
+        "properties": { "name": { "type": "string" } }
+      },
+      "GHLinkRequest": {
+        "type": "object",
+        "properties": {
+          "ref": { "type": "string" },
+          "team": { "type": "string" }
+        }
+      },
+      "CloudEvent": {
+        "type": "object",
+        "properties": {
+          "data": { "$ref": "#/components/schemas/CloudEventData" },
+          "subject": { "type": "string" },
+          "id": { "type": "string" },
+          "type": { "type": "string" },
+          "specVersion": { "type": "string", "enum": ["0.3", "1.0"] },
+          "time": { "type": "string", "format": "date-time" },
+          "source": { "type": "string", "format": "uri" },
+          "dataContentType": { "type": "string" },
+          "attributeNames": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "dataSchema": { "type": "string", "format": "uri" },
+          "extensionNames": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "CloudEventData": { "type": "object" },
+      "UserRequest": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "email": { "type": "string" },
+          "name": { "type": "string" },
+          "displayName": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "admin",
+              "operator",
+              "sponsor",
+              "auditor",
+              "author",
+              "partner",
+              "advisor"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "pending_deletion",
+              "deleted",
+              "archived"
+            ]
+          },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          }
+        }
+      },
+      "PageableObject": {
+        "type": "object",
+        "properties": {
+          "offset": { "type": "integer", "format": "int64" },
+          "sort": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SortObject" }
+          },
+          "unpaged": { "type": "boolean" },
+          "paged": { "type": "boolean" },
+          "pageNumber": { "type": "integer", "format": "int32" },
+          "pageSize": { "type": "integer", "format": "int32" }
+        }
+      },
+      "SortObject": {
+        "type": "object",
+        "properties": {
+          "direction": { "type": "string" },
+          "nullHandling": { "type": "string" },
+          "ascending": { "type": "boolean" },
+          "property": { "type": "string" },
+          "ignoreCase": { "type": "boolean" }
+        }
+      },
+      "WorkflowTemplateResponsePage": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowTemplate" }
+          },
+          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
+          "totalElements": { "type": "integer", "format": "int64" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
+          "last": { "type": "boolean" },
+          "totalPages": { "type": "integer", "format": "int32" },
+          "sort": { "$ref": "#/components/schemas/SortObject" },
+          "first": { "type": "boolean" },
+          "numberOfElements": { "type": "integer", "format": "int32" },
+          "empty": { "type": "boolean" }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "email": { "type": "string" },
+          "name": { "type": "string" },
+          "displayName": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "admin",
+              "operator",
+              "sponsor",
+              "auditor",
+              "author",
+              "partner",
+              "advisor"
+            ]
+          },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "lastLoginDate": { "type": "string", "format": "date-time" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "pending_deletion",
+              "deleted",
+              "archived"
+            ]
+          },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "settings": { "$ref": "#/components/schemas/UserSettings" }
+        }
+      },
+      "UserSettings": {
+        "type": "object",
+        "properties": {
+          "isFirstVisit": { "type": "boolean" },
+          "isShowHelp": { "type": "boolean" },
+          "hasConsented": { "type": "boolean" }
+        }
+      },
+      "PageUser": {
+        "type": "object",
+        "properties": {
+          "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/User" }
+          },
+          "sort": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SortObject" }
+          },
+          "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
+          "empty": { "type": "boolean" }
+        }
+      },
+      "PageToken": {
+        "type": "object",
+        "properties": {
+          "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Token" }
+          },
+          "sort": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SortObject" }
+          },
+          "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
+          "empty": { "type": "boolean" }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["session", "user", "team", "workflow", "global"]
+          },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "expirationDate": { "type": "string", "format": "date-time" },
+          "valid": { "type": "boolean" },
+          "principal": { "type": "string" },
+          "permissions": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "PageWorkflowRun": {
+        "type": "object",
+        "properties": {
+          "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowRun" }
+          },
+          "sort": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SortObject" }
+          },
+          "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
+          "empty": { "type": "boolean" }
+        }
+      },
+      "WorkflowRunCount": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "object",
+            "additionalProperties": { "type": "integer", "format": "int64" }
+          }
+        }
+      },
+      "ChangeLogVersion": {
+        "type": "object",
+        "properties": {
+          "author": { "type": "string" },
+          "reason": { "type": "string" },
+          "date": { "type": "string", "format": "date-time" },
+          "version": { "type": "integer", "format": "int32" }
+        }
+      },
+      "WorkflowResponsePage": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Workflow" }
+          },
+          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
+          "totalElements": { "type": "integer", "format": "int64" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
+          "last": { "type": "boolean" },
+          "totalPages": { "type": "integer", "format": "int32" },
+          "sort": { "$ref": "#/components/schemas/SortObject" },
+          "first": { "type": "boolean" },
+          "numberOfElements": { "type": "integer", "format": "int32" },
+          "empty": { "type": "boolean" }
+        }
+      },
+      "TaskResponsePage": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Task" }
+          },
+          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
+          "totalElements": { "type": "integer", "format": "int64" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
+          "last": { "type": "boolean" },
+          "totalPages": { "type": "integer", "format": "int32" },
+          "sort": { "$ref": "#/components/schemas/SortObject" },
+          "first": { "type": "boolean" },
+          "numberOfElements": { "type": "integer", "format": "int32" },
+          "empty": { "type": "boolean" }
+        }
+      },
+      "PageWorkflowSchedule": {
+        "type": "object",
+        "properties": {
+          "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowSchedule" }
+          },
+          "sort": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SortObject" }
+          },
+          "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
+          "empty": { "type": "boolean" }
+        }
+      },
+      "WorkflowScheduleCalendar": {
+        "type": "object",
+        "properties": {
+          "scheduleId": { "type": "string" },
+          "dates": {
+            "type": "array",
+            "items": { "type": "string", "format": "date-time" }
+          }
+        }
+      },
+      "WorkflowRunInsight": {
+        "type": "object",
+        "properties": {
+          "totalRuns": { "type": "integer", "format": "int64" },
+          "concurrentRuns": { "type": "integer", "format": "int64" },
+          "totalDuration": { "type": "integer", "format": "int64" },
+          "medianDuration": { "type": "integer", "format": "int64" },
+          "runs": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowRunSummary" }
+          }
+        }
+      },
+      "WorkflowRunSummary": {
+        "type": "object",
+        "properties": {
+          "creationDate": { "type": "string", "format": "date-time" },
+          "duration": { "type": "integer", "format": "int64" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "notstarted",
+              "ready",
+              "running",
+              "waiting",
+              "succeeded",
+              "failed",
+              "invalid",
+              "skipped",
+              "cancelled",
+              "timedout"
+            ]
+          },
+          "workflowRef": { "type": "string" },
+          "workflowName": { "type": "string" }
+        }
+      },
+      "Action": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "workflowRef": { "type": "string" },
+          "workflowRunRef": { "type": "string" },
+          "taskRunRef": { "type": "string" },
+          "actioners": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Actioner" }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["approved", "submitted", "rejected", "cancelled"]
+          },
+          "type": { "type": "string", "enum": ["approval", "manual"] },
+          "instructions": { "type": "string" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "numberOfApprovers": { "type": "integer", "format": "int32" },
+          "approverGroupRef": { "type": "string" },
+          "taskName": { "type": "string" },
+          "workflowName": { "type": "string" },
+          "teamName": { "type": "string" },
+          "numberOfApprovals": { "type": "integer", "format": "int64" },
+          "approvalsRequired": { "type": "integer", "format": "int64" }
+        }
+      },
+      "Actioner": {
+        "type": "object",
+        "properties": {
+          "approverId": { "type": "string" },
+          "approverEmail": { "type": "string" },
+          "approverName": { "type": "string" },
+          "comments": { "type": "string" },
+          "date": { "type": "string", "format": "date-time" },
+          "approved": { "type": "boolean" }
+        }
+      },
+      "ActionSummary": {
+        "type": "object",
+        "properties": {
+          "approvalsRate": { "type": "integer", "format": "int64" },
+          "manual": { "type": "integer", "format": "int64" },
+          "approvals": { "type": "integer", "format": "int64" }
+        }
+      },
+      "PageAction": {
+        "type": "object",
+        "properties": {
+          "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Action" }
+          },
+          "sort": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SortObject" }
+          },
+          "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
+          "empty": { "type": "boolean" }
+        }
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["session", "user", "team", "workflow", "global"]
+          },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "permissions": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "PageTeam": {
+        "type": "object",
+        "properties": {
+          "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Team" }
+          },
+          "sort": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SortObject" }
+          },
+          "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
+          "empty": { "type": "boolean" }
+        }
+      },
+      "StreamingResponseBody": { "type": "object" },
+      "CronValidationResponse": {
+        "type": "object",
+        "properties": {
+          "valid": { "type": "boolean" },
+          "message": { "type": "string" }
+        }
+      },
+      "TeamSummary": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "displayName": { "type": "string" },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "status": { "type": "string", "enum": ["active", "inactive"] },
+          "externalRef": { "type": "string" },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "insights": { "$ref": "#/components/schemas/TeamSummaryInsights" }
+        }
+      },
+      "TeamSummaryInsights": {
+        "type": "object",
+        "properties": {
+          "workflows": { "type": "integer", "format": "int64" },
+          "members": { "type": "integer", "format": "int64" }
+        }
+      },
+      "UserProfile": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "email": { "type": "string" },
+          "name": { "type": "string" },
+          "displayName": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "admin",
+              "operator",
+              "sponsor",
+              "auditor",
+              "author",
+              "partner",
+              "advisor"
+            ]
+          },
+          "creationDate": { "type": "string", "format": "date-time" },
+          "lastLoginDate": { "type": "string", "format": "date-time" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "pending_deletion",
+              "deleted",
+              "archived"
+            ]
+          },
+          "labels": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "settings": { "$ref": "#/components/schemas/UserSettings" },
+          "teams": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TeamSummary" }
+          },
+          "permissions": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "Navigation": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string", "enum": ["link", "menu", "divider"] },
+          "icon": { "type": "string" },
+          "link": { "type": "string" },
+          "disabled": { "type": "boolean" },
+          "beta": { "type": "boolean" }
+        }
+      },
+      "Integration": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "link": { "type": "string" },
+          "icon": { "type": "string" },
+          "status": { "type": "string", "enum": ["unlinked", "linked"] },
+          "description": { "type": "string" },
+          "instructions": { "type": "string" },
+          "ref": { "type": "string" }
+        }
+      },
+      "Features": {
+        "type": "object",
+        "properties": {
+          "features": {
+            "type": "object",
+            "additionalProperties": { "type": "object" }
+          }
+        }
+      },
+      "HeaderFeatures": {
+        "type": "object",
+        "properties": {
+          "notifications.enabled": { "type": "boolean" },
+          "support.enabled": { "type": "boolean" },
+          "docs.enabled": { "type": "boolean" },
+          "internal.enabled": { "type": "boolean" },
+          "consent.enabled": { "type": "boolean" }
+        }
+      },
+      "HeaderNavigation": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "isDropdown": { "type": "boolean" },
+          "options": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/HeaderOption" }
+          }
+        }
+      },
+      "HeaderNavigationResponse": {
+        "type": "object",
+        "properties": {
+          "platform": { "$ref": "#/components/schemas/HeaderPlatform" },
+          "features": { "$ref": "#/components/schemas/HeaderFeatures" },
+          "navigation": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/HeaderNavigation" }
+          },
+          "featuredServices": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/HeaderOption" }
+          },
+          "platformMessage": {
+            "$ref": "#/components/schemas/HeaderPlatformMessage"
+          }
+        }
+      },
+      "HeaderOption": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "templateId": { "type": "string" },
+          "imageId": { "type": "string" }
+        }
+      },
+      "HeaderPlatform": {
+        "type": "object",
+        "properties": {
+          "version": { "type": "string" },
+          "name": { "type": "string" },
+          "signOutUrl": { "type": "string" },
+          "communityUrl": { "type": "string" },
+          "appName": { "type": "string" },
+          "platformName": { "type": "string" },
+          "displayLogo": { "type": "boolean" },
+          "logoURL": { "type": "string" },
+          "privateTeams": { "type": "boolean" },
+          "sendMail": { "type": "boolean" },
+          "baseServicesUrl": { "type": "string" },
+          "baseEnvUrl": { "type": "string" }
+        }
+      },
+      "HeaderPlatformMessage": {
+        "type": "object",
+        "properties": {
+          "kind": { "type": "string" },
+          "title": { "type": "string" },
+          "message": { "type": "string" }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "apiKey",
+        "name": "bearerAuth",
+        "in": "header",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
