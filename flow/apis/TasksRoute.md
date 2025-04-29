@@ -9,15 +9,14 @@ title: Tasks Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new using Tekton Task YAML**](#Update, replace, or create new using Tekton Task YAML) | PUT | `/api/v2/task/{name}` |
-| [**Create a new Task using Tekton Task YAML**](#Create a new Task using Tekton Task YAML) | POST | `/api/v2/task` |
-| [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.) | GET | `/api/v2/task/{name}` |
-| [**Retrieve the changlog**](#Retrieve the changlog) | GET | `/api/v2/task/{name}/changelog` |
-| [**Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates) | GET | `/api/v2/task/query` |
+| [**Update, replace, or create new using Tekton Task YAML**](#update-replace-or-create-new-using-tekton-task-yaml) | PUT | `/api/v2/task/{name}` |
+| [**Create a new Task using Tekton Task YAML**](#create-a-new-task-using-tekton-task-yaml) | POST | `/api/v2/task` |
+| [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#retrieve-a-specific-task-as-tekton-task-yaml-if-no-version-specified-the-latest-version-is-returned) | GET | `/api/v2/task/{name}` |
+| [**Retrieve the changlog**](#retrieve-the-changlog) | GET | `/api/v2/task/{name}/changelog` |
+| [**Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#search-for-task-if-teams-are-provided-it-will-query-the-teams-if-no-teams-are-provided-it-will-query-global-task-templates) | GET | `/api/v2/task/query` |
 | [****](#) | POST | `/api/v2/task/validate` |
 
 
-<a name="apply12"></a>
 
 ## **Update, replace, or create new using Tekton Task YAML**
 
@@ -55,7 +54,6 @@ No authorization required
 
 [**Task**](./models/Task.md)
 
-<a name="create12"></a>
 
 ## **Create a new Task using Tekton Task YAML**
 
@@ -91,7 +89,6 @@ No authorization required
 
 [**Task**](./models/Task.md)
 
-<a name="get41"></a>
 
 ## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**
 
@@ -125,7 +122,6 @@ No authorization required
 
 [**Task**](./models/Task.md)
 
-<a name="getChangelog2"></a>
 
 ## **Retrieve the changlog**
 
@@ -159,7 +155,6 @@ No authorization required
 
 [**List**](./models/ChangeLogVersion.md)
 
-<a name="query5"></a>
 
 ## **Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**
 
@@ -197,7 +192,6 @@ No authorization required
 
 [**TaskResponsePage**](./models/TaskResponsePage.md)
 
-<a name="validateYaml1"></a>
 
 ## ****
 

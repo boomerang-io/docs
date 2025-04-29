@@ -9,16 +9,15 @@ title: Schedules Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create a Schedule.**](#Create a Schedule.) | POST | `/api/v2/team/{team}/schedule` |
-| [**Delete a Schedule.**](#Delete a Schedule.) | DELETE | `/api/v2/team/{team}/schedule/{scheduleId}` |
-| [**Retrieve a Schedule.**](#Retrieve a Schedule.) | GET | `/api/v2/team/{team}/schedule/{scheduleId}` |
-| [**Retrieve Calendars for Schedules by Dates.**](#Retrieve Calendars for Schedules by Dates.) | GET | `/api/v2/team/{team}/schedule/calendars` |
-| [**Search for Schedules**](#Search for Schedules) | GET | `/api/v2/team/{team}/schedule/query` |
-| [**Apply a Schedule.**](#Apply a Schedule.) | PUT | `/api/v2/team/{team}/schedule` |
-| [**Validate a Schedules CRON.**](#Validate a Schedules CRON.) | GET | `/api/v2/team/{team}/schedule/validate-cron` |
+| [**Create a Schedule.**](#create-a-schedule) | POST | `/api/v2/team/{team}/schedule` |
+| [**Delete a Schedule.**](#delete-a-schedule) | DELETE | `/api/v2/team/{team}/schedule/{scheduleId}` |
+| [**Retrieve a Schedule.**](#retrieve-a-schedule) | GET | `/api/v2/team/{team}/schedule/{scheduleId}` |
+| [**Retrieve Calendars for Schedules by Dates.**](#retrieve-calendars-for-schedules-by-dates) | GET | `/api/v2/team/{team}/schedule/calendars` |
+| [**Search for Schedules**](#search-for-schedules) | GET | `/api/v2/team/{team}/schedule/query` |
+| [**Apply a Schedule.**](#apply-a-schedule) | PUT | `/api/v2/team/{team}/schedule` |
+| [**Validate a Schedules CRON.**](#validate-a-schedules-cron) | GET | `/api/v2/team/{team}/schedule/validate-cron` |
 
 
-<a name="createSchedule"></a>
 
 ## **Create a Schedule.**
 
@@ -54,7 +53,6 @@ No authorization required
 
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
-<a name="deleteSchedule"></a>
 
 ## **Delete a Schedule.**
 
@@ -88,7 +86,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="get2"></a>
 
 ## **Retrieve a Schedule.**
 
@@ -122,7 +119,6 @@ No authorization required
 
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
-<a name="getCalendarsForSchedules"></a>
 
 ## **Retrieve Calendars for Schedules by Dates.**
 
@@ -158,7 +154,6 @@ No authorization required
 
 [**List**](./models/WorkflowScheduleCalendar.md)
 
-<a name="query3"></a>
 
 ## **Search for Schedules**
 
@@ -196,7 +191,6 @@ No authorization required
 
 [**PageWorkflowSchedule**](./models/PageWorkflowSchedule.md)
 
-<a name="updateSchedule"></a>
 
 ## **Apply a Schedule.**
 
@@ -232,7 +226,6 @@ No authorization required
 
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
-<a name="validateCron"></a>
 
 ## **Validate a Schedules CRON.**
 

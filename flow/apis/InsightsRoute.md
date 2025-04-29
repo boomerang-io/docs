@@ -9,10 +9,9 @@ title: Insights Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Retrieve insights for a team**](#Retrieve insights for a team) | GET | `/api/v2/team/{team}/insights` |
+| [**Retrieve insights for a team**](#retrieve-insights-for-a-team) | GET | `/api/v2/team/{team}/insights` |
 
 
-<a name="getTeamInsights"></a>
 
 ## **Retrieve insights for a team**
 

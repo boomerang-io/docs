@@ -9,22 +9,21 @@ title: Team Management Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new team**](#Create new team) | POST | `/api/v2/team` |
+| [**Create new team**](#create-new-team) | POST | `/api/v2/team` |
 | [****](#) | DELETE | `/api/v2/team/{team}/approvers` |
 | [****](#) | DELETE | `/api/v2/team/{team}/parameters/{name}` |
-| [**Delete a team**](#Delete a team) | DELETE | `/api/v2/team/{team}` |
+| [**Delete a team**](#delete-a-team) | DELETE | `/api/v2/team/{team}` |
 | [****](#) | GET | `/api/v2/team/quotas/default` |
 | [****](#) | GET | `/api/v2/team/roles` |
-| [**Get team**](#Get team) | GET | `/api/v2/team/{team}` |
-| [**Search for Teams**](#Search for Teams) | GET | `/api/v2/team/query` |
+| [**Get team**](#get-team) | GET | `/api/v2/team/{team}` |
+| [**Search for Teams**](#search-for-teams) | GET | `/api/v2/team/query` |
 | [****](#) | DELETE | `/api/v2/team/{team}/leave` |
 | [****](#) | DELETE | `/api/v2/team/{team}/members` |
 | [****](#) | DELETE | `/api/v2/team/{team}/quotas` |
-| [**Patch or update a team**](#Patch or update a team) | PATCH | `/api/v2/team/{team}` |
-| [**Validate team name and check uniqueness.**](#Validate team name and check uniqueness.) | POST | `/api/v2/team/validate-name` |
+| [**Patch or update a team**](#patch-or-update-a-team) | PATCH | `/api/v2/team/{team}` |
+| [**Validate team name and check uniqueness.**](#validate-team-name-and-check-uniqueness) | POST | `/api/v2/team/validate-name` |
 
 
-<a name="createTeam"></a>
 
 ## **Create new team**
 
@@ -59,7 +58,6 @@ No authorization required
 
 [**Team**](./models/Team.md)
 
-<a name="deleteApproverGroup"></a>
 
 ## ****
 
@@ -95,7 +93,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="deleteParameters"></a>
 
 ## ****
 
@@ -129,7 +126,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="deleteWorkflow1"></a>
 
 ## **Delete a team**
 
@@ -162,7 +158,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="getDefaultQuotas"></a>
 
 ## ****
 
@@ -191,7 +186,6 @@ No authorization required
 
 [**Quotas**](./models/Quotas.md)
 
-<a name="getRoles"></a>
 
 ## ****
 
@@ -220,7 +214,6 @@ No authorization required
 
 [**List**](./models/Role.md)
 
-<a name="getTeam"></a>
 
 ## **Get team**
 
@@ -253,7 +246,6 @@ No authorization required
 
 [**Team**](./models/Team.md)
 
-<a name="getTeams"></a>
 
 ## **Search for Teams**
 
@@ -292,7 +284,6 @@ No authorization required
 
 [**PageTeam**](./models/PageTeam.md)
 
-<a name="leave"></a>
 
 ## ****
 
@@ -325,7 +316,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="removeMembers"></a>
 
 ## ****
 
@@ -361,7 +351,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="resetQuotas"></a>
 
 ## ****
 
@@ -394,7 +383,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="updateTeam"></a>
 
 ## **Patch or update a team**
 
@@ -430,7 +418,6 @@ No authorization required
 
 [**Team**](./models/Team.md)
 
-<a name="validateTeamName"></a>
 
 ## **Validate team name and check uniqueness.**
 

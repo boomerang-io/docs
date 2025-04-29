@@ -9,13 +9,12 @@ title: Users Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update a Boomerang Flow Users details**](#Update a Boomerang Flow Users details) | PATCH | `/api/v2/user/{userId}` |
-| [**Delete a Boomerang Flow user**](#Delete a Boomerang Flow user) | DELETE | `/api/v2/user/{userId}` |
-| [**Get a Users details**](#Get a Users details) | GET | `/api/v2/user/{userId}` |
-| [**Search for Users**](#Search for Users) | GET | `/api/v2/user/query` |
+| [**Update a Boomerang Flow Users details**](#update-a-boomerang-flow-users-details) | PATCH | `/api/v2/user/{userId}` |
+| [**Delete a Boomerang Flow user**](#delete-a-boomerang-flow-user) | DELETE | `/api/v2/user/{userId}` |
+| [**Get a Users details**](#get-a-users-details) | GET | `/api/v2/user/{userId}` |
+| [**Search for Users**](#search-for-users) | GET | `/api/v2/user/query` |
 
 
-<a name="apply1"></a>
 
 ## **Update a Boomerang Flow Users details**
 
@@ -51,7 +50,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="deleteFlowUser"></a>
 
 ## **Delete a Boomerang Flow user**
 
@@ -84,7 +82,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="getUserByID"></a>
 
 ## **Get a Users details**
 
@@ -117,7 +114,6 @@ No authorization required
 
 [**User**](./models/User.md)
 
-<a name="getUsers"></a>
 
 ## **Search for Users**
 

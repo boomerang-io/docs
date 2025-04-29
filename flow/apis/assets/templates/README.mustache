@@ -56,7 +56,7 @@ All endpoints do not require authorization.
 
 | Method | Route | 
 | ------------- | ------------- |
-{{#operation}}| [**{{summary}}**](./{{apiDocPath}}{{classname}}#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}} |
+{{#operation}}| [**{{summary}}**](./{{apiDocPath}}{{classname}}#{{#lambda.kebabcase}}{{#lambda.titlecase}}{{summary}}{{/lambda.titlecase}}{{/lambda.kebabcase}}) | **{{httpMethod}}** {{path}} |
 {{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
 {{/generateApiDocs}}
 

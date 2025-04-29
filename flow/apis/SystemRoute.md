@@ -9,19 +9,18 @@ title: System Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new global Param**](#Create new global Param) | POST | `/api/v2/global-params` |
-| [**Delete specific global Param**](#Delete specific global Param) | DELETE | `/api/v2/global-params/{key}` |
-| [**Get all global Params**](#Get all global Params) | GET | `/api/v2/global-params` |
-| [**Retrieve Boomerang Flow Settings**](#Retrieve Boomerang Flow Settings) | GET | `/api/v2/settings` |
-| [**Retrieve feature flags.**](#Retrieve feature flags.) | GET | `/api/v2/features` |
-| [**Retrieve this instances context, features, and navigation.**](#Retrieve this instances context, features, and navigation.) | GET | `/api/v2/context` |
-| [**Retrieve navigation.**](#Retrieve navigation.) | GET | `/api/v2/navigation` |
-| [**Register and activate an installation of Flow**](#Register and activate an installation of Flow) | PUT | `/api/v2/activate` |
+| [**Create new global Param**](#create-new-global-param) | POST | `/api/v2/global-params` |
+| [**Delete specific global Param**](#delete-specific-global-param) | DELETE | `/api/v2/global-params/{key}` |
+| [**Get all global Params**](#get-all-global-params) | GET | `/api/v2/global-params` |
+| [**Retrieve Boomerang Flow Settings**](#retrieve-boomerang-flow-settings) | GET | `/api/v2/settings` |
+| [**Retrieve feature flags.**](#retrieve-feature-flags) | GET | `/api/v2/features` |
+| [**Retrieve this instances context, features, and navigation.**](#retrieve-this-instances-context-features-and-navigation) | GET | `/api/v2/context` |
+| [**Retrieve navigation.**](#retrieve-navigation) | GET | `/api/v2/navigation` |
+| [**Register and activate an installation of Flow**](#register-and-activate-an-installation-of-flow) | PUT | `/api/v2/activate` |
 | [****](#) | PUT | `/api/v2/global-params` |
-| [**Update Boomerang Flow Settings**](#Update Boomerang Flow Settings) | PUT | `/api/v2/settings` |
+| [**Update Boomerang Flow Settings**](#update-boomerang-flow-settings) | PUT | `/api/v2/settings` |
 
 
-<a name="create2"></a>
 
 ## **Create new global Param**
 
@@ -56,7 +55,6 @@ No authorization required
 
 [**AbstractParam**](./models/AbstractParam.md)
 
-<a name="delete2"></a>
 
 ## **Delete specific global Param**
 
@@ -89,7 +87,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="getAll1"></a>
 
 ## **Get all global Params**
 
@@ -118,7 +115,6 @@ No authorization required
 
 [**List**](./models/AbstractParam.md)
 
-<a name="getAppConfiguration"></a>
 
 ## **Retrieve Boomerang Flow Settings**
 
@@ -147,7 +143,6 @@ No authorization required
 
 [**List**](./models/Setting.md)
 
-<a name="getFlowFeatures"></a>
 
 ## **Retrieve feature flags.**
 
@@ -176,7 +171,6 @@ No authorization required
 
 [**Features**](./models/Features.md)
 
-<a name="getHeaderNavigation"></a>
 
 ## **Retrieve this instances context, features, and navigation.**
 
@@ -205,7 +199,6 @@ No authorization required
 
 [**HeaderNavigationResponse**](./models/HeaderNavigationResponse.md)
 
-<a name="getNavigation"></a>
 
 ## **Retrieve navigation.**
 
@@ -238,7 +231,6 @@ No authorization required
 
 [**List**](./models/Navigation.md)
 
-<a name="register"></a>
 
 ## **Register and activate an installation of Flow**
 
@@ -273,7 +265,6 @@ No authorization required
 
 **Boolean**
 
-<a name="update1"></a>
 
 ## ****
 
@@ -308,7 +299,6 @@ No authorization required
 
 [**AbstractParam**](./models/AbstractParam.md)
 
-<a name="updateSettings"></a>
 
 ## **Update Boomerang Flow Settings**
 

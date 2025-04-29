@@ -9,13 +9,12 @@ title: Actions Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Provide an update for an Action**](#Provide an update for an Action) | PUT | `/api/v2/team/{team}/action` |
-| [**Retrieve a specific Action by Id**](#Retrieve a specific Action by Id) | GET | `/api/v2/team/{team}/action/{actionId}` |
-| [**Search for Actions**](#Search for Actions) | GET | `/api/v2/team/{team}/action/query` |
-| [**Get Actions Summary**](#Get Actions Summary) | GET | `/api/v2/team/{team}/action/summary` |
+| [**Provide an update for an Action**](#provide-an-update-for-an-action) | PUT | `/api/v2/team/{team}/action` |
+| [**Retrieve a specific Action by Id**](#retrieve-a-specific-action-by-id) | GET | `/api/v2/team/{team}/action/{actionId}` |
+| [**Search for Actions**](#search-for-actions) | GET | `/api/v2/team/{team}/action/query` |
+| [**Get Actions Summary**](#get-actions-summary) | GET | `/api/v2/team/{team}/action/summary` |
 
 
-<a name="action"></a>
 
 ## **Provide an update for an Action**
 
@@ -51,7 +50,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="get3"></a>
 
 ## **Retrieve a specific Action by Id**
 
@@ -85,7 +83,6 @@ No authorization required
 
 [**Action**](./models/Action.md)
 
-<a name="query4"></a>
 
 ## **Search for Actions**
 
@@ -127,7 +124,6 @@ No authorization required
 
 [**PageAction**](./models/PageAction.md)
 
-<a name="summary"></a>
 
 ## **Get Actions Summary**
 

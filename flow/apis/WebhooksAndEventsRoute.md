@@ -12,10 +12,9 @@ title: Webhooks And Events Route
 | [****](#) | POST | `/api/v2/event` |
 | [****](#) | POST | `/api/v2/callback` |
 | [****](#) | GET | `/api/v2/callback` |
-| [**Trigger WorkflowRun via Webhook.**](#Trigger WorkflowRun via Webhook.) | POST | `/api/v2/webhook` |
+| [**Trigger WorkflowRun via Webhook.**](#trigger-workflow-run-via-webhook) | POST | `/api/v2/webhook` |
 
 
-<a name="acceptEvent1"></a>
 
 ## ****
 
@@ -51,7 +50,6 @@ No authorization required
 
 **Object**
 
-<a name="acceptWaitForEvent"></a>
 
 ## ****
 
@@ -89,7 +87,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="acceptWaitForEvent1"></a>
 
 ## ****
 
@@ -124,7 +121,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="acceptWebhookEvent"></a>
 
 ## **Trigger WorkflowRun via Webhook.**
 

@@ -9,12 +9,11 @@ title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-{{#operations}}{{#operation}}| [**{{summary}}**](#{{summary}}) | {{httpMethod}} | `{{path}}` |
+{{#operations}}{{#operation}}| [**{{summary}}**](#{{#lambda.kebabcase}}{{#lambda.titlecase}}{{summary}}{{/lambda.titlecase}}{{/lambda.kebabcase}}) | {{httpMethod}} | `{{path}}` |
 {{/operation}}{{/operations}}
 
 {{#operations}}
 {{#operation}}
-<a name="{{operationId}}"></a>
 
 ## **{{summary}}**
 

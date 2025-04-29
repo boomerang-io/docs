@@ -9,14 +9,13 @@ title: Workflow Templates Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new, Workflow Template**](#Update, replace, or create new, Workflow Template) | PUT | `/api/v2/workflowtemplate` |
-| [**Create a new Workflow Template**](#Create a new Workflow Template) | POST | `/api/v2/workflowtemplate` |
-| [**Delete a Workflow Template**](#Delete a Workflow Template) | DELETE | `/api/v2/workflowtemplate/{name}` |
-| [**Retrieve a Workflow Template**](#Retrieve a Workflow Template) | GET | `/api/v2/workflowtemplate/{name}` |
-| [**Search for Workflow Templates**](#Search for Workflow Templates) | GET | `/api/v2/workflowtemplate/query` |
+| [**Update, replace, or create new, Workflow Template**](#update-replace-or-create-new-workflow-template) | PUT | `/api/v2/workflowtemplate` |
+| [**Create a new Workflow Template**](#create-a-new-workflow-template) | POST | `/api/v2/workflowtemplate` |
+| [**Delete a Workflow Template**](#delete-a-workflow-template) | DELETE | `/api/v2/workflowtemplate/{name}` |
+| [**Retrieve a Workflow Template**](#retrieve-a-workflow-template) | GET | `/api/v2/workflowtemplate/{name}` |
+| [**Search for Workflow Templates**](#search-for-workflow-templates) | GET | `/api/v2/workflowtemplate/query` |
 
 
-<a name="apply"></a>
 
 ## **Update, replace, or create new, Workflow Template**
 
@@ -52,7 +51,6 @@ No authorization required
 
 [**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
-<a name="create"></a>
 
 ## **Create a new Workflow Template**
 
@@ -87,7 +85,6 @@ No authorization required
 
 [**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
-<a name="deleteWorkflow"></a>
 
 ## **Delete a Workflow Template**
 
@@ -120,7 +117,6 @@ No authorization required
 
 null (empty response body)
 
-<a name="get"></a>
 
 ## **Retrieve a Workflow Template**
 
@@ -156,7 +152,6 @@ No authorization required
 
 [**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
-<a name="query"></a>
 
 ## **Search for Workflow Templates**
 

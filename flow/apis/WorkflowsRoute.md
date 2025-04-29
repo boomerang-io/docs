@@ -9,21 +9,20 @@ title: Workflows Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new, Workflow for Canvas**](#Update, replace, or create new, Workflow for Canvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-| [**Update, replace, or create new, Workflow**](#Update, replace, or create new, Workflow) | PUT | `/api/v2/team/{team}/workflow` |
-| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#Convert workflow to compose model for UI Designer and detailed Activity screens.) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-| [**Create a new workflow**](#Create a new workflow) | POST | `/api/v2/team/{team}/workflow` |
-| [**Delete a workflow**](#Delete a workflow) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
-| [**Duplicates the workflow.**](#Duplicates the workflow.) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
-| [**Export the Workflow as JSON.**](#Export the Workflow as JSON.) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
-| [**Retrieve the parameters.**](#Retrieve the parameters.) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
-| [**Retrieve the changlog**](#Retrieve the changlog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
-| [**Retrieve a Workflow**](#Retrieve a Workflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
-| [**Search for Workflows**](#Search for Workflows) | GET | `/api/v2/team/{team}/workflow/query` |
-| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
+| [**Update, replace, or create new, Workflow for Canvas**](#update-replace-or-create-new-workflow-for-canvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Update, replace, or create new, Workflow**](#update-replace-or-create-new-workflow) | PUT | `/api/v2/team/{team}/workflow` |
+| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#convert-workflow-to-compose-model-for-ui-designer-and-detailed-activity-screens) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Create a new workflow**](#create-a-new-workflow) | POST | `/api/v2/team/{team}/workflow` |
+| [**Delete a workflow**](#delete-a-workflow) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
+| [**Duplicates the workflow.**](#duplicates-the-workflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
+| [**Export the Workflow as JSON.**](#export-the-workflow-as-json) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
+| [**Retrieve the parameters.**](#retrieve-the-parameters) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
+| [**Retrieve the changlog**](#retrieve-the-changlog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
+| [**Retrieve a Workflow**](#retrieve-a-workflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
+| [**Search for Workflows**](#search-for-workflows) | GET | `/api/v2/team/{team}/workflow/query` |
+| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submit-a-workflow-to-be-run-will-queue-the-workflow-run-ready-for-execution) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
 
 
-<a name="applyCanvas"></a>
 
 ## **Update, replace, or create new, Workflow for Canvas**
 
@@ -60,7 +59,6 @@ title: Workflows Route
 
 [**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
-<a name="applyWorkflow"></a>
 
 ## **Update, replace, or create new, Workflow**
 
@@ -97,7 +95,6 @@ title: Workflows Route
 
 [**Workflow**](./models/Workflow.md)
 
-<a name="compose"></a>
 
 ## **Convert workflow to compose model for UI Designer and detailed Activity screens.**
 
@@ -132,7 +129,6 @@ This endpoint does not require a request body.
 
 [**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
-<a name="createWorkflow"></a>
 
 ## **Create a new workflow**
 
@@ -168,7 +164,6 @@ This endpoint does not require a request body.
 
 [**Workflow**](./models/Workflow.md)
 
-<a name="deleteWorkflow2"></a>
 
 ## **Delete a workflow**
 
@@ -202,7 +197,6 @@ This endpoint does not require a request body.
 
 null (empty response body)
 
-<a name="duplicateWorkflow"></a>
 
 ## **Duplicates the workflow.**
 
@@ -236,7 +230,6 @@ This endpoint does not require a request body.
 
 [**Workflow**](./models/Workflow.md)
 
-<a name="export"></a>
 
 ## **Export the Workflow as JSON.**
 
@@ -270,7 +263,6 @@ This endpoint does not require a request body.
 
 **File**
 
-<a name="getAvailableParameters"></a>
 
 ## **Retrieve the parameters.**
 
@@ -304,7 +296,6 @@ This endpoint does not require a request body.
 
 **List**
 
-<a name="getChangelog"></a>
 
 ## **Retrieve the changlog**
 
@@ -339,7 +330,6 @@ This endpoint does not require a request body.
 
 [**List**](./models/ChangeLogVersion.md)
 
-<a name="getWorkflow"></a>
 
 ## **Retrieve a Workflow**
 
@@ -376,7 +366,6 @@ This endpoint does not require a request body.
 
 [**Workflow**](./models/Workflow.md)
 
-<a name="queryWorkflows"></a>
 
 ## **Search for Workflows**
 
@@ -415,7 +404,6 @@ This endpoint does not require a request body.
 
 [**WorkflowResponsePage**](./models/WorkflowResponsePage.md)
 
-<a name="submitWorkflow"></a>
 
 ## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**
 
