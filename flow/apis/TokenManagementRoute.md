@@ -31,7 +31,7 @@ title: Token Management Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**TokenCreateRequest**](../Models/TokenCreateRequest) | true |
+| [**TokenCreateRequest**](./Models/TokenCreateRequest) | true |
 
 
 ### Authorization
@@ -47,7 +47,7 @@ No authorization required
 
 ### Response
 
-[**TokenCreateResponse**](../Models/TokenCreateResponse.md)
+[**TokenCreateResponse**](./Models/TokenCreateResponse.md)
 
 <a name="deleteToken"></a>
 
@@ -97,8 +97,8 @@ No authorization required
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
 | **order** | **String** | true | Ascending (ASC) or Descending (DESC) sort order on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **types** | [**List**](../Models/String) | false | List of types to filter for. Defaults to all. | Defaults to null. Enum: [session, user, team, workflow, global] | 
-| **principals** | [**List**](../Models/String) | false | List of principals to filter for. Based on the types you are querying for. | Defaults to null. | 
+| **types** | [**List**](./Models/String) | false | List of types to filter for. Defaults to all. | Defaults to null. Enum: [session, user, team, workflow, global] | 
+| **principals** | [**List**](./Models/String) | false | List of principals to filter for. Based on the types you are querying for. | Defaults to null. | 
 | **sort** | **String** | false | The element to sort onr | Defaults to Optional[creationDate]. | 0
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
@@ -120,5 +120,5 @@ No authorization required
 
 ### Response
 
-[**PageToken**](../Models/PageToken.md)
+[**PageToken**](./Models/PageToken.md)
 

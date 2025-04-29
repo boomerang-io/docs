@@ -42,7 +42,7 @@ title: Workflows Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowCanvas**](../Models/WorkflowCanvas) | true |
+| [**WorkflowCanvas**](./Models/WorkflowCanvas) | true |
 
 
 ### Authorization
@@ -58,7 +58,7 @@ title: Workflows Route
 
 ### Response
 
-[**WorkflowCanvas**](../Models/WorkflowCanvas.md)
+[**WorkflowCanvas**](./Models/WorkflowCanvas.md)
 
 <a name="applyWorkflow"></a>
 
@@ -79,7 +79,7 @@ title: Workflows Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**Workflow**](../Models/Workflow) | true |
+| [**Workflow**](./Models/Workflow) | true |
 
 
 ### Authorization
@@ -95,7 +95,7 @@ title: Workflows Route
 
 ### Response
 
-[**Workflow**](../Models/Workflow.md)
+[**Workflow**](./Models/Workflow.md)
 
 <a name="compose"></a>
 
@@ -130,7 +130,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowCanvas**](../Models/WorkflowCanvas.md)
+[**WorkflowCanvas**](./Models/WorkflowCanvas.md)
 
 <a name="createWorkflow"></a>
 
@@ -150,7 +150,7 @@ This endpoint does not require a request body.
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**Workflow**](../Models/Workflow) | true |
+| [**Workflow**](./Models/Workflow) | true |
 
 
 ### Authorization
@@ -166,7 +166,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**Workflow**](../Models/Workflow.md)
+[**Workflow**](./Models/Workflow.md)
 
 <a name="deleteWorkflow2"></a>
 
@@ -234,7 +234,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**Workflow**](../Models/Workflow.md)
+[**Workflow**](./Models/Workflow.md)
 
 <a name="export"></a>
 
@@ -337,7 +337,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**List**](../Models/ChangeLogVersion.md)
+[**List**](./Models/ChangeLogVersion.md)
 
 <a name="getWorkflow"></a>
 
@@ -374,7 +374,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**Workflow**](../Models/Workflow.md)
+[**Workflow**](./Models/Workflow.md)
 
 <a name="queryWorkflows"></a>
 
@@ -392,9 +392,9 @@ This endpoint does not require a request body.
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
 | **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **labels** | [**List**](../Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **statuses** | [**List**](../Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
-| **workflows** | [**List**](../Models/String) | false | List of workflows to filter for. | Defaults to null. | 
+| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **statuses** | [**List**](./Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
+| **workflows** | [**List**](./Models/String) | false | List of workflows to filter for. | Defaults to null. | 
 
 
 ### Request Body
@@ -413,7 +413,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowResponsePage**](../Models/WorkflowResponsePage.md)
+[**WorkflowResponsePage**](./Models/WorkflowResponsePage.md)
 
 <a name="submitWorkflow"></a>
 
@@ -435,7 +435,7 @@ This endpoint does not require a request body.
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowSubmitRequest**](../Models/WorkflowSubmitRequest) | true |
+| [**WorkflowSubmitRequest**](./Models/WorkflowSubmitRequest) | true |
 
 
 ### Authorization
@@ -451,5 +451,5 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowRun**](../Models/WorkflowRun.md)
+[**WorkflowRun**](./Models/WorkflowRun.md)
 

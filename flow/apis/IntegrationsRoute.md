@@ -51,7 +51,7 @@ No authorization required
 
 ### Response
 
-[**List**](../Models/Integration.md)
+[**List**](./Models/Integration.md)
 
 <a name="githubInstall"></a>
 
@@ -104,7 +104,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**GHLinkRequest**](../Models/GHLinkRequest) | true |
+| [**GHLinkRequest**](./Models/GHLinkRequest) | true |
 
 
 ### Authorization
@@ -139,7 +139,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**GHLinkRequest**](../Models/GHLinkRequest) | true |
+| [**GHLinkRequest**](./Models/GHLinkRequest) | true |
 
 
 ### Authorization

@@ -32,7 +32,7 @@ title: Parameters Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](../Models/AbstractParam) | true |
+| [**AbstractParam**](./Models/AbstractParam) | true |
 
 
 ### Authorization
@@ -48,7 +48,7 @@ No authorization required
 
 ### Response
 
-[**AbstractParam**](../Models/AbstractParam.md)
+[**AbstractParam**](./Models/AbstractParam.md)
 
 <a name="delete1"></a>
 
@@ -110,7 +110,7 @@ No authorization required
 
 ### Response
 
-[**List**](../Models/AbstractParam.md)
+[**List**](./Models/AbstractParam.md)
 
 <a name="update"></a>
 
@@ -129,7 +129,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](../Models/AbstractParam) | true |
+| [**AbstractParam**](./Models/AbstractParam) | true |
 
 
 ### Authorization
@@ -145,5 +145,5 @@ No authorization required
 
 ### Response
 
-[**AbstractParam**](../Models/AbstractParam.md)
+[**AbstractParam**](./Models/AbstractParam.md)
 

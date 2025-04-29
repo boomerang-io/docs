@@ -28,8 +28,8 @@ The insights are based on the workflow runs and their statuses.
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **fromDate** | **Long** | false |  | Defaults to null. | 789
 | **toDate** | **Long** | false |  | Defaults to null. | 789
-| **workflows** | [**List**](../Models/String) | false |  | Defaults to null. | 
-| **statuses** | [**List**](../Models/String) | false |  | Defaults to null. | 
+| **workflows** | [**List**](./Models/String) | false |  | Defaults to null. | 
+| **statuses** | [**List**](./Models/String) | false |  | Defaults to null. | 
 
 
 ### Request Body
@@ -48,5 +48,5 @@ No authorization required
 
 ### Response
 
-[**WorkflowRunInsight**](../Models/WorkflowRunInsight.md)
+[**WorkflowRunInsight**](./Models/WorkflowRunInsight.md)
 

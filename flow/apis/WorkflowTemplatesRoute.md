@@ -34,7 +34,7 @@ title: Workflow Templates Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowTemplate**](../Models/WorkflowTemplate) | true |
+| [**WorkflowTemplate**](./Models/WorkflowTemplate) | true |
 
 
 ### Authorization
@@ -50,7 +50,7 @@ No authorization required
 
 ### Response
 
-[**WorkflowTemplate**](../Models/WorkflowTemplate.md)
+[**WorkflowTemplate**](./Models/WorkflowTemplate.md)
 
 <a name="create"></a>
 
@@ -69,7 +69,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowTemplate**](../Models/WorkflowTemplate) | true |
+| [**WorkflowTemplate**](./Models/WorkflowTemplate) | true |
 
 
 ### Authorization
@@ -85,7 +85,7 @@ No authorization required
 
 ### Response
 
-[**WorkflowTemplate**](../Models/WorkflowTemplate.md)
+[**WorkflowTemplate**](./Models/WorkflowTemplate.md)
 
 <a name="deleteWorkflow"></a>
 
@@ -154,7 +154,7 @@ No authorization required
 
 ### Response
 
-[**WorkflowTemplate**](../Models/WorkflowTemplate.md)
+[**WorkflowTemplate**](./Models/WorkflowTemplate.md)
 
 <a name="query"></a>
 
@@ -171,8 +171,8 @@ No authorization required
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
 | **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **labels** | [**List**](../Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **names** | [**List**](../Models/String) | false | List of WorkflowTemplate names to filter for. Defaults to all. | Defaults to null. | mongodb-email-query-results
+| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **names** | [**List**](./Models/String) | false | List of WorkflowTemplate names to filter for. Defaults to all. | Defaults to null. | mongodb-email-query-results
 
 
 ### Request Body
@@ -191,5 +191,5 @@ No authorization required
 
 ### Response
 
-[**WorkflowTemplateResponsePage**](../Models/WorkflowTemplateResponsePage.md)
+[**WorkflowTemplateResponsePage**](./Models/WorkflowTemplateResponsePage.md)
 

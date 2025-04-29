@@ -33,7 +33,7 @@ title: Users Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**UserRequest**](../Models/UserRequest) | true |
+| [**UserRequest**](./Models/UserRequest) | true |
 
 
 ### Authorization
@@ -115,7 +115,7 @@ No authorization required
 
 ### Response
 
-[**User**](../Models/User.md)
+[**User**](./Models/User.md)
 
 <a name="getUsers"></a>
 
@@ -131,9 +131,9 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
-| **labels** | [**List**](../Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **status** | [**List**](../Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
-| **ids** | [**List**](../Models/String) | false | List of ids to filter for. | Defaults to null. | 
+| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **status** | [**List**](./Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
+| **ids** | [**List**](./Models/String) | false | List of ids to filter for. | Defaults to null. | 
 | **order** | **String** | false | Ascending or Descending (default) order | Defaults to Optional[DESC]. Enum: [ASC, DESC] | 0
 | **sort** | **String** | false | The element to sort on | Defaults to Optional[name]. | 0
 
@@ -154,5 +154,5 @@ No authorization required
 
 ### Response
 
-[**PageUser**](../Models/PageUser.md)
+[**PageUser**](./Models/PageUser.md)
 

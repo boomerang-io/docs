@@ -38,7 +38,7 @@ title: System Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](../Models/AbstractParam) | true |
+| [**AbstractParam**](./Models/AbstractParam) | true |
 
 
 ### Authorization
@@ -54,7 +54,7 @@ No authorization required
 
 ### Response
 
-[**AbstractParam**](../Models/AbstractParam.md)
+[**AbstractParam**](./Models/AbstractParam.md)
 
 <a name="delete2"></a>
 
@@ -116,7 +116,7 @@ No authorization required
 
 ### Response
 
-[**List**](../Models/AbstractParam.md)
+[**List**](./Models/AbstractParam.md)
 
 <a name="getAppConfiguration"></a>
 
@@ -145,7 +145,7 @@ No authorization required
 
 ### Response
 
-[**List**](../Models/Setting.md)
+[**List**](./Models/Setting.md)
 
 <a name="getFlowFeatures"></a>
 
@@ -174,7 +174,7 @@ No authorization required
 
 ### Response
 
-[**Features**](../Models/Features.md)
+[**Features**](./Models/Features.md)
 
 <a name="getHeaderNavigation"></a>
 
@@ -203,7 +203,7 @@ No authorization required
 
 ### Response
 
-[**HeaderNavigationResponse**](../Models/HeaderNavigationResponse.md)
+[**HeaderNavigationResponse**](./Models/HeaderNavigationResponse.md)
 
 <a name="getNavigation"></a>
 
@@ -236,7 +236,7 @@ No authorization required
 
 ### Response
 
-[**List**](../Models/Navigation.md)
+[**List**](./Models/Navigation.md)
 
 <a name="register"></a>
 
@@ -255,7 +255,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**OneTimeCode**](../Models/OneTimeCode) | false |
+| [**OneTimeCode**](./Models/OneTimeCode) | false |
 
 
 ### Authorization
@@ -290,7 +290,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](../Models/AbstractParam) | true |
+| [**AbstractParam**](./Models/AbstractParam) | true |
 
 
 ### Authorization
@@ -306,7 +306,7 @@ No authorization required
 
 ### Response
 
-[**AbstractParam**](../Models/AbstractParam.md)
+[**AbstractParam**](./Models/AbstractParam.md)
 
 <a name="updateSettings"></a>
 
@@ -325,7 +325,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**List**](../Models/Setting) | true |
+| [**List**](./Models/Setting) | true |
 
 
 ### Authorization
@@ -341,5 +341,5 @@ No authorization required
 
 ### Response
 
-[**List**](../Models/Setting.md)
+[**List**](./Models/Setting.md)
 

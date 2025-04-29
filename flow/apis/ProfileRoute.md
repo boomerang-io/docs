@@ -40,7 +40,7 @@ No authorization required
 
 ### Response
 
-[**UserProfile**](../Models/UserProfile.md)
+[**UserProfile**](./Models/UserProfile.md)
 
 <a name="updateProfile"></a>
 
@@ -59,7 +59,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**UserRequest**](../Models/UserRequest) | true |
+| [**UserRequest**](./Models/UserRequest) | true |
 
 
 ### Authorization

@@ -36,7 +36,7 @@ title: Schedules Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowSchedule**](../Models/WorkflowSchedule) | true |
+| [**WorkflowSchedule**](./Models/WorkflowSchedule) | true |
 
 
 ### Authorization
@@ -52,7 +52,7 @@ No authorization required
 
 ### Response
 
-[**WorkflowSchedule**](../Models/WorkflowSchedule.md)
+[**WorkflowSchedule**](./Models/WorkflowSchedule.md)
 
 <a name="deleteSchedule"></a>
 
@@ -120,7 +120,7 @@ No authorization required
 
 ### Response
 
-[**WorkflowSchedule**](../Models/WorkflowSchedule.md)
+[**WorkflowSchedule**](./Models/WorkflowSchedule.md)
 
 <a name="getCalendarsForSchedules"></a>
 
@@ -135,7 +135,7 @@ No authorization required
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **schedules** | [**List**](../Models/String) | true |  | Defaults to null. | 
+| **schedules** | [**List**](./Models/String) | true |  | Defaults to null. | 
 | **fromDate** | **Long** | true |  | Defaults to null. | 789
 | **toDate** | **Long** | true |  | Defaults to null. | 789
 
@@ -156,7 +156,7 @@ No authorization required
 
 ### Response
 
-[**List**](../Models/WorkflowScheduleCalendar.md)
+[**List**](./Models/WorkflowScheduleCalendar.md)
 
 <a name="query3"></a>
 
@@ -173,9 +173,9 @@ No authorization required
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **limit** | **Integer** | true | Result Size | Defaults to 10. | 10
 | **page** | **Integer** | true | Page Number | Defaults to 0. | 0
-| **statuses** | [**List**](../Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,archived
-| **types** | [**List**](../Models/String) | false | List of types to filter for. Defaults to all. | Defaults to null. | cron,advancedCron
-| **workflows** | [**List**](../Models/String) | false | List of workflows to filter for. | Defaults to null. | 
+| **statuses** | [**List**](./Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,archived
+| **types** | [**List**](./Models/String) | false | List of types to filter for. Defaults to all. | Defaults to null. | cron,advancedCron
+| **workflows** | [**List**](./Models/String) | false | List of workflows to filter for. | Defaults to null. | 
 
 
 ### Request Body
@@ -194,7 +194,7 @@ No authorization required
 
 ### Response
 
-[**PageWorkflowSchedule**](../Models/PageWorkflowSchedule.md)
+[**PageWorkflowSchedule**](./Models/PageWorkflowSchedule.md)
 
 <a name="updateSchedule"></a>
 
@@ -214,7 +214,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowSchedule**](../Models/WorkflowSchedule) | true |
+| [**WorkflowSchedule**](./Models/WorkflowSchedule) | true |
 
 
 ### Authorization
@@ -230,7 +230,7 @@ No authorization required
 
 ### Response
 
-[**WorkflowSchedule**](../Models/WorkflowSchedule.md)
+[**WorkflowSchedule**](./Models/WorkflowSchedule.md)
 
 <a name="validateCron"></a>
 
@@ -263,5 +263,5 @@ No authorization required
 
 ### Response
 
-[**CronValidationResponse**](../Models/CronValidationResponse.md)
+[**CronValidationResponse**](./Models/CronValidationResponse.md)
 

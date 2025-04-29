@@ -37,7 +37,7 @@ The name must only contain alphanumeric and - characeters. If the name exists, a
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**Task**](../Models/Task) | true |
+| [**Task**](./Models/Task) | true |
 
 
 ### Authorization
@@ -53,7 +53,7 @@ No authorization required
 
 ### Response
 
-[**Task**](../Models/Task.md)
+[**Task**](./Models/Task.md)
 
 <a name="create12"></a>
 
@@ -73,7 +73,7 @@ The name needs to be unique and must only contain alphanumeric and - characeters
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**Task**](../Models/Task) | true |
+| [**Task**](./Models/Task) | true |
 
 
 ### Authorization
@@ -89,7 +89,7 @@ No authorization required
 
 ### Response
 
-[**Task**](../Models/Task.md)
+[**Task**](./Models/Task.md)
 
 <a name="get41"></a>
 
@@ -123,7 +123,7 @@ No authorization required
 
 ### Response
 
-[**Task**](../Models/Task.md)
+[**Task**](./Models/Task.md)
 
 <a name="getChangelog2"></a>
 
@@ -157,7 +157,7 @@ No authorization required
 
 ### Response
 
-[**List**](../Models/ChangeLogVersion.md)
+[**List**](./Models/ChangeLogVersion.md)
 
 <a name="query5"></a>
 
@@ -174,9 +174,9 @@ No authorization required
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
 | **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **labels** | [**List**](../Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **statuses** | [**List**](../Models/String) | false | List of statuses to filter for. | Defaults to null. | active,inactive
-| **names** | [**List**](../Models/String) | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait
+| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **statuses** | [**List**](./Models/String) | false | List of statuses to filter for. | Defaults to null. | active,inactive
+| **names** | [**List**](./Models/String) | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait
 
 
 ### Request Body
@@ -195,7 +195,7 @@ No authorization required
 
 ### Response
 
-[**TaskResponsePage**](../Models/TaskResponsePage.md)
+[**TaskResponsePage**](./Models/TaskResponsePage.md)
 
 <a name="validateYaml1"></a>
 
@@ -214,7 +214,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**TektonTask**](../Models/TektonTask) | true |
+| [**TektonTask**](./Models/TektonTask) | true |
 
 
 ### Authorization

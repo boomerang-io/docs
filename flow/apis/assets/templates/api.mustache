@@ -29,14 +29,14 @@ title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|{{/-last}}{{/allParams}}
-{{#allParams}}{{^isBodyParam}}| **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](../{{modelPackage}}/{{baseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} | {{description}} | {{#defaultValue}}Defaults to {{.}}.{{/defaultValue}}{{#allowableValues}} Enum: [{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}} | {{example}}
+{{#allParams}}{{^isBodyParam}}| **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](./{{modelPackage}}/{{baseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} | {{description}} | {{#defaultValue}}Defaults to {{.}}.{{/defaultValue}}{{#allowableValues}} Enum: [{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}} | {{example}}
 {{/isBodyParam}}{{/allParams}}
 
 ### Request Body
 {{#bodyParams}}
 | Schema | Required | 
 | ------ | --- | 
-| {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](../{{modelPackage}}/{{baseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} |
+| {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](./{{modelPackage}}/{{baseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} |
 {{/bodyParams}}
 {{^bodyParams}}This endpoint does not require a request body.{{/bodyParams}}
 
@@ -53,7 +53,7 @@ title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 
 ### Response
 
-{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}{{#generateModelDocs}}[**{{returnType}}**](../{{modelPackage}}/{{returnBaseType}}.md){{/generateModelDocs}}{{^generateModelDocs}}**{{returnType}}**{{/generateModelDocs}}{{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}
+{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}{{#generateModelDocs}}[**{{returnType}}**](./{{modelPackage}}/{{returnBaseType}}.md){{/generateModelDocs}}{{^generateModelDocs}}**{{returnType}}**{{/generateModelDocs}}{{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}
 
 {{/operation}}
 {{/operations}}
