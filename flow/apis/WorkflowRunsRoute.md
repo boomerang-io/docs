@@ -33,7 +33,7 @@ title: Workflow Runs Route
 | **workflowRunId** | **String** | true | ID of WorkflowRun to Cancel | Defaults to null. | workflowRunId_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -69,7 +69,7 @@ This endpoint does not require a request body.
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -102,7 +102,7 @@ This endpoint does not require a request body.
 | **workflowRunId** | **String** | true | ID of WorkflowRun to Finalize | Defaults to null. | workflowRunId_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -136,7 +136,7 @@ This endpoint does not require a request body.
 | **withTasks** | **Boolean** | false | Include Task Runs in the response | Defaults to true. | true
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -179,7 +179,7 @@ This endpoint does not require a request body.
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -212,7 +212,7 @@ This endpoint does not require a request body.
 | **workflowRunId** | **String** | true | ID of WorkflowRun to Retry. | Defaults to null. | workflowRunId_example
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**WorkflowRunRequest**](./models/WorkflowRunRequest) | false |
@@ -248,7 +248,7 @@ This endpoint does not require a request body.
 | **workflowRunId** | **String** | true | ID of WorkflowRun to Start | Defaults to null. | workflowRunId_example
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**WorkflowRunRequest**](./models/WorkflowRunRequest) | false |

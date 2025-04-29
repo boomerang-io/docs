@@ -29,7 +29,7 @@ title: Actions Route
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**List**](./models/ActionRequest) | true |
@@ -65,7 +65,7 @@ null (empty response body)
 | **actionId** | **String** | true | ID of Action | Defaults to null. | actionId_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -106,7 +106,7 @@ No authorization required
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -141,7 +141,7 @@ No authorization required
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization

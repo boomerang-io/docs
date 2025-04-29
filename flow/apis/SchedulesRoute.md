@@ -32,7 +32,7 @@ title: Schedules Route
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**WorkflowSchedule**](./models/WorkflowSchedule) | true |
@@ -68,7 +68,7 @@ No authorization required
 | **scheduleId** | **String** | true |  | Defaults to null. | scheduleId_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -101,7 +101,7 @@ null (empty response body)
 | **scheduleId** | **String** | true |  | Defaults to null. | scheduleId_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -136,7 +136,7 @@ No authorization required
 | **toDate** | **Long** | true |  | Defaults to null. | 789
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -173,7 +173,7 @@ No authorization required
 | **workflows** | [**List**](./models/String) | false | List of workflows to filter for. | Defaults to null. | 
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -205,7 +205,7 @@ No authorization required
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**WorkflowSchedule**](./models/WorkflowSchedule) | true |
@@ -240,7 +240,7 @@ No authorization required
 | **cron** | **String** | true | A CRON expression to validate | Defaults to null. | cron_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization

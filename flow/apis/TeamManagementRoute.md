@@ -37,7 +37,7 @@ title: Team Management Route
 | ---- | ---- | -------- | ----------- | --- |---|
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**TeamRequest**](./models/TeamRequest) | true |
@@ -72,7 +72,7 @@ No authorization required
 | **team** | **String** | true | Team as owner reference. | Defaults to null. | team_example
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**List**](./models/string) | true |
@@ -108,7 +108,7 @@ null (empty response body)
 | **name** | **String** | true |  | Defaults to null. | name_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -140,7 +140,7 @@ null (empty response body)
 | **team** | **String** | true | ID of Team | Defaults to null. | team_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -168,7 +168,7 @@ null (empty response body)
 This endpoint does not need any parameter.
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -196,7 +196,7 @@ No authorization required
 This endpoint does not need any parameter.
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -228,7 +228,7 @@ No authorization required
 | **team** | **String** | true | Team as owner reference. | Defaults to null. | my-amazing-team
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -266,7 +266,7 @@ No authorization required
 | **sort** | **String** | false | The element to sort on | Defaults to Optional[name]. | 0
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -298,7 +298,7 @@ No authorization required
 | **team** | **String** | true | Team as owner reference. | Defaults to null. | team_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -330,7 +330,7 @@ null (empty response body)
 | **team** | **String** | true | Team as owner reference. | Defaults to null. | my-amazing-team
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**List**](./models/TeamMember) | true |
@@ -365,7 +365,7 @@ null (empty response body)
 | **team** | **String** | true | Team as owner reference. | Defaults to null. | team_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -397,7 +397,7 @@ null (empty response body)
 | **team** | **String** | true | ID of Team | Defaults to null. | team_example
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**TeamRequest**](./models/TeamRequest) | true |
@@ -431,7 +431,7 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**TeamNameCheckRequest**](./models/TeamNameCheckRequest) | true |

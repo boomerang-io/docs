@@ -33,7 +33,7 @@ The name must only contain alphanumeric and - characeters. If the name exists, a
 | **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**Task**](./models/Task) | true |
@@ -68,7 +68,7 @@ The name needs to be unique and must only contain alphanumeric and - characeters
 | ---- | ---- | -------- | ----------- | --- |---|
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**Task**](./models/Task) | true |
@@ -104,7 +104,7 @@ No authorization required
 | **version** | **Integer** | false | Task Version | Defaults to null. | 56
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -137,7 +137,7 @@ Retrieves each versions changelog and returns them all as a list.
 | **name** | **String** | true | Name of Task | Defaults to null. | name_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -174,7 +174,7 @@ No authorization required
 | **names** | [**List**](./models/String) | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -205,7 +205,7 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**TektonTask**](./models/TektonTask) | true |

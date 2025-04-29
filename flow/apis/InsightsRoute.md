@@ -31,7 +31,7 @@ The insights are based on the workflow runs and their statuses.
 | **statuses** | [**List**](./models/String) | false |  | Defaults to null. | 
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization

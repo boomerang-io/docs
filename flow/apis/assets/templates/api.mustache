@@ -31,7 +31,7 @@ title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 {{#allParams}}{{^isBodyParam}}| **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](./{{#lambda.lowercase}}{{modelPackage}}{{/lambda.lowercase}}/{{baseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} | {{description}} | {{#defaultValue}}Defaults to {{.}}.{{/defaultValue}}{{#allowableValues}} Enum: [{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}} | {{example}}
 {{/isBodyParam}}{{/allParams}}
 
-### Request Body
+#### Request Body
 {{#bodyParams}}
 | Schema | Required | 
 | ------ | --- | 

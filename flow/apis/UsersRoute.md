@@ -29,7 +29,7 @@ title: Users Route
 | **userId** | **String** | true |  | Defaults to null. | userId_example
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**UserRequest**](./models/UserRequest) | true |
@@ -64,7 +64,7 @@ null (empty response body)
 | **userId** | **String** | true |  | Defaults to null. | userId_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -96,7 +96,7 @@ null (empty response body)
 | **userId** | **String** | true |  | Defaults to null. | userId_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -134,7 +134,7 @@ No authorization required
 | **sort** | **String** | false | The element to sort on | Defaults to Optional[name]. | 0
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization

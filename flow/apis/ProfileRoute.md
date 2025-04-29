@@ -23,7 +23,7 @@ title: Profile Route
 This endpoint does not need any parameter.
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -54,7 +54,7 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**UserRequest**](./models/UserRequest) | true |

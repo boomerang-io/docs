@@ -27,7 +27,7 @@ title: Token Management Route
 | ---- | ---- | -------- | ----------- | --- |---|
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**TokenCreateRequest**](./models/TokenCreateRequest) | true |
@@ -62,7 +62,7 @@ No authorization required
 | **id** | **String** | true | ID of the Token | Defaults to null. | id_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -101,7 +101,7 @@ No authorization required
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization

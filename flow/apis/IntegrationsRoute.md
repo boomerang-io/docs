@@ -34,7 +34,7 @@ title: Integrations Route
 | **team** | **String** | true |  | Defaults to null. | team_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -67,7 +67,7 @@ No authorization required
 | **team** | **String** | false |  | Defaults to null. | team_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -98,7 +98,7 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**GHLinkRequest**](./models/GHLinkRequest) | true |
@@ -132,7 +132,7 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | [**GHLinkRequest**](./models/GHLinkRequest) | true |
@@ -163,7 +163,7 @@ null (empty response body)
 This endpoint does not need any parameter.
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -195,7 +195,7 @@ null (empty response body)
 | **code** | **String** | true |  | Defaults to null. | code_example
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -223,7 +223,7 @@ No authorization required
 This endpoint does not need any parameter.
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
@@ -256,7 +256,7 @@ No authorization required
 | **x-slack-signature** | **String** | true |  | Defaults to null. | x-slack-signature_example
 
 
-### Request Body
+#### Request Body
 | Schema | Required | 
 | ------ | --- | 
 | **Object** | true |
@@ -287,7 +287,7 @@ No authorization required
 This endpoint does not need any parameter.
 
 
-### Request Body
+#### Request Body
 This endpoint does not require a request body.
 
 #### Authorization
