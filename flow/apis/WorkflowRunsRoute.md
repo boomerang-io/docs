@@ -9,18 +9,18 @@ title: Workflow Runs Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Cancel a WorkflowRun**](#cancela-workflow-run) | DELETE | `/api/v2/team/{team}/workflowrun/{workflowRunId}/cancel` |
-| [**Retrieve a summary of WorkflowRuns by Status.**](#retrieveasummaryof-workflow-runsby-status) | GET | `/api/v2/team/{team}/workflowrun/count` |
-| [**End a WorkflowRun**](#enda-workflow-run) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/finalize` |
-| [**Retrieve a specific WorkflowRun.**](#retrieveaspecific-workflow-run) | GET | `/api/v2/team/{team}/workflowrun/{workflowRunId}` |
-| [**Search for WorkflowRuns**](#searchfor-workflow-runs) | GET | `/api/v2/team/{team}/workflowrun/query` |
-| [**Retry WorkflowRun execution.**](#retry-workflow-runexecution) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/retry` |
-| [**Start WorkflowRun execution. The WorkflowRun has to already have been queued.**](#start-workflow-runexecution-the-workflow-runhastoalreadyhavebeenqueued) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/start` |
+| [**Cancel a WorkflowRun**](#cancel) | DELETE | `/api/v2/team/{team}/workflowrun/{workflowRunId}/cancel` |
+| [**Retrieve a summary of WorkflowRuns by Status.**](#count) | GET | `/api/v2/team/{team}/workflowrun/count` |
+| [**End a WorkflowRun**](#finalize) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/finalize` |
+| [**Retrieve a specific WorkflowRun.**](#get1) | GET | `/api/v2/team/{team}/workflowrun/{workflowRunId}` |
+| [**Search for WorkflowRuns**](#query2) | GET | `/api/v2/team/{team}/workflowrun/query` |
+| [**Retry WorkflowRun execution.**](#retry) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/retry` |
+| [**Start WorkflowRun execution. The WorkflowRun has to already have been queued.**](#start) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/start` |
 
 
 <a name="cancel"></a>
 
-## **Cancel a WorkflowRun**
+## **Cancel a WorkflowRun** {#cancel}
 
 > DELETE /api/v2/team/{team}/workflowrun/{workflowRunId}/cancel
 
@@ -54,7 +54,7 @@ This endpoint does not require a request body.
 
 <a name="count"></a>
 
-## **Retrieve a summary of WorkflowRuns by Status.**
+## **Retrieve a summary of WorkflowRuns by Status.** {#count}
 
 > GET /api/v2/team/{team}/workflowrun/count?labels=,workflows=63d3656ca845957db7d25ef0,63a3e732b0496509a7f1d763,fromDate=1677589200000,toDate=1680267600000
 
@@ -91,7 +91,7 @@ This endpoint does not require a request body.
 
 <a name="finalize"></a>
 
-## **End a WorkflowRun**
+## **End a WorkflowRun** {#finalize}
 
 > PUT /api/v2/team/{team}/workflowrun/{workflowRunId}/finalize
 
@@ -125,7 +125,7 @@ This endpoint does not require a request body.
 
 <a name="get1"></a>
 
-## **Retrieve a specific WorkflowRun.**
+## **Retrieve a specific WorkflowRun.** {#get1}
 
 > GET /api/v2/team/{team}/workflowrun/{workflowRunId}?withTasks=true
 
@@ -160,7 +160,7 @@ This endpoint does not require a request body.
 
 <a name="query2"></a>
 
-## **Search for WorkflowRuns**
+## **Search for WorkflowRuns** {#query2}
 
 > GET /api/v2/team/{team}/workflowrun/query?labels=,statuses=succeeded,skipped,phase=completed,finalized,workflowruns=,workflows=,triggers=,limit=10,page=0,order=ASC,fromDate=1677589200000,toDate=1680267600000
 
@@ -204,7 +204,7 @@ This endpoint does not require a request body.
 
 <a name="retry"></a>
 
-## **Retry WorkflowRun execution.**
+## **Retry WorkflowRun execution.** {#retry}
 
 > PUT /api/v2/team/{team}/workflowrun/{workflowRunId}/retry
 
@@ -241,7 +241,7 @@ This endpoint does not require a request body.
 
 <a name="start"></a>
 
-## **Start WorkflowRun execution. The WorkflowRun has to already have been queued.**
+## **Start WorkflowRun execution. The WorkflowRun has to already have been queued.** {#start}
 
 > PUT /api/v2/team/{team}/workflowrun/{workflowRunId}/start
 

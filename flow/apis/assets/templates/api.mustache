@@ -9,14 +9,14 @@ title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-{{#operations}}{{#operation}}| [**{{summary}}**](#{{#lambda.kebabcase}}{{summary}}{{/lambda.kebabcase}}) | {{httpMethod}} | `{{path}}` |
+{{#operations}}{{#operation}}| [**{{summary}}**](#{{operationId}}) | {{httpMethod}} | `{{path}}` |
 {{/operation}}{{/operations}}
 
 {{#operations}}
 {{#operation}}
 <a name="{{operationId}}"></a>
 
-## **{{summary}}**
+## **{{summary}}** {#{{operationId}}}
 
 > {{httpMethod}} {{path}}{{#hasQueryParams}}?{{#queryParams}}{{paramName}}={{example}}{{^-last}},{{/-last}}{{/queryParams}}{{/hasQueryParams}}
 

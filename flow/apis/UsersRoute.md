@@ -9,15 +9,15 @@ title: Users Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update a Boomerang Flow Users details**](#updatea-boomerang-flow-usersdetails) | PATCH | `/api/v2/user/{userId}` |
-| [**Delete a Boomerang Flow user**](#deletea-boomerang-flowuser) | DELETE | `/api/v2/user/{userId}` |
-| [**Get a Users details**](#geta-usersdetails) | GET | `/api/v2/user/{userId}` |
-| [**Search for Users**](#searchfor-users) | GET | `/api/v2/user/query` |
+| [**Update a Boomerang Flow Users details**](#apply1) | PATCH | `/api/v2/user/{userId}` |
+| [**Delete a Boomerang Flow user**](#deleteFlowUser) | DELETE | `/api/v2/user/{userId}` |
+| [**Get a Users details**](#getUserByID) | GET | `/api/v2/user/{userId}` |
+| [**Search for Users**](#getUsers) | GET | `/api/v2/user/query` |
 
 
 <a name="apply1"></a>
 
-## **Update a Boomerang Flow Users details**
+## **Update a Boomerang Flow Users details** {#apply1}
 
 > PATCH /api/v2/user/{userId}
 
@@ -53,7 +53,7 @@ null (empty response body)
 
 <a name="deleteFlowUser"></a>
 
-## **Delete a Boomerang Flow user**
+## **Delete a Boomerang Flow user** {#deleteFlowUser}
 
 > DELETE /api/v2/user/{userId}
 
@@ -86,7 +86,7 @@ null (empty response body)
 
 <a name="getUserByID"></a>
 
-## **Get a Users details**
+## **Get a Users details** {#getUserByID}
 
 > GET /api/v2/user/{userId}
 
@@ -119,7 +119,7 @@ No authorization required
 
 <a name="getUsers"></a>
 
-## **Search for Users**
+## **Search for Users** {#getUsers}
 
 > GET /api/v2/user/query?labels=,status=active,inactive,ids=,limit=10,page=0,order=0,sort=0
 

@@ -9,15 +9,15 @@ title: Parameters Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new global Param**](#createnewglobal-param) | POST | `/api/v2/parameters` |
-| [**Delete specific global Param**](#deletespecificglobal-param) | DELETE | `/api/v2/parameters/{name}` |
-| [**Get all global Params**](#getallglobal-params) | GET | `/api/v2/parameters` |
-| [****](#) | PUT | `/api/v2/parameters` |
+| [**Create new global Param**](#create1) | POST | `/api/v2/parameters` |
+| [**Delete specific global Param**](#delete1) | DELETE | `/api/v2/parameters/{name}` |
+| [**Get all global Params**](#getAll) | GET | `/api/v2/parameters` |
+| [****](#update) | PUT | `/api/v2/parameters` |
 
 
 <a name="create1"></a>
 
-## **Create new global Param**
+## **Create new global Param** {#create1}
 
 > POST /api/v2/parameters
 
@@ -52,7 +52,7 @@ No authorization required
 
 <a name="delete1"></a>
 
-## **Delete specific global Param**
+## **Delete specific global Param** {#delete1}
 
 > DELETE /api/v2/parameters/{name}
 
@@ -85,7 +85,7 @@ null (empty response body)
 
 <a name="getAll"></a>
 
-## **Get all global Params**
+## **Get all global Params** {#getAll}
 
 > GET /api/v2/parameters
 
@@ -114,7 +114,7 @@ No authorization required
 
 <a name="update"></a>
 
-## ****
+## **** {#update}
 
 > PUT /api/v2/parameters
 

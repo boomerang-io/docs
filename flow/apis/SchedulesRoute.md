@@ -9,18 +9,18 @@ title: Schedules Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create a Schedule.**](#createa-schedule) | POST | `/api/v2/team/{team}/schedule` |
-| [**Delete a Schedule.**](#deletea-schedule) | DELETE | `/api/v2/team/{team}/schedule/{scheduleId}` |
-| [**Retrieve a Schedule.**](#retrievea-schedule) | GET | `/api/v2/team/{team}/schedule/{scheduleId}` |
-| [**Retrieve Calendars for Schedules by Dates.**](#retrieve-calendarsfor-schedulesby-dates) | GET | `/api/v2/team/{team}/schedule/calendars` |
-| [**Search for Schedules**](#searchfor-schedules) | GET | `/api/v2/team/{team}/schedule/query` |
-| [**Apply a Schedule.**](#applya-schedule) | PUT | `/api/v2/team/{team}/schedule` |
-| [**Validate a Schedules CRON.**](#validatea-schedules-cron) | GET | `/api/v2/team/{team}/schedule/validate-cron` |
+| [**Create a Schedule.**](#createSchedule) | POST | `/api/v2/team/{team}/schedule` |
+| [**Delete a Schedule.**](#deleteSchedule) | DELETE | `/api/v2/team/{team}/schedule/{scheduleId}` |
+| [**Retrieve a Schedule.**](#get2) | GET | `/api/v2/team/{team}/schedule/{scheduleId}` |
+| [**Retrieve Calendars for Schedules by Dates.**](#getCalendarsForSchedules) | GET | `/api/v2/team/{team}/schedule/calendars` |
+| [**Search for Schedules**](#query3) | GET | `/api/v2/team/{team}/schedule/query` |
+| [**Apply a Schedule.**](#updateSchedule) | PUT | `/api/v2/team/{team}/schedule` |
+| [**Validate a Schedules CRON.**](#validateCron) | GET | `/api/v2/team/{team}/schedule/validate-cron` |
 
 
 <a name="createSchedule"></a>
 
-## **Create a Schedule.**
+## **Create a Schedule.** {#createSchedule}
 
 > POST /api/v2/team/{team}/schedule
 
@@ -56,7 +56,7 @@ No authorization required
 
 <a name="deleteSchedule"></a>
 
-## **Delete a Schedule.**
+## **Delete a Schedule.** {#deleteSchedule}
 
 > DELETE /api/v2/team/{team}/schedule/{scheduleId}
 
@@ -90,7 +90,7 @@ null (empty response body)
 
 <a name="get2"></a>
 
-## **Retrieve a Schedule.**
+## **Retrieve a Schedule.** {#get2}
 
 > GET /api/v2/team/{team}/schedule/{scheduleId}
 
@@ -124,7 +124,7 @@ No authorization required
 
 <a name="getCalendarsForSchedules"></a>
 
-## **Retrieve Calendars for Schedules by Dates.**
+## **Retrieve Calendars for Schedules by Dates.** {#getCalendarsForSchedules}
 
 > GET /api/v2/team/{team}/schedule/calendars?schedules=,fromDate=789,toDate=789
 
@@ -160,7 +160,7 @@ No authorization required
 
 <a name="query3"></a>
 
-## **Search for Schedules**
+## **Search for Schedules** {#query3}
 
 > GET /api/v2/team/{team}/schedule/query?statuses=active,archived,types=cron,advancedCron,workflows=,limit=10,page=0
 
@@ -198,7 +198,7 @@ No authorization required
 
 <a name="updateSchedule"></a>
 
-## **Apply a Schedule.**
+## **Apply a Schedule.** {#updateSchedule}
 
 > PUT /api/v2/team/{team}/schedule
 
@@ -234,7 +234,7 @@ No authorization required
 
 <a name="validateCron"></a>
 
-## **Validate a Schedules CRON.**
+## **Validate a Schedules CRON.** {#validateCron}
 
 > GET /api/v2/team/{team}/schedule/validate-cron?cron=cron_example
 

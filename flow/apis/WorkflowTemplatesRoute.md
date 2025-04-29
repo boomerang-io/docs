@@ -9,16 +9,16 @@ title: Workflow Templates Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new, Workflow Template**](#updatereplaceorcreatenew-workflow-template) | PUT | `/api/v2/workflowtemplate` |
-| [**Create a new Workflow Template**](#createanew-workflow-template) | POST | `/api/v2/workflowtemplate` |
-| [**Delete a Workflow Template**](#deletea-workflow-template) | DELETE | `/api/v2/workflowtemplate/{name}` |
-| [**Retrieve a Workflow Template**](#retrievea-workflow-template) | GET | `/api/v2/workflowtemplate/{name}` |
-| [**Search for Workflow Templates**](#searchfor-workflow-templates) | GET | `/api/v2/workflowtemplate/query` |
+| [**Update, replace, or create new, Workflow Template**](#apply) | PUT | `/api/v2/workflowtemplate` |
+| [**Create a new Workflow Template**](#create) | POST | `/api/v2/workflowtemplate` |
+| [**Delete a Workflow Template**](#deleteWorkflow) | DELETE | `/api/v2/workflowtemplate/{name}` |
+| [**Retrieve a Workflow Template**](#get) | GET | `/api/v2/workflowtemplate/{name}` |
+| [**Search for Workflow Templates**](#query) | GET | `/api/v2/workflowtemplate/query` |
 
 
 <a name="apply"></a>
 
-## **Update, replace, or create new, Workflow Template**
+## **Update, replace, or create new, Workflow Template** {#apply}
 
 > PUT /api/v2/workflowtemplate?replace=true
 
@@ -54,7 +54,7 @@ No authorization required
 
 <a name="create"></a>
 
-## **Create a new Workflow Template**
+## **Create a new Workflow Template** {#create}
 
 > POST /api/v2/workflowtemplate
 
@@ -89,7 +89,7 @@ No authorization required
 
 <a name="deleteWorkflow"></a>
 
-## **Delete a Workflow Template**
+## **Delete a Workflow Template** {#deleteWorkflow}
 
 > DELETE /api/v2/workflowtemplate/{name}
 
@@ -122,7 +122,7 @@ null (empty response body)
 
 <a name="get"></a>
 
-## **Retrieve a Workflow Template**
+## **Retrieve a Workflow Template** {#get}
 
 > GET /api/v2/workflowtemplate/{name}?version=56,withTasks=true
 
@@ -158,7 +158,7 @@ No authorization required
 
 <a name="query"></a>
 
-## **Search for Workflow Templates**
+## **Search for Workflow Templates** {#query}
 
 > GET /api/v2/workflowtemplate/query?labels=,names=mongodb-email-query-results,limit=10,page=0,sort=ASC
 

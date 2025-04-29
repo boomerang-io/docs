@@ -9,23 +9,23 @@ title: Workflows Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new, Workflow for Canvas**](#updatereplaceorcreatenew-workflowfor-canvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-| [**Update, replace, or create new, Workflow**](#updatereplaceorcreatenew-workflow) | PUT | `/api/v2/team/{team}/workflow` |
-| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#convertworkflowtocomposemodelfor-ui-designeranddetailed-activityscreens) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-| [**Create a new workflow**](#createanewworkflow) | POST | `/api/v2/team/{team}/workflow` |
-| [**Delete a workflow**](#deleteaworkflow) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
-| [**Duplicates the workflow.**](#duplicatestheworkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
-| [**Export the Workflow as JSON.**](#exportthe-workflowas-json) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
-| [**Retrieve the parameters.**](#retrievetheparameters) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
-| [**Retrieve the changlog**](#retrievethechanglog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
-| [**Retrieve a Workflow**](#retrievea-workflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
-| [**Search for Workflows**](#searchfor-workflows) | GET | `/api/v2/team/{team}/workflow/query` |
-| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submita-workflowtoberun-willqueuethe-workflow-runreadyforexecution) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
+| [**Update, replace, or create new, Workflow for Canvas**](#applyCanvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Update, replace, or create new, Workflow**](#applyWorkflow) | PUT | `/api/v2/team/{team}/workflow` |
+| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#compose) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Create a new workflow**](#createWorkflow) | POST | `/api/v2/team/{team}/workflow` |
+| [**Delete a workflow**](#deleteWorkflow2) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
+| [**Duplicates the workflow.**](#duplicateWorkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
+| [**Export the Workflow as JSON.**](#export) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
+| [**Retrieve the parameters.**](#getAvailableParameters) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
+| [**Retrieve the changlog**](#getChangelog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
+| [**Retrieve a Workflow**](#getWorkflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
+| [**Search for Workflows**](#queryWorkflows) | GET | `/api/v2/team/{team}/workflow/query` |
+| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submitWorkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
 
 
 <a name="applyCanvas"></a>
 
-## **Update, replace, or create new, Workflow for Canvas**
+## **Update, replace, or create new, Workflow for Canvas** {#applyCanvas}
 
 > PUT /api/v2/team/{team}/workflow/{workflow}/compose?replace=true
 
@@ -62,7 +62,7 @@ title: Workflows Route
 
 <a name="applyWorkflow"></a>
 
-## **Update, replace, or create new, Workflow**
+## **Update, replace, or create new, Workflow** {#applyWorkflow}
 
 > PUT /api/v2/team/{team}/workflow?replace=true
 
@@ -99,7 +99,7 @@ title: Workflows Route
 
 <a name="compose"></a>
 
-## **Convert workflow to compose model for UI Designer and detailed Activity screens.**
+## **Convert workflow to compose model for UI Designer and detailed Activity screens.** {#compose}
 
 > GET /api/v2/team/{team}/workflow/{workflow}/compose?version=56
 
@@ -134,7 +134,7 @@ This endpoint does not require a request body.
 
 <a name="createWorkflow"></a>
 
-## **Create a new workflow**
+## **Create a new workflow** {#createWorkflow}
 
 > POST /api/v2/team/{team}/workflow
 
@@ -170,7 +170,7 @@ This endpoint does not require a request body.
 
 <a name="deleteWorkflow2"></a>
 
-## **Delete a workflow**
+## **Delete a workflow** {#deleteWorkflow2}
 
 > DELETE /api/v2/team/{team}/workflow/{workflow}
 
@@ -204,7 +204,7 @@ null (empty response body)
 
 <a name="duplicateWorkflow"></a>
 
-## **Duplicates the workflow.**
+## **Duplicates the workflow.** {#duplicateWorkflow}
 
 > POST /api/v2/team/{team}/workflow/{workflow}/duplicate
 
@@ -238,7 +238,7 @@ This endpoint does not require a request body.
 
 <a name="export"></a>
 
-## **Export the Workflow as JSON.**
+## **Export the Workflow as JSON.** {#export}
 
 > GET /api/v2/team/{team}/workflow/{workflow}/export
 
@@ -272,7 +272,7 @@ This endpoint does not require a request body.
 
 <a name="getAvailableParameters"></a>
 
-## **Retrieve the parameters.**
+## **Retrieve the parameters.** {#getAvailableParameters}
 
 > GET /api/v2/team/{team}/workflow/{workflow}/available-parameters
 
@@ -306,7 +306,7 @@ This endpoint does not require a request body.
 
 <a name="getChangelog"></a>
 
-## **Retrieve the changlog**
+## **Retrieve the changlog** {#getChangelog}
 
 > GET /api/v2/team/{team}/workflow/{workflow}/changelog
 
@@ -341,7 +341,7 @@ This endpoint does not require a request body.
 
 <a name="getWorkflow"></a>
 
-## **Retrieve a Workflow**
+## **Retrieve a Workflow** {#getWorkflow}
 
 > GET /api/v2/team/{team}/workflow/{workflow}?version=56,withTasks=true
 
@@ -378,7 +378,7 @@ This endpoint does not require a request body.
 
 <a name="queryWorkflows"></a>
 
-## **Search for Workflows**
+## **Search for Workflows** {#queryWorkflows}
 
 > GET /api/v2/team/{team}/workflow/query?labels=,statuses=active,inactive,workflows=,limit=10,page=0,sort=ASC
 
@@ -417,7 +417,7 @@ This endpoint does not require a request body.
 
 <a name="submitWorkflow"></a>
 
-## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**
+## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.** {#submitWorkflow}
 
 > POST /api/v2/team/{team}/workflow/{workflow}/submit?start=true
 

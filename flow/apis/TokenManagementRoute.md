@@ -9,14 +9,14 @@ title: Token Management Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create Token**](#create-token) | POST | `/api/v2/token` |
-| [**Delete Token**](#delete-token) | DELETE | `/api/v2/token/{id}` |
-| [**Search for Tokens**](#searchfor-tokens) | GET | `/api/v2/token/query` |
+| [**Create Token**](#createToken) | POST | `/api/v2/token` |
+| [**Delete Token**](#deleteToken) | DELETE | `/api/v2/token/{id}` |
+| [**Search for Tokens**](#query1) | GET | `/api/v2/token/query` |
 
 
 <a name="createToken"></a>
 
-## **Create Token**
+## **Create Token** {#createToken}
 
 > POST /api/v2/token
 
@@ -51,7 +51,7 @@ No authorization required
 
 <a name="deleteToken"></a>
 
-## **Delete Token**
+## **Delete Token** {#deleteToken}
 
 > DELETE /api/v2/token/{id}
 
@@ -84,7 +84,7 @@ No authorization required
 
 <a name="query1"></a>
 
-## **Search for Tokens**
+## **Search for Tokens** {#query1}
 
 > GET /api/v2/token/query?types=,principals=,limit=10,page=0,order=ASC,sort=0,fromDate=1677589200000,toDate=1680267600000
 

@@ -9,12 +9,12 @@ title: Insights Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Retrieve insights for a team**](#retrieveinsightsforateam) | GET | `/api/v2/team/{team}/insights` |
+| [**Retrieve insights for a team**](#getTeamInsights) | GET | `/api/v2/team/{team}/insights` |
 
 
 <a name="getTeamInsights"></a>
 
-## **Retrieve insights for a team**
+## **Retrieve insights for a team** {#getTeamInsights}
 
 > GET /api/v2/team/{team}/insights?fromDate=789,toDate=789,workflows=,statuses=
 

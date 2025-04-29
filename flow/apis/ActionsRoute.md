@@ -9,15 +9,15 @@ title: Actions Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Provide an update for an Action**](#provideanupdateforan-action) | PUT | `/api/v2/team/{team}/action` |
-| [**Retrieve a specific Action by Id**](#retrieveaspecific-actionby-id) | GET | `/api/v2/team/{team}/action/{actionId}` |
-| [**Search for Actions**](#searchfor-actions) | GET | `/api/v2/team/{team}/action/query` |
-| [**Get Actions Summary**](#get-actions-summary) | GET | `/api/v2/team/{team}/action/summary` |
+| [**Provide an update for an Action**](#action) | PUT | `/api/v2/team/{team}/action` |
+| [**Retrieve a specific Action by Id**](#get3) | GET | `/api/v2/team/{team}/action/{actionId}` |
+| [**Search for Actions**](#query4) | GET | `/api/v2/team/{team}/action/query` |
+| [**Get Actions Summary**](#summary) | GET | `/api/v2/team/{team}/action/summary` |
 
 
 <a name="action"></a>
 
-## **Provide an update for an Action**
+## **Provide an update for an Action** {#action}
 
 > PUT /api/v2/team/{team}/action
 
@@ -53,7 +53,7 @@ null (empty response body)
 
 <a name="get3"></a>
 
-## **Retrieve a specific Action by Id**
+## **Retrieve a specific Action by Id** {#get3}
 
 > GET /api/v2/team/{team}/action/{actionId}
 
@@ -87,7 +87,7 @@ No authorization required
 
 <a name="query4"></a>
 
-## **Search for Actions**
+## **Search for Actions** {#query4}
 
 > GET /api/v2/team/{team}/action/query?types=manual,approval,statuses=approved,rejected,submitted,workflows=,limit=10,page=0,order=0,sort=0,fromDate=1677589200000,toDate=1680267600000
 
@@ -129,7 +129,7 @@ No authorization required
 
 <a name="summary"></a>
 
-## **Get Actions Summary**
+## **Get Actions Summary** {#summary}
 
 > GET /api/v2/team/{team}/action/summary?workflows=,fromDate=1677589200000,toDate=1680267600000
 

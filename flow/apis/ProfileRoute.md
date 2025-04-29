@@ -9,13 +9,13 @@ title: Profile Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Get your Profile**](#getyour-profile) | GET | `/api/v2/profile` |
-| [**Patch your Profile**](#patchyour-profile) | PATCH | `/api/v2/profile` |
+| [**Get your Profile**](#getProfile) | GET | `/api/v2/profile` |
+| [**Patch your Profile**](#updateProfile) | PATCH | `/api/v2/profile` |
 
 
 <a name="getProfile"></a>
 
-## **Get your Profile**
+## **Get your Profile** {#getProfile}
 
 > GET /api/v2/profile
 
@@ -44,7 +44,7 @@ No authorization required
 
 <a name="updateProfile"></a>
 
-## **Patch your Profile**
+## **Patch your Profile** {#updateProfile}
 
 > PATCH /api/v2/profile
 

@@ -9,18 +9,18 @@ title: Team Tasks Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new using Tekton Task YAML**](#updatereplaceorcreatenewusing-tekton-task-yaml) | PUT | `/api/v2/team/{team}/task/{name}` |
-| [**Create a new Task Template using Tekton Task YAML**](#createanew-task-templateusing-tekton-task-yaml) | POST | `/api/v2/team/{team}/task` |
-| [**Delete a Team Task**](#deletea-team-task) | DELETE | `/api/v2/team/{team}/task/{name}` |
-| [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#retrieveaspecifictaskas-tekton-task-yaml-ifnoversionspecifiedthelatestversionisreturned) | GET | `/api/v2/team/{team}/task/{name}` |
-| [**Retrieve the changlog**](#retrievethechanglog) | GET | `/api/v2/team/{team}/task/{name}/changelog` |
-| [**Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#searchfor-tasks-ifteamsareprovideditwillquerytheteams-ifnoteamsareprovideditwillquery-global-task-templates) | GET | `/api/v2/team/{team}/task/query` |
-| [****](#) | POST | `/api/v2/team/{team}/task/validate` |
+| [**Update, replace, or create new using Tekton Task YAML**](#apply11) | PUT | `/api/v2/team/{team}/task/{name}` |
+| [**Create a new Task Template using Tekton Task YAML**](#create11) | POST | `/api/v2/team/{team}/task` |
+| [**Delete a Team Task**](#delete) | DELETE | `/api/v2/team/{team}/task/{name}` |
+| [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#get21) | GET | `/api/v2/team/{team}/task/{name}` |
+| [**Retrieve the changlog**](#getChangelog1) | GET | `/api/v2/team/{team}/task/{name}/changelog` |
+| [**Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#queryTaskTemplates) | GET | `/api/v2/team/{team}/task/query` |
+| [****](#validateYaml) | POST | `/api/v2/team/{team}/task/validate` |
 
 
 <a name="apply11"></a>
 
-## **Update, replace, or create new using Tekton Task YAML**
+## **Update, replace, or create new using Tekton Task YAML** {#apply11}
 
 > PUT /api/v2/team/{team}/task/{name}?replace=true
 
@@ -59,7 +59,7 @@ No authorization required
 
 <a name="create11"></a>
 
-## **Create a new Task Template using Tekton Task YAML**
+## **Create a new Task Template using Tekton Task YAML** {#create11}
 
 > POST /api/v2/team/{team}/task
 
@@ -96,7 +96,7 @@ No authorization required
 
 <a name="delete"></a>
 
-## **Delete a Team Task**
+## **Delete a Team Task** {#delete}
 
 > DELETE /api/v2/team/{team}/task/{name}
 
@@ -130,7 +130,7 @@ null (empty response body)
 
 <a name="get21"></a>
 
-## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**
+## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.** {#get21}
 
 > GET /api/v2/team/{team}/task/{name}?version=56
 
@@ -165,7 +165,7 @@ No authorization required
 
 <a name="getChangelog1"></a>
 
-## **Retrieve the changlog**
+## **Retrieve the changlog** {#getChangelog1}
 
 > GET /api/v2/team/{team}/task/{name}/changelog
 
@@ -200,7 +200,7 @@ No authorization required
 
 <a name="queryTaskTemplates"></a>
 
-## **Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**
+## **Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates** {#queryTaskTemplates}
 
 > GET /api/v2/team/{team}/task/query?labels=,statuses=active,inactive,names=switch,event-wait,limit=10,page=0,sort=ASC
 
@@ -239,7 +239,7 @@ No authorization required
 
 <a name="validateYaml"></a>
 
-## ****
+## **** {#validateYaml}
 
 > POST /api/v2/team/{team}/task/validate
 

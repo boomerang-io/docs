@@ -9,20 +9,20 @@ title: Integrations Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Retrieve the integrations and their status within a Team**](#retrievetheintegrationsandtheirstatuswithina-team) | GET | `/api/v2/integration` |
-| [**Retrieve the installation ID and store against a team**](#retrievetheinstallation-i-dandstoreagainstateam) | GET | `/api/v2/integration/github/installation` |
-| [**Links the GitHub Installation ID with a Team**](#linksthe-git-hub-installation-i-dwitha-team) | POST | `/api/v2/integration/github/link` |
-| [**Unlinks the GitHub Installation ID from a Team**](#unlinksthe-git-hub-installation-i-dfroma-team) | POST | `/api/v2/integration/github/unlink` |
-| [**Install URL Redirect**](#install-url-redirect) | GET | `/api/v2/integration/slack/install` |
-| [**Receive Slack Oauth2 request**](#receive-slack-oauth2request) | GET | `/api/v2/integration/slack/auth` |
-| [**Receive Slack Slash Commands**](#receive-slack-slash-commands) | POST | `/api/v2/integration/slack/commands` |
-| [**Receive Slack Events**](#receive-slack-events) | POST | `/api/v2/integration/slack/events` |
-| [**Receive Slack Interactivity**](#receive-slack-interactivity) | POST | `/api/v2/integration/slack/interactivity` |
+| [**Retrieve the integrations and their status within a Team**](#get4) | GET | `/api/v2/integration` |
+| [**Retrieve the installation ID and store against a team**](#githubInstall) | GET | `/api/v2/integration/github/installation` |
+| [**Links the GitHub Installation ID with a Team**](#githubLink) | POST | `/api/v2/integration/github/link` |
+| [**Unlinks the GitHub Installation ID from a Team**](#githubUnlink) | POST | `/api/v2/integration/github/unlink` |
+| [**Install URL Redirect**](#installSlack) | GET | `/api/v2/integration/slack/install` |
+| [**Receive Slack Oauth2 request**](#receiveSlackAuth) | GET | `/api/v2/integration/slack/auth` |
+| [**Receive Slack Slash Commands**](#receiveSlackCommand) | POST | `/api/v2/integration/slack/commands` |
+| [**Receive Slack Events**](#receiveSlackEvent) | POST | `/api/v2/integration/slack/events` |
+| [**Receive Slack Interactivity**](#receiveSlackInteractivity) | POST | `/api/v2/integration/slack/interactivity` |
 
 
 <a name="get4"></a>
 
-## **Retrieve the integrations and their status within a Team**
+## **Retrieve the integrations and their status within a Team** {#get4}
 
 > GET /api/v2/integration?team=team_example
 
@@ -55,7 +55,7 @@ No authorization required
 
 <a name="githubInstall"></a>
 
-## **Retrieve the installation ID and store against a team**
+## **Retrieve the installation ID and store against a team** {#githubInstall}
 
 > GET /api/v2/integration/github/installation?id=56,team=team_example
 
@@ -89,7 +89,7 @@ No authorization required
 
 <a name="githubLink"></a>
 
-## **Links the GitHub Installation ID with a Team**
+## **Links the GitHub Installation ID with a Team** {#githubLink}
 
 > POST /api/v2/integration/github/link
 
@@ -124,7 +124,7 @@ No authorization required
 
 <a name="githubUnlink"></a>
 
-## **Unlinks the GitHub Installation ID from a Team**
+## **Unlinks the GitHub Installation ID from a Team** {#githubUnlink}
 
 > POST /api/v2/integration/github/unlink
 
@@ -159,7 +159,7 @@ null (empty response body)
 
 <a name="installSlack"></a>
 
-## **Install URL Redirect**
+## **Install URL Redirect** {#installSlack}
 
 > GET /api/v2/integration/slack/install
 
@@ -188,7 +188,7 @@ null (empty response body)
 
 <a name="receiveSlackAuth"></a>
 
-## **Receive Slack Oauth2 request**
+## **Receive Slack Oauth2 request** {#receiveSlackAuth}
 
 > GET /api/v2/integration/slack/auth?code=code_example
 
@@ -221,7 +221,7 @@ No authorization required
 
 <a name="receiveSlackCommand"></a>
 
-## **Receive Slack Slash Commands**
+## **Receive Slack Slash Commands** {#receiveSlackCommand}
 
 > POST /api/v2/integration/slack/commands
 
@@ -250,7 +250,7 @@ No authorization required
 
 <a name="receiveSlackEvent"></a>
 
-## **Receive Slack Events**
+## **Receive Slack Events** {#receiveSlackEvent}
 
 > POST /api/v2/integration/slack/events
 
@@ -287,7 +287,7 @@ No authorization required
 
 <a name="receiveSlackInteractivity"></a>
 
-## **Receive Slack Interactivity**
+## **Receive Slack Interactivity** {#receiveSlackInteractivity}
 
 > POST /api/v2/integration/slack/interactivity
 
