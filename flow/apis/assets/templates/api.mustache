@@ -9,13 +9,14 @@ title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-{{#operations}}{{#operation}}| [**{{summary}}**](#{{operationId}}) | {{httpMethod}} | `{{path}}` |
+{{#operations}}{{#operation}}| [**{{summary}}**](#{{summary}}) | {{httpMethod}} | `{{path}}` |
 {{/operation}}{{/operations}}
 
 {{#operations}}
 {{#operation}}
+<a name="{{operationId}}"></a>
 
-## **{{summary}}**<a href="#{{operationId}}"></a>
+## **{{summary}}**
 
 > {{httpMethod}} {{path}}{{#hasQueryParams}}?{{#queryParams}}{{paramName}}={{example}}{{^-last}},{{/-last}}{{/queryParams}}{{/hasQueryParams}}
 
@@ -23,7 +24,7 @@ title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 {{.}}
 {{/notes}}
 
-### Request Parameters
+#### Request Parameters
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}
 
 | Name | Type | Required | Description | Notes | Example |
@@ -39,18 +40,18 @@ title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 {{/bodyParams}}
 {{^bodyParams}}This endpoint does not require a request body.{{/bodyParams}}
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 {{^authMethods}}No authorization required{{/authMethods}}{{#authMethods}}[{{name}}](./overview#{{name}}){{^-last}}, {{/-last}}{{/authMethods}}
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: {{#consumes}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/consumes}}{{^consumes}}Not defined{{/consumes}}
 - **Accept**: {{#produces}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/produces}}{{^produces}}Not defined{{/produces}}
 
-### Response
+#### Response
 
 {{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}{{#generateModelDocs}}[**{{returnType}}**](./{{#lambda.lowercase}}{{modelPackage}}{{/lambda.lowercase}}/{{returnBaseType}}.md){{/generateModelDocs}}{{^generateModelDocs}}**{{returnType}}**{{/generateModelDocs}}{{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}
 

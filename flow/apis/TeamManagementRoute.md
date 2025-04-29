@@ -9,28 +9,29 @@ title: Team Management Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new team**](#createTeam) | POST | `/api/v2/team` |
-| [****](#deleteApproverGroup) | DELETE | `/api/v2/team/{team}/approvers` |
-| [****](#deleteParameters) | DELETE | `/api/v2/team/{team}/parameters/{name}` |
-| [**Delete a team**](#deleteWorkflow1) | DELETE | `/api/v2/team/{team}` |
-| [****](#getDefaultQuotas) | GET | `/api/v2/team/quotas/default` |
-| [****](#getRoles) | GET | `/api/v2/team/roles` |
-| [**Get team**](#getTeam) | GET | `/api/v2/team/{team}` |
-| [**Search for Teams**](#getTeams) | GET | `/api/v2/team/query` |
-| [****](#leave) | DELETE | `/api/v2/team/{team}/leave` |
-| [****](#removeMembers) | DELETE | `/api/v2/team/{team}/members` |
-| [****](#resetQuotas) | DELETE | `/api/v2/team/{team}/quotas` |
-| [**Patch or update a team**](#updateTeam) | PATCH | `/api/v2/team/{team}` |
-| [**Validate team name and check uniqueness.**](#validateTeamName) | POST | `/api/v2/team/validate-name` |
+| [**Create new team**](#Create new team) | POST | `/api/v2/team` |
+| [****](#) | DELETE | `/api/v2/team/{team}/approvers` |
+| [****](#) | DELETE | `/api/v2/team/{team}/parameters/{name}` |
+| [**Delete a team**](#Delete a team) | DELETE | `/api/v2/team/{team}` |
+| [****](#) | GET | `/api/v2/team/quotas/default` |
+| [****](#) | GET | `/api/v2/team/roles` |
+| [**Get team**](#Get team) | GET | `/api/v2/team/{team}` |
+| [**Search for Teams**](#Search for Teams) | GET | `/api/v2/team/query` |
+| [****](#) | DELETE | `/api/v2/team/{team}/leave` |
+| [****](#) | DELETE | `/api/v2/team/{team}/members` |
+| [****](#) | DELETE | `/api/v2/team/{team}/quotas` |
+| [**Patch or update a team**](#Patch or update a team) | PATCH | `/api/v2/team/{team}` |
+| [**Validate team name and check uniqueness.**](#Validate team name and check uniqueness.) | POST | `/api/v2/team/validate-name` |
 
 
+<a name="createTeam"></a>
 
-## **Create new team**<a href="#createTeam"></a>
+## **Create new team**
 
 > POST /api/v2/team
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -43,28 +44,29 @@ title: Team Management Route
 | [**TeamRequest**](./models/TeamRequest) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Team**](./models/Team.md)
 
+<a name="deleteApproverGroup"></a>
 
-## ****<a href="#deleteApproverGroup"></a>
+## ****
 
 > DELETE /api/v2/team/{team}/approvers
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -78,28 +80,29 @@ No authorization required
 | [**List**](./models/string) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="deleteParameters"></a>
 
-## ****<a href="#deleteParameters"></a>
+## ****
 
 > DELETE /api/v2/team/{team}/parameters/{name}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -111,28 +114,29 @@ null (empty response body)
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="deleteWorkflow1"></a>
 
-## **Delete a team**<a href="#deleteWorkflow1"></a>
+## **Delete a team**
 
 > DELETE /api/v2/team/{team}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -143,84 +147,87 @@ null (empty response body)
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="getDefaultQuotas"></a>
 
-## ****<a href="#getDefaultQuotas"></a>
+## ****
 
 > GET /api/v2/team/quotas/default
 
 
-### Request Parameters
+#### Request Parameters
 This endpoint does not need any parameter.
 
 
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Quotas**](./models/Quotas.md)
 
+<a name="getRoles"></a>
 
-## ****<a href="#getRoles"></a>
+## ****
 
 > GET /api/v2/team/roles
 
 
-### Request Parameters
+#### Request Parameters
 This endpoint does not need any parameter.
 
 
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**List**](./models/Role.md)
 
+<a name="getTeam"></a>
 
-## **Get team**<a href="#getTeam"></a>
+## **Get team**
 
 > GET /api/v2/team/{team}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -231,28 +238,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Team**](./models/Team.md)
 
+<a name="getTeams"></a>
 
-## **Search for Teams**<a href="#getTeams"></a>
+## **Search for Teams**
 
 > GET /api/v2/team/query?labels=,statuses=active,inactive,teams=my-amazing-team,boomerangs-return,limit=10,page=0,order=0,sort=0
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -269,28 +277,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**PageTeam**](./models/PageTeam.md)
 
+<a name="leave"></a>
 
-## ****<a href="#leave"></a>
+## ****
 
 > DELETE /api/v2/team/{team}/leave
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -301,28 +310,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="removeMembers"></a>
 
-## ****<a href="#removeMembers"></a>
+## ****
 
 > DELETE /api/v2/team/{team}/members
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -336,28 +346,29 @@ null (empty response body)
 | [**List**](./models/TeamMember) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="resetQuotas"></a>
 
-## ****<a href="#resetQuotas"></a>
+## ****
 
 > DELETE /api/v2/team/{team}/quotas
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -368,28 +379,29 @@ null (empty response body)
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="updateTeam"></a>
 
-## **Patch or update a team**<a href="#updateTeam"></a>
+## **Patch or update a team**
 
 > PATCH /api/v2/team/{team}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -403,28 +415,29 @@ null (empty response body)
 | [**TeamRequest**](./models/TeamRequest) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Team**](./models/Team.md)
 
+<a name="validateTeamName"></a>
 
-## **Validate team name and check uniqueness.**<a href="#validateTeamName"></a>
+## **Validate team name and check uniqueness.**
 
 > POST /api/v2/team/validate-name
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -437,18 +450,18 @@ No authorization required
 | [**TeamNameCheckRequest**](./models/TeamNameCheckRequest) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 **Object**
 

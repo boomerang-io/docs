@@ -9,17 +9,18 @@ title: Insights Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Retrieve insights for a team**](#getTeamInsights) | GET | `/api/v2/team/{team}/insights` |
+| [**Retrieve insights for a team**](#Retrieve insights for a team) | GET | `/api/v2/team/{team}/insights` |
 
 
+<a name="getTeamInsights"></a>
 
-## **Retrieve insights for a team**<a href="#getTeamInsights"></a>
+## **Retrieve insights for a team**
 
 > GET /api/v2/team/{team}/insights?fromDate=789,toDate=789,workflows=,statuses=
 
 The insights are based on the workflow runs and their statuses.
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -34,18 +35,18 @@ The insights are based on the workflow runs and their statuses.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowRunInsight**](./models/WorkflowRunInsight.md)
 

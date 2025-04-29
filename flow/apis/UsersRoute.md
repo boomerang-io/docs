@@ -9,19 +9,20 @@ title: Users Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update a Boomerang Flow Users details**](#apply1) | PATCH | `/api/v2/user/{userId}` |
-| [**Delete a Boomerang Flow user**](#deleteFlowUser) | DELETE | `/api/v2/user/{userId}` |
-| [**Get a Users details**](#getUserByID) | GET | `/api/v2/user/{userId}` |
-| [**Search for Users**](#getUsers) | GET | `/api/v2/user/query` |
+| [**Update a Boomerang Flow Users details**](#Update a Boomerang Flow Users details) | PATCH | `/api/v2/user/{userId}` |
+| [**Delete a Boomerang Flow user**](#Delete a Boomerang Flow user) | DELETE | `/api/v2/user/{userId}` |
+| [**Get a Users details**](#Get a Users details) | GET | `/api/v2/user/{userId}` |
+| [**Search for Users**](#Search for Users) | GET | `/api/v2/user/query` |
 
 
+<a name="apply1"></a>
 
-## **Update a Boomerang Flow Users details**<a href="#apply1"></a>
+## **Update a Boomerang Flow Users details**
 
 > PATCH /api/v2/user/{userId}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -35,28 +36,29 @@ title: Users Route
 | [**UserRequest**](./models/UserRequest) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="deleteFlowUser"></a>
 
-## **Delete a Boomerang Flow user**<a href="#deleteFlowUser"></a>
+## **Delete a Boomerang Flow user**
 
 > DELETE /api/v2/user/{userId}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -67,28 +69,29 @@ null (empty response body)
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="getUserByID"></a>
 
-## **Get a Users details**<a href="#getUserByID"></a>
+## **Get a Users details**
 
 > GET /api/v2/user/{userId}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -99,28 +102,29 @@ null (empty response body)
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**User**](./models/User.md)
 
+<a name="getUsers"></a>
 
-## **Search for Users**<a href="#getUsers"></a>
+## **Search for Users**
 
 > GET /api/v2/user/query?labels=,status=active,inactive,ids=,limit=10,page=0,order=0,sort=0
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -137,18 +141,18 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**PageUser**](./models/PageUser.md)
 

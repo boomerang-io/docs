@@ -9,22 +9,23 @@ title: Workflow Runs Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Cancel a WorkflowRun**](#cancel) | DELETE | `/api/v2/team/{team}/workflowrun/{workflowRunId}/cancel` |
-| [**Retrieve a summary of WorkflowRuns by Status.**](#count) | GET | `/api/v2/team/{team}/workflowrun/count` |
-| [**End a WorkflowRun**](#finalize) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/finalize` |
-| [**Retrieve a specific WorkflowRun.**](#get1) | GET | `/api/v2/team/{team}/workflowrun/{workflowRunId}` |
-| [**Search for WorkflowRuns**](#query2) | GET | `/api/v2/team/{team}/workflowrun/query` |
-| [**Retry WorkflowRun execution.**](#retry) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/retry` |
-| [**Start WorkflowRun execution. The WorkflowRun has to already have been queued.**](#start) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/start` |
+| [**Cancel a WorkflowRun**](#Cancel a WorkflowRun) | DELETE | `/api/v2/team/{team}/workflowrun/{workflowRunId}/cancel` |
+| [**Retrieve a summary of WorkflowRuns by Status.**](#Retrieve a summary of WorkflowRuns by Status.) | GET | `/api/v2/team/{team}/workflowrun/count` |
+| [**End a WorkflowRun**](#End a WorkflowRun) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/finalize` |
+| [**Retrieve a specific WorkflowRun.**](#Retrieve a specific WorkflowRun.) | GET | `/api/v2/team/{team}/workflowrun/{workflowRunId}` |
+| [**Search for WorkflowRuns**](#Search for WorkflowRuns) | GET | `/api/v2/team/{team}/workflowrun/query` |
+| [**Retry WorkflowRun execution.**](#Retry WorkflowRun execution.) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/retry` |
+| [**Start WorkflowRun execution. The WorkflowRun has to already have been queued.**](#Start WorkflowRun execution. The WorkflowRun has to already have been queued.) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/start` |
 
 
+<a name="cancel"></a>
 
-## **Cancel a WorkflowRun**<a href="#cancel"></a>
+## **Cancel a WorkflowRun**
 
 > DELETE /api/v2/team/{team}/workflowrun/{workflowRunId}/cancel
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -36,28 +37,29 @@ title: Workflow Runs Route
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 
+<a name="count"></a>
 
-## **Retrieve a summary of WorkflowRuns by Status.**<a href="#count"></a>
+## **Retrieve a summary of WorkflowRuns by Status.**
 
 > GET /api/v2/team/{team}/workflowrun/count?labels=,workflows=63d3656ca845957db7d25ef0,63a3e732b0496509a7f1d763,fromDate=1677589200000,toDate=1680267600000
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -72,28 +74,29 @@ This endpoint does not require a request body.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowRunCount**](./models/WorkflowRunCount.md)
 
+<a name="finalize"></a>
 
-## **End a WorkflowRun**<a href="#finalize"></a>
+## **End a WorkflowRun**
 
 > PUT /api/v2/team/{team}/workflowrun/{workflowRunId}/finalize
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -105,28 +108,29 @@ This endpoint does not require a request body.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 
+<a name="get1"></a>
 
-## **Retrieve a specific WorkflowRun.**<a href="#get1"></a>
+## **Retrieve a specific WorkflowRun.**
 
 > GET /api/v2/team/{team}/workflowrun/{workflowRunId}?withTasks=true
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -139,28 +143,29 @@ This endpoint does not require a request body.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 
+<a name="query2"></a>
 
-## **Search for WorkflowRuns**<a href="#query2"></a>
+## **Search for WorkflowRuns**
 
 > GET /api/v2/team/{team}/workflowrun/query?labels=,statuses=succeeded,skipped,phase=completed,finalized,workflowruns=,workflows=,triggers=,limit=10,page=0,order=ASC,fromDate=1677589200000,toDate=1680267600000
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -182,28 +187,29 @@ This endpoint does not require a request body.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**PageWorkflowRun**](./models/PageWorkflowRun.md)
 
+<a name="retry"></a>
 
-## **Retry WorkflowRun execution.**<a href="#retry"></a>
+## **Retry WorkflowRun execution.**
 
 > PUT /api/v2/team/{team}/workflowrun/{workflowRunId}/retry
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -218,28 +224,29 @@ This endpoint does not require a request body.
 | [**WorkflowRunRequest**](./models/WorkflowRunRequest) | false |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 
+<a name="start"></a>
 
-## **Start WorkflowRun execution. The WorkflowRun has to already have been queued.**<a href="#start"></a>
+## **Start WorkflowRun execution. The WorkflowRun has to already have been queued.**
 
 > PUT /api/v2/team/{team}/workflowrun/{workflowRunId}/start
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -254,18 +261,18 @@ This endpoint does not require a request body.
 | [**WorkflowRunRequest**](./models/WorkflowRunRequest) | false |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 

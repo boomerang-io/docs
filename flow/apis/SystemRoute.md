@@ -9,25 +9,26 @@ title: System Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new global Param**](#create2) | POST | `/api/v2/global-params` |
-| [**Delete specific global Param**](#delete2) | DELETE | `/api/v2/global-params/{key}` |
-| [**Get all global Params**](#getAll1) | GET | `/api/v2/global-params` |
-| [**Retrieve Boomerang Flow Settings**](#getAppConfiguration) | GET | `/api/v2/settings` |
-| [**Retrieve feature flags.**](#getFlowFeatures) | GET | `/api/v2/features` |
-| [**Retrieve this instances context, features, and navigation.**](#getHeaderNavigation) | GET | `/api/v2/context` |
-| [**Retrieve navigation.**](#getNavigation) | GET | `/api/v2/navigation` |
-| [**Register and activate an installation of Flow**](#register) | PUT | `/api/v2/activate` |
-| [****](#update1) | PUT | `/api/v2/global-params` |
-| [**Update Boomerang Flow Settings**](#updateSettings) | PUT | `/api/v2/settings` |
+| [**Create new global Param**](#Create new global Param) | POST | `/api/v2/global-params` |
+| [**Delete specific global Param**](#Delete specific global Param) | DELETE | `/api/v2/global-params/{key}` |
+| [**Get all global Params**](#Get all global Params) | GET | `/api/v2/global-params` |
+| [**Retrieve Boomerang Flow Settings**](#Retrieve Boomerang Flow Settings) | GET | `/api/v2/settings` |
+| [**Retrieve feature flags.**](#Retrieve feature flags.) | GET | `/api/v2/features` |
+| [**Retrieve this instances context, features, and navigation.**](#Retrieve this instances context, features, and navigation.) | GET | `/api/v2/context` |
+| [**Retrieve navigation.**](#Retrieve navigation.) | GET | `/api/v2/navigation` |
+| [**Register and activate an installation of Flow**](#Register and activate an installation of Flow) | PUT | `/api/v2/activate` |
+| [****](#) | PUT | `/api/v2/global-params` |
+| [**Update Boomerang Flow Settings**](#Update Boomerang Flow Settings) | PUT | `/api/v2/settings` |
 
 
+<a name="create2"></a>
 
-## **Create new global Param**<a href="#create2"></a>
+## **Create new global Param**
 
 > POST /api/v2/global-params
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -40,28 +41,29 @@ title: System Route
 | [**AbstractParam**](./models/AbstractParam) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**AbstractParam**](./models/AbstractParam.md)
 
+<a name="delete2"></a>
 
-## **Delete specific global Param**<a href="#delete2"></a>
+## **Delete specific global Param**
 
 > DELETE /api/v2/global-params/{key}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -72,140 +74,145 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="getAll1"></a>
 
-## **Get all global Params**<a href="#getAll1"></a>
+## **Get all global Params**
 
 > GET /api/v2/global-params
 
 
-### Request Parameters
+#### Request Parameters
 This endpoint does not need any parameter.
 
 
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**List**](./models/AbstractParam.md)
 
+<a name="getAppConfiguration"></a>
 
-## **Retrieve Boomerang Flow Settings**<a href="#getAppConfiguration"></a>
+## **Retrieve Boomerang Flow Settings**
 
 > GET /api/v2/settings
 
 
-### Request Parameters
+#### Request Parameters
 This endpoint does not need any parameter.
 
 
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**List**](./models/Setting.md)
 
+<a name="getFlowFeatures"></a>
 
-## **Retrieve feature flags.**<a href="#getFlowFeatures"></a>
+## **Retrieve feature flags.**
 
 > GET /api/v2/features
 
 
-### Request Parameters
+#### Request Parameters
 This endpoint does not need any parameter.
 
 
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Features**](./models/Features.md)
 
+<a name="getHeaderNavigation"></a>
 
-## **Retrieve this instances context, features, and navigation.**<a href="#getHeaderNavigation"></a>
+## **Retrieve this instances context, features, and navigation.**
 
 > GET /api/v2/context
 
 
-### Request Parameters
+#### Request Parameters
 This endpoint does not need any parameter.
 
 
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**HeaderNavigationResponse**](./models/HeaderNavigationResponse.md)
 
+<a name="getNavigation"></a>
 
-## **Retrieve navigation.**<a href="#getNavigation"></a>
+## **Retrieve navigation.**
 
 > GET /api/v2/navigation?team=my-amazing-team
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -216,28 +223,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**List**](./models/Navigation.md)
 
+<a name="register"></a>
 
-## **Register and activate an installation of Flow**<a href="#register"></a>
+## **Register and activate an installation of Flow**
 
 > PUT /api/v2/activate
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -250,28 +258,29 @@ No authorization required
 | [**OneTimeCode**](./models/OneTimeCode) | false |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 **Boolean**
 
+<a name="update1"></a>
 
-## ****<a href="#update1"></a>
+## ****
 
 > PUT /api/v2/global-params
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -284,28 +293,29 @@ No authorization required
 | [**AbstractParam**](./models/AbstractParam) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**AbstractParam**](./models/AbstractParam.md)
 
+<a name="updateSettings"></a>
 
-## **Update Boomerang Flow Settings**<a href="#updateSettings"></a>
+## **Update Boomerang Flow Settings**
 
 > PUT /api/v2/settings
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -318,18 +328,18 @@ No authorization required
 | [**List**](./models/Setting) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**List**](./models/Setting.md)
 

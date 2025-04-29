@@ -9,22 +9,23 @@ title: Tasks Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new using Tekton Task YAML**](#apply12) | PUT | `/api/v2/task/{name}` |
-| [**Create a new Task using Tekton Task YAML**](#create12) | POST | `/api/v2/task` |
-| [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#get41) | GET | `/api/v2/task/{name}` |
-| [**Retrieve the changlog**](#getChangelog2) | GET | `/api/v2/task/{name}/changelog` |
-| [**Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#query5) | GET | `/api/v2/task/query` |
-| [****](#validateYaml1) | POST | `/api/v2/task/validate` |
+| [**Update, replace, or create new using Tekton Task YAML**](#Update, replace, or create new using Tekton Task YAML) | PUT | `/api/v2/task/{name}` |
+| [**Create a new Task using Tekton Task YAML**](#Create a new Task using Tekton Task YAML) | POST | `/api/v2/task` |
+| [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.) | GET | `/api/v2/task/{name}` |
+| [**Retrieve the changlog**](#Retrieve the changlog) | GET | `/api/v2/task/{name}/changelog` |
+| [**Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates) | GET | `/api/v2/task/query` |
+| [****](#) | POST | `/api/v2/task/validate` |
 
 
+<a name="apply12"></a>
 
-## **Update, replace, or create new using Tekton Task YAML**<a href="#apply12"></a>
+## **Update, replace, or create new using Tekton Task YAML**
 
 > PUT /api/v2/task/{name}?replace=true
 
 The name must only contain alphanumeric and - characeters. If the name exists, apply will create a new version.
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -39,29 +40,30 @@ The name must only contain alphanumeric and - characeters. If the name exists, a
 | [**Task**](./models/Task) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json, application/x-yaml
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Task**](./models/Task.md)
 
+<a name="create12"></a>
 
-## **Create a new Task using Tekton Task YAML**<a href="#create12"></a>
+## **Create a new Task using Tekton Task YAML**
 
 > POST /api/v2/task
 
 The name needs to be unique and must only contain alphanumeric and - characeters.
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -74,28 +76,29 @@ The name needs to be unique and must only contain alphanumeric and - characeters
 | [**Task**](./models/Task) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json, application/x-yaml
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Task**](./models/Task.md)
 
+<a name="get41"></a>
 
-## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**<a href="#get41"></a>
+## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**
 
 > GET /api/v2/task/{name}?version=56
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -107,29 +110,30 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Task**](./models/Task.md)
 
+<a name="getChangelog2"></a>
 
-## **Retrieve the changlog**<a href="#getChangelog2"></a>
+## **Retrieve the changlog**
 
 > GET /api/v2/task/{name}/changelog
 
 Retrieves each versions changelog and returns them all as a list.
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -140,28 +144,29 @@ Retrieves each versions changelog and returns them all as a list.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**List**](./models/ChangeLogVersion.md)
 
+<a name="query5"></a>
 
-## **Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**<a href="#query5"></a>
+## **Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**
 
 > GET /api/v2/task/query?labels=,statuses=active,inactive,names=switch,event-wait,limit=10,page=0,sort=ASC
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -177,28 +182,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**TaskResponsePage**](./models/TaskResponsePage.md)
 
+<a name="validateYaml1"></a>
 
-## ****<a href="#validateYaml1"></a>
+## ****
 
 > POST /api/v2/task/validate
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -211,18 +217,18 @@ No authorization required
 | [**TektonTask**](./models/TektonTask) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/x-yaml
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 

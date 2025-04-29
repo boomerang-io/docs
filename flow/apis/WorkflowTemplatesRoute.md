@@ -9,20 +9,21 @@ title: Workflow Templates Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new, Workflow Template**](#apply) | PUT | `/api/v2/workflowtemplate` |
-| [**Create a new Workflow Template**](#create) | POST | `/api/v2/workflowtemplate` |
-| [**Delete a Workflow Template**](#deleteWorkflow) | DELETE | `/api/v2/workflowtemplate/{name}` |
-| [**Retrieve a Workflow Template**](#get) | GET | `/api/v2/workflowtemplate/{name}` |
-| [**Search for Workflow Templates**](#query) | GET | `/api/v2/workflowtemplate/query` |
+| [**Update, replace, or create new, Workflow Template**](#Update, replace, or create new, Workflow Template) | PUT | `/api/v2/workflowtemplate` |
+| [**Create a new Workflow Template**](#Create a new Workflow Template) | POST | `/api/v2/workflowtemplate` |
+| [**Delete a Workflow Template**](#Delete a Workflow Template) | DELETE | `/api/v2/workflowtemplate/{name}` |
+| [**Retrieve a Workflow Template**](#Retrieve a Workflow Template) | GET | `/api/v2/workflowtemplate/{name}` |
+| [**Search for Workflow Templates**](#Search for Workflow Templates) | GET | `/api/v2/workflowtemplate/query` |
 
 
+<a name="apply"></a>
 
-## **Update, replace, or create new, Workflow Template**<a href="#apply"></a>
+## **Update, replace, or create new, Workflow Template**
 
 > PUT /api/v2/workflowtemplate?replace=true
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -36,28 +37,29 @@ title: Workflow Templates Route
 | [**WorkflowTemplate**](./models/WorkflowTemplate) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
+<a name="create"></a>
 
-## **Create a new Workflow Template**<a href="#create"></a>
+## **Create a new Workflow Template**
 
 > POST /api/v2/workflowtemplate
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -70,28 +72,29 @@ No authorization required
 | [**WorkflowTemplate**](./models/WorkflowTemplate) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
+<a name="deleteWorkflow"></a>
 
-## **Delete a Workflow Template**<a href="#deleteWorkflow"></a>
+## **Delete a Workflow Template**
 
 > DELETE /api/v2/workflowtemplate/{name}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -102,29 +105,30 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="get"></a>
 
-## **Retrieve a Workflow Template**<a href="#get"></a>
+## **Retrieve a Workflow Template**
 
 > GET /api/v2/workflowtemplate/{name}?version=56,withTasks=true
 
 Retrieve a version of the Workflow Template. Defaults to latest. Optionally without Tasks
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -137,28 +141,29 @@ Retrieve a version of the Workflow Template. Defaults to latest. Optionally with
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
+<a name="query"></a>
 
-## **Search for Workflow Templates**<a href="#query"></a>
+## **Search for Workflow Templates**
 
 > GET /api/v2/workflowtemplate/query?labels=,names=mongodb-email-query-results,limit=10,page=0,sort=ASC
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -173,18 +178,18 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowTemplateResponsePage**](./models/WorkflowTemplateResponsePage.md)
 

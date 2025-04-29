@@ -9,27 +9,28 @@ title: Workflows Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new, Workflow for Canvas**](#applyCanvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-| [**Update, replace, or create new, Workflow**](#applyWorkflow) | PUT | `/api/v2/team/{team}/workflow` |
-| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#compose) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-| [**Create a new workflow**](#createWorkflow) | POST | `/api/v2/team/{team}/workflow` |
-| [**Delete a workflow**](#deleteWorkflow2) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
-| [**Duplicates the workflow.**](#duplicateWorkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
-| [**Export the Workflow as JSON.**](#export) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
-| [**Retrieve the parameters.**](#getAvailableParameters) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
-| [**Retrieve the changlog**](#getChangelog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
-| [**Retrieve a Workflow**](#getWorkflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
-| [**Search for Workflows**](#queryWorkflows) | GET | `/api/v2/team/{team}/workflow/query` |
-| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submitWorkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
+| [**Update, replace, or create new, Workflow for Canvas**](#Update, replace, or create new, Workflow for Canvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Update, replace, or create new, Workflow**](#Update, replace, or create new, Workflow) | PUT | `/api/v2/team/{team}/workflow` |
+| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#Convert workflow to compose model for UI Designer and detailed Activity screens.) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Create a new workflow**](#Create a new workflow) | POST | `/api/v2/team/{team}/workflow` |
+| [**Delete a workflow**](#Delete a workflow) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
+| [**Duplicates the workflow.**](#Duplicates the workflow.) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
+| [**Export the Workflow as JSON.**](#Export the Workflow as JSON.) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
+| [**Retrieve the parameters.**](#Retrieve the parameters.) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
+| [**Retrieve the changlog**](#Retrieve the changlog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
+| [**Retrieve a Workflow**](#Retrieve a Workflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
+| [**Search for Workflows**](#Search for Workflows) | GET | `/api/v2/team/{team}/workflow/query` |
+| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
 
 
+<a name="applyCanvas"></a>
 
-## **Update, replace, or create new, Workflow for Canvas**<a href="#applyCanvas"></a>
+## **Update, replace, or create new, Workflow for Canvas**
 
 > PUT /api/v2/team/{team}/workflow/{workflow}/compose?replace=true
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -44,28 +45,29 @@ title: Workflows Route
 | [**WorkflowCanvas**](./models/WorkflowCanvas) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
+<a name="applyWorkflow"></a>
 
-## **Update, replace, or create new, Workflow**<a href="#applyWorkflow"></a>
+## **Update, replace, or create new, Workflow**
 
 > PUT /api/v2/team/{team}/workflow?replace=true
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -80,28 +82,29 @@ title: Workflows Route
 | [**Workflow**](./models/Workflow) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Workflow**](./models/Workflow.md)
 
+<a name="compose"></a>
 
-## **Convert workflow to compose model for UI Designer and detailed Activity screens.**<a href="#compose"></a>
+## **Convert workflow to compose model for UI Designer and detailed Activity screens.**
 
 > GET /api/v2/team/{team}/workflow/{workflow}/compose?version=56
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -114,28 +117,29 @@ title: Workflows Route
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
+<a name="createWorkflow"></a>
 
-## **Create a new workflow**<a href="#createWorkflow"></a>
+## **Create a new workflow**
 
 > POST /api/v2/team/{team}/workflow
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -149,28 +153,29 @@ This endpoint does not require a request body.
 | [**Workflow**](./models/Workflow) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Workflow**](./models/Workflow.md)
 
+<a name="deleteWorkflow2"></a>
 
-## **Delete a workflow**<a href="#deleteWorkflow2"></a>
+## **Delete a workflow**
 
 > DELETE /api/v2/team/{team}/workflow/{workflow}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -182,28 +187,29 @@ This endpoint does not require a request body.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="duplicateWorkflow"></a>
 
-## **Duplicates the workflow.**<a href="#duplicateWorkflow"></a>
+## **Duplicates the workflow.**
 
 > POST /api/v2/team/{team}/workflow/{workflow}/duplicate
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -215,28 +221,29 @@ null (empty response body)
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Workflow**](./models/Workflow.md)
 
+<a name="export"></a>
 
-## **Export the Workflow as JSON.**<a href="#export"></a>
+## **Export the Workflow as JSON.**
 
 > GET /api/v2/team/{team}/workflow/{workflow}/export
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -248,28 +255,29 @@ This endpoint does not require a request body.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### Response
+#### Response
 
 **File**
 
+<a name="getAvailableParameters"></a>
 
-## **Retrieve the parameters.**<a href="#getAvailableParameters"></a>
+## **Retrieve the parameters.**
 
 > GET /api/v2/team/{team}/workflow/{workflow}/available-parameters
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -281,29 +289,30 @@ This endpoint does not require a request body.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 **List**
 
+<a name="getChangelog"></a>
 
-## **Retrieve the changlog**<a href="#getChangelog"></a>
+## **Retrieve the changlog**
 
 > GET /api/v2/team/{team}/workflow/{workflow}/changelog
 
 Retrieves each versions changelog and returns them all as a list.
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -315,29 +324,30 @@ Retrieves each versions changelog and returns them all as a list.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**List**](./models/ChangeLogVersion.md)
 
+<a name="getWorkflow"></a>
 
-## **Retrieve a Workflow**<a href="#getWorkflow"></a>
+## **Retrieve a Workflow**
 
 > GET /api/v2/team/{team}/workflow/{workflow}?version=56,withTasks=true
 
 Retrieve a version of the Workflow. Defaults to latest. Optionally without Tasks
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -351,28 +361,29 @@ Retrieve a version of the Workflow. Defaults to latest. Optionally without Tasks
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Workflow**](./models/Workflow.md)
 
+<a name="queryWorkflows"></a>
 
-## **Search for Workflows**<a href="#queryWorkflows"></a>
+## **Search for Workflows**
 
 > GET /api/v2/team/{team}/workflow/query?labels=,statuses=active,inactive,workflows=,limit=10,page=0,sort=ASC
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -389,28 +400,29 @@ This endpoint does not require a request body.
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowResponsePage**](./models/WorkflowResponsePage.md)
 
+<a name="submitWorkflow"></a>
 
-## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**<a href="#submitWorkflow"></a>
+## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**
 
 > POST /api/v2/team/{team}/workflow/{workflow}/submit?start=true
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -426,18 +438,18 @@ This endpoint does not require a request body.
 | [**WorkflowSubmitRequest**](./models/WorkflowSubmitRequest) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 [x-access-token](./overview#x-access-token), [BearerAuth](./overview#BearerAuth)
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 

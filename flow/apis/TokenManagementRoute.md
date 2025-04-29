@@ -9,18 +9,19 @@ title: Token Management Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create Token**](#createToken) | POST | `/api/v2/token` |
-| [**Delete Token**](#deleteToken) | DELETE | `/api/v2/token/{id}` |
-| [**Search for Tokens**](#query1) | GET | `/api/v2/token/query` |
+| [**Create Token**](#Create Token) | POST | `/api/v2/token` |
+| [**Delete Token**](#Delete Token) | DELETE | `/api/v2/token/{id}` |
+| [**Search for Tokens**](#Search for Tokens) | GET | `/api/v2/token/query` |
 
 
+<a name="createToken"></a>
 
-## **Create Token**<a href="#createToken"></a>
+## **Create Token**
 
 > POST /api/v2/token
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -33,28 +34,29 @@ title: Token Management Route
 | [**TokenCreateRequest**](./models/TokenCreateRequest) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**TokenCreateResponse**](./models/TokenCreateResponse.md)
 
+<a name="deleteToken"></a>
 
-## **Delete Token**<a href="#deleteToken"></a>
+## **Delete Token**
 
 > DELETE /api/v2/token/{id}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -65,28 +67,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 **Object**
 
+<a name="query1"></a>
 
-## **Search for Tokens**<a href="#query1"></a>
+## **Search for Tokens**
 
 > GET /api/v2/token/query?types=,principals=,limit=10,page=0,order=ASC,sort=0,fromDate=1677589200000,toDate=1680267600000
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -104,18 +107,18 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**PageToken**](./models/PageToken.md)
 

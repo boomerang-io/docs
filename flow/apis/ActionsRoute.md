@@ -9,19 +9,20 @@ title: Actions Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Provide an update for an Action**](#action) | PUT | `/api/v2/team/{team}/action` |
-| [**Retrieve a specific Action by Id**](#get3) | GET | `/api/v2/team/{team}/action/{actionId}` |
-| [**Search for Actions**](#query4) | GET | `/api/v2/team/{team}/action/query` |
-| [**Get Actions Summary**](#summary) | GET | `/api/v2/team/{team}/action/summary` |
+| [**Provide an update for an Action**](#Provide an update for an Action) | PUT | `/api/v2/team/{team}/action` |
+| [**Retrieve a specific Action by Id**](#Retrieve a specific Action by Id) | GET | `/api/v2/team/{team}/action/{actionId}` |
+| [**Search for Actions**](#Search for Actions) | GET | `/api/v2/team/{team}/action/query` |
+| [**Get Actions Summary**](#Get Actions Summary) | GET | `/api/v2/team/{team}/action/summary` |
 
 
+<a name="action"></a>
 
-## **Provide an update for an Action**<a href="#action"></a>
+## **Provide an update for an Action**
 
 > PUT /api/v2/team/{team}/action
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -35,28 +36,29 @@ title: Actions Route
 | [**List**](./models/ActionRequest) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="get3"></a>
 
-## **Retrieve a specific Action by Id**<a href="#get3"></a>
+## **Retrieve a specific Action by Id**
 
 > GET /api/v2/team/{team}/action/{actionId}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -68,28 +70,29 @@ null (empty response body)
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**Action**](./models/Action.md)
 
+<a name="query4"></a>
 
-## **Search for Actions**<a href="#query4"></a>
+## **Search for Actions**
 
 > GET /api/v2/team/{team}/action/query?types=manual,approval,statuses=approved,rejected,submitted,workflows=,limit=10,page=0,order=0,sort=0,fromDate=1677589200000,toDate=1680267600000
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -109,28 +112,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**PageAction**](./models/PageAction.md)
 
+<a name="summary"></a>
 
-## **Get Actions Summary**<a href="#summary"></a>
+## **Get Actions Summary**
 
 > GET /api/v2/team/{team}/action/summary?workflows=,fromDate=1677589200000,toDate=1680267600000
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -144,18 +148,18 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**ActionSummary**](./models/ActionSummary.md)
 

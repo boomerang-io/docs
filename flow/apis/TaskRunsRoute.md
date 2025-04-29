@@ -9,16 +9,17 @@ title: Task Runs Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Retrieve a TaskRuns log from a specific WorkflowRun.**](#streamTaskRunLog) | GET | `/api/v2/taskrun/{taskRunId}/log` |
+| [**Retrieve a TaskRuns log from a specific WorkflowRun.**](#Retrieve a TaskRuns log from a specific WorkflowRun.) | GET | `/api/v2/taskrun/{taskRunId}/log` |
 
 
+<a name="streamTaskRunLog"></a>
 
-## **Retrieve a TaskRuns log from a specific WorkflowRun.**<a href="#streamTaskRunLog"></a>
+## **Retrieve a TaskRuns log from a specific WorkflowRun.**
 
 > GET /api/v2/taskrun/{taskRunId}/log
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -29,18 +30,18 @@ title: Task Runs Route
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 **Object**
 

@@ -9,19 +9,20 @@ title: Webhooks And Events Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [****](#acceptEvent1) | POST | `/api/v2/event` |
-| [****](#acceptWaitForEvent) | POST | `/api/v2/callback` |
-| [****](#acceptWaitForEvent1) | GET | `/api/v2/callback` |
-| [**Trigger WorkflowRun via Webhook.**](#acceptWebhookEvent) | POST | `/api/v2/webhook` |
+| [****](#) | POST | `/api/v2/event` |
+| [****](#) | POST | `/api/v2/callback` |
+| [****](#) | GET | `/api/v2/callback` |
+| [**Trigger WorkflowRun via Webhook.**](#Trigger WorkflowRun via Webhook.) | POST | `/api/v2/webhook` |
 
 
+<a name="acceptEvent1"></a>
 
-## ****<a href="#acceptEvent1"></a>
+## ****
 
 > POST /api/v2/event?workflow=workflow_example
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -35,28 +36,29 @@ title: Webhooks And Events Route
 | **String** | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json, application/cloudevents+json;charset=utf-8, application/cloudevents+json; charset=utf-8
 - **Accept**: */*
 
-### Response
+#### Response
 
 **Object**
 
+<a name="acceptWaitForEvent"></a>
 
-## ****<a href="#acceptWaitForEvent"></a>
+## ****
 
 > POST /api/v2/callback?workflowrun=workflowrun_example,topic=topic_example,status=status_example
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -72,28 +74,29 @@ No authorization required
 | **Object** | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json;charset=utf-8, application/json; charset=utf-8
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="acceptWaitForEvent1"></a>
 
-## ****<a href="#acceptWaitForEvent1"></a>
+## ****
 
 > GET /api/v2/callback?workflowrun=workflowrun_example,topic=topic_example,status=status_example
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -106,28 +109,29 @@ null (empty response body)
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="acceptWebhookEvent"></a>
 
-## **Trigger WorkflowRun via Webhook.**<a href="#acceptWebhookEvent"></a>
+## **Trigger WorkflowRun via Webhook.**
 
 > POST /api/v2/webhook?workflow=workflow_example
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -141,18 +145,18 @@ null (empty response body)
 | **Object** | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json;charset=utf-8, application/json; charset=utf-8
 - **Accept**: */*
 
-### Response
+#### Response
 
 **Object**
 

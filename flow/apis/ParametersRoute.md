@@ -9,19 +9,20 @@ title: Parameters Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new global Param**](#create1) | POST | `/api/v2/parameters` |
-| [**Delete specific global Param**](#delete1) | DELETE | `/api/v2/parameters/{name}` |
-| [**Get all global Params**](#getAll) | GET | `/api/v2/parameters` |
-| [****](#update) | PUT | `/api/v2/parameters` |
+| [**Create new global Param**](#Create new global Param) | POST | `/api/v2/parameters` |
+| [**Delete specific global Param**](#Delete specific global Param) | DELETE | `/api/v2/parameters/{name}` |
+| [**Get all global Params**](#Get all global Params) | GET | `/api/v2/parameters` |
+| [****](#) | PUT | `/api/v2/parameters` |
 
 
+<a name="create1"></a>
 
-## **Create new global Param**<a href="#create1"></a>
+## **Create new global Param**
 
 > POST /api/v2/parameters
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -34,28 +35,29 @@ title: Parameters Route
 | [**AbstractParam**](./models/AbstractParam) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**AbstractParam**](./models/AbstractParam.md)
 
+<a name="delete1"></a>
 
-## **Delete specific global Param**<a href="#delete1"></a>
+## **Delete specific global Param**
 
 > DELETE /api/v2/parameters/{name}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -66,56 +68,58 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="getAll"></a>
 
-## **Get all global Params**<a href="#getAll"></a>
+## **Get all global Params**
 
 > GET /api/v2/parameters
 
 
-### Request Parameters
+#### Request Parameters
 This endpoint does not need any parameter.
 
 
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**List**](./models/AbstractParam.md)
 
+<a name="update"></a>
 
-## ****<a href="#update"></a>
+## ****
 
 > PUT /api/v2/parameters
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -128,18 +132,18 @@ No authorization required
 | [**AbstractParam**](./models/AbstractParam) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**AbstractParam**](./models/AbstractParam.md)
 

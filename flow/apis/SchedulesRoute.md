@@ -9,22 +9,23 @@ title: Schedules Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create a Schedule.**](#createSchedule) | POST | `/api/v2/team/{team}/schedule` |
-| [**Delete a Schedule.**](#deleteSchedule) | DELETE | `/api/v2/team/{team}/schedule/{scheduleId}` |
-| [**Retrieve a Schedule.**](#get2) | GET | `/api/v2/team/{team}/schedule/{scheduleId}` |
-| [**Retrieve Calendars for Schedules by Dates.**](#getCalendarsForSchedules) | GET | `/api/v2/team/{team}/schedule/calendars` |
-| [**Search for Schedules**](#query3) | GET | `/api/v2/team/{team}/schedule/query` |
-| [**Apply a Schedule.**](#updateSchedule) | PUT | `/api/v2/team/{team}/schedule` |
-| [**Validate a Schedules CRON.**](#validateCron) | GET | `/api/v2/team/{team}/schedule/validate-cron` |
+| [**Create a Schedule.**](#Create a Schedule.) | POST | `/api/v2/team/{team}/schedule` |
+| [**Delete a Schedule.**](#Delete a Schedule.) | DELETE | `/api/v2/team/{team}/schedule/{scheduleId}` |
+| [**Retrieve a Schedule.**](#Retrieve a Schedule.) | GET | `/api/v2/team/{team}/schedule/{scheduleId}` |
+| [**Retrieve Calendars for Schedules by Dates.**](#Retrieve Calendars for Schedules by Dates.) | GET | `/api/v2/team/{team}/schedule/calendars` |
+| [**Search for Schedules**](#Search for Schedules) | GET | `/api/v2/team/{team}/schedule/query` |
+| [**Apply a Schedule.**](#Apply a Schedule.) | PUT | `/api/v2/team/{team}/schedule` |
+| [**Validate a Schedules CRON.**](#Validate a Schedules CRON.) | GET | `/api/v2/team/{team}/schedule/validate-cron` |
 
 
+<a name="createSchedule"></a>
 
-## **Create a Schedule.**<a href="#createSchedule"></a>
+## **Create a Schedule.**
 
 > POST /api/v2/team/{team}/schedule
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -38,28 +39,29 @@ title: Schedules Route
 | [**WorkflowSchedule**](./models/WorkflowSchedule) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
+<a name="deleteSchedule"></a>
 
-## **Delete a Schedule.**<a href="#deleteSchedule"></a>
+## **Delete a Schedule.**
 
 > DELETE /api/v2/team/{team}/schedule/{scheduleId}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -71,28 +73,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
+<a name="get2"></a>
 
-## **Retrieve a Schedule.**<a href="#get2"></a>
+## **Retrieve a Schedule.**
 
 > GET /api/v2/team/{team}/schedule/{scheduleId}
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -104,28 +107,29 @@ null (empty response body)
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
+<a name="getCalendarsForSchedules"></a>
 
-## **Retrieve Calendars for Schedules by Dates.**<a href="#getCalendarsForSchedules"></a>
+## **Retrieve Calendars for Schedules by Dates.**
 
 > GET /api/v2/team/{team}/schedule/calendars?schedules=,fromDate=789,toDate=789
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -139,28 +143,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**List**](./models/WorkflowScheduleCalendar.md)
 
+<a name="query3"></a>
 
-## **Search for Schedules**<a href="#query3"></a>
+## **Search for Schedules**
 
 > GET /api/v2/team/{team}/schedule/query?statuses=active,archived,types=cron,advancedCron,workflows=,limit=10,page=0
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -176,28 +181,29 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**PageWorkflowSchedule**](./models/PageWorkflowSchedule.md)
 
+<a name="updateSchedule"></a>
 
-## **Apply a Schedule.**<a href="#updateSchedule"></a>
+## **Apply a Schedule.**
 
 > PUT /api/v2/team/{team}/schedule
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -211,28 +217,29 @@ No authorization required
 | [**WorkflowSchedule**](./models/WorkflowSchedule) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
+<a name="validateCron"></a>
 
-## **Validate a Schedules CRON.**<a href="#validateCron"></a>
+## **Validate a Schedules CRON.**
 
 > GET /api/v2/team/{team}/schedule/validate-cron?cron=cron_example
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -243,18 +250,18 @@ No authorization required
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**CronValidationResponse**](./models/CronValidationResponse.md)
 

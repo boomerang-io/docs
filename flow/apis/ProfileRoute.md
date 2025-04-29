@@ -9,45 +9,47 @@ title: Profile Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Get your Profile**](#getProfile) | GET | `/api/v2/profile` |
-| [**Patch your Profile**](#updateProfile) | PATCH | `/api/v2/profile` |
+| [**Get your Profile**](#Get your Profile) | GET | `/api/v2/profile` |
+| [**Patch your Profile**](#Patch your Profile) | PATCH | `/api/v2/profile` |
 
 
+<a name="getProfile"></a>
 
-## **Get your Profile**<a href="#getProfile"></a>
+## **Get your Profile**
 
 > GET /api/v2/profile
 
 
-### Request Parameters
+#### Request Parameters
 This endpoint does not need any parameter.
 
 
 ### Request Body
 This endpoint does not require a request body.
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-### Response
+#### Response
 
 [**UserProfile**](./models/UserProfile.md)
 
+<a name="updateProfile"></a>
 
-## **Patch your Profile**<a href="#updateProfile"></a>
+## **Patch your Profile**
 
 > PATCH /api/v2/profile
 
 
-### Request Parameters
+#### Request Parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
@@ -60,18 +62,18 @@ No authorization required
 | [**UserRequest**](./models/UserRequest) | true |
 
 
-### Authorization
+#### Authorization
 
 > Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
-### Request Headers
+#### Request Headers
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
 
-### Response
+#### Response
 
 null (empty response body)
 
