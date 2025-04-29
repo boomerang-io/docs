@@ -18,9 +18,8 @@ title: Team Tasks Route
 | [****](#validateYaml) | POST | `/api/v2/team/{team}/task/validate` |
 
 
-<a name="apply11"></a>
 
-## **Update, replace, or create new using Tekton Task YAML** {#apply11}
+## **Update, replace, or create new using Tekton Task YAML** <a name="apply11"></a>
 
 > PUT /api/v2/team/{team}/task/{name}?replace=true
 
@@ -57,9 +56,8 @@ No authorization required
 
 [**Task**](./models/Task.md)
 
-<a name="create11"></a>
 
-## **Create a new Task Template using Tekton Task YAML** {#create11}
+## **Create a new Task Template using Tekton Task YAML** <a name="create11"></a>
 
 > POST /api/v2/team/{team}/task
 
@@ -94,9 +92,8 @@ No authorization required
 
 [**Task**](./models/Task.md)
 
-<a name="delete"></a>
 
-## **Delete a Team Task** {#delete}
+## **Delete a Team Task** <a name="delete"></a>
 
 > DELETE /api/v2/team/{team}/task/{name}
 
@@ -128,9 +125,8 @@ No authorization required
 
 null (empty response body)
 
-<a name="get21"></a>
 
-## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.** {#get21}
+## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.** <a name="get21"></a>
 
 > GET /api/v2/team/{team}/task/{name}?version=56
 
@@ -163,9 +159,8 @@ No authorization required
 
 [**Task**](./models/Task.md)
 
-<a name="getChangelog1"></a>
 
-## **Retrieve the changlog** {#getChangelog1}
+## **Retrieve the changlog** <a name="getChangelog1"></a>
 
 > GET /api/v2/team/{team}/task/{name}/changelog
 
@@ -198,9 +193,8 @@ No authorization required
 
 [**List**](./models/ChangeLogVersion.md)
 
-<a name="queryTaskTemplates"></a>
 
-## **Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates** {#queryTaskTemplates}
+## **Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates** <a name="queryTaskTemplates"></a>
 
 > GET /api/v2/team/{team}/task/query?labels=,statuses=active,inactive,names=switch,event-wait,limit=10,page=0,sort=ASC
 
@@ -237,9 +231,8 @@ No authorization required
 
 [**TaskResponsePage**](./models/TaskResponsePage.md)
 
-<a name="validateYaml"></a>
 
-## **** {#validateYaml}
+## **** <a name="validateYaml"></a>
 
 > POST /api/v2/team/{team}/task/validate
 

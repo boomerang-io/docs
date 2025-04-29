@@ -23,9 +23,8 @@ title: Workflows Route
 | [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submitWorkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
 
 
-<a name="applyCanvas"></a>
 
-## **Update, replace, or create new, Workflow for Canvas** {#applyCanvas}
+## **Update, replace, or create new, Workflow for Canvas** <a name="applyCanvas"></a>
 
 > PUT /api/v2/team/{team}/workflow/{workflow}/compose?replace=true
 
@@ -60,9 +59,8 @@ title: Workflows Route
 
 [**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
-<a name="applyWorkflow"></a>
 
-## **Update, replace, or create new, Workflow** {#applyWorkflow}
+## **Update, replace, or create new, Workflow** <a name="applyWorkflow"></a>
 
 > PUT /api/v2/team/{team}/workflow?replace=true
 
@@ -97,9 +95,8 @@ title: Workflows Route
 
 [**Workflow**](./models/Workflow.md)
 
-<a name="compose"></a>
 
-## **Convert workflow to compose model for UI Designer and detailed Activity screens.** {#compose}
+## **Convert workflow to compose model for UI Designer and detailed Activity screens.** <a name="compose"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}/compose?version=56
 
@@ -132,9 +129,8 @@ This endpoint does not require a request body.
 
 [**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
-<a name="createWorkflow"></a>
 
-## **Create a new workflow** {#createWorkflow}
+## **Create a new workflow** <a name="createWorkflow"></a>
 
 > POST /api/v2/team/{team}/workflow
 
@@ -168,9 +164,8 @@ This endpoint does not require a request body.
 
 [**Workflow**](./models/Workflow.md)
 
-<a name="deleteWorkflow2"></a>
 
-## **Delete a workflow** {#deleteWorkflow2}
+## **Delete a workflow** <a name="deleteWorkflow2"></a>
 
 > DELETE /api/v2/team/{team}/workflow/{workflow}
 
@@ -202,9 +197,8 @@ This endpoint does not require a request body.
 
 null (empty response body)
 
-<a name="duplicateWorkflow"></a>
 
-## **Duplicates the workflow.** {#duplicateWorkflow}
+## **Duplicates the workflow.** <a name="duplicateWorkflow"></a>
 
 > POST /api/v2/team/{team}/workflow/{workflow}/duplicate
 
@@ -236,9 +230,8 @@ This endpoint does not require a request body.
 
 [**Workflow**](./models/Workflow.md)
 
-<a name="export"></a>
 
-## **Export the Workflow as JSON.** {#export}
+## **Export the Workflow as JSON.** <a name="export"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}/export
 
@@ -270,9 +263,8 @@ This endpoint does not require a request body.
 
 **File**
 
-<a name="getAvailableParameters"></a>
 
-## **Retrieve the parameters.** {#getAvailableParameters}
+## **Retrieve the parameters.** <a name="getAvailableParameters"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}/available-parameters
 
@@ -304,9 +296,8 @@ This endpoint does not require a request body.
 
 **List**
 
-<a name="getChangelog"></a>
 
-## **Retrieve the changlog** {#getChangelog}
+## **Retrieve the changlog** <a name="getChangelog"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}/changelog
 
@@ -339,9 +330,8 @@ This endpoint does not require a request body.
 
 [**List**](./models/ChangeLogVersion.md)
 
-<a name="getWorkflow"></a>
 
-## **Retrieve a Workflow** {#getWorkflow}
+## **Retrieve a Workflow** <a name="getWorkflow"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}?version=56,withTasks=true
 
@@ -376,9 +366,8 @@ This endpoint does not require a request body.
 
 [**Workflow**](./models/Workflow.md)
 
-<a name="queryWorkflows"></a>
 
-## **Search for Workflows** {#queryWorkflows}
+## **Search for Workflows** <a name="queryWorkflows"></a>
 
 > GET /api/v2/team/{team}/workflow/query?labels=,statuses=active,inactive,workflows=,limit=10,page=0,sort=ASC
 
@@ -415,9 +404,8 @@ This endpoint does not require a request body.
 
 [**WorkflowResponsePage**](./models/WorkflowResponsePage.md)
 
-<a name="submitWorkflow"></a>
 
-## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.** {#submitWorkflow}
+## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.** <a name="submitWorkflow"></a>
 
 > POST /api/v2/team/{team}/workflow/{workflow}/submit?start=true
 

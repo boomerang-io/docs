@@ -18,9 +18,8 @@ title: Workflow Runs Route
 | [**Start WorkflowRun execution. The WorkflowRun has to already have been queued.**](#start) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/start` |
 
 
-<a name="cancel"></a>
 
-## **Cancel a WorkflowRun** {#cancel}
+## **Cancel a WorkflowRun** <a name="cancel"></a>
 
 > DELETE /api/v2/team/{team}/workflowrun/{workflowRunId}/cancel
 
@@ -52,9 +51,8 @@ This endpoint does not require a request body.
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 
-<a name="count"></a>
 
-## **Retrieve a summary of WorkflowRuns by Status.** {#count}
+## **Retrieve a summary of WorkflowRuns by Status.** <a name="count"></a>
 
 > GET /api/v2/team/{team}/workflowrun/count?labels=,workflows=63d3656ca845957db7d25ef0,63a3e732b0496509a7f1d763,fromDate=1677589200000,toDate=1680267600000
 
@@ -89,9 +87,8 @@ This endpoint does not require a request body.
 
 [**WorkflowRunCount**](./models/WorkflowRunCount.md)
 
-<a name="finalize"></a>
 
-## **End a WorkflowRun** {#finalize}
+## **End a WorkflowRun** <a name="finalize"></a>
 
 > PUT /api/v2/team/{team}/workflowrun/{workflowRunId}/finalize
 
@@ -123,9 +120,8 @@ This endpoint does not require a request body.
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 
-<a name="get1"></a>
 
-## **Retrieve a specific WorkflowRun.** {#get1}
+## **Retrieve a specific WorkflowRun.** <a name="get1"></a>
 
 > GET /api/v2/team/{team}/workflowrun/{workflowRunId}?withTasks=true
 
@@ -158,9 +154,8 @@ This endpoint does not require a request body.
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 
-<a name="query2"></a>
 
-## **Search for WorkflowRuns** {#query2}
+## **Search for WorkflowRuns** <a name="query2"></a>
 
 > GET /api/v2/team/{team}/workflowrun/query?labels=,statuses=succeeded,skipped,phase=completed,finalized,workflowruns=,workflows=,triggers=,limit=10,page=0,order=ASC,fromDate=1677589200000,toDate=1680267600000
 
@@ -202,9 +197,8 @@ This endpoint does not require a request body.
 
 [**PageWorkflowRun**](./models/PageWorkflowRun.md)
 
-<a name="retry"></a>
 
-## **Retry WorkflowRun execution.** {#retry}
+## **Retry WorkflowRun execution.** <a name="retry"></a>
 
 > PUT /api/v2/team/{team}/workflowrun/{workflowRunId}/retry
 
@@ -239,9 +233,8 @@ This endpoint does not require a request body.
 
 [**WorkflowRun**](./models/WorkflowRun.md)
 
-<a name="start"></a>
 
-## **Start WorkflowRun execution. The WorkflowRun has to already have been queued.** {#start}
+## **Start WorkflowRun execution. The WorkflowRun has to already have been queued.** <a name="start"></a>
 
 > PUT /api/v2/team/{team}/workflowrun/{workflowRunId}/start
 

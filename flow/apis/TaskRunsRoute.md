@@ -12,9 +12,8 @@ title: Task Runs Route
 | [**Retrieve a TaskRuns log from a specific WorkflowRun.**](#streamTaskRunLog) | GET | `/api/v2/taskrun/{taskRunId}/log` |
 
 
-<a name="streamTaskRunLog"></a>
 
-## **Retrieve a TaskRuns log from a specific WorkflowRun.** {#streamTaskRunLog}
+## **Retrieve a TaskRuns log from a specific WorkflowRun.** <a name="streamTaskRunLog"></a>
 
 > GET /api/v2/taskrun/{taskRunId}/log
 

@@ -18,9 +18,8 @@ title: Schedules Route
 | [**Validate a Schedules CRON.**](#validateCron) | GET | `/api/v2/team/{team}/schedule/validate-cron` |
 
 
-<a name="createSchedule"></a>
 
-## **Create a Schedule.** {#createSchedule}
+## **Create a Schedule.** <a name="createSchedule"></a>
 
 > POST /api/v2/team/{team}/schedule
 
@@ -54,9 +53,8 @@ No authorization required
 
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
-<a name="deleteSchedule"></a>
 
-## **Delete a Schedule.** {#deleteSchedule}
+## **Delete a Schedule.** <a name="deleteSchedule"></a>
 
 > DELETE /api/v2/team/{team}/schedule/{scheduleId}
 
@@ -88,9 +86,8 @@ No authorization required
 
 null (empty response body)
 
-<a name="get2"></a>
 
-## **Retrieve a Schedule.** {#get2}
+## **Retrieve a Schedule.** <a name="get2"></a>
 
 > GET /api/v2/team/{team}/schedule/{scheduleId}
 
@@ -122,9 +119,8 @@ No authorization required
 
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
-<a name="getCalendarsForSchedules"></a>
 
-## **Retrieve Calendars for Schedules by Dates.** {#getCalendarsForSchedules}
+## **Retrieve Calendars for Schedules by Dates.** <a name="getCalendarsForSchedules"></a>
 
 > GET /api/v2/team/{team}/schedule/calendars?schedules=,fromDate=789,toDate=789
 
@@ -158,9 +154,8 @@ No authorization required
 
 [**List**](./models/WorkflowScheduleCalendar.md)
 
-<a name="query3"></a>
 
-## **Search for Schedules** {#query3}
+## **Search for Schedules** <a name="query3"></a>
 
 > GET /api/v2/team/{team}/schedule/query?statuses=active,archived,types=cron,advancedCron,workflows=,limit=10,page=0
 
@@ -196,9 +191,8 @@ No authorization required
 
 [**PageWorkflowSchedule**](./models/PageWorkflowSchedule.md)
 
-<a name="updateSchedule"></a>
 
-## **Apply a Schedule.** {#updateSchedule}
+## **Apply a Schedule.** <a name="updateSchedule"></a>
 
 > PUT /api/v2/team/{team}/schedule
 
@@ -232,9 +226,8 @@ No authorization required
 
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
-<a name="validateCron"></a>
 
-## **Validate a Schedules CRON.** {#validateCron}
+## **Validate a Schedules CRON.** <a name="validateCron"></a>
 
 > GET /api/v2/team/{team}/schedule/validate-cron?cron=cron_example
 

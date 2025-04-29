@@ -15,9 +15,8 @@ title: Users Route
 | [**Search for Users**](#getUsers) | GET | `/api/v2/user/query` |
 
 
-<a name="apply1"></a>
 
-## **Update a Boomerang Flow Users details** {#apply1}
+## **Update a Boomerang Flow Users details** <a name="apply1"></a>
 
 > PATCH /api/v2/user/{userId}
 
@@ -51,9 +50,8 @@ No authorization required
 
 null (empty response body)
 
-<a name="deleteFlowUser"></a>
 
-## **Delete a Boomerang Flow user** {#deleteFlowUser}
+## **Delete a Boomerang Flow user** <a name="deleteFlowUser"></a>
 
 > DELETE /api/v2/user/{userId}
 
@@ -84,9 +82,8 @@ No authorization required
 
 null (empty response body)
 
-<a name="getUserByID"></a>
 
-## **Get a Users details** {#getUserByID}
+## **Get a Users details** <a name="getUserByID"></a>
 
 > GET /api/v2/user/{userId}
 
@@ -117,9 +114,8 @@ No authorization required
 
 [**User**](./models/User.md)
 
-<a name="getUsers"></a>
 
-## **Search for Users** {#getUsers}
+## **Search for Users** <a name="getUsers"></a>
 
 > GET /api/v2/user/query?labels=,status=active,inactive,ids=,limit=10,page=0,order=0,sort=0
 

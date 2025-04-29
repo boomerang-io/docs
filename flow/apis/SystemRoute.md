@@ -21,9 +21,8 @@ title: System Route
 | [**Update Boomerang Flow Settings**](#updateSettings) | PUT | `/api/v2/settings` |
 
 
-<a name="create2"></a>
 
-## **Create new global Param** {#create2}
+## **Create new global Param** <a name="create2"></a>
 
 > POST /api/v2/global-params
 
@@ -56,9 +55,8 @@ No authorization required
 
 [**AbstractParam**](./models/AbstractParam.md)
 
-<a name="delete2"></a>
 
-## **Delete specific global Param** {#delete2}
+## **Delete specific global Param** <a name="delete2"></a>
 
 > DELETE /api/v2/global-params/{key}
 
@@ -89,9 +87,8 @@ No authorization required
 
 null (empty response body)
 
-<a name="getAll1"></a>
 
-## **Get all global Params** {#getAll1}
+## **Get all global Params** <a name="getAll1"></a>
 
 > GET /api/v2/global-params
 
@@ -118,9 +115,8 @@ No authorization required
 
 [**List**](./models/AbstractParam.md)
 
-<a name="getAppConfiguration"></a>
 
-## **Retrieve Boomerang Flow Settings** {#getAppConfiguration}
+## **Retrieve Boomerang Flow Settings** <a name="getAppConfiguration"></a>
 
 > GET /api/v2/settings
 
@@ -147,9 +143,8 @@ No authorization required
 
 [**List**](./models/Setting.md)
 
-<a name="getFlowFeatures"></a>
 
-## **Retrieve feature flags.** {#getFlowFeatures}
+## **Retrieve feature flags.** <a name="getFlowFeatures"></a>
 
 > GET /api/v2/features
 
@@ -176,9 +171,8 @@ No authorization required
 
 [**Features**](./models/Features.md)
 
-<a name="getHeaderNavigation"></a>
 
-## **Retrieve this instances context, features, and navigation.** {#getHeaderNavigation}
+## **Retrieve this instances context, features, and navigation.** <a name="getHeaderNavigation"></a>
 
 > GET /api/v2/context
 
@@ -205,9 +199,8 @@ No authorization required
 
 [**HeaderNavigationResponse**](./models/HeaderNavigationResponse.md)
 
-<a name="getNavigation"></a>
 
-## **Retrieve navigation.** {#getNavigation}
+## **Retrieve navigation.** <a name="getNavigation"></a>
 
 > GET /api/v2/navigation?team=my-amazing-team
 
@@ -238,9 +231,8 @@ No authorization required
 
 [**List**](./models/Navigation.md)
 
-<a name="register"></a>
 
-## **Register and activate an installation of Flow** {#register}
+## **Register and activate an installation of Flow** <a name="register"></a>
 
 > PUT /api/v2/activate
 
@@ -273,9 +265,8 @@ No authorization required
 
 **Boolean**
 
-<a name="update1"></a>
 
-## **** {#update1}
+## **** <a name="update1"></a>
 
 > PUT /api/v2/global-params
 
@@ -308,9 +299,8 @@ No authorization required
 
 [**AbstractParam**](./models/AbstractParam.md)
 
-<a name="updateSettings"></a>
 
-## **Update Boomerang Flow Settings** {#updateSettings}
+## **Update Boomerang Flow Settings** <a name="updateSettings"></a>
 
 > PUT /api/v2/settings
 

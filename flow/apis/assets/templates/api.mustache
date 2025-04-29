@@ -14,9 +14,8 @@ title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 
 {{#operations}}
 {{#operation}}
-<a name="{{operationId}}"></a>
 
-## **{{summary}}** {#{{operationId}}}
+## **{{summary}}** <a name="{{operationId}}"></a>
 
 > {{httpMethod}} {{path}}{{#hasQueryParams}}?{{#queryParams}}{{paramName}}={{example}}{{^-last}},{{/-last}}{{/queryParams}}{{/hasQueryParams}}
 

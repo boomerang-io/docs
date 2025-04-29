@@ -15,9 +15,8 @@ title: Actions Route
 | [**Get Actions Summary**](#summary) | GET | `/api/v2/team/{team}/action/summary` |
 
 
-<a name="action"></a>
 
-## **Provide an update for an Action** {#action}
+## **Provide an update for an Action** <a name="action"></a>
 
 > PUT /api/v2/team/{team}/action
 
@@ -51,9 +50,8 @@ No authorization required
 
 null (empty response body)
 
-<a name="get3"></a>
 
-## **Retrieve a specific Action by Id** {#get3}
+## **Retrieve a specific Action by Id** <a name="get3"></a>
 
 > GET /api/v2/team/{team}/action/{actionId}
 
@@ -85,9 +83,8 @@ No authorization required
 
 [**Action**](./models/Action.md)
 
-<a name="query4"></a>
 
-## **Search for Actions** {#query4}
+## **Search for Actions** <a name="query4"></a>
 
 > GET /api/v2/team/{team}/action/query?types=manual,approval,statuses=approved,rejected,submitted,workflows=,limit=10,page=0,order=0,sort=0,fromDate=1677589200000,toDate=1680267600000
 
@@ -127,9 +124,8 @@ No authorization required
 
 [**PageAction**](./models/PageAction.md)
 
-<a name="summary"></a>
 
-## **Get Actions Summary** {#summary}
+## **Get Actions Summary** <a name="summary"></a>
 
 > GET /api/v2/team/{team}/action/summary?workflows=,fromDate=1677589200000,toDate=1680267600000
 
