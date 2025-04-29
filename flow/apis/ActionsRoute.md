@@ -9,13 +9,9 @@ title: Actions Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Provide an update for an Action**](#action) | PUT | `/api/v2/team/{team}/action` |
-
 | [**Retrieve a specific Action by Id**](#get3) | GET | `/api/v2/team/{team}/action/{actionId}` |
-
 | [**Search for Actions**](#query4) | GET | `/api/v2/team/{team}/action/query` |
-
 | [**Get Actions Summary**](#summary) | GET | `/api/v2/team/{team}/action/summary` |
 
 
@@ -32,6 +28,7 @@ title: Actions Route
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
+
 
 ### Request Body
 | Schema | Required | 
@@ -68,6 +65,7 @@ null (empty response body)
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **actionId** | **String** | true | ID of Action | Defaults to null. | actionId_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -110,6 +108,7 @@ No authorization required
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -144,6 +143,7 @@ No authorization required
 | **workflows** | [**List**](../Models/String) | false | List of workflows to filter for. | Defaults to null. | 
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
+
 
 ### Request Body
 This endpoint does not require a request body.

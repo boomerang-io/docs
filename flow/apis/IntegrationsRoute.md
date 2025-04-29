@@ -9,23 +9,14 @@ title: Integrations Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Retrieve the integrations and their status within a Team**](#get4) | GET | `/api/v2/integration` |
-
 | [**Retrieve the installation ID and store against a team**](#githubInstall) | GET | `/api/v2/integration/github/installation` |
-
 | [**Links the GitHub Installation ID with a Team**](#githubLink) | POST | `/api/v2/integration/github/link` |
-
 | [**Unlinks the GitHub Installation ID from a Team**](#githubUnlink) | POST | `/api/v2/integration/github/unlink` |
-
 | [**Install URL Redirect**](#installSlack) | GET | `/api/v2/integration/slack/install` |
-
 | [**Receive Slack Oauth2 request**](#receiveSlackAuth) | GET | `/api/v2/integration/slack/auth` |
-
 | [**Receive Slack Slash Commands**](#receiveSlackCommand) | POST | `/api/v2/integration/slack/commands` |
-
 | [**Receive Slack Events**](#receiveSlackEvent) | POST | `/api/v2/integration/slack/events` |
-
 | [**Receive Slack Interactivity**](#receiveSlackInteractivity) | POST | `/api/v2/integration/slack/interactivity` |
 
 
@@ -42,6 +33,7 @@ title: Integrations Route
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true |  | Defaults to null. | team_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -76,6 +68,7 @@ No authorization required
 | **id** | **Integer** | false |  | Defaults to null. | 56
 | **team** | **String** | false |  | Defaults to null. | team_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -106,6 +99,7 @@ No authorization required
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 
@@ -141,6 +135,7 @@ No authorization required
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 
+
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
@@ -171,6 +166,7 @@ null (empty response body)
 
 ### Request Parameters
 This endpoint does not need any parameter.
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -204,6 +200,7 @@ null (empty response body)
 | ---- | ---- | -------- | ----------- | --- |---|
 | **code** | **String** | true |  | Defaults to null. | code_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -231,6 +228,7 @@ No authorization required
 
 ### Request Parameters
 This endpoint does not need any parameter.
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -265,6 +263,7 @@ No authorization required
 | **x-slack-request-timestamp** | **String** | true |  | Defaults to null. | x-slack-request-timestamp_example
 | **x-slack-signature** | **String** | true |  | Defaults to null. | x-slack-signature_example
 
+
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
@@ -295,6 +294,7 @@ No authorization required
 
 ### Request Parameters
 This endpoint does not need any parameter.
+
 
 ### Request Body
 This endpoint does not require a request body.

@@ -9,29 +9,17 @@ title: Workflows Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Update, replace, or create new, Workflow for Canvas**](#applyCanvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-
 | [**Update, replace, or create new, Workflow**](#applyWorkflow) | PUT | `/api/v2/team/{team}/workflow` |
-
 | [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#compose) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-
 | [**Create a new workflow**](#createWorkflow) | POST | `/api/v2/team/{team}/workflow` |
-
 | [**Delete a workflow**](#deleteWorkflow2) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
-
 | [**Duplicates the workflow.**](#duplicateWorkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
-
 | [**Export the Workflow as JSON.**](#export) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
-
 | [**Retrieve the parameters.**](#getAvailableParameters) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
-
 | [**Retrieve the changlog**](#getChangelog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
-
 | [**Retrieve a Workflow**](#getWorkflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
-
 | [**Search for Workflows**](#queryWorkflows) | GET | `/api/v2/team/{team}/workflow/query` |
-
 | [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submitWorkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
 
 
@@ -49,6 +37,7 @@ title: Workflows Route
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true
+
 
 ### Request Body
 | Schema | Required | 
@@ -85,6 +74,7 @@ title: Workflows Route
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true
+
 
 ### Request Body
 | Schema | Required | 
@@ -123,6 +113,7 @@ title: Workflows Route
 | **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
 | **version** | **Integer** | false | Workflow Version | Defaults to null. | 56
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -154,6 +145,7 @@ This endpoint does not require a request body.
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
+
 
 ### Request Body
 | Schema | Required | 
@@ -191,6 +183,7 @@ This endpoint does not require a request body.
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -223,6 +216,7 @@ null (empty response body)
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -257,6 +251,7 @@ This endpoint does not require a request body.
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -289,6 +284,7 @@ This endpoint does not require a request body.
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -323,6 +319,7 @@ Retrieves each versions changelog and returns them all as a list.
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -359,6 +356,7 @@ Retrieve a version of the Workflow. Defaults to latest. Optionally without Tasks
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **version** | **Integer** | false | Workflow Version | Defaults to null. | 56
 | **withTasks** | **Boolean** | false | Include Workflow Tasks | Defaults to true. | true
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -398,6 +396,7 @@ This endpoint does not require a request body.
 | **statuses** | [**List**](../Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
 | **workflows** | [**List**](../Models/String) | false | List of workflows to filter for. | Defaults to null. | 
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -431,6 +430,7 @@ This endpoint does not require a request body.
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
 | **start** | **Boolean** | false | Start the WorkflowRun immediately after submission | Defaults to false. | true
+
 
 ### Request Body
 | Schema | Required | 

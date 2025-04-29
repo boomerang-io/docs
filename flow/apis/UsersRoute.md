@@ -9,13 +9,9 @@ title: Users Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Update a Boomerang Flow Users details**](#apply1) | PATCH | `/api/v2/user/{userId}` |
-
 | [**Delete a Boomerang Flow user**](#deleteFlowUser) | DELETE | `/api/v2/user/{userId}` |
-
 | [**Get a Users details**](#getUserByID) | GET | `/api/v2/user/{userId}` |
-
 | [**Search for Users**](#getUsers) | GET | `/api/v2/user/query` |
 
 
@@ -32,6 +28,7 @@ title: Users Route
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **userId** | **String** | true |  | Defaults to null. | userId_example
+
 
 ### Request Body
 | Schema | Required | 
@@ -68,6 +65,7 @@ null (empty response body)
 | ---- | ---- | -------- | ----------- | --- |---|
 | **userId** | **String** | true |  | Defaults to null. | userId_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -99,6 +97,7 @@ null (empty response body)
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **userId** | **String** | true |  | Defaults to null. | userId_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -137,6 +136,7 @@ No authorization required
 | **ids** | [**List**](../Models/String) | false | List of ids to filter for. | Defaults to null. | 
 | **order** | **String** | false | Ascending or Descending (default) order | Defaults to Optional[DESC]. Enum: [ASC, DESC] | 0
 | **sort** | **String** | false | The element to sort on | Defaults to Optional[name]. | 0
+
 
 ### Request Body
 This endpoint does not require a request body.

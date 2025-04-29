@@ -9,25 +9,15 @@ title: System Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Create new global Param**](#create2) | POST | `/api/v2/global-params` |
-
 | [**Delete specific global Param**](#delete2) | DELETE | `/api/v2/global-params/{key}` |
-
 | [**Get all global Params**](#getAll1) | GET | `/api/v2/global-params` |
-
 | [**Retrieve Boomerang Flow Settings**](#getAppConfiguration) | GET | `/api/v2/settings` |
-
 | [**Retrieve feature flags.**](#getFlowFeatures) | GET | `/api/v2/features` |
-
 | [**Retrieve this instances context, features, and navigation.**](#getHeaderNavigation) | GET | `/api/v2/context` |
-
 | [**Retrieve navigation.**](#getNavigation) | GET | `/api/v2/navigation` |
-
 | [**Register and activate an installation of Flow**](#register) | PUT | `/api/v2/activate` |
-
 | [****](#update1) | PUT | `/api/v2/global-params` |
-
 | [**Update Boomerang Flow Settings**](#updateSettings) | PUT | `/api/v2/settings` |
 
 
@@ -43,6 +33,7 @@ title: System Route
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 
@@ -79,6 +70,7 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 | **key** | **String** | true |  | Defaults to null. | key_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -106,6 +98,7 @@ null (empty response body)
 
 ### Request Parameters
 This endpoint does not need any parameter.
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -135,6 +128,7 @@ No authorization required
 ### Request Parameters
 This endpoint does not need any parameter.
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -163,6 +157,7 @@ No authorization required
 ### Request Parameters
 This endpoint does not need any parameter.
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -190,6 +185,7 @@ No authorization required
 
 ### Request Parameters
 This endpoint does not need any parameter.
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -223,6 +219,7 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | false | Team as owner reference | Defaults to null. | my-amazing-team
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -253,6 +250,7 @@ No authorization required
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 
@@ -288,6 +286,7 @@ No authorization required
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 
+
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
@@ -321,6 +320,7 @@ No authorization required
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 

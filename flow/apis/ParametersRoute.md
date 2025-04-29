@@ -9,13 +9,9 @@ title: Parameters Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Create new global Param**](#create1) | POST | `/api/v2/parameters` |
-
 | [**Delete specific global Param**](#delete1) | DELETE | `/api/v2/parameters/{name}` |
-
 | [**Get all global Params**](#getAll) | GET | `/api/v2/parameters` |
-
 | [****](#update) | PUT | `/api/v2/parameters` |
 
 
@@ -31,6 +27,7 @@ title: Parameters Route
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 
@@ -67,6 +64,7 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 | **name** | **String** | true |  | Defaults to null. | name_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -94,6 +92,7 @@ null (empty response body)
 
 ### Request Parameters
 This endpoint does not need any parameter.
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -125,6 +124,7 @@ No authorization required
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 

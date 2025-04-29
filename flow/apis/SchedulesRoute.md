@@ -9,19 +9,12 @@ title: Schedules Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Create a Schedule.**](#createSchedule) | POST | `/api/v2/team/{team}/schedule` |
-
 | [**Delete a Schedule.**](#deleteSchedule) | DELETE | `/api/v2/team/{team}/schedule/{scheduleId}` |
-
 | [**Retrieve a Schedule.**](#get2) | GET | `/api/v2/team/{team}/schedule/{scheduleId}` |
-
 | [**Retrieve Calendars for Schedules by Dates.**](#getCalendarsForSchedules) | GET | `/api/v2/team/{team}/schedule/calendars` |
-
 | [**Search for Schedules**](#query3) | GET | `/api/v2/team/{team}/schedule/query` |
-
 | [**Apply a Schedule.**](#updateSchedule) | PUT | `/api/v2/team/{team}/schedule` |
-
 | [**Validate a Schedules CRON.**](#validateCron) | GET | `/api/v2/team/{team}/schedule/validate-cron` |
 
 
@@ -38,6 +31,7 @@ title: Schedules Route
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
+
 
 ### Request Body
 | Schema | Required | 
@@ -75,6 +69,7 @@ No authorization required
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **scheduleId** | **String** | true |  | Defaults to null. | scheduleId_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -107,6 +102,7 @@ null (empty response body)
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **scheduleId** | **String** | true |  | Defaults to null. | scheduleId_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -142,6 +138,7 @@ No authorization required
 | **schedules** | [**List**](../Models/String) | true |  | Defaults to null. | 
 | **fromDate** | **Long** | true |  | Defaults to null. | 789
 | **toDate** | **Long** | true |  | Defaults to null. | 789
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -180,6 +177,7 @@ No authorization required
 | **types** | [**List**](../Models/String) | false | List of types to filter for. Defaults to all. | Defaults to null. | cron,advancedCron
 | **workflows** | [**List**](../Models/String) | false | List of workflows to filter for. | Defaults to null. | 
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -211,6 +209,7 @@ No authorization required
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
+
 
 ### Request Body
 | Schema | Required | 
@@ -246,6 +245,7 @@ No authorization required
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **cron** | **String** | true | A CRON expression to validate | Defaults to null. | cron_example
+
 
 ### Request Body
 This endpoint does not require a request body.

@@ -9,7 +9,6 @@ title: Insights Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Retrieve insights for a team**](#getTeamInsights) | GET | `/api/v2/team/{team}/insights` |
 
 
@@ -31,6 +30,7 @@ The insights are based on the workflow runs and their statuses.
 | **toDate** | **Long** | false |  | Defaults to null. | 789
 | **workflows** | [**List**](../Models/String) | false |  | Defaults to null. | 
 | **statuses** | [**List**](../Models/String) | false |  | Defaults to null. | 
+
 
 ### Request Body
 This endpoint does not require a request body.

@@ -9,15 +9,10 @@ title: Workflow Templates Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Update, replace, or create new, Workflow Template**](#apply) | PUT | `/api/v2/workflowtemplate` |
-
 | [**Create a new Workflow Template**](#create) | POST | `/api/v2/workflowtemplate` |
-
 | [**Delete a Workflow Template**](#deleteWorkflow) | DELETE | `/api/v2/workflowtemplate/{name}` |
-
 | [**Retrieve a Workflow Template**](#get) | GET | `/api/v2/workflowtemplate/{name}` |
-
 | [**Search for Workflow Templates**](#query) | GET | `/api/v2/workflowtemplate/query` |
 
 
@@ -34,6 +29,7 @@ title: Workflow Templates Route
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true
+
 
 ### Request Body
 | Schema | Required | 
@@ -68,6 +64,7 @@ No authorization required
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 
@@ -104,6 +101,7 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 | **name** | **String** | true | Name of Workflow Template | Defaults to null. | name_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -138,6 +136,7 @@ Retrieve a version of the Workflow Template. Defaults to latest. Optionally with
 | **name** | **String** | true | Name of Workflow Template | Defaults to null. | name_example
 | **version** | **Integer** | false | Workflow Template Version | Defaults to null. | 56
 | **withTasks** | **Boolean** | false | Include Tasks | Defaults to true. | true
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -174,6 +173,7 @@ No authorization required
 | **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
 | **labels** | [**List**](../Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
 | **names** | [**List**](../Models/String) | false | List of WorkflowTemplate names to filter for. Defaults to all. | Defaults to null. | mongodb-email-query-results
+
 
 ### Request Body
 This endpoint does not require a request body.

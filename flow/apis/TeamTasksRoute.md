@@ -9,19 +9,12 @@ title: Team Tasks Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Update, replace, or create new using Tekton Task YAML**](#apply11) | PUT | `/api/v2/team/{team}/task/{name}` |
-
 | [**Create a new Task Template using Tekton Task YAML**](#create11) | POST | `/api/v2/team/{team}/task` |
-
 | [**Delete a Team Task**](#delete) | DELETE | `/api/v2/team/{team}/task/{name}` |
-
 | [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#get21) | GET | `/api/v2/team/{team}/task/{name}` |
-
 | [**Retrieve the changlog**](#getChangelog1) | GET | `/api/v2/team/{team}/task/{name}/changelog` |
-
 | [**Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#queryTaskTemplates) | GET | `/api/v2/team/{team}/task/query` |
-
 | [****](#validateYaml) | POST | `/api/v2/team/{team}/task/validate` |
 
 
@@ -41,6 +34,7 @@ The name must only contain alphanumeric and - characeters. If the name exists, a
 | **name** | **String** | true | Name of Task | Defaults to null. | name_example
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true
+
 
 ### Request Body
 | Schema | Required | 
@@ -78,6 +72,7 @@ The name needs to be unique and must only contain alphanumeric and - characeters
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 
+
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
@@ -114,6 +109,7 @@ No authorization required
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **name** | **String** | true | Name of Task | Defaults to null. | name_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -148,6 +144,7 @@ null (empty response body)
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **version** | **Integer** | false | Task Version | Defaults to null. | 56
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -181,6 +178,7 @@ Retrieves each versions changelog and returns them all as a list.
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **name** | **String** | true | Name of Task | Defaults to null. | name_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -220,6 +218,7 @@ No authorization required
 | **statuses** | [**List**](../Models/String) | false | List of statuses to filter for. | Defaults to null. | active,inactive
 | **names** | [**List**](../Models/String) | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -250,6 +249,7 @@ No authorization required
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 

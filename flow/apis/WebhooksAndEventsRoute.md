@@ -9,13 +9,9 @@ title: Webhooks And Events Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [****](#acceptEvent1) | POST | `/api/v2/event` |
-
 | [****](#acceptWaitForEvent) | POST | `/api/v2/callback` |
-
 | [****](#acceptWaitForEvent1) | GET | `/api/v2/callback` |
-
 | [**Trigger WorkflowRun via Webhook.**](#acceptWebhookEvent) | POST | `/api/v2/webhook` |
 
 
@@ -32,6 +28,7 @@ title: Webhooks And Events Route
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **workflow** | **String** | false | The Workflow the request relates to | Defaults to null. | workflow_example
+
 
 ### Request Body
 | Schema | Required | 
@@ -70,6 +67,7 @@ No authorization required
 | **topic** | **String** | true | The topic to publish to | Defaults to null. | topic_example
 | **status** | **String** | false | The status to set for the WaitForEvent TaskRun. Succeeded | Failed. | Defaults to succeeded. | status_example
 
+
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
@@ -107,6 +105,7 @@ null (empty response body)
 | **topic** | **String** | true | The topic to publish to | Defaults to null. | topic_example
 | **status** | **String** | false | The status to set for the WaitForEvent TaskRun. Succeeded | Failed. | Defaults to succeeded. | status_example
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -138,6 +137,7 @@ null (empty response body)
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **workflow** | **String** | false | Workflow reference the request relates to | Defaults to null. | workflow_example
+
 
 ### Request Body
 | Schema | Required | 

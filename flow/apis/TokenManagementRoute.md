@@ -9,11 +9,8 @@ title: Token Management Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Create Token**](#createToken) | POST | `/api/v2/token` |
-
 | [**Delete Token**](#deleteToken) | DELETE | `/api/v2/token/{id}` |
-
 | [**Search for Tokens**](#query1) | GET | `/api/v2/token/query` |
 
 
@@ -29,6 +26,7 @@ title: Token Management Route
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 
@@ -64,6 +62,7 @@ No authorization required
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **id** | **String** | true | ID of the Token | Defaults to null. | id_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -103,6 +102,7 @@ No authorization required
 | **sort** | **String** | false | The element to sort onr | Defaults to Optional[creationDate]. | 0
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
+
 
 ### Request Body
 This endpoint does not require a request body.

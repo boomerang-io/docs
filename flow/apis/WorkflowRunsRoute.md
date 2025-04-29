@@ -9,19 +9,12 @@ title: Workflow Runs Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Cancel a WorkflowRun**](#cancel) | DELETE | `/api/v2/team/{team}/workflowrun/{workflowRunId}/cancel` |
-
 | [**Retrieve a summary of WorkflowRuns by Status.**](#count) | GET | `/api/v2/team/{team}/workflowrun/count` |
-
 | [**End a WorkflowRun**](#finalize) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/finalize` |
-
 | [**Retrieve a specific WorkflowRun.**](#get1) | GET | `/api/v2/team/{team}/workflowrun/{workflowRunId}` |
-
 | [**Search for WorkflowRuns**](#query2) | GET | `/api/v2/team/{team}/workflowrun/query` |
-
 | [**Retry WorkflowRun execution.**](#retry) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/retry` |
-
 | [**Start WorkflowRun execution. The WorkflowRun has to already have been queued.**](#start) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/start` |
 
 
@@ -39,6 +32,7 @@ title: Workflow Runs Route
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflowRunId** | **String** | true | ID of WorkflowRun to Cancel | Defaults to null. | workflowRunId_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -76,6 +70,7 @@ This endpoint does not require a request body.
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -108,6 +103,7 @@ This endpoint does not require a request body.
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflowRunId** | **String** | true | ID of WorkflowRun to Finalize | Defaults to null. | workflowRunId_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -142,6 +138,7 @@ This endpoint does not require a request body.
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflowRunId** | **String** | true | ID of WorkflowRun | Defaults to null. | workflowRunId_example
 | **withTasks** | **Boolean** | false | Include Task Runs in the response | Defaults to true. | true
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -186,6 +183,7 @@ This endpoint does not require a request body.
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -218,6 +216,7 @@ This endpoint does not require a request body.
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflowRunId** | **String** | true | ID of WorkflowRun to Retry. | Defaults to null. | workflowRunId_example
+
 
 ### Request Body
 | Schema | Required | 
@@ -254,6 +253,7 @@ This endpoint does not require a request body.
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **workflowRunId** | **String** | true | ID of WorkflowRun to Start | Defaults to null. | workflowRunId_example
+
 
 ### Request Body
 | Schema | Required | 

@@ -9,7 +9,6 @@ title: Task Runs Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Retrieve a TaskRuns log from a specific WorkflowRun.**](#streamTaskRunLog) | GET | `/api/v2/taskrun/{taskRunId}/log` |
 
 
@@ -26,6 +25,7 @@ title: Task Runs Route
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **taskRunId** | **String** | true | Id of TaskRun | Defaults to null. | taskRunId_example
+
 
 ### Request Body
 This endpoint does not require a request body.

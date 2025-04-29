@@ -9,9 +9,7 @@ title: Profile Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Get your Profile**](#getProfile) | GET | `/api/v2/profile` |
-
 | [**Patch your Profile**](#updateProfile) | PATCH | `/api/v2/profile` |
 
 
@@ -24,6 +22,7 @@ title: Profile Route
 
 ### Request Parameters
 This endpoint does not need any parameter.
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -55,6 +54,7 @@ No authorization required
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 

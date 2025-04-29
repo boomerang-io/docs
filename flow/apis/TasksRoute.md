@@ -9,17 +9,11 @@ title: Tasks Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-
 | [**Update, replace, or create new using Tekton Task YAML**](#apply12) | PUT | `/api/v2/task/{name}` |
-
 | [**Create a new Task using Tekton Task YAML**](#create12) | POST | `/api/v2/task` |
-
 | [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#get41) | GET | `/api/v2/task/{name}` |
-
 | [**Retrieve the changlog**](#getChangelog2) | GET | `/api/v2/task/{name}/changelog` |
-
 | [**Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#query5) | GET | `/api/v2/task/query` |
-
 | [****](#validateYaml1) | POST | `/api/v2/task/validate` |
 
 
@@ -38,6 +32,7 @@ The name must only contain alphanumeric and - characeters. If the name exists, a
 | ---- | ---- | -------- | ----------- | --- |---|
 | **name** | **String** | true | Name of Task | Defaults to null. | name_example
 | **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true
+
 
 ### Request Body
 | Schema | Required | 
@@ -73,6 +68,7 @@ The name needs to be unique and must only contain alphanumeric and - characeters
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 
@@ -110,6 +106,7 @@ No authorization required
 | **name** | **String** | true | Name of Task | Defaults to null. | name_example
 | **version** | **Integer** | false | Task Version | Defaults to null. | 56
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -142,6 +139,7 @@ Retrieves each versions changelog and returns them all as a list.
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **name** | **String** | true | Name of Task | Defaults to null. | name_example
+
 
 ### Request Body
 This endpoint does not require a request body.
@@ -180,6 +178,7 @@ No authorization required
 | **statuses** | [**List**](../Models/String) | false | List of statuses to filter for. | Defaults to null. | active,inactive
 | **names** | [**List**](../Models/String) | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait
 
+
 ### Request Body
 This endpoint does not require a request body.
 
@@ -210,6 +209,7 @@ No authorization required
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
+
 
 ### Request Body
 | Schema | Required | 

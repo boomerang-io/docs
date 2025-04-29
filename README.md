@@ -27,7 +27,7 @@ npx openapi-generator-cli generate -i ./flow/apis/assets/spec.json -g markdown -
 mv ./tmp/README.md ./tmp/overview.md
 find ./tmp/Apis -type f -exec mv {} ./tmp/ \;
 find ./tmp/*.md -type f -exec mv {} ./flow/apis/ \;
-mv ./tmp/Models ./flow/apis/models
+find ./tmp/Models/*.md -type f -exec mv {} ./flow/apis/models/ \;
 rm -rf ./tmp
 ```
 
