@@ -34,7 +34,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Actions
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Provide an update for an Action**](./ActionsRoute#provide-an-update-for-an-action) | **PUT** /api/v2/team/{team}/action |
 | [**Retrieve a specific Action by Id**](./ActionsRoute#retrieve-a-specific-action-by-id) | **GET** /api/v2/team/{team}/action/{actionId} |
@@ -43,13 +43,13 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Insights
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Retrieve insights for a team**](./InsightsRoute#retrieve-insights-for-a-team) | **GET** /api/v2/team/{team}/insights |
 
 ### Integrations
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Retrieve the integrations and their status within a Team**](./IntegrationsRoute#retrieve-the-integrations-and-their-status-within-a-team) | **GET** /api/v2/integration |
 | [**Retrieve the installation ID and store against a team**](./IntegrationsRoute#retrieve-the-installation-id-and-store-against-a-team) | **GET** /api/v2/integration/github/installation |
@@ -63,7 +63,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Parameters
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Create new global Param**](./ParametersRoute#create-new-global-param) | **POST** /api/v2/parameters |
 | [**Delete specific global Param**](./ParametersRoute#delete-specific-global-param) | **DELETE** /api/v2/parameters/{name} |
@@ -72,14 +72,14 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Profile
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Get your Profile**](./ProfileRoute#get-your-profile) | **GET** /api/v2/profile |
 | [**Patch your Profile**](./ProfileRoute#patch-your-profile) | **PATCH** /api/v2/profile |
 
 ### Schedules
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Create a Schedule.**](./SchedulesRoute#create-a-schedule) | **POST** /api/v2/team/{team}/schedule |
 | [**Delete a Schedule.**](./SchedulesRoute#delete-a-schedule) | **DELETE** /api/v2/team/{team}/schedule/{scheduleId} |
@@ -91,7 +91,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### System
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Create new global Param**](./SystemRoute#create-new-global-param) | **POST** /api/v2/global-params |
 | [**Delete specific global Param**](./SystemRoute#delete-specific-global-param) | **DELETE** /api/v2/global-params/{key} |
@@ -106,13 +106,13 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Task Runs
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Retrieve a TaskRuns log from a specific WorkflowRun.**](./TaskRunsRoute#retrieve-a-task-runs-log-from-a-specific-workflow-run) | **GET** /api/v2/taskrun/{taskRunId}/log |
 
 ### Tasks
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Update, replace, or create new using Tekton Task YAML**](./TasksRoute#update-replace-or-create-new-using-tekton-task-yaml) | **PUT** /api/v2/task/{name} |
 | [**Create a new Task using Tekton Task YAML**](./TasksRoute#create-a-new-task-using-tekton-task-yaml) | **POST** /api/v2/task |
@@ -123,7 +123,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Team Management
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Create new team**](./TeamManagementRoute#create-new-team) | **POST** /api/v2/team |
 | [****](./TeamManagementRoute#) | **DELETE** /api/v2/team/{team}/approvers |
@@ -141,7 +141,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Team Tasks
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Update, replace, or create new using Tekton Task YAML**](./TeamTasksRoute#update-replace-or-create-new-using-tekton-task-yaml) | **PUT** /api/v2/team/{team}/task/{name} |
 | [**Create a new Task Template using Tekton Task YAML**](./TeamTasksRoute#create-a-new-task-template-using-tekton-task-yaml) | **POST** /api/v2/team/{team}/task |
@@ -153,7 +153,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Token Management
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Create Token**](./TokenManagementRoute#create-token) | **POST** /api/v2/token |
 | [**Delete Token**](./TokenManagementRoute#delete-token) | **DELETE** /api/v2/token/{id} |
@@ -161,7 +161,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Users
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Update a Boomerang Flow Users details**](./UsersRoute#update-a-boomerang-flow-users-details) | **PATCH** /api/v2/user/{userId} |
 | [**Delete a Boomerang Flow user**](./UsersRoute#delete-a-boomerang-flow-user) | **DELETE** /api/v2/user/{userId} |
@@ -170,7 +170,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Webhooks And Events
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [****](./WebhooksAndEventsRoute#) | **POST** /api/v2/event |
 | [****](./WebhooksAndEventsRoute#) | **POST** /api/v2/callback |
@@ -179,7 +179,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Workflow Runs
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Cancel a WorkflowRun**](./WorkflowRunsRoute#cancel-a-workflow-run) | **DELETE** /api/v2/team/{team}/workflowrun/{workflowRunId}/cancel |
 | [**Retrieve a summary of WorkflowRuns by Status.**](./WorkflowRunsRoute#retrieve-a-summary-of-workflow-runs-by-status) | **GET** /api/v2/team/{team}/workflowrun/count |
@@ -191,7 +191,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Workflow Templates
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Update, replace, or create new, Workflow Template**](./WorkflowTemplatesRoute#update-replace-or-create-new-workflow-template) | **PUT** /api/v2/workflowtemplate |
 | [**Create a new Workflow Template**](./WorkflowTemplatesRoute#create-a-new-workflow-template) | **POST** /api/v2/workflowtemplate |
@@ -201,7 +201,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 ### Workflows
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 | [**Update, replace, or create new, Workflow for Canvas**](./WorkflowsRoute#update-replace-or-create-new-workflow-for-canvas) | **PUT** /api/v2/team/{team}/workflow/{workflow}/compose |
 | [**Update, replace, or create new, Workflow**](./WorkflowsRoute#update-replace-or-create-new-workflow) | **PUT** /api/v2/team/{team}/workflow |

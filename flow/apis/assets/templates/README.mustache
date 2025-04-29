@@ -54,7 +54,7 @@ All endpoints do not require authorization.
 {{#apiInfo}}{{#apis}}{{#operations}}
 ### {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}}
 
-| Method | Route | 
+| Route | Endpoint | 
 | ------------- | ------------- |
 {{#operation}}| [**{{summary}}**](./{{apiDocPath}}{{classname}}#{{#lambda.kebabcase}}{{#lambda.titlecase}}{{summary}}{{/lambda.titlecase}}{{/lambda.kebabcase}}) | **{{httpMethod}}** {{path}} |
 {{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
