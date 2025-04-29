@@ -1,8 +1,9 @@
 ---
-title: Integrations
+title: Integrations Route
 ---
 
-# Integrations
+# Integrations Route
+
 
 
 
@@ -29,6 +30,7 @@ title: Integrations
 
 
 <a name="get4"></a>
+
 ## **Retrieve the integrations and their status within a Team**
 
 > GET /api/v2/integration?team=team_example
@@ -46,6 +48,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -58,9 +62,10 @@ No authorization required
 [**List**](../Models/Integration.md)
 
 <a name="githubInstall"></a>
+
 ## **Retrieve the installation ID and store against a team**
 
-> GET /api/v2/integration/github/installation?id=56, team=team_example
+> GET /api/v2/integration/github/installation?id=56,team=team_example
 
 
 ### Request Parameters
@@ -76,6 +81,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -88,6 +95,7 @@ No authorization required
 **Object**
 
 <a name="githubLink"></a>
+
 ## **Links the GitHub Installation ID with a Team**
 
 > POST /api/v2/integration/github/link
@@ -102,10 +110,12 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**GHLinkRequest**](../Models/GHLinkRequest.md) | true |
+| [**GHLinkRequest**](../Models/GHLinkRequest) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -119,6 +129,7 @@ No authorization required
 **Object**
 
 <a name="githubUnlink"></a>
+
 ## **Unlinks the GitHub Installation ID from a Team**
 
 > POST /api/v2/integration/github/unlink
@@ -133,10 +144,12 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**GHLinkRequest**](../Models/GHLinkRequest.md) | true |
+| [**GHLinkRequest**](../Models/GHLinkRequest) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -150,6 +163,7 @@ No authorization required
 null (empty response body)
 
 <a name="installSlack"></a>
+
 ## **Install URL Redirect**
 
 > GET /api/v2/integration/slack/install
@@ -163,6 +177,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -175,6 +191,7 @@ No authorization required
 null (empty response body)
 
 <a name="receiveSlackAuth"></a>
+
 ## **Receive Slack Oauth2 request**
 
 > GET /api/v2/integration/slack/auth?code=code_example
@@ -192,6 +209,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -204,6 +223,7 @@ No authorization required
 **Object**
 
 <a name="receiveSlackCommand"></a>
+
 ## **Receive Slack Slash Commands**
 
 > POST /api/v2/integration/slack/commands
@@ -217,6 +237,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -229,6 +251,7 @@ No authorization required
 **Object**
 
 <a name="receiveSlackEvent"></a>
+
 ## **Receive Slack Events**
 
 > POST /api/v2/integration/slack/events
@@ -250,6 +273,8 @@ No authorization required
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -262,6 +287,7 @@ No authorization required
 **Object**
 
 <a name="receiveSlackInteractivity"></a>
+
 ## **Receive Slack Interactivity**
 
 > POST /api/v2/integration/slack/interactivity
@@ -274,6 +300,8 @@ This endpoint does not need any parameter.
 This endpoint does not require a request body.
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 

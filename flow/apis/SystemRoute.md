@@ -1,8 +1,9 @@
 ---
-title: System
+title: System Route
 ---
 
-# System
+# System Route
+
 
 
 
@@ -31,6 +32,7 @@ title: System
 
 
 <a name="create2"></a>
+
 ## **Create new global Param**
 
 > POST /api/v2/global-params
@@ -45,10 +47,12 @@ title: System
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](../Models/AbstractParam.md) | true |
+| [**AbstractParam**](../Models/AbstractParam) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -62,6 +66,7 @@ No authorization required
 [**AbstractParam**](../Models/AbstractParam.md)
 
 <a name="delete2"></a>
+
 ## **Delete specific global Param**
 
 > DELETE /api/v2/global-params/{key}
@@ -79,6 +84,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -91,6 +98,7 @@ No authorization required
 null (empty response body)
 
 <a name="getAll1"></a>
+
 ## **Get all global Params**
 
 > GET /api/v2/global-params
@@ -104,6 +112,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -116,6 +126,7 @@ No authorization required
 [**List**](../Models/AbstractParam.md)
 
 <a name="getAppConfiguration"></a>
+
 ## **Retrieve Boomerang Flow Settings**
 
 > GET /api/v2/settings
@@ -129,6 +140,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -141,6 +154,7 @@ No authorization required
 [**List**](../Models/Setting.md)
 
 <a name="getFlowFeatures"></a>
+
 ## **Retrieve feature flags.**
 
 > GET /api/v2/features
@@ -154,6 +168,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -166,6 +182,7 @@ No authorization required
 [**Features**](../Models/Features.md)
 
 <a name="getHeaderNavigation"></a>
+
 ## **Retrieve this instances context, features, and navigation.**
 
 > GET /api/v2/context
@@ -179,6 +196,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -191,6 +210,7 @@ No authorization required
 [**HeaderNavigationResponse**](../Models/HeaderNavigationResponse.md)
 
 <a name="getNavigation"></a>
+
 ## **Retrieve navigation.**
 
 > GET /api/v2/navigation?team=my-amazing-team
@@ -208,6 +228,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -220,6 +242,7 @@ No authorization required
 [**List**](../Models/Navigation.md)
 
 <a name="register"></a>
+
 ## **Register and activate an installation of Flow**
 
 > PUT /api/v2/activate
@@ -234,10 +257,12 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**OneTimeCode**](../Models/OneTimeCode.md) | false |
+| [**OneTimeCode**](../Models/OneTimeCode) | false |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -251,6 +276,7 @@ No authorization required
 **Boolean**
 
 <a name="update1"></a>
+
 ## ****
 
 > PUT /api/v2/global-params
@@ -265,10 +291,12 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](../Models/AbstractParam.md) | true |
+| [**AbstractParam**](../Models/AbstractParam) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -282,6 +310,7 @@ No authorization required
 [**AbstractParam**](../Models/AbstractParam.md)
 
 <a name="updateSettings"></a>
+
 ## **Update Boomerang Flow Settings**
 
 > PUT /api/v2/settings
@@ -296,10 +325,12 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**List**](../Models/Setting.md) | true |
+| [**List**](../Models/Setting) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 

@@ -1,8 +1,9 @@
 ---
-title: TaskRunManagement
+title: Task Runs Route
 ---
 
-# TaskRunManagement
+# Task Runs Route
+
 
 
 
@@ -13,6 +14,7 @@ title: TaskRunManagement
 
 
 <a name="streamTaskRunLog"></a>
+
 ## **Retrieve a TaskRuns log from a specific WorkflowRun.**
 
 > GET /api/v2/taskrun/{taskRunId}/log
@@ -29,6 +31,8 @@ title: TaskRunManagement
 This endpoint does not require a request body.
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 

@@ -23,8 +23,8 @@ Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on h
 To update the API docs, run the following commands along with the API spec (currently stored in `flow/apis/assets/spec.json`):
 
 ```sh
-npx openapi-generator-cli generate -i ./flow/apis/assets/spec.json -g markdown -o ./tmp --skip-validate-spec -t ./flow/apis/assets/templates/
-mv ./tmp/README.md ./tmp/routes.md
+npx openapi-generator-cli generate -i ./flow/apis/assets/spec.json -g markdown -o ./tmp --skip-validate-spec -t ./flow/apis/assets/templates/ --api-name-suffix 'Route'
+mv ./tmp/README.md ./tmp/overview.md
 find ./tmp/Apis -type f -exec mv {} ./tmp/ \;
 find ./tmp/*.md -type f -exec mv {} ./flow/apis/ \;
 mv ./tmp/Models ./flow/apis/models
@@ -39,7 +39,8 @@ npm install @openapitools/openapi-generator-cli -g
 
 ### References
 
-The available mustahe variables can be found [here](https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/CodegenOperation.java)
+- The available mustahe variables can be found [here](https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/CodegenOperation.java)
+- Available mustache lambdas can be found [here](https://openapi-generator.tech/docs/templating#mustache-lambdas)
 
 ### Tips
 
@@ -48,7 +49,7 @@ When writing the Java code, make sure to add the summary and description for eac
 ### To Do
 
 - [ ] Add a script to automatically generate the API docs and update the `flow/apis/docs` folder.
-- [ ] Implement an MDX version so that the {{requestBodyExamples}} can be added within a code block element.
+- [ ] Implement an MDX version so that the {{requestBodyExamples}} can be added within a code block element. Future [reference](https://github.com/synx-ai/oas3-mdx/blob/master/example/templates/mdx/path.hdb)
 
 ## License
 

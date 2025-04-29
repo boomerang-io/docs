@@ -1,8 +1,9 @@
 ---
-title: WorkflowTemplateManagement
+title: Workflow Templates Route
 ---
 
-# WorkflowTemplateManagement
+# Workflow Templates Route
+
 
 
 
@@ -21,6 +22,7 @@ title: WorkflowTemplateManagement
 
 
 <a name="apply"></a>
+
 ## **Update, replace, or create new, Workflow Template**
 
 > PUT /api/v2/workflowtemplate?replace=true
@@ -36,10 +38,12 @@ title: WorkflowTemplateManagement
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowTemplate**](../Models/WorkflowTemplate.md) | true |
+| [**WorkflowTemplate**](../Models/WorkflowTemplate) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -53,6 +57,7 @@ No authorization required
 [**WorkflowTemplate**](../Models/WorkflowTemplate.md)
 
 <a name="create"></a>
+
 ## **Create a new Workflow Template**
 
 > POST /api/v2/workflowtemplate
@@ -67,10 +72,12 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowTemplate**](../Models/WorkflowTemplate.md) | true |
+| [**WorkflowTemplate**](../Models/WorkflowTemplate) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -84,6 +91,7 @@ No authorization required
 [**WorkflowTemplate**](../Models/WorkflowTemplate.md)
 
 <a name="deleteWorkflow"></a>
+
 ## **Delete a Workflow Template**
 
 > DELETE /api/v2/workflowtemplate/{name}
@@ -101,6 +109,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -113,9 +123,10 @@ No authorization required
 null (empty response body)
 
 <a name="get"></a>
+
 ## **Retrieve a Workflow Template**
 
-> GET /api/v2/workflowtemplate/{name}?version=56, withTasks=true
+> GET /api/v2/workflowtemplate/{name}?version=56,withTasks=true
 
 Retrieve a version of the Workflow Template. Defaults to latest. Optionally without Tasks
 
@@ -133,6 +144,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -145,9 +158,10 @@ No authorization required
 [**WorkflowTemplate**](../Models/WorkflowTemplate.md)
 
 <a name="query"></a>
+
 ## **Search for Workflow Templates**
 
-> GET /api/v2/workflowtemplate/query?labels=, names=mongodb-email-query-results, limit=10, page=0, sort=ASC
+> GET /api/v2/workflowtemplate/query?labels=,names=mongodb-email-query-results,limit=10,page=0,sort=ASC
 
 
 ### Request Parameters
@@ -158,13 +172,15 @@ No authorization required
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
 | **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **labels** | [**List**](../Models/String.md) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **names** | [**List**](../Models/String.md) | false | List of WorkflowTemplate names to filter for. Defaults to all. | Defaults to null. | mongodb-email-query-results
+| **labels** | [**List**](../Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **names** | [**List**](../Models/String) | false | List of WorkflowTemplate names to filter for. Defaults to all. | Defaults to null. | mongodb-email-query-results
 
 ### Request Body
 This endpoint does not require a request body.
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 

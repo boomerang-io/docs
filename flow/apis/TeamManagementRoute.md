@@ -1,8 +1,9 @@
 ---
-title: TeamManagement
+title: Team Management Route
 ---
 
-# TeamManagement
+# Team Management Route
+
 
 
 
@@ -37,6 +38,7 @@ title: TeamManagement
 
 
 <a name="createTeam"></a>
+
 ## **Create new team**
 
 > POST /api/v2/team
@@ -51,10 +53,12 @@ title: TeamManagement
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**TeamRequest**](../Models/TeamRequest.md) | true |
+| [**TeamRequest**](../Models/TeamRequest) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -68,6 +72,7 @@ No authorization required
 [**Team**](../Models/Team.md)
 
 <a name="deleteApproverGroup"></a>
+
 ## ****
 
 > DELETE /api/v2/team/{team}/approvers
@@ -83,10 +88,12 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**List**](../Models/string.md) | true |
+| [**List**](../Models/string) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -100,6 +107,7 @@ No authorization required
 null (empty response body)
 
 <a name="deleteParameters"></a>
+
 ## ****
 
 > DELETE /api/v2/team/{team}/parameters/{name}
@@ -118,6 +126,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -130,6 +140,7 @@ No authorization required
 null (empty response body)
 
 <a name="deleteWorkflow1"></a>
+
 ## **Delete a team**
 
 > DELETE /api/v2/team/{team}
@@ -147,6 +158,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -159,6 +172,7 @@ No authorization required
 null (empty response body)
 
 <a name="getDefaultQuotas"></a>
+
 ## ****
 
 > GET /api/v2/team/quotas/default
@@ -172,6 +186,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -184,6 +200,7 @@ No authorization required
 [**Quotas**](../Models/Quotas.md)
 
 <a name="getRoles"></a>
+
 ## ****
 
 > GET /api/v2/team/roles
@@ -197,6 +214,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -209,6 +228,7 @@ No authorization required
 [**List**](../Models/Role.md)
 
 <a name="getTeam"></a>
+
 ## **Get team**
 
 > GET /api/v2/team/{team}
@@ -226,6 +246,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -238,9 +260,10 @@ No authorization required
 [**Team**](../Models/Team.md)
 
 <a name="getTeams"></a>
+
 ## **Search for Teams**
 
-> GET /api/v2/team/query?labels=, statuses=active,inactive, teams=my-amazing-team,boomerangs-return, limit=10, page=0, order=0, sort=0
+> GET /api/v2/team/query?labels=,statuses=active,inactive,teams=my-amazing-team,boomerangs-return,limit=10,page=0,order=0,sort=0
 
 
 ### Request Parameters
@@ -250,9 +273,9 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
-| **labels** | [**List**](../Models/String.md) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **statuses** | [**List**](../Models/String.md) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
-| **teams** | [**List**](../Models/String.md) | false | List of Team names to filter for. | Defaults to null. | my-amazing-team,boomerangs-return
+| **labels** | [**List**](../Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **statuses** | [**List**](../Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
+| **teams** | [**List**](../Models/String) | false | List of Team names to filter for. | Defaults to null. | my-amazing-team,boomerangs-return
 | **order** | **String** | false | Ascending or Descending (default) order | Defaults to Optional[DESC]. Enum: [ASC, DESC] | 0
 | **sort** | **String** | false | The element to sort on | Defaults to Optional[name]. | 0
 
@@ -260,6 +283,8 @@ No authorization required
 This endpoint does not require a request body.
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -273,6 +298,7 @@ No authorization required
 [**PageTeam**](../Models/PageTeam.md)
 
 <a name="leave"></a>
+
 ## ****
 
 > DELETE /api/v2/team/{team}/leave
@@ -290,6 +316,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -302,6 +330,7 @@ No authorization required
 null (empty response body)
 
 <a name="removeMembers"></a>
+
 ## ****
 
 > DELETE /api/v2/team/{team}/members
@@ -317,10 +346,12 @@ null (empty response body)
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**List**](../Models/TeamMember.md) | true |
+| [**List**](../Models/TeamMember) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -334,6 +365,7 @@ No authorization required
 null (empty response body)
 
 <a name="resetQuotas"></a>
+
 ## ****
 
 > DELETE /api/v2/team/{team}/quotas
@@ -351,6 +383,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -363,6 +397,7 @@ No authorization required
 null (empty response body)
 
 <a name="updateTeam"></a>
+
 ## **Patch or update a team**
 
 > PATCH /api/v2/team/{team}
@@ -378,10 +413,12 @@ null (empty response body)
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**TeamRequest**](../Models/TeamRequest.md) | true |
+| [**TeamRequest**](../Models/TeamRequest) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -395,6 +432,7 @@ No authorization required
 [**Team**](../Models/Team.md)
 
 <a name="validateTeamName"></a>
+
 ## **Validate team name and check uniqueness.**
 
 > POST /api/v2/team/validate-name
@@ -409,10 +447,12 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**TeamNameCheckRequest**](../Models/TeamNameCheckRequest.md) | true |
+| [**TeamNameCheckRequest**](../Models/TeamNameCheckRequest) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 

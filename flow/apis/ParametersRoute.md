@@ -1,8 +1,9 @@
 ---
-title: Parameters
+title: Parameters Route
 ---
 
-# Parameters
+# Parameters Route
+
 
 
 
@@ -19,6 +20,7 @@ title: Parameters
 
 
 <a name="create1"></a>
+
 ## **Create new global Param**
 
 > POST /api/v2/parameters
@@ -33,10 +35,12 @@ title: Parameters
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](../Models/AbstractParam.md) | true |
+| [**AbstractParam**](../Models/AbstractParam) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
@@ -50,6 +54,7 @@ No authorization required
 [**AbstractParam**](../Models/AbstractParam.md)
 
 <a name="delete1"></a>
+
 ## **Delete specific global Param**
 
 > DELETE /api/v2/parameters/{name}
@@ -67,6 +72,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -79,6 +86,7 @@ No authorization required
 null (empty response body)
 
 <a name="getAll"></a>
+
 ## **Get all global Params**
 
 > GET /api/v2/parameters
@@ -92,6 +100,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -104,6 +114,7 @@ No authorization required
 [**List**](../Models/AbstractParam.md)
 
 <a name="update"></a>
+
 ## ****
 
 > PUT /api/v2/parameters
@@ -118,10 +129,12 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](../Models/AbstractParam.md) | true |
+| [**AbstractParam**](../Models/AbstractParam) | true |
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 

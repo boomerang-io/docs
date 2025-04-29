@@ -1,10 +1,11 @@
 ---
-title: {{baseName}}
+title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 ---
 
-# {{baseName}}
+# {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
 
-{{#description}}{{.}}{{/description}}
+{{description}}
+{{summary}}
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
@@ -18,7 +19,7 @@ title: {{baseName}}
 
 ## **{{summary}}**
 
-> {{httpMethod}} {{path}}{{#hasQueryParams}}?{{#queryParams}}{{paramName}}={{example}}{{^-last}}, {{/-last}}{{/queryParams}}{{/hasQueryParams}}
+> {{httpMethod}} {{path}}{{#hasQueryParams}}?{{#queryParams}}{{paramName}}={{example}}{{^-last}},{{/-last}}{{/queryParams}}{{/hasQueryParams}}
 
 {{#notes}}
 {{.}}
@@ -31,7 +32,7 @@ title: {{baseName}}
 | ---- | ---- | -------- | ----------- | --- |---|{{/-last}}{{/allParams}}
 {{#allParams}}
 {{^isBodyParam}}
-| **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](../{{modelPackage}}/{{baseType}}.md){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} | {{description}} | {{#defaultValue}}Defaults to {{.}}.{{/defaultValue}}{{#allowableValues}} Enum: [{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}} | {{example}}
+| **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](../{{modelPackage}}/{{baseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} | {{description}} | {{#defaultValue}}Defaults to {{.}}.{{/defaultValue}}{{#allowableValues}} Enum: [{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}} | {{example}}
 {{/isBodyParam}}
 {{/allParams}}
 
@@ -39,13 +40,15 @@ title: {{baseName}}
 {{#bodyParams}}
 | Schema | Required | 
 | ------ | --- | 
-| {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](../{{modelPackage}}/{{baseType}}.md){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} |
+| {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](../{{modelPackage}}/{{baseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} |
 {{/bodyParams}}
 {{^bodyParams}}This endpoint does not require a request body.{{/bodyParams}}
 
 ### Authorization
 
-{{^authMethods}}No authorization required{{/authMethods}}{{#authMethods}}[{{name}}](../README.md#{{name}}){{^-last}}, {{/-last}}{{/authMethods}}
+> Note: this section and the documentation around what is required is still actively being updated.
+
+{{^authMethods}}No authorization required{{/authMethods}}{{#authMethods}}[{{name}}](./overview#{{name}}){{^-last}}, {{/-last}}{{/authMethods}}
 
 ### Request Headers
 

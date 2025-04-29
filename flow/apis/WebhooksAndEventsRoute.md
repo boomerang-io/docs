@@ -1,8 +1,9 @@
 ---
-title: TriggersForEventsTopicsAndWebhooks
+title: Webhooks And Events Route
 ---
 
-# TriggersForEventsTopicsAndWebhooks
+# Webhooks And Events Route
+
 
 
 
@@ -19,6 +20,7 @@ title: TriggersForEventsTopicsAndWebhooks
 
 
 <a name="acceptEvent1"></a>
+
 ## ****
 
 > POST /api/v2/event?workflow=workflow_example
@@ -39,6 +41,8 @@ title: TriggersForEventsTopicsAndWebhooks
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -51,9 +55,10 @@ No authorization required
 **Object**
 
 <a name="acceptWaitForEvent"></a>
+
 ## ****
 
-> POST /api/v2/callback?workflowrun=workflowrun_example, topic=topic_example, status=status_example
+> POST /api/v2/callback?workflowrun=workflowrun_example,topic=topic_example,status=status_example
 
 
 ### Request Parameters
@@ -73,6 +78,8 @@ No authorization required
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -85,9 +92,10 @@ No authorization required
 null (empty response body)
 
 <a name="acceptWaitForEvent1"></a>
+
 ## ****
 
-> GET /api/v2/callback?workflowrun=workflowrun_example, topic=topic_example, status=status_example
+> GET /api/v2/callback?workflowrun=workflowrun_example,topic=topic_example,status=status_example
 
 
 ### Request Parameters
@@ -104,6 +112,8 @@ This endpoint does not require a request body.
 
 ### Authorization
 
+> Note: this section and the documentation around what is required is still actively being updated.
+
 No authorization required
 
 ### Request Headers
@@ -116,6 +126,7 @@ No authorization required
 null (empty response body)
 
 <a name="acceptWebhookEvent"></a>
+
 ## **Trigger WorkflowRun via Webhook.**
 
 > POST /api/v2/webhook?workflow=workflow_example
@@ -135,6 +146,8 @@ null (empty response body)
 
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 

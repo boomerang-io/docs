@@ -1,40 +1,17 @@
 ---
-title: API Specifications
-order: 2
+title: Overview
+order: 1
 ---
 
-# API Specifications
+# Overview
 
-{{#generateApiDocs}}
+We expose a series of RESTFul APIs that allows management and extensibility of every aspect of the system, driven via an API first design.
 
-<a name="documentation-for-api-endpoints"></a>
+## Authentication
 
-## Routes
+> Please refer to [security architecture](../architecture/security#tokens) for further guidance.
 
-{{#apiInfo}}{{#apis}}{{#operations}}
-## {{baseName}}
-
-| Method | Route | 
-| ------------- | ------------- |
-{{#operation}}| [**{{summary}}**](./{{apiDocPath}}{{classname}}.md#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}} |
-{{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
-{{/generateApiDocs}}
-
-{{#generateModelDocs}}
-<a name="documentation-for-models"></a>
-## Documentation for Models
-
-{{#modelPackage}}
-{{#models}}{{#model}} - [{{{classname}}}](./{{{modelPackage}}}/{{modelDocPath}}{{{classFilename}}}.md)
-{{/model}}{{/models}}
-{{/modelPackage}}
-{{^modelPackage}}
-No model defined in this package
-{{/modelPackage}}
-{{/generateModelDocs}}
-
-<a name="documentation-for-authorization"></a>{{! TODO: optional documentation for authorization? }}
-## Documentation for Authorization
+APIs that required authentication, can use an appropriately scoped token in the following ways:
 
 {{^authMethods}}
 All endpoints do not require authorization.
@@ -67,3 +44,59 @@ All endpoints do not require authorization.
 {{/isOAuth}}
 
 {{/authMethods}}
+
+{{#generateApiDocs}}
+
+<a name="routes"></a>
+
+## Routes
+
+{{#apiInfo}}{{#apis}}{{#operations}}
+### {{baseName}}
+
+| Method | Route | 
+| ------------- | ------------- |
+{{#operation}}| [**{{summary}}**](./{{apiDocPath}}{{classname}}#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}} |
+{{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
+{{/generateApiDocs}}
+
+{{#generateModelDocs}}
+<a name="models"></a>
+
+## Models
+
+{{#modelPackage}}
+{{#models}}{{#model}} - [{{{classname}}}](./{{{modelPackage}}}/{{modelDocPath}}{{{classFilename}}})
+{{/model}}{{/models}}
+{{/modelPackage}}
+{{^modelPackage}}
+No model defined in this package
+{{/modelPackage}}
+{{/generateModelDocs}}
+
+<a name="auth"></a>
+
+## Open API Specification
+
+The APIs are documented using the OpenAPI specification 3.0.1 and the raw specification file can can be found on [GitHub](https://github.com/boomerang-io/docs/blob/main/flow/apis/assets/spec.json). 
+
+## Versioning
+
+To make it easier to evolve and extend we version the API, such as `/apis/v1`. This is done at the API level rather than a particular context to ensure we have a consistent view and behavior for the life of a version.
+
+## SDKs
+
+We currently generate a Java client based on the OpenAPI specification, one such open source project to facilitate this is the open API-generator project. (https://github.com/OpenAPITools/openapi-generator).
+
+_In the future we will also support NodeJS and Go._
+
+## Limits
+
+Our API endpoints have limits on the number of requests that can be made with the following defaults that can be edited in the Ingress definition.
+
+| Type                      | Description                                                       | Default |
+| ------------------------- | ----------------------------------------------------------------- | ------- |
+| Connections               | Number of concurrent connections allowed from a single IP address | 3       |
+| Requests Per Minute (rpm) | Number of requests accepted from a given IP each minute           | 100     |
+
+_Reference_: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rate-limiting

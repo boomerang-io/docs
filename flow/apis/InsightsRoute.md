@@ -1,22 +1,25 @@
 ---
-title: InsightsManagement
+title: Insights Route
 ---
 
-# InsightsManagement
+# Insights Route
+
 
 
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 
-| [**Retrieve insights for a team.**](#getTeamInsights) | GET | `/api/v2/team/{team}/insights` |
+| [**Retrieve insights for a team**](#getTeamInsights) | GET | `/api/v2/team/{team}/insights` |
 
 
 <a name="getTeamInsights"></a>
-## **Retrieve insights for a team.**
 
-> GET /api/v2/team/{team}/insights?fromDate=789, toDate=789, workflows=, statuses=
+## **Retrieve insights for a team**
 
+> GET /api/v2/team/{team}/insights?fromDate=789,toDate=789,workflows=,statuses=
+
+The insights are based on the workflow runs and their statuses.
 
 ### Request Parameters
 
@@ -26,13 +29,15 @@ title: InsightsManagement
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **fromDate** | **Long** | false |  | Defaults to null. | 789
 | **toDate** | **Long** | false |  | Defaults to null. | 789
-| **workflows** | [**List**](../Models/String.md) | false |  | Defaults to null. | 
-| **statuses** | [**List**](../Models/String.md) | false |  | Defaults to null. | 
+| **workflows** | [**List**](../Models/String) | false |  | Defaults to null. | 
+| **statuses** | [**List**](../Models/String) | false |  | Defaults to null. | 
 
 ### Request Body
 This endpoint does not require a request body.
 
 ### Authorization
+
+> Note: this section and the documentation around what is required is still actively being updated.
 
 No authorization required
 
