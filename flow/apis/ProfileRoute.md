@@ -4,9 +4,6 @@ title: Profile Route
 
 # Profile Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Get your Profile**](#get-your-profile) | GET | `/api/v2/profile` |
@@ -34,12 +31,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**UserProfile**](./models/UserProfile.md)
+[**UserProfile**](./models/UserProfile)
 
 
 ## **Patch your Profile**
@@ -68,8 +65,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: Not defined
+- **Content-Type**: `application/json`
+- **Accept**: `Not defined`
 
 #### Response
 

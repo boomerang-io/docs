@@ -1,4 +1,8 @@
-# WorkflowSummary
+---
+title: Workflow Summary Model
+---
+
+# Workflow Summary Model
 ## Properties
 
 | Name | Type | Description | Notes |

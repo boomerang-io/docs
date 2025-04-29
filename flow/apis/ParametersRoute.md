@@ -4,9 +4,6 @@ title: Parameters Route
 
 # Parameters Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Create new global Param**](#create-new-global-param) | POST | `/api/v2/parameters` |
@@ -42,12 +39,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**AbstractParam**](./models/AbstractParam.md)
+[**AbstractParam**](./models/AbstractParam)
 
 
 ## **Delete specific global Param**
@@ -74,8 +71,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -102,12 +99,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**List**](./models/AbstractParam.md)
+[**List**](./models/AbstractParam)
 
 
 ## ****
@@ -136,10 +133,10 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**AbstractParam**](./models/AbstractParam.md)
+[**AbstractParam**](./models/AbstractParam)
 

@@ -1,4 +1,8 @@
-# Navigation
+---
+title: Navigation Model
+---
+
+# Navigation Model
 ## Properties
 
 | Name | Type | Description | Notes |

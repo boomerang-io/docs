@@ -1,4 +1,8 @@
-# TaskWorkspace
+---
+title: Task Workspace Model
+---
+
+# Task Workspace Model
 ## Properties
 
 | Name | Type | Description | Notes |

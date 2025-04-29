@@ -1,4 +1,8 @@
-# KeyValuePair
+---
+title: Key Value Pair Model
+---
+
+# Key Value Pair Model
 ## Properties
 
 | Name | Type | Description | Notes |

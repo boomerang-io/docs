@@ -1,4 +1,8 @@
-# ChangeLogVersion
+---
+title: Change Log Version Model
+---
+
+# Change Log Version Model
 ## Properties
 
 | Name | Type | Description | Notes |

@@ -1,4 +1,8 @@
-# HeaderFeatures
+---
+title: Header Features Model
+---
+
+# Header Features Model
 ## Properties
 
 | Name | Type | Description | Notes |

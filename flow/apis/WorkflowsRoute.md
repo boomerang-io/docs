@@ -4,9 +4,6 @@ title: Workflows Route
 
 # Workflows Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Update, replace, or create new, Workflow for Canvas**](#update-replace-or-create-new-workflow-for-canvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
@@ -52,12 +49,12 @@ title: Workflows Route
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowCanvas**](./models/WorkflowCanvas.md)
+[**WorkflowCanvas**](./models/WorkflowCanvas)
 
 
 ## **Update, replace, or create new, Workflow**
@@ -88,12 +85,12 @@ title: Workflows Route
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Workflow**](./models/Workflow.md)
+[**Workflow**](./models/Workflow)
 
 
 ## **Convert workflow to compose model for UI Designer and detailed Activity screens.**
@@ -122,12 +119,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowCanvas**](./models/WorkflowCanvas.md)
+[**WorkflowCanvas**](./models/WorkflowCanvas)
 
 
 ## **Create a new workflow**
@@ -157,12 +154,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Workflow**](./models/Workflow.md)
+[**Workflow**](./models/Workflow)
 
 
 ## **Delete a workflow**
@@ -190,8 +187,8 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -223,12 +220,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Workflow**](./models/Workflow.md)
+[**Workflow**](./models/Workflow)
 
 
 ## **Export the Workflow as JSON.**
@@ -256,8 +253,8 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+- **Content-Type**: `Not defined`
+- **Accept**: `application/json`
 
 #### Response
 
@@ -289,8 +286,8 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
@@ -323,12 +320,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**List**](./models/ChangeLogVersion.md)
+[**List**](./models/ChangeLogVersion)
 
 
 ## **Retrieve a Workflow**
@@ -359,12 +356,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Workflow**](./models/Workflow.md)
+[**Workflow**](./models/Workflow)
 
 
 ## **Search for Workflows**
@@ -397,12 +394,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowResponsePage**](./models/WorkflowResponsePage.md)
+[**WorkflowResponsePage**](./models/WorkflowResponsePage)
 
 
 ## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**
@@ -434,10 +431,10 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowRun**](./models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun)
 

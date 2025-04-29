@@ -1,4 +1,8 @@
-# WorkflowTaskDependency
+---
+title: Workflow Task Dependency Model
+---
+
+# Workflow Task Dependency Model
 ## Properties
 
 | Name | Type | Description | Notes |

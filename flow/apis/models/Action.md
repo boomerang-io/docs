@@ -1,4 +1,8 @@
-# Action
+---
+title: Action Model
+---
+
+# Action Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -7,7 +11,7 @@
 | **workflowRef** | **String** |  | [optional] [default to null] |
 | **workflowRunRef** | **String** |  | [optional] [default to null] |
 | **taskRunRef** | **String** |  | [optional] [default to null] |
-| **actioners** | [**List**](Actioner.md) |  | [optional] [default to null] |
+| **actioners** | [**List**](Actioner) |  | [optional] [default to null] |
 | **status** | **String** |  | [optional] [default to null] |
 | **type** | **String** |  | [optional] [default to null] |
 | **instructions** | **String** |  | [optional] [default to null] |

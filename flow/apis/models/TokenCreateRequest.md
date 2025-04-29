@@ -1,4 +1,8 @@
-# TokenCreateRequest
+---
+title: Token Create Request Model
+---
+
+# Token Create Request Model
 ## Properties
 
 | Name | Type | Description | Notes |

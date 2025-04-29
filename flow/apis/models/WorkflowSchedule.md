@@ -1,4 +1,8 @@
-# WorkflowSchedule
+---
+title: Workflow Schedule Model
+---
+
+# Workflow Schedule Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -14,7 +18,7 @@
 | **cronSchedule** | **String** |  | [optional] [default to null] |
 | **dateSchedule** | **Date** |  | [optional] [default to null] |
 | **timezone** | **String** |  | [optional] [default to null] |
-| **params** | [**List**](RunParam.md) |  | [optional] [default to null] |
+| **params** | [**List**](RunParam) |  | [optional] [default to null] |
 | **nextScheduleDate** | **Date** |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)

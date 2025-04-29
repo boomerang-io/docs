@@ -1,4 +1,8 @@
-# TeamNameCheckRequest
+---
+title: Team Name Check Request Model
+---
+
+# Team Name Check Request Model
 ## Properties
 
 | Name | Type | Description | Notes |

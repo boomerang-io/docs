@@ -4,9 +4,6 @@ title: Insights Route
 
 # Insights Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Retrieve insights for a team**](#retrieve-insights-for-a-team) | GET | `/api/v2/team/{team}/insights` |
@@ -42,10 +39,10 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowRunInsight**](./models/WorkflowRunInsight.md)
+[**WorkflowRunInsight**](./models/WorkflowRunInsight)
 

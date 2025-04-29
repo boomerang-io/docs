@@ -1,4 +1,8 @@
-# UserRequest
+---
+title: User Request Model
+---
+
+# User Request Model
 ## Properties
 
 | Name | Type | Description | Notes |

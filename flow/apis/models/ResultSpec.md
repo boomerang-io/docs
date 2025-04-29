@@ -1,4 +1,8 @@
-# ResultSpec
+---
+title: Result Spec Model
+---
+
+# Result Spec Model
 ## Properties
 
 | Name | Type | Description | Notes |

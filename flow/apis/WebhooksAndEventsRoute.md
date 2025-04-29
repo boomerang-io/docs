@@ -4,9 +4,6 @@ title: Webhooks And Events Route
 
 # Webhooks And Events Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [****](#) | POST | `/api/v2/event` |
@@ -43,8 +40,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json, application/cloudevents+json;charset=utf-8, application/cloudevents+json; charset=utf-8
-- **Accept**: */*
+- **Content-Type**: `application/json, application/cloudevents+json;charset=utf-8, application/cloudevents+json; charset=utf-8`
+- **Accept**: `*/*`
 
 #### Response
 
@@ -80,8 +77,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json;charset=utf-8, application/json; charset=utf-8
-- **Accept**: Not defined
+- **Content-Type**: `application/json;charset=utf-8, application/json; charset=utf-8`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -114,8 +111,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -149,8 +146,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json;charset=utf-8, application/json; charset=utf-8
-- **Accept**: */*
+- **Content-Type**: `application/json;charset=utf-8, application/json; charset=utf-8`
+- **Accept**: `*/*`
 
 #### Response
 

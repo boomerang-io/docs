@@ -4,9 +4,6 @@ title: Team Tasks Route
 
 # Team Tasks Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Update, replace, or create new using Tekton Task YAML**](#update-replace-or-create-new-using-tekton-task-yaml) | PUT | `/api/v2/team/{team}/task/{name}` |
@@ -49,12 +46,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json, application/x-yaml
-- **Accept**: */*
+- **Content-Type**: `application/json, application/x-yaml`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Task**](./models/Task.md)
+[**Task**](./models/Task)
 
 
 ## **Create a new Task Template using Tekton Task YAML**
@@ -85,12 +82,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json, application/x-yaml
-- **Accept**: */*
+- **Content-Type**: `application/json, application/x-yaml`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Task**](./models/Task.md)
+[**Task**](./models/Task)
 
 
 ## **Delete a Team Task**
@@ -118,8 +115,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -152,12 +149,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Task**](./models/Task.md)
+[**Task**](./models/Task)
 
 
 ## **Retrieve the changlog**
@@ -186,12 +183,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**List**](./models/ChangeLogVersion.md)
+[**List**](./models/ChangeLogVersion)
 
 
 ## **Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**
@@ -224,12 +221,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**TaskResponsePage**](./models/TaskResponsePage.md)
+[**TaskResponsePage**](./models/TaskResponsePage)
 
 
 ## ****
@@ -258,8 +255,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/x-yaml
-- **Accept**: Not defined
+- **Content-Type**: `application/x-yaml`
+- **Accept**: `Not defined`
 
 #### Response
 

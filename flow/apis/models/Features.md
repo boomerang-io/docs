@@ -1,4 +1,8 @@
-# Features
+---
+title: Features Model
+---
+
+# Features Model
 ## Properties
 
 | Name | Type | Description | Notes |

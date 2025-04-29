@@ -1,4 +1,8 @@
-# WorkflowTemplate
+---
+title: Workflow Template Model
+---
+
+# Workflow Template Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -12,12 +16,12 @@
 | **description** | **String** |  | [optional] [default to null] |
 | **labels** | **Map** |  | [optional] [default to null] |
 | **annotations** | **Map** |  | [optional] [default to null] |
-| **params** | [**List**](AbstractParam.md) |  | [optional] [default to null] |
-| **tasks** | [**List**](WorkflowTask.md) |  | [optional] [default to null] |
+| **params** | [**List**](AbstractParam) |  | [optional] [default to null] |
+| **tasks** | [**List**](WorkflowTask) |  | [optional] [default to null] |
 | **icon** | **String** |  | [optional] [default to null] |
 | **markdown** | **String** |  | [optional] [default to null] |
-| **changelog** | [**ChangeLog**](ChangeLog.md) |  | [optional] [default to null] |
-| **workspaces** | [**List**](WorkflowWorkspace.md) |  | [optional] [default to null] |
+| **changelog** | [**ChangeLog**](ChangeLog) |  | [optional] [default to null] |
+| **workspaces** | [**List**](WorkflowWorkspace) |  | [optional] [default to null] |
 | **upgradesAvailable** | **Boolean** |  | [optional] [default to null] |
 | **unknownFields** | **Map** |  | [optional] [default to null] |
 

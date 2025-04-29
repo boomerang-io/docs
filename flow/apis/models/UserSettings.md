@@ -1,4 +1,8 @@
-# UserSettings
+---
+title: User Settings Model
+---
+
+# User Settings Model
 ## Properties
 
 | Name | Type | Description | Notes |

@@ -1,4 +1,8 @@
-# TeamSummary
+---
+title: Team Summary Model
+---
+
+# Team Summary Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -9,7 +13,7 @@
 | **status** | **String** |  | [optional] [default to null] |
 | **externalRef** | **String** |  | [optional] [default to null] |
 | **labels** | **Map** |  | [optional] [default to null] |
-| **insights** | [**TeamSummaryInsights**](TeamSummaryInsights.md) |  | [optional] [default to null] |
+| **insights** | [**TeamSummaryInsights**](TeamSummaryInsights) |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

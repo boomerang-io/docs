@@ -1,4 +1,8 @@
-# CanvasNodePosition
+---
+title: Canvas Node Position Model
+---
+
+# Canvas Node Position Model
 ## Properties
 
 | Name | Type | Description | Notes |

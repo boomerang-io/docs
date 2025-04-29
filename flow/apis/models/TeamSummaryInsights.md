@@ -1,4 +1,8 @@
-# TeamSummaryInsights
+---
+title: Team Summary Insights Model
+---
+
+# Team Summary Insights Model
 ## Properties
 
 | Name | Type | Description | Notes |

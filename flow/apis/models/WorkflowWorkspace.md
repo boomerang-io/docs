@@ -1,4 +1,8 @@
-# WorkflowWorkspace
+---
+title: Workflow Workspace Model
+---
+
+# Workflow Workspace Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -7,7 +11,7 @@
 | **description** | **String** |  | [optional] [default to null] |
 | **type** | **String** |  | [optional] [default to null] |
 | **optional** | **Boolean** |  | [optional] [default to null] |
-| **spec** | [**Object**](.md) |  | [optional] [default to null] |
+| **spec** | [**Object**]() |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

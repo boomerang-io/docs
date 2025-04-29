@@ -4,9 +4,6 @@ title: Actions Route
 
 # Actions Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Provide an update for an Action**](#provide-an-update-for-an-action) | PUT | `/api/v2/team/{team}/action` |
@@ -43,8 +40,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: Not defined
+- **Content-Type**: `application/json`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -76,12 +73,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Action**](./models/Action.md)
+[**Action**](./models/Action)
 
 
 ## **Search for Actions**
@@ -117,12 +114,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**PageAction**](./models/PageAction.md)
+[**PageAction**](./models/PageAction)
 
 
 ## **Get Actions Summary**
@@ -152,10 +149,10 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**ActionSummary**](./models/ActionSummary.md)
+[**ActionSummary**](./models/ActionSummary)
 

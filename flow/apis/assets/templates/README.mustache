@@ -52,7 +52,7 @@ All endpoints do not require authorization.
 ## Routes
 
 {{#apiInfo}}{{#apis}}{{#operations}}
-### {{baseName}}
+### {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}}
 
 | Method | Route | 
 | ------------- | ------------- |
@@ -66,7 +66,7 @@ All endpoints do not require authorization.
 ## Models
 
 {{#modelPackage}}
-{{#models}}{{#model}} - [{{{classname}}}](./{{{modelPackage}}}/{{modelDocPath}}{{{classFilename}}})
+{{#models}}{{#model}} - [{{classname}}]({{#lambda.lowercase}}./{{modelPackage}}/{{modelDocPath}}{{/lambda.lowercase}}{{classname}})
 {{/model}}{{/models}}
 {{/modelPackage}}
 {{^modelPackage}}

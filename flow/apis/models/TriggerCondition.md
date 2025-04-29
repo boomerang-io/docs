@@ -1,4 +1,8 @@
-# TriggerCondition
+---
+title: Trigger Condition Model
+---
+
+# Trigger Condition Model
 ## Properties
 
 | Name | Type | Description | Notes |

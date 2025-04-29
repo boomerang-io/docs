@@ -1,4 +1,8 @@
-# WorkflowRunSummary
+---
+title: Workflow Run Summary Model
+---
+
+# Workflow Run Summary Model
 ## Properties
 
 | Name | Type | Description | Notes |

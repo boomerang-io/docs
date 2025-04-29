@@ -1,9 +1,13 @@
-# CloudEvent
+---
+title: Cloud Event Model
+---
+
+# Cloud Event Model
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **data** | [**Object**](.md) |  | [optional] [default to null] |
+| **data** | [**Object**]() |  | [optional] [default to null] |
 | **specVersion** | **String** |  | [optional] [default to null] |
 | **source** | **URI** |  | [optional] [default to null] |
 | **time** | **Date** |  | [optional] [default to null] |

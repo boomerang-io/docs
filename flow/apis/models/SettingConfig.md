@@ -1,4 +1,8 @@
-# SettingConfig
+---
+title: Setting Config Model
+---
+
+# Setting Config Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -10,7 +14,7 @@
 | **type** | **String** |  | [optional] [default to null] |
 | **minValueLength** | **Integer** |  | [optional] [default to null] |
 | **maxValueLength** | **Integer** |  | [optional] [default to null] |
-| **options** | [**List**](KeyValuePair.md) |  | [optional] [default to null] |
+| **options** | [**List**](KeyValuePair) |  | [optional] [default to null] |
 | **required** | **Boolean** |  | [optional] [default to null] |
 | **placeholder** | **String** |  | [optional] [default to null] |
 | **helperText** | **String** |  | [optional] [default to null] |

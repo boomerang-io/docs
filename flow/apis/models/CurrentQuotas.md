@@ -1,4 +1,8 @@
-# CurrentQuotas
+---
+title: Current Quotas Model
+---
+
+# Current Quotas Model
 ## Properties
 
 | Name | Type | Description | Notes |

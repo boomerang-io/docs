@@ -1,4 +1,8 @@
-# WorkflowRun
+---
+title: Workflow Run Model
+---
+
+# Workflow Run Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -16,15 +20,15 @@
 | **workflowRevisionRef** | **String** |  | [optional] [default to null] |
 | **labels** | **Map** |  | [optional] [default to null] |
 | **annotations** | **Map** |  | [optional] [default to null] |
-| **params** | [**List**](RunParam.md) |  | [optional] [default to null] |
-| **tasks** | [**List**](TaskRun.md) |  | [optional] [default to null] |
+| **params** | [**List**](RunParam) |  | [optional] [default to null] |
+| **tasks** | [**List**](TaskRun) |  | [optional] [default to null] |
 | **debug** | **Boolean** |  | [optional] [default to null] |
 | **workflowName** | **String** |  | [optional] [default to null] |
 | **workflowVersion** | **Integer** |  | [optional] [default to null] |
 | **trigger** | **String** |  | [optional] [default to null] |
 | **initiatedByRef** | **String** |  | [optional] [default to null] |
-| **results** | [**List**](RunResult.md) |  | [optional] [default to null] |
-| **workspaces** | [**List**](WorkflowWorkspace.md) |  | [optional] [default to null] |
+| **results** | [**List**](RunResult) |  | [optional] [default to null] |
+| **workspaces** | [**List**](WorkflowWorkspace) |  | [optional] [default to null] |
 | **awaitingApproval** | **Boolean** |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)

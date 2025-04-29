@@ -1,4 +1,8 @@
-# TaskRun
+---
+title: Task Run Model
+---
+
+# Task Run Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -12,10 +16,10 @@
 | **startTime** | **Date** |  | [optional] [default to null] |
 | **duration** | **Long** |  | [optional] [default to null] |
 | **timeout** | **Long** |  | [optional] [default to null] |
-| **params** | [**List**](RunParam.md) |  | [optional] [default to null] |
-| **results** | [**List**](RunResult.md) |  | [optional] [default to null] |
-| **workspaces** | [**List**](TaskWorkspace.md) |  | [optional] [default to null] |
-| **spec** | [**TaskRunSpec**](TaskRunSpec.md) |  | [optional] [default to null] |
+| **params** | [**List**](RunParam) |  | [optional] [default to null] |
+| **results** | [**List**](RunResult) |  | [optional] [default to null] |
+| **workspaces** | [**List**](TaskWorkspace) |  | [optional] [default to null] |
+| **spec** | [**TaskRunSpec**](TaskRunSpec) |  | [optional] [default to null] |
 | **status** | **String** |  | [optional] [default to null] |
 | **phase** | **String** |  | [optional] [default to null] |
 | **statusMessage** | **String** |  | [optional] [default to null] |

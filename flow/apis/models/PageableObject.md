@@ -1,9 +1,13 @@
-# PageableObject
+---
+title: Pageable Object Model
+---
+
+# Pageable Object Model
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **sort** | [**List**](SortObject.md) |  | [optional] [default to null] |
+| **sort** | [**List**](SortObject) |  | [optional] [default to null] |
 | **offset** | **Long** |  | [optional] [default to null] |
 | **paged** | **Boolean** |  | [optional] [default to null] |
 | **pageNumber** | **Integer** |  | [optional] [default to null] |

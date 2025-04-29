@@ -4,9 +4,6 @@ title: Schedules Route
 
 # Schedules Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Create a Schedule.**](#create-a-schedule) | POST | `/api/v2/team/{team}/schedule` |
@@ -46,12 +43,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowSchedule**](./models/WorkflowSchedule.md)
+[**WorkflowSchedule**](./models/WorkflowSchedule)
 
 
 ## **Delete a Schedule.**
@@ -79,8 +76,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -112,12 +109,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowSchedule**](./models/WorkflowSchedule.md)
+[**WorkflowSchedule**](./models/WorkflowSchedule)
 
 
 ## **Retrieve Calendars for Schedules by Dates.**
@@ -147,12 +144,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**List**](./models/WorkflowScheduleCalendar.md)
+[**List**](./models/WorkflowScheduleCalendar)
 
 
 ## **Search for Schedules**
@@ -184,12 +181,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**PageWorkflowSchedule**](./models/PageWorkflowSchedule.md)
+[**PageWorkflowSchedule**](./models/PageWorkflowSchedule)
 
 
 ## **Apply a Schedule.**
@@ -219,12 +216,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowSchedule**](./models/WorkflowSchedule.md)
+[**WorkflowSchedule**](./models/WorkflowSchedule)
 
 
 ## **Validate a Schedules CRON.**
@@ -251,10 +248,10 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**CronValidationResponse**](./models/CronValidationResponse.md)
+[**CronValidationResponse**](./models/CronValidationResponse)
 

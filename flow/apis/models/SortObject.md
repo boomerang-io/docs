@@ -1,4 +1,8 @@
-# SortObject
+---
+title: Sort Object Model
+---
+
+# Sort Object Model
 ## Properties
 
 | Name | Type | Description | Notes |

@@ -1,4 +1,8 @@
-# ActionSummary
+---
+title: Action Summary Model
+---
+
+# Action Summary Model
 ## Properties
 
 | Name | Type | Description | Notes |

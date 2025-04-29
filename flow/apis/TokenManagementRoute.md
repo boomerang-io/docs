@@ -4,9 +4,6 @@ title: Token Management Route
 
 # Token Management Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Create Token**](#create-token) | POST | `/api/v2/token` |
@@ -41,12 +38,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**TokenCreateResponse**](./models/TokenCreateResponse.md)
+[**TokenCreateResponse**](./models/TokenCreateResponse)
 
 
 ## **Delete Token**
@@ -73,8 +70,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
@@ -112,10 +109,10 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**PageToken**](./models/PageToken.md)
+[**PageToken**](./models/PageToken)
 

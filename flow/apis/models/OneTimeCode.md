@@ -1,4 +1,8 @@
-# OneTimeCode
+---
+title: One Time Code Model
+---
+
+# One Time Code Model
 ## Properties
 
 | Name | Type | Description | Notes |

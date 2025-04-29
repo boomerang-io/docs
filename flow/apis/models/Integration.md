@@ -1,4 +1,8 @@
-# Integration
+---
+title: Integration Model
+---
+
+# Integration Model
 ## Properties
 
 | Name | Type | Description | Notes |

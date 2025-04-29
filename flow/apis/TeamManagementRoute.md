@@ -4,9 +4,6 @@ title: Team Management Route
 
 # Team Management Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Create new team**](#create-new-team) | POST | `/api/v2/team` |
@@ -51,12 +48,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Team**](./models/Team.md)
+[**Team**](./models/Team)
 
 
 ## ****
@@ -86,8 +83,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: Not defined
+- **Content-Type**: `application/json`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -119,8 +116,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -151,8 +148,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -179,12 +176,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Quotas**](./models/Quotas.md)
+[**Quotas**](./models/Quotas)
 
 
 ## ****
@@ -207,12 +204,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**List**](./models/Role.md)
+[**List**](./models/Role)
 
 
 ## **Get team**
@@ -239,12 +236,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Team**](./models/Team.md)
+[**Team**](./models/Team)
 
 
 ## **Search for Teams**
@@ -277,12 +274,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**PageTeam**](./models/PageTeam.md)
+[**PageTeam**](./models/PageTeam)
 
 
 ## ****
@@ -309,8 +306,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -344,8 +341,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: Not defined
+- **Content-Type**: `application/json`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -376,8 +373,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -411,12 +408,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**Team**](./models/Team.md)
+[**Team**](./models/Team)
 
 
 ## **Validate team name and check uniqueness.**
@@ -445,8 +442,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 

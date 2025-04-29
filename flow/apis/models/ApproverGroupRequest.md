@@ -1,4 +1,8 @@
-# ApproverGroupRequest
+---
+title: Approver Group Request Model
+---
+
+# Approver Group Request Model
 ## Properties
 
 | Name | Type | Description | Notes |

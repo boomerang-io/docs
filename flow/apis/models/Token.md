@@ -1,4 +1,8 @@
-# Token
+---
+title: Token Model
+---
+
+# Token Model
 ## Properties
 
 | Name | Type | Description | Notes |

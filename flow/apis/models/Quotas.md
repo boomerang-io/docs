@@ -1,4 +1,8 @@
-# Quotas
+---
+title: Quotas Model
+---
+
+# Quotas Model
 ## Properties
 
 | Name | Type | Description | Notes |

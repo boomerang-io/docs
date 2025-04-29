@@ -1,4 +1,8 @@
-# WorkflowScheduleCalendar
+---
+title: Workflow Schedule Calendar Model
+---
+
+# Workflow Schedule Calendar Model
 ## Properties
 
 | Name | Type | Description | Notes |

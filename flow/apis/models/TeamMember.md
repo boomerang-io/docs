@@ -1,4 +1,8 @@
-# TeamMember
+---
+title: Team Member Model
+---
+
+# Team Member Model
 ## Properties
 
 | Name | Type | Description | Notes |

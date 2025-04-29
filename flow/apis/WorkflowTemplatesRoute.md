@@ -4,9 +4,6 @@ title: Workflow Templates Route
 
 # Workflow Templates Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Update, replace, or create new, Workflow Template**](#update-replace-or-create-new-workflow-template) | PUT | `/api/v2/workflowtemplate` |
@@ -44,12 +41,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowTemplate**](./models/WorkflowTemplate.md)
+[**WorkflowTemplate**](./models/WorkflowTemplate)
 
 
 ## **Create a new Workflow Template**
@@ -78,12 +75,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowTemplate**](./models/WorkflowTemplate.md)
+[**WorkflowTemplate**](./models/WorkflowTemplate)
 
 
 ## **Delete a Workflow Template**
@@ -110,8 +107,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -145,12 +142,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowTemplate**](./models/WorkflowTemplate.md)
+[**WorkflowTemplate**](./models/WorkflowTemplate)
 
 
 ## **Search for Workflow Templates**
@@ -181,10 +178,10 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowTemplateResponsePage**](./models/WorkflowTemplateResponsePage.md)
+[**WorkflowTemplateResponsePage**](./models/WorkflowTemplateResponsePage)
 

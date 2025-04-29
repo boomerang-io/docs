@@ -1,4 +1,8 @@
-# WorkflowRunCount
+---
+title: Workflow Run Count Model
+---
+
+# Workflow Run Count Model
 ## Properties
 
 | Name | Type | Description | Notes |

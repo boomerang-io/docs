@@ -4,9 +4,6 @@ title: Task Runs Route
 
 # Task Runs Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Retrieve a TaskRuns log from a specific WorkflowRun.**](#retrieve-a-task-runs-log-from-a-specific-workflow-run) | GET | `/api/v2/taskrun/{taskRunId}/log` |
@@ -37,8 +34,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 

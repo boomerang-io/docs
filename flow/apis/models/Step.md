@@ -1,4 +1,8 @@
-# Step
+---
+title: Step Model
+---
+
+# Step Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -7,7 +11,7 @@
 | **image** | **String** |  | [optional] [default to null] |
 | **script** | **String** |  | [optional] [default to null] |
 | **workingDir** | **String** |  | [optional] [default to null] |
-| **env** | [**List**](TaskEnvVar.md) |  | [optional] [default to null] |
+| **env** | [**List**](TaskEnvVar) |  | [optional] [default to null] |
 | **command** | **List** |  | [optional] [default to null] |
 | **args** | **List** |  | [optional] [default to null] |
 

@@ -1,4 +1,8 @@
-# HeaderOption
+---
+title: Header Option Model
+---
+
+# Header Option Model
 ## Properties
 
 | Name | Type | Description | Notes |

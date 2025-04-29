@@ -4,9 +4,6 @@ title: Users Route
 
 # Users Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Update a Boomerang Flow Users details**](#update-a-boomerang-flow-users-details) | PATCH | `/api/v2/user/{userId}` |
@@ -43,8 +40,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: Not defined
+- **Content-Type**: `application/json`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -75,8 +72,8 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
 
 #### Response
 
@@ -107,12 +104,12 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**User**](./models/User.md)
+[**User**](./models/User)
 
 
 ## **Search for Users**
@@ -145,10 +142,10 @@ No authorization required
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**PageUser**](./models/PageUser.md)
+[**PageUser**](./models/PageUser)
 

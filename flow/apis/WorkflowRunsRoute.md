@@ -4,9 +4,6 @@ title: Workflow Runs Route
 
 # Workflow Runs Route
 
-
-
-
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Cancel a WorkflowRun**](#cancel-a-workflow-run) | DELETE | `/api/v2/team/{team}/workflowrun/{workflowRunId}/cancel` |
@@ -44,12 +41,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowRun**](./models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun)
 
 
 ## **Retrieve a summary of WorkflowRuns by Status.**
@@ -80,12 +77,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowRunCount**](./models/WorkflowRunCount.md)
+[**WorkflowRunCount**](./models/WorkflowRunCount)
 
 
 ## **End a WorkflowRun**
@@ -113,12 +110,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowRun**](./models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun)
 
 
 ## **Retrieve a specific WorkflowRun.**
@@ -147,12 +144,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowRun**](./models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun)
 
 
 ## **Search for WorkflowRuns**
@@ -190,12 +187,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
 
 #### Response
 
-[**PageWorkflowRun**](./models/PageWorkflowRun.md)
+[**PageWorkflowRun**](./models/PageWorkflowRun)
 
 
 ## **Retry WorkflowRun execution.**
@@ -226,12 +223,12 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowRun**](./models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun)
 
 
 ## **Start WorkflowRun execution. The WorkflowRun has to already have been queued.**
@@ -262,10 +259,10 @@ This endpoint does not require a request body.
 
 #### Request Headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: `application/json`
+- **Accept**: `*/*`
 
 #### Response
 
-[**WorkflowRun**](./models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun)
 

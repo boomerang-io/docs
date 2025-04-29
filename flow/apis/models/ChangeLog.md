@@ -1,4 +1,8 @@
-# ChangeLog
+---
+title: Change Log Model
+---
+
+# Change Log Model
 ## Properties
 
 | Name | Type | Description | Notes |

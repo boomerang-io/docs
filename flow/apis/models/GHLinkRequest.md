@@ -1,4 +1,8 @@
-# GHLinkRequest
+---
+title: GH Link Request Model
+---
+
+# GH Link Request Model
 ## Properties
 
 | Name | Type | Description | Notes |

@@ -1,4 +1,8 @@
-# HeaderPlatform
+---
+title: Header Platform Model
+---
+
+# Header Platform Model
 ## Properties
 
 | Name | Type | Description | Notes |

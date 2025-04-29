@@ -1,4 +1,8 @@
-# Task
+---
+title: Task Model
+---
+
+# Task Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -14,9 +18,9 @@
 | **description** | **String** |  | [optional] [default to null] |
 | **labels** | **Map** |  | [optional] [default to null] |
 | **annotations** | **Map** |  | [optional] [default to null] |
-| **changelog** | [**ChangeLog**](ChangeLog.md) |  | [optional] [default to null] |
+| **changelog** | [**ChangeLog**](ChangeLog) |  | [optional] [default to null] |
 | **category** | **String** |  | [optional] [default to null] |
-| **spec** | [**TaskSpec**](TaskSpec.md) |  | [optional] [default to null] |
+| **spec** | [**TaskSpec**](TaskSpec) |  | [optional] [default to null] |
 | **icon** | **String** |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)

@@ -1,4 +1,8 @@
-# UserProfile
+---
+title: User Profile Model
+---
+
+# User Profile Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -12,8 +16,8 @@
 | **lastLoginDate** | **Date** |  | [optional] [default to null] |
 | **status** | **String** |  | [optional] [default to null] |
 | **labels** | **Map** |  | [optional] [default to null] |
-| **settings** | [**UserSettings**](UserSettings.md) |  | [optional] [default to null] |
-| **teams** | [**List**](TeamSummary.md) |  | [optional] [default to null] |
+| **settings** | [**UserSettings**](UserSettings) |  | [optional] [default to null] |
+| **teams** | [**List**](TeamSummary) |  | [optional] [default to null] |
 | **permissions** | **List** |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)

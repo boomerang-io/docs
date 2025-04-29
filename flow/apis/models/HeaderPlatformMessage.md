@@ -1,4 +1,8 @@
-# HeaderPlatformMessage
+---
+title: Header Platform Message Model
+---
+
+# Header Platform Message Model
 ## Properties
 
 | Name | Type | Description | Notes |

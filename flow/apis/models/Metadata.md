@@ -1,4 +1,8 @@
-# Metadata
+---
+title: Metadata Model
+---
+
+# Metadata Model
 ## Properties
 
 | Name | Type | Description | Notes |

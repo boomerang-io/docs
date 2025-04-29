@@ -1,4 +1,8 @@
-# TeamRequest
+---
+title: Team Request Model
+---
+
+# Team Request Model
 ## Properties
 
 | Name | Type | Description | Notes |
@@ -10,10 +14,10 @@
 | **type** | **String** |  | [optional] [default to null] |
 | **externalRef** | **String** |  | [optional] [default to null] |
 | **labels** | **Map** |  | [optional] [default to null] |
-| **parameters** | [**List**](AbstractParam.md) |  | [optional] [default to null] |
-| **quotas** | [**Quotas**](Quotas.md) |  | [optional] [default to null] |
-| **members** | [**List**](TeamMember.md) |  | [optional] [default to null] |
-| **approverGroups** | [**List**](ApproverGroupRequest.md) |  | [optional] [default to null] |
+| **parameters** | [**List**](AbstractParam) |  | [optional] [default to null] |
+| **quotas** | [**Quotas**](Quotas) |  | [optional] [default to null] |
+| **members** | [**List**](TeamMember) |  | [optional] [default to null] |
+| **approverGroups** | [**List**](ApproverGroupRequest) |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

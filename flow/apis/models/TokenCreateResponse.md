@@ -1,4 +1,8 @@
-# TokenCreateResponse
+---
+title: Token Create Response Model
+---
+
+# Token Create Response Model
 ## Properties
 
 | Name | Type | Description | Notes |

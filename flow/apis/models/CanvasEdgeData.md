@@ -1,4 +1,8 @@
-# CanvasEdgeData
+---
+title: Canvas Edge Data Model
+---
+
+# Canvas Edge Data Model
 ## Properties
 
 | Name | Type | Description | Notes |
