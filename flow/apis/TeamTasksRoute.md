@@ -9,13 +9,13 @@ title: Team Tasks Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new using Tekton Task YAML**](#apply11) | PUT | `/api/v2/team/{team}/task/{name}` |
-| [**Create a new Task Template using Tekton Task YAML**](#create11) | POST | `/api/v2/team/{team}/task` |
-| [**Delete a Team Task**](#delete) | DELETE | `/api/v2/team/{team}/task/{name}` |
-| [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#get21) | GET | `/api/v2/team/{team}/task/{name}` |
-| [**Retrieve the changlog**](#getChangelog1) | GET | `/api/v2/team/{team}/task/{name}/changelog` |
-| [**Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#queryTaskTemplates) | GET | `/api/v2/team/{team}/task/query` |
-| [****](#validateYaml) | POST | `/api/v2/team/{team}/task/validate` |
+| [**Update, replace, or create new using Tekton Task YAML**](#updatereplaceorcreatenewusing-tekton-task-yaml) | PUT | `/api/v2/team/{team}/task/{name}` |
+| [**Create a new Task Template using Tekton Task YAML**](#createanew-task-templateusing-tekton-task-yaml) | POST | `/api/v2/team/{team}/task` |
+| [**Delete a Team Task**](#deletea-team-task) | DELETE | `/api/v2/team/{team}/task/{name}` |
+| [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#retrieveaspecifictaskas-tekton-task-yaml-ifnoversionspecifiedthelatestversionisreturned) | GET | `/api/v2/team/{team}/task/{name}` |
+| [**Retrieve the changlog**](#retrievethechanglog) | GET | `/api/v2/team/{team}/task/{name}/changelog` |
+| [**Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#searchfor-tasks-ifteamsareprovideditwillquerytheteams-ifnoteamsareprovideditwillquery-global-task-templates) | GET | `/api/v2/team/{team}/task/query` |
+| [****](#) | POST | `/api/v2/team/{team}/task/validate` |
 
 
 <a name="apply11"></a>
@@ -39,7 +39,7 @@ The name must only contain alphanumeric and - characeters. If the name exists, a
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**Task**](./Models/Task) | true |
+| [**Task**](./models/Task) | true |
 
 
 ### Authorization
@@ -55,7 +55,7 @@ No authorization required
 
 ### Response
 
-[**Task**](./Models/Task.md)
+[**Task**](./models/Task.md)
 
 <a name="create11"></a>
 
@@ -76,7 +76,7 @@ The name needs to be unique and must only contain alphanumeric and - characeters
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**Task**](./Models/Task) | true |
+| [**Task**](./models/Task) | true |
 
 
 ### Authorization
@@ -92,7 +92,7 @@ No authorization required
 
 ### Response
 
-[**Task**](./Models/Task.md)
+[**Task**](./models/Task.md)
 
 <a name="delete"></a>
 
@@ -161,7 +161,7 @@ No authorization required
 
 ### Response
 
-[**Task**](./Models/Task.md)
+[**Task**](./models/Task.md)
 
 <a name="getChangelog1"></a>
 
@@ -196,7 +196,7 @@ No authorization required
 
 ### Response
 
-[**List**](./Models/ChangeLogVersion.md)
+[**List**](./models/ChangeLogVersion.md)
 
 <a name="queryTaskTemplates"></a>
 
@@ -214,9 +214,9 @@ No authorization required
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
 | **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **statuses** | [**List**](./Models/String) | false | List of statuses to filter for. | Defaults to null. | active,inactive
-| **names** | [**List**](./Models/String) | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait
+| **labels** | [**List**](./models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **statuses** | [**List**](./models/String) | false | List of statuses to filter for. | Defaults to null. | active,inactive
+| **names** | [**List**](./models/String) | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait
 
 
 ### Request Body
@@ -235,7 +235,7 @@ No authorization required
 
 ### Response
 
-[**TaskResponsePage**](./Models/TaskResponsePage.md)
+[**TaskResponsePage**](./models/TaskResponsePage.md)
 
 <a name="validateYaml"></a>
 
@@ -254,7 +254,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**TektonTask**](./Models/TektonTask) | true |
+| [**TektonTask**](./models/TektonTask) | true |
 
 
 ### Authorization

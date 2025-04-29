@@ -9,7 +9,7 @@ title: Insights Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Retrieve insights for a team**](#getTeamInsights) | GET | `/api/v2/team/{team}/insights` |
+| [**Retrieve insights for a team**](#retrieveinsightsforateam) | GET | `/api/v2/team/{team}/insights` |
 
 
 <a name="getTeamInsights"></a>
@@ -28,8 +28,8 @@ The insights are based on the workflow runs and their statuses.
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **fromDate** | **Long** | false |  | Defaults to null. | 789
 | **toDate** | **Long** | false |  | Defaults to null. | 789
-| **workflows** | [**List**](./Models/String) | false |  | Defaults to null. | 
-| **statuses** | [**List**](./Models/String) | false |  | Defaults to null. | 
+| **workflows** | [**List**](./models/String) | false |  | Defaults to null. | 
+| **statuses** | [**List**](./models/String) | false |  | Defaults to null. | 
 
 
 ### Request Body
@@ -48,5 +48,5 @@ No authorization required
 
 ### Response
 
-[**WorkflowRunInsight**](./Models/WorkflowRunInsight.md)
+[**WorkflowRunInsight**](./models/WorkflowRunInsight.md)
 

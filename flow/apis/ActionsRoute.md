@@ -9,10 +9,10 @@ title: Actions Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Provide an update for an Action**](#action) | PUT | `/api/v2/team/{team}/action` |
-| [**Retrieve a specific Action by Id**](#get3) | GET | `/api/v2/team/{team}/action/{actionId}` |
-| [**Search for Actions**](#query4) | GET | `/api/v2/team/{team}/action/query` |
-| [**Get Actions Summary**](#summary) | GET | `/api/v2/team/{team}/action/summary` |
+| [**Provide an update for an Action**](#provideanupdateforan-action) | PUT | `/api/v2/team/{team}/action` |
+| [**Retrieve a specific Action by Id**](#retrieveaspecific-actionby-id) | GET | `/api/v2/team/{team}/action/{actionId}` |
+| [**Search for Actions**](#searchfor-actions) | GET | `/api/v2/team/{team}/action/query` |
+| [**Get Actions Summary**](#get-actions-summary) | GET | `/api/v2/team/{team}/action/summary` |
 
 
 <a name="action"></a>
@@ -33,7 +33,7 @@ title: Actions Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**List**](./Models/ActionRequest) | true |
+| [**List**](./models/ActionRequest) | true |
 
 
 ### Authorization
@@ -83,7 +83,7 @@ No authorization required
 
 ### Response
 
-[**Action**](./Models/Action.md)
+[**Action**](./models/Action.md)
 
 <a name="query4"></a>
 
@@ -100,9 +100,9 @@ No authorization required
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
 | **limit** | **Integer** | true | Result Size | Defaults to 10. | 10
 | **page** | **Integer** | true | Page Number | Defaults to 0. | 0
-| **types** | [**List**](./Models/String) | false | List of types to filter for. Defaults to all. | Defaults to null. Enum: [approval, manual] | manual,approval
-| **statuses** | [**List**](./Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. Enum: [approved, submitted, rejected, cancelled] | approved,rejected,submitted
-| **workflows** | [**List**](./Models/String) | false | List of workflows to filter for. | Defaults to null. | 
+| **types** | [**List**](./models/String) | false | List of types to filter for. Defaults to all. | Defaults to null. Enum: [approval, manual] | manual,approval
+| **statuses** | [**List**](./models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. Enum: [approved, submitted, rejected, cancelled] | approved,rejected,submitted
+| **workflows** | [**List**](./models/String) | false | List of workflows to filter for. | Defaults to null. | 
 | **order** | **String** | false | Ascending or Descending (default) order | Defaults to Optional[DESC]. Enum: [ASC, DESC] | 0
 | **sort** | **String** | false | The element to sort on | Defaults to Optional[creationDate]. | 0
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
@@ -125,7 +125,7 @@ No authorization required
 
 ### Response
 
-[**PageAction**](./Models/PageAction.md)
+[**PageAction**](./models/PageAction.md)
 
 <a name="summary"></a>
 
@@ -140,7 +140,7 @@ No authorization required
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **workflows** | [**List**](./Models/String) | false | List of workflows to filter for. | Defaults to null. | 
+| **workflows** | [**List**](./models/String) | false | List of workflows to filter for. | Defaults to null. | 
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
@@ -161,5 +161,5 @@ No authorization required
 
 ### Response
 
-[**ActionSummary**](./Models/ActionSummary.md)
+[**ActionSummary**](./models/ActionSummary.md)
 

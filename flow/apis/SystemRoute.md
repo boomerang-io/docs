@@ -9,16 +9,16 @@ title: System Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new global Param**](#create2) | POST | `/api/v2/global-params` |
-| [**Delete specific global Param**](#delete2) | DELETE | `/api/v2/global-params/{key}` |
-| [**Get all global Params**](#getAll1) | GET | `/api/v2/global-params` |
-| [**Retrieve Boomerang Flow Settings**](#getAppConfiguration) | GET | `/api/v2/settings` |
-| [**Retrieve feature flags.**](#getFlowFeatures) | GET | `/api/v2/features` |
-| [**Retrieve this instances context, features, and navigation.**](#getHeaderNavigation) | GET | `/api/v2/context` |
-| [**Retrieve navigation.**](#getNavigation) | GET | `/api/v2/navigation` |
-| [**Register and activate an installation of Flow**](#register) | PUT | `/api/v2/activate` |
-| [****](#update1) | PUT | `/api/v2/global-params` |
-| [**Update Boomerang Flow Settings**](#updateSettings) | PUT | `/api/v2/settings` |
+| [**Create new global Param**](#createnewglobal-param) | POST | `/api/v2/global-params` |
+| [**Delete specific global Param**](#deletespecificglobal-param) | DELETE | `/api/v2/global-params/{key}` |
+| [**Get all global Params**](#getallglobal-params) | GET | `/api/v2/global-params` |
+| [**Retrieve Boomerang Flow Settings**](#retrieve-boomerang-flow-settings) | GET | `/api/v2/settings` |
+| [**Retrieve feature flags.**](#retrievefeatureflags) | GET | `/api/v2/features` |
+| [**Retrieve this instances context, features, and navigation.**](#retrievethisinstancescontextfeaturesandnavigation) | GET | `/api/v2/context` |
+| [**Retrieve navigation.**](#retrievenavigation) | GET | `/api/v2/navigation` |
+| [**Register and activate an installation of Flow**](#registerandactivateaninstallationof-flow) | PUT | `/api/v2/activate` |
+| [****](#) | PUT | `/api/v2/global-params` |
+| [**Update Boomerang Flow Settings**](#update-boomerang-flow-settings) | PUT | `/api/v2/settings` |
 
 
 <a name="create2"></a>
@@ -38,7 +38,7 @@ title: System Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](./Models/AbstractParam) | true |
+| [**AbstractParam**](./models/AbstractParam) | true |
 
 
 ### Authorization
@@ -54,7 +54,7 @@ No authorization required
 
 ### Response
 
-[**AbstractParam**](./Models/AbstractParam.md)
+[**AbstractParam**](./models/AbstractParam.md)
 
 <a name="delete2"></a>
 
@@ -116,7 +116,7 @@ No authorization required
 
 ### Response
 
-[**List**](./Models/AbstractParam.md)
+[**List**](./models/AbstractParam.md)
 
 <a name="getAppConfiguration"></a>
 
@@ -145,7 +145,7 @@ No authorization required
 
 ### Response
 
-[**List**](./Models/Setting.md)
+[**List**](./models/Setting.md)
 
 <a name="getFlowFeatures"></a>
 
@@ -174,7 +174,7 @@ No authorization required
 
 ### Response
 
-[**Features**](./Models/Features.md)
+[**Features**](./models/Features.md)
 
 <a name="getHeaderNavigation"></a>
 
@@ -203,7 +203,7 @@ No authorization required
 
 ### Response
 
-[**HeaderNavigationResponse**](./Models/HeaderNavigationResponse.md)
+[**HeaderNavigationResponse**](./models/HeaderNavigationResponse.md)
 
 <a name="getNavigation"></a>
 
@@ -236,7 +236,7 @@ No authorization required
 
 ### Response
 
-[**List**](./Models/Navigation.md)
+[**List**](./models/Navigation.md)
 
 <a name="register"></a>
 
@@ -255,7 +255,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**OneTimeCode**](./Models/OneTimeCode) | false |
+| [**OneTimeCode**](./models/OneTimeCode) | false |
 
 
 ### Authorization
@@ -290,7 +290,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](./Models/AbstractParam) | true |
+| [**AbstractParam**](./models/AbstractParam) | true |
 
 
 ### Authorization
@@ -306,7 +306,7 @@ No authorization required
 
 ### Response
 
-[**AbstractParam**](./Models/AbstractParam.md)
+[**AbstractParam**](./models/AbstractParam.md)
 
 <a name="updateSettings"></a>
 
@@ -325,7 +325,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**List**](./Models/Setting) | true |
+| [**List**](./models/Setting) | true |
 
 
 ### Authorization
@@ -341,5 +341,5 @@ No authorization required
 
 ### Response
 
-[**List**](./Models/Setting.md)
+[**List**](./models/Setting.md)
 

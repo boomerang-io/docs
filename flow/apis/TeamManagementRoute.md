@@ -9,19 +9,19 @@ title: Team Management Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new team**](#createTeam) | POST | `/api/v2/team` |
-| [****](#deleteApproverGroup) | DELETE | `/api/v2/team/{team}/approvers` |
-| [****](#deleteParameters) | DELETE | `/api/v2/team/{team}/parameters/{name}` |
-| [**Delete a team**](#deleteWorkflow1) | DELETE | `/api/v2/team/{team}` |
-| [****](#getDefaultQuotas) | GET | `/api/v2/team/quotas/default` |
-| [****](#getRoles) | GET | `/api/v2/team/roles` |
-| [**Get team**](#getTeam) | GET | `/api/v2/team/{team}` |
-| [**Search for Teams**](#getTeams) | GET | `/api/v2/team/query` |
-| [****](#leave) | DELETE | `/api/v2/team/{team}/leave` |
-| [****](#removeMembers) | DELETE | `/api/v2/team/{team}/members` |
-| [****](#resetQuotas) | DELETE | `/api/v2/team/{team}/quotas` |
-| [**Patch or update a team**](#updateTeam) | PATCH | `/api/v2/team/{team}` |
-| [**Validate team name and check uniqueness.**](#validateTeamName) | POST | `/api/v2/team/validate-name` |
+| [**Create new team**](#createnewteam) | POST | `/api/v2/team` |
+| [****](#) | DELETE | `/api/v2/team/{team}/approvers` |
+| [****](#) | DELETE | `/api/v2/team/{team}/parameters/{name}` |
+| [**Delete a team**](#deleteateam) | DELETE | `/api/v2/team/{team}` |
+| [****](#) | GET | `/api/v2/team/quotas/default` |
+| [****](#) | GET | `/api/v2/team/roles` |
+| [**Get team**](#getteam) | GET | `/api/v2/team/{team}` |
+| [**Search for Teams**](#searchfor-teams) | GET | `/api/v2/team/query` |
+| [****](#) | DELETE | `/api/v2/team/{team}/leave` |
+| [****](#) | DELETE | `/api/v2/team/{team}/members` |
+| [****](#) | DELETE | `/api/v2/team/{team}/quotas` |
+| [**Patch or update a team**](#patchorupdateateam) | PATCH | `/api/v2/team/{team}` |
+| [**Validate team name and check uniqueness.**](#validateteamnameandcheckuniqueness) | POST | `/api/v2/team/validate-name` |
 
 
 <a name="createTeam"></a>
@@ -41,7 +41,7 @@ title: Team Management Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**TeamRequest**](./Models/TeamRequest) | true |
+| [**TeamRequest**](./models/TeamRequest) | true |
 
 
 ### Authorization
@@ -57,7 +57,7 @@ No authorization required
 
 ### Response
 
-[**Team**](./Models/Team.md)
+[**Team**](./models/Team.md)
 
 <a name="deleteApproverGroup"></a>
 
@@ -77,7 +77,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**List**](./Models/string) | true |
+| [**List**](./models/string) | true |
 
 
 ### Authorization
@@ -189,7 +189,7 @@ No authorization required
 
 ### Response
 
-[**Quotas**](./Models/Quotas.md)
+[**Quotas**](./models/Quotas.md)
 
 <a name="getRoles"></a>
 
@@ -218,7 +218,7 @@ No authorization required
 
 ### Response
 
-[**List**](./Models/Role.md)
+[**List**](./models/Role.md)
 
 <a name="getTeam"></a>
 
@@ -251,7 +251,7 @@ No authorization required
 
 ### Response
 
-[**Team**](./Models/Team.md)
+[**Team**](./models/Team.md)
 
 <a name="getTeams"></a>
 
@@ -267,9 +267,9 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
-| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **statuses** | [**List**](./Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
-| **teams** | [**List**](./Models/String) | false | List of Team names to filter for. | Defaults to null. | my-amazing-team,boomerangs-return
+| **labels** | [**List**](./models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **statuses** | [**List**](./models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
+| **teams** | [**List**](./models/String) | false | List of Team names to filter for. | Defaults to null. | my-amazing-team,boomerangs-return
 | **order** | **String** | false | Ascending or Descending (default) order | Defaults to Optional[DESC]. Enum: [ASC, DESC] | 0
 | **sort** | **String** | false | The element to sort on | Defaults to Optional[name]. | 0
 
@@ -290,7 +290,7 @@ No authorization required
 
 ### Response
 
-[**PageTeam**](./Models/PageTeam.md)
+[**PageTeam**](./models/PageTeam.md)
 
 <a name="leave"></a>
 
@@ -343,7 +343,7 @@ null (empty response body)
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**List**](./Models/TeamMember) | true |
+| [**List**](./models/TeamMember) | true |
 
 
 ### Authorization
@@ -412,7 +412,7 @@ null (empty response body)
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**TeamRequest**](./Models/TeamRequest) | true |
+| [**TeamRequest**](./models/TeamRequest) | true |
 
 
 ### Authorization
@@ -428,7 +428,7 @@ No authorization required
 
 ### Response
 
-[**Team**](./Models/Team.md)
+[**Team**](./models/Team.md)
 
 <a name="validateTeamName"></a>
 
@@ -447,7 +447,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**TeamNameCheckRequest**](./Models/TeamNameCheckRequest) | true |
+| [**TeamNameCheckRequest**](./models/TeamNameCheckRequest) | true |
 
 
 ### Authorization

@@ -9,5 +9,5 @@
 | **timeout** | [**Spec_timeout**](Spec_timeout.md) |  | [optional] [default to null] |
 | **results** | [**List**](ResultSpec.md) |  | [optional] [default to null] |
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

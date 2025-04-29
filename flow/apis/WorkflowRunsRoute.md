@@ -9,13 +9,13 @@ title: Workflow Runs Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Cancel a WorkflowRun**](#cancel) | DELETE | `/api/v2/team/{team}/workflowrun/{workflowRunId}/cancel` |
-| [**Retrieve a summary of WorkflowRuns by Status.**](#count) | GET | `/api/v2/team/{team}/workflowrun/count` |
-| [**End a WorkflowRun**](#finalize) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/finalize` |
-| [**Retrieve a specific WorkflowRun.**](#get1) | GET | `/api/v2/team/{team}/workflowrun/{workflowRunId}` |
-| [**Search for WorkflowRuns**](#query2) | GET | `/api/v2/team/{team}/workflowrun/query` |
-| [**Retry WorkflowRun execution.**](#retry) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/retry` |
-| [**Start WorkflowRun execution. The WorkflowRun has to already have been queued.**](#start) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/start` |
+| [**Cancel a WorkflowRun**](#cancela-workflow-run) | DELETE | `/api/v2/team/{team}/workflowrun/{workflowRunId}/cancel` |
+| [**Retrieve a summary of WorkflowRuns by Status.**](#retrieveasummaryof-workflow-runsby-status) | GET | `/api/v2/team/{team}/workflowrun/count` |
+| [**End a WorkflowRun**](#enda-workflow-run) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/finalize` |
+| [**Retrieve a specific WorkflowRun.**](#retrieveaspecific-workflow-run) | GET | `/api/v2/team/{team}/workflowrun/{workflowRunId}` |
+| [**Search for WorkflowRuns**](#searchfor-workflow-runs) | GET | `/api/v2/team/{team}/workflowrun/query` |
+| [**Retry WorkflowRun execution.**](#retry-workflow-runexecution) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/retry` |
+| [**Start WorkflowRun execution. The WorkflowRun has to already have been queued.**](#start-workflow-runexecution-the-workflow-runhastoalreadyhavebeenqueued) | PUT | `/api/v2/team/{team}/workflowrun/{workflowRunId}/start` |
 
 
 <a name="cancel"></a>
@@ -50,7 +50,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowRun**](./Models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun.md)
 
 <a name="count"></a>
 
@@ -65,8 +65,8 @@ This endpoint does not require a request body.
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **workflows** | [**List**](./Models/String) | false | List of Workflow IDs  to filter for. Does not validate the IDs provided. Defaults to all. | Defaults to null. | 63d3656ca845957db7d25ef0,63a3e732b0496509a7f1d763
+| **labels** | [**List**](./models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **workflows** | [**List**](./models/String) | false | List of Workflow IDs  to filter for. Does not validate the IDs provided. Defaults to all. | Defaults to null. | 63d3656ca845957db7d25ef0,63a3e732b0496509a7f1d763
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
@@ -87,7 +87,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowRunCount**](./Models/WorkflowRunCount.md)
+[**WorkflowRunCount**](./models/WorkflowRunCount.md)
 
 <a name="finalize"></a>
 
@@ -121,7 +121,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowRun**](./Models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun.md)
 
 <a name="get1"></a>
 
@@ -156,7 +156,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowRun**](./Models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun.md)
 
 <a name="query2"></a>
 
@@ -174,12 +174,12 @@ This endpoint does not require a request body.
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
 | **order** | **String** | true | Ascending (ASC) or Descending (DESC) sort order on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **statuses** | [**List**](./Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | succeeded,skipped
-| **phase** | [**List**](./Models/String) | false | List of phases to filter for. Defaults to all. | Defaults to null. | completed,finalized
-| **workflowruns** | [**List**](./Models/String) | false | List of WorkflowRun IDs to filter for. | Defaults to null. | 
-| **workflows** | [**List**](./Models/String) | false | List of Workflow IDs to filter for. | Defaults to null. | 
-| **triggers** | [**List**](./Models/String) | false | List of Triggers to filter for. | Defaults to null. | 
+| **labels** | [**List**](./models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **statuses** | [**List**](./models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | succeeded,skipped
+| **phase** | [**List**](./models/String) | false | List of phases to filter for. Defaults to all. | Defaults to null. | completed,finalized
+| **workflowruns** | [**List**](./models/String) | false | List of WorkflowRun IDs to filter for. | Defaults to null. | 
+| **workflows** | [**List**](./models/String) | false | List of Workflow IDs to filter for. | Defaults to null. | 
+| **triggers** | [**List**](./models/String) | false | List of Triggers to filter for. | Defaults to null. | 
 | **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
 | **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
 
@@ -200,7 +200,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**PageWorkflowRun**](./Models/PageWorkflowRun.md)
+[**PageWorkflowRun**](./models/PageWorkflowRun.md)
 
 <a name="retry"></a>
 
@@ -221,7 +221,7 @@ This endpoint does not require a request body.
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowRunRequest**](./Models/WorkflowRunRequest) | false |
+| [**WorkflowRunRequest**](./models/WorkflowRunRequest) | false |
 
 
 ### Authorization
@@ -237,7 +237,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowRun**](./Models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun.md)
 
 <a name="start"></a>
 
@@ -258,7 +258,7 @@ This endpoint does not require a request body.
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowRunRequest**](./Models/WorkflowRunRequest) | false |
+| [**WorkflowRunRequest**](./models/WorkflowRunRequest) | false |
 
 
 ### Authorization
@@ -274,5 +274,5 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowRun**](./Models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun.md)
 

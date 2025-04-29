@@ -9,18 +9,18 @@ title: Workflows Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new, Workflow for Canvas**](#applyCanvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-| [**Update, replace, or create new, Workflow**](#applyWorkflow) | PUT | `/api/v2/team/{team}/workflow` |
-| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#compose) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
-| [**Create a new workflow**](#createWorkflow) | POST | `/api/v2/team/{team}/workflow` |
-| [**Delete a workflow**](#deleteWorkflow2) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
-| [**Duplicates the workflow.**](#duplicateWorkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
-| [**Export the Workflow as JSON.**](#export) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
-| [**Retrieve the parameters.**](#getAvailableParameters) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
-| [**Retrieve the changlog**](#getChangelog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
-| [**Retrieve a Workflow**](#getWorkflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
-| [**Search for Workflows**](#queryWorkflows) | GET | `/api/v2/team/{team}/workflow/query` |
-| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submitWorkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
+| [**Update, replace, or create new, Workflow for Canvas**](#updatereplaceorcreatenew-workflowfor-canvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Update, replace, or create new, Workflow**](#updatereplaceorcreatenew-workflow) | PUT | `/api/v2/team/{team}/workflow` |
+| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#convertworkflowtocomposemodelfor-ui-designeranddetailed-activityscreens) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Create a new workflow**](#createanewworkflow) | POST | `/api/v2/team/{team}/workflow` |
+| [**Delete a workflow**](#deleteaworkflow) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
+| [**Duplicates the workflow.**](#duplicatestheworkflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
+| [**Export the Workflow as JSON.**](#exportthe-workflowas-json) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
+| [**Retrieve the parameters.**](#retrievetheparameters) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
+| [**Retrieve the changlog**](#retrievethechanglog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
+| [**Retrieve a Workflow**](#retrievea-workflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
+| [**Search for Workflows**](#searchfor-workflows) | GET | `/api/v2/team/{team}/workflow/query` |
+| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submita-workflowtoberun-willqueuethe-workflow-runreadyforexecution) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
 
 
 <a name="applyCanvas"></a>
@@ -42,7 +42,7 @@ title: Workflows Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowCanvas**](./Models/WorkflowCanvas) | true |
+| [**WorkflowCanvas**](./models/WorkflowCanvas) | true |
 
 
 ### Authorization
@@ -58,7 +58,7 @@ title: Workflows Route
 
 ### Response
 
-[**WorkflowCanvas**](./Models/WorkflowCanvas.md)
+[**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
 <a name="applyWorkflow"></a>
 
@@ -79,7 +79,7 @@ title: Workflows Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**Workflow**](./Models/Workflow) | true |
+| [**Workflow**](./models/Workflow) | true |
 
 
 ### Authorization
@@ -95,7 +95,7 @@ title: Workflows Route
 
 ### Response
 
-[**Workflow**](./Models/Workflow.md)
+[**Workflow**](./models/Workflow.md)
 
 <a name="compose"></a>
 
@@ -130,7 +130,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowCanvas**](./Models/WorkflowCanvas.md)
+[**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
 <a name="createWorkflow"></a>
 
@@ -150,7 +150,7 @@ This endpoint does not require a request body.
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**Workflow**](./Models/Workflow) | true |
+| [**Workflow**](./models/Workflow) | true |
 
 
 ### Authorization
@@ -166,7 +166,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**Workflow**](./Models/Workflow.md)
+[**Workflow**](./models/Workflow.md)
 
 <a name="deleteWorkflow2"></a>
 
@@ -234,7 +234,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**Workflow**](./Models/Workflow.md)
+[**Workflow**](./models/Workflow.md)
 
 <a name="export"></a>
 
@@ -337,7 +337,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**List**](./Models/ChangeLogVersion.md)
+[**List**](./models/ChangeLogVersion.md)
 
 <a name="getWorkflow"></a>
 
@@ -374,7 +374,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**Workflow**](./Models/Workflow.md)
+[**Workflow**](./models/Workflow.md)
 
 <a name="queryWorkflows"></a>
 
@@ -392,9 +392,9 @@ This endpoint does not require a request body.
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
 | **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **statuses** | [**List**](./Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
-| **workflows** | [**List**](./Models/String) | false | List of workflows to filter for. | Defaults to null. | 
+| **labels** | [**List**](./models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **statuses** | [**List**](./models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
+| **workflows** | [**List**](./models/String) | false | List of workflows to filter for. | Defaults to null. | 
 
 
 ### Request Body
@@ -413,7 +413,7 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowResponsePage**](./Models/WorkflowResponsePage.md)
+[**WorkflowResponsePage**](./models/WorkflowResponsePage.md)
 
 <a name="submitWorkflow"></a>
 
@@ -435,7 +435,7 @@ This endpoint does not require a request body.
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowSubmitRequest**](./Models/WorkflowSubmitRequest) | true |
+| [**WorkflowSubmitRequest**](./models/WorkflowSubmitRequest) | true |
 
 
 ### Authorization
@@ -451,5 +451,5 @@ This endpoint does not require a request body.
 
 ### Response
 
-[**WorkflowRun**](./Models/WorkflowRun.md)
+[**WorkflowRun**](./models/WorkflowRun.md)
 

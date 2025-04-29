@@ -9,11 +9,11 @@ title: Workflow Templates Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new, Workflow Template**](#apply) | PUT | `/api/v2/workflowtemplate` |
-| [**Create a new Workflow Template**](#create) | POST | `/api/v2/workflowtemplate` |
-| [**Delete a Workflow Template**](#deleteWorkflow) | DELETE | `/api/v2/workflowtemplate/{name}` |
-| [**Retrieve a Workflow Template**](#get) | GET | `/api/v2/workflowtemplate/{name}` |
-| [**Search for Workflow Templates**](#query) | GET | `/api/v2/workflowtemplate/query` |
+| [**Update, replace, or create new, Workflow Template**](#updatereplaceorcreatenew-workflow-template) | PUT | `/api/v2/workflowtemplate` |
+| [**Create a new Workflow Template**](#createanew-workflow-template) | POST | `/api/v2/workflowtemplate` |
+| [**Delete a Workflow Template**](#deletea-workflow-template) | DELETE | `/api/v2/workflowtemplate/{name}` |
+| [**Retrieve a Workflow Template**](#retrievea-workflow-template) | GET | `/api/v2/workflowtemplate/{name}` |
+| [**Search for Workflow Templates**](#searchfor-workflow-templates) | GET | `/api/v2/workflowtemplate/query` |
 
 
 <a name="apply"></a>
@@ -34,7 +34,7 @@ title: Workflow Templates Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowTemplate**](./Models/WorkflowTemplate) | true |
+| [**WorkflowTemplate**](./models/WorkflowTemplate) | true |
 
 
 ### Authorization
@@ -50,7 +50,7 @@ No authorization required
 
 ### Response
 
-[**WorkflowTemplate**](./Models/WorkflowTemplate.md)
+[**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
 <a name="create"></a>
 
@@ -69,7 +69,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**WorkflowTemplate**](./Models/WorkflowTemplate) | true |
+| [**WorkflowTemplate**](./models/WorkflowTemplate) | true |
 
 
 ### Authorization
@@ -85,7 +85,7 @@ No authorization required
 
 ### Response
 
-[**WorkflowTemplate**](./Models/WorkflowTemplate.md)
+[**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
 <a name="deleteWorkflow"></a>
 
@@ -154,7 +154,7 @@ No authorization required
 
 ### Response
 
-[**WorkflowTemplate**](./Models/WorkflowTemplate.md)
+[**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
 <a name="query"></a>
 
@@ -171,8 +171,8 @@ No authorization required
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
 | **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **names** | [**List**](./Models/String) | false | List of WorkflowTemplate names to filter for. Defaults to all. | Defaults to null. | mongodb-email-query-results
+| **labels** | [**List**](./models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **names** | [**List**](./models/String) | false | List of WorkflowTemplate names to filter for. Defaults to all. | Defaults to null. | mongodb-email-query-results
 
 
 ### Request Body
@@ -191,5 +191,5 @@ No authorization required
 
 ### Response
 
-[**WorkflowTemplateResponsePage**](./Models/WorkflowTemplateResponsePage.md)
+[**WorkflowTemplateResponsePage**](./models/WorkflowTemplateResponsePage.md)
 

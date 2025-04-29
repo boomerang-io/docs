@@ -9,15 +9,15 @@ title: Integrations Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Retrieve the integrations and their status within a Team**](#get4) | GET | `/api/v2/integration` |
-| [**Retrieve the installation ID and store against a team**](#githubInstall) | GET | `/api/v2/integration/github/installation` |
-| [**Links the GitHub Installation ID with a Team**](#githubLink) | POST | `/api/v2/integration/github/link` |
-| [**Unlinks the GitHub Installation ID from a Team**](#githubUnlink) | POST | `/api/v2/integration/github/unlink` |
-| [**Install URL Redirect**](#installSlack) | GET | `/api/v2/integration/slack/install` |
-| [**Receive Slack Oauth2 request**](#receiveSlackAuth) | GET | `/api/v2/integration/slack/auth` |
-| [**Receive Slack Slash Commands**](#receiveSlackCommand) | POST | `/api/v2/integration/slack/commands` |
-| [**Receive Slack Events**](#receiveSlackEvent) | POST | `/api/v2/integration/slack/events` |
-| [**Receive Slack Interactivity**](#receiveSlackInteractivity) | POST | `/api/v2/integration/slack/interactivity` |
+| [**Retrieve the integrations and their status within a Team**](#retrievetheintegrationsandtheirstatuswithina-team) | GET | `/api/v2/integration` |
+| [**Retrieve the installation ID and store against a team**](#retrievetheinstallation-i-dandstoreagainstateam) | GET | `/api/v2/integration/github/installation` |
+| [**Links the GitHub Installation ID with a Team**](#linksthe-git-hub-installation-i-dwitha-team) | POST | `/api/v2/integration/github/link` |
+| [**Unlinks the GitHub Installation ID from a Team**](#unlinksthe-git-hub-installation-i-dfroma-team) | POST | `/api/v2/integration/github/unlink` |
+| [**Install URL Redirect**](#install-url-redirect) | GET | `/api/v2/integration/slack/install` |
+| [**Receive Slack Oauth2 request**](#receive-slack-oauth2request) | GET | `/api/v2/integration/slack/auth` |
+| [**Receive Slack Slash Commands**](#receive-slack-slash-commands) | POST | `/api/v2/integration/slack/commands` |
+| [**Receive Slack Events**](#receive-slack-events) | POST | `/api/v2/integration/slack/events` |
+| [**Receive Slack Interactivity**](#receive-slack-interactivity) | POST | `/api/v2/integration/slack/interactivity` |
 
 
 <a name="get4"></a>
@@ -51,7 +51,7 @@ No authorization required
 
 ### Response
 
-[**List**](./Models/Integration.md)
+[**List**](./models/Integration.md)
 
 <a name="githubInstall"></a>
 
@@ -104,7 +104,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**GHLinkRequest**](./Models/GHLinkRequest) | true |
+| [**GHLinkRequest**](./models/GHLinkRequest) | true |
 
 
 ### Authorization
@@ -139,7 +139,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**GHLinkRequest**](./Models/GHLinkRequest) | true |
+| [**GHLinkRequest**](./models/GHLinkRequest) | true |
 
 
 ### Authorization

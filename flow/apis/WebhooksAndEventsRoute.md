@@ -9,10 +9,10 @@ title: Webhooks And Events Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [****](#acceptEvent1) | POST | `/api/v2/event` |
-| [****](#acceptWaitForEvent) | POST | `/api/v2/callback` |
-| [****](#acceptWaitForEvent1) | GET | `/api/v2/callback` |
-| [**Trigger WorkflowRun via Webhook.**](#acceptWebhookEvent) | POST | `/api/v2/webhook` |
+| [****](#) | POST | `/api/v2/event` |
+| [****](#) | POST | `/api/v2/callback` |
+| [****](#) | GET | `/api/v2/callback` |
+| [**Trigger WorkflowRun via Webhook.**](#trigger-workflow-runvia-webhook) | POST | `/api/v2/webhook` |
 
 
 <a name="acceptEvent1"></a>

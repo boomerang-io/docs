@@ -9,10 +9,10 @@ title: Users Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update a Boomerang Flow Users details**](#apply1) | PATCH | `/api/v2/user/{userId}` |
-| [**Delete a Boomerang Flow user**](#deleteFlowUser) | DELETE | `/api/v2/user/{userId}` |
-| [**Get a Users details**](#getUserByID) | GET | `/api/v2/user/{userId}` |
-| [**Search for Users**](#getUsers) | GET | `/api/v2/user/query` |
+| [**Update a Boomerang Flow Users details**](#updatea-boomerang-flow-usersdetails) | PATCH | `/api/v2/user/{userId}` |
+| [**Delete a Boomerang Flow user**](#deletea-boomerang-flowuser) | DELETE | `/api/v2/user/{userId}` |
+| [**Get a Users details**](#geta-usersdetails) | GET | `/api/v2/user/{userId}` |
+| [**Search for Users**](#searchfor-users) | GET | `/api/v2/user/query` |
 
 
 <a name="apply1"></a>
@@ -33,7 +33,7 @@ title: Users Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**UserRequest**](./Models/UserRequest) | true |
+| [**UserRequest**](./models/UserRequest) | true |
 
 
 ### Authorization
@@ -115,7 +115,7 @@ No authorization required
 
 ### Response
 
-[**User**](./Models/User.md)
+[**User**](./models/User.md)
 
 <a name="getUsers"></a>
 
@@ -131,9 +131,9 @@ No authorization required
 | ---- | ---- | -------- | ----------- | --- |---|
 | **limit** | **Integer** | true | Result Size | Defaults to null. | 10
 | **page** | **Integer** | true | Page Number | Defaults to null. | 0
-| **labels** | [**List**](./Models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **status** | [**List**](./Models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
-| **ids** | [**List**](./Models/String) | false | List of ids to filter for. | Defaults to null. | 
+| **labels** | [**List**](./models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
+| **status** | [**List**](./models/String) | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive
+| **ids** | [**List**](./models/String) | false | List of ids to filter for. | Defaults to null. | 
 | **order** | **String** | false | Ascending or Descending (default) order | Defaults to Optional[DESC]. Enum: [ASC, DESC] | 0
 | **sort** | **String** | false | The element to sort on | Defaults to Optional[name]. | 0
 
@@ -154,5 +154,5 @@ No authorization required
 
 ### Response
 
-[**PageUser**](./Models/PageUser.md)
+[**PageUser**](./models/PageUser.md)
 

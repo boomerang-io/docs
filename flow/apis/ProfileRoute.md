@@ -9,8 +9,8 @@ title: Profile Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Get your Profile**](#getProfile) | GET | `/api/v2/profile` |
-| [**Patch your Profile**](#updateProfile) | PATCH | `/api/v2/profile` |
+| [**Get your Profile**](#getyour-profile) | GET | `/api/v2/profile` |
+| [**Patch your Profile**](#patchyour-profile) | PATCH | `/api/v2/profile` |
 
 
 <a name="getProfile"></a>
@@ -40,7 +40,7 @@ No authorization required
 
 ### Response
 
-[**UserProfile**](./Models/UserProfile.md)
+[**UserProfile**](./models/UserProfile.md)
 
 <a name="updateProfile"></a>
 
@@ -59,7 +59,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**UserRequest**](./Models/UserRequest) | true |
+| [**UserRequest**](./models/UserRequest) | true |
 
 
 ### Authorization

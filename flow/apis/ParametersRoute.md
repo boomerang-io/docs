@@ -9,10 +9,10 @@ title: Parameters Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new global Param**](#create1) | POST | `/api/v2/parameters` |
-| [**Delete specific global Param**](#delete1) | DELETE | `/api/v2/parameters/{name}` |
-| [**Get all global Params**](#getAll) | GET | `/api/v2/parameters` |
-| [****](#update) | PUT | `/api/v2/parameters` |
+| [**Create new global Param**](#createnewglobal-param) | POST | `/api/v2/parameters` |
+| [**Delete specific global Param**](#deletespecificglobal-param) | DELETE | `/api/v2/parameters/{name}` |
+| [**Get all global Params**](#getallglobal-params) | GET | `/api/v2/parameters` |
+| [****](#) | PUT | `/api/v2/parameters` |
 
 
 <a name="create1"></a>
@@ -32,7 +32,7 @@ title: Parameters Route
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](./Models/AbstractParam) | true |
+| [**AbstractParam**](./models/AbstractParam) | true |
 
 
 ### Authorization
@@ -48,7 +48,7 @@ No authorization required
 
 ### Response
 
-[**AbstractParam**](./Models/AbstractParam.md)
+[**AbstractParam**](./models/AbstractParam.md)
 
 <a name="delete1"></a>
 
@@ -110,7 +110,7 @@ No authorization required
 
 ### Response
 
-[**List**](./Models/AbstractParam.md)
+[**List**](./models/AbstractParam.md)
 
 <a name="update"></a>
 
@@ -129,7 +129,7 @@ No authorization required
 ### Request Body
 | Schema | Required | 
 | ------ | --- | 
-| [**AbstractParam**](./Models/AbstractParam) | true |
+| [**AbstractParam**](./models/AbstractParam) | true |
 
 
 ### Authorization
@@ -145,5 +145,5 @@ No authorization required
 
 ### Response
 
-[**AbstractParam**](./Models/AbstractParam.md)
+[**AbstractParam**](./models/AbstractParam.md)
 

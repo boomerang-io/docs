@@ -16,5 +16,5 @@
 | **workflows** | [**List**](WorkflowSummary.md) |  | [optional] [default to null] |
 | **approverGroups** | [**List**](ApproverGroup.md) |  | [optional] [default to null] |
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 
