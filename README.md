@@ -20,11 +20,35 @@ Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on h
 
 ### Generating the API docs
 
-To update the API docs, run the following LLM command along with the API spec
+To update the API docs, run the following commands along with the API spec (currently stored in `flow/apis/assets/spec.json`):
 
+```sh
+npx openapi-generator-cli generate -i ./flow/apis/assets/spec.json -g markdown -o ./tmp --skip-validate-spec -t ./flow/apis/assets/templates/
+mv ./tmp/README.md ./tmp/routes.md
+find ./tmp/Apis -type f -exec mv {} ./tmp/ \;
+find ./tmp/*.md -type f -exec mv {} ./flow/apis/ \;
+mv ./tmp/Models ./flow/apis/models
+rm -rf ./tmp
 ```
-As a technical writer using the following Swagger API spec, generate markdown documents that can be inserted into the API section of the documentation
+
+#### Pre-req
+
+```sh
+npm install @openapitools/openapi-generator-cli -g
 ```
+
+### References
+
+The available mustahe variables can be found [here](https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/CodegenOperation.java)
+
+### Tips
+
+When writing the Java code, make sure to add the summary and description for each method, they are key to the generated API documentation.
+
+### To Do
+
+- [ ] Add a script to automatically generate the API docs and update the `flow/apis/docs` folder.
+- [ ] Implement an MDX version so that the {{requestBodyExamples}} can be added within a code block element.
 
 ## License
 
