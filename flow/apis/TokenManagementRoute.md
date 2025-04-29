@@ -15,7 +15,7 @@ title: Token Management Route
 
 
 
-## **Create Token** <a name="createToken"></a>
+## **Create Token**<a href="#createToken"></a>
 
 > POST /api/v2/token
 
@@ -49,7 +49,7 @@ No authorization required
 [**TokenCreateResponse**](./models/TokenCreateResponse.md)
 
 
-## **Delete Token** <a name="deleteToken"></a>
+## **Delete Token**<a href="#deleteToken"></a>
 
 > DELETE /api/v2/token/{id}
 
@@ -81,7 +81,7 @@ No authorization required
 **Object**
 
 
-## **Search for Tokens** <a name="query1"></a>
+## **Search for Tokens**<a href="#query1"></a>
 
 > GET /api/v2/token/query?types=,principals=,limit=10,page=0,order=ASC,sort=0,fromDate=1677589200000,toDate=1680267600000
 

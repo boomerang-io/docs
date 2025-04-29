@@ -19,7 +19,7 @@ title: Schedules Route
 
 
 
-## **Create a Schedule.** <a name="createSchedule"></a>
+## **Create a Schedule.**<a href="#createSchedule"></a>
 
 > POST /api/v2/team/{team}/schedule
 
@@ -54,7 +54,7 @@ No authorization required
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
 
-## **Delete a Schedule.** <a name="deleteSchedule"></a>
+## **Delete a Schedule.**<a href="#deleteSchedule"></a>
 
 > DELETE /api/v2/team/{team}/schedule/{scheduleId}
 
@@ -87,7 +87,7 @@ No authorization required
 null (empty response body)
 
 
-## **Retrieve a Schedule.** <a name="get2"></a>
+## **Retrieve a Schedule.**<a href="#get2"></a>
 
 > GET /api/v2/team/{team}/schedule/{scheduleId}
 
@@ -120,7 +120,7 @@ No authorization required
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
 
-## **Retrieve Calendars for Schedules by Dates.** <a name="getCalendarsForSchedules"></a>
+## **Retrieve Calendars for Schedules by Dates.**<a href="#getCalendarsForSchedules"></a>
 
 > GET /api/v2/team/{team}/schedule/calendars?schedules=,fromDate=789,toDate=789
 
@@ -155,7 +155,7 @@ No authorization required
 [**List**](./models/WorkflowScheduleCalendar.md)
 
 
-## **Search for Schedules** <a name="query3"></a>
+## **Search for Schedules**<a href="#query3"></a>
 
 > GET /api/v2/team/{team}/schedule/query?statuses=active,archived,types=cron,advancedCron,workflows=,limit=10,page=0
 
@@ -192,7 +192,7 @@ No authorization required
 [**PageWorkflowSchedule**](./models/PageWorkflowSchedule.md)
 
 
-## **Apply a Schedule.** <a name="updateSchedule"></a>
+## **Apply a Schedule.**<a href="#updateSchedule"></a>
 
 > PUT /api/v2/team/{team}/schedule
 
@@ -227,7 +227,7 @@ No authorization required
 [**WorkflowSchedule**](./models/WorkflowSchedule.md)
 
 
-## **Validate a Schedules CRON.** <a name="validateCron"></a>
+## **Validate a Schedules CRON.**<a href="#validateCron"></a>
 
 > GET /api/v2/team/{team}/schedule/validate-cron?cron=cron_example
 

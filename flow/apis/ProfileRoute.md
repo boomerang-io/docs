@@ -14,7 +14,7 @@ title: Profile Route
 
 
 
-## **Get your Profile** <a name="getProfile"></a>
+## **Get your Profile**<a href="#getProfile"></a>
 
 > GET /api/v2/profile
 
@@ -42,7 +42,7 @@ No authorization required
 [**UserProfile**](./models/UserProfile.md)
 
 
-## **Patch your Profile** <a name="updateProfile"></a>
+## **Patch your Profile**<a href="#updateProfile"></a>
 
 > PATCH /api/v2/profile
 

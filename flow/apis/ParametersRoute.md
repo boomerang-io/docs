@@ -16,7 +16,7 @@ title: Parameters Route
 
 
 
-## **Create new global Param** <a name="create1"></a>
+## **Create new global Param**<a href="#create1"></a>
 
 > POST /api/v2/parameters
 
@@ -50,7 +50,7 @@ No authorization required
 [**AbstractParam**](./models/AbstractParam.md)
 
 
-## **Delete specific global Param** <a name="delete1"></a>
+## **Delete specific global Param**<a href="#delete1"></a>
 
 > DELETE /api/v2/parameters/{name}
 
@@ -82,7 +82,7 @@ No authorization required
 null (empty response body)
 
 
-## **Get all global Params** <a name="getAll"></a>
+## **Get all global Params**<a href="#getAll"></a>
 
 > GET /api/v2/parameters
 
@@ -110,7 +110,7 @@ No authorization required
 [**List**](./models/AbstractParam.md)
 
 
-## **** <a name="update"></a>
+## ****<a href="#update"></a>
 
 > PUT /api/v2/parameters
 

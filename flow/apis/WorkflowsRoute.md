@@ -24,7 +24,7 @@ title: Workflows Route
 
 
 
-## **Update, replace, or create new, Workflow for Canvas** <a name="applyCanvas"></a>
+## **Update, replace, or create new, Workflow for Canvas**<a href="#applyCanvas"></a>
 
 > PUT /api/v2/team/{team}/workflow/{workflow}/compose?replace=true
 
@@ -60,7 +60,7 @@ title: Workflows Route
 [**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
 
-## **Update, replace, or create new, Workflow** <a name="applyWorkflow"></a>
+## **Update, replace, or create new, Workflow**<a href="#applyWorkflow"></a>
 
 > PUT /api/v2/team/{team}/workflow?replace=true
 
@@ -96,7 +96,7 @@ title: Workflows Route
 [**Workflow**](./models/Workflow.md)
 
 
-## **Convert workflow to compose model for UI Designer and detailed Activity screens.** <a name="compose"></a>
+## **Convert workflow to compose model for UI Designer and detailed Activity screens.**<a href="#compose"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}/compose?version=56
 
@@ -130,7 +130,7 @@ This endpoint does not require a request body.
 [**WorkflowCanvas**](./models/WorkflowCanvas.md)
 
 
-## **Create a new workflow** <a name="createWorkflow"></a>
+## **Create a new workflow**<a href="#createWorkflow"></a>
 
 > POST /api/v2/team/{team}/workflow
 
@@ -165,7 +165,7 @@ This endpoint does not require a request body.
 [**Workflow**](./models/Workflow.md)
 
 
-## **Delete a workflow** <a name="deleteWorkflow2"></a>
+## **Delete a workflow**<a href="#deleteWorkflow2"></a>
 
 > DELETE /api/v2/team/{team}/workflow/{workflow}
 
@@ -198,7 +198,7 @@ This endpoint does not require a request body.
 null (empty response body)
 
 
-## **Duplicates the workflow.** <a name="duplicateWorkflow"></a>
+## **Duplicates the workflow.**<a href="#duplicateWorkflow"></a>
 
 > POST /api/v2/team/{team}/workflow/{workflow}/duplicate
 
@@ -231,7 +231,7 @@ This endpoint does not require a request body.
 [**Workflow**](./models/Workflow.md)
 
 
-## **Export the Workflow as JSON.** <a name="export"></a>
+## **Export the Workflow as JSON.**<a href="#export"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}/export
 
@@ -264,7 +264,7 @@ This endpoint does not require a request body.
 **File**
 
 
-## **Retrieve the parameters.** <a name="getAvailableParameters"></a>
+## **Retrieve the parameters.**<a href="#getAvailableParameters"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}/available-parameters
 
@@ -297,7 +297,7 @@ This endpoint does not require a request body.
 **List**
 
 
-## **Retrieve the changlog** <a name="getChangelog"></a>
+## **Retrieve the changlog**<a href="#getChangelog"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}/changelog
 
@@ -331,7 +331,7 @@ This endpoint does not require a request body.
 [**List**](./models/ChangeLogVersion.md)
 
 
-## **Retrieve a Workflow** <a name="getWorkflow"></a>
+## **Retrieve a Workflow**<a href="#getWorkflow"></a>
 
 > GET /api/v2/team/{team}/workflow/{workflow}?version=56,withTasks=true
 
@@ -367,7 +367,7 @@ This endpoint does not require a request body.
 [**Workflow**](./models/Workflow.md)
 
 
-## **Search for Workflows** <a name="queryWorkflows"></a>
+## **Search for Workflows**<a href="#queryWorkflows"></a>
 
 > GET /api/v2/team/{team}/workflow/query?labels=,statuses=active,inactive,workflows=,limit=10,page=0,sort=ASC
 
@@ -405,7 +405,7 @@ This endpoint does not require a request body.
 [**WorkflowResponsePage**](./models/WorkflowResponsePage.md)
 
 
-## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.** <a name="submitWorkflow"></a>
+## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**<a href="#submitWorkflow"></a>
 
 > POST /api/v2/team/{team}/workflow/{workflow}/submit?start=true
 

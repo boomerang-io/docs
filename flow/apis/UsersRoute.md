@@ -16,7 +16,7 @@ title: Users Route
 
 
 
-## **Update a Boomerang Flow Users details** <a name="apply1"></a>
+## **Update a Boomerang Flow Users details**<a href="#apply1"></a>
 
 > PATCH /api/v2/user/{userId}
 
@@ -51,7 +51,7 @@ No authorization required
 null (empty response body)
 
 
-## **Delete a Boomerang Flow user** <a name="deleteFlowUser"></a>
+## **Delete a Boomerang Flow user**<a href="#deleteFlowUser"></a>
 
 > DELETE /api/v2/user/{userId}
 
@@ -83,7 +83,7 @@ No authorization required
 null (empty response body)
 
 
-## **Get a Users details** <a name="getUserByID"></a>
+## **Get a Users details**<a href="#getUserByID"></a>
 
 > GET /api/v2/user/{userId}
 
@@ -115,7 +115,7 @@ No authorization required
 [**User**](./models/User.md)
 
 
-## **Search for Users** <a name="getUsers"></a>
+## **Search for Users**<a href="#getUsers"></a>
 
 > GET /api/v2/user/query?labels=,status=active,inactive,ids=,limit=10,page=0,order=0,sort=0
 

@@ -17,7 +17,7 @@ title: Workflow Templates Route
 
 
 
-## **Update, replace, or create new, Workflow Template** <a name="apply"></a>
+## **Update, replace, or create new, Workflow Template**<a href="#apply"></a>
 
 > PUT /api/v2/workflowtemplate?replace=true
 
@@ -52,7 +52,7 @@ No authorization required
 [**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
 
-## **Create a new Workflow Template** <a name="create"></a>
+## **Create a new Workflow Template**<a href="#create"></a>
 
 > POST /api/v2/workflowtemplate
 
@@ -86,7 +86,7 @@ No authorization required
 [**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
 
-## **Delete a Workflow Template** <a name="deleteWorkflow"></a>
+## **Delete a Workflow Template**<a href="#deleteWorkflow"></a>
 
 > DELETE /api/v2/workflowtemplate/{name}
 
@@ -118,7 +118,7 @@ No authorization required
 null (empty response body)
 
 
-## **Retrieve a Workflow Template** <a name="get"></a>
+## **Retrieve a Workflow Template**<a href="#get"></a>
 
 > GET /api/v2/workflowtemplate/{name}?version=56,withTasks=true
 
@@ -153,7 +153,7 @@ No authorization required
 [**WorkflowTemplate**](./models/WorkflowTemplate.md)
 
 
-## **Search for Workflow Templates** <a name="query"></a>
+## **Search for Workflow Templates**<a href="#query"></a>
 
 > GET /api/v2/workflowtemplate/query?labels=,names=mongodb-email-query-results,limit=10,page=0,sort=ASC
 

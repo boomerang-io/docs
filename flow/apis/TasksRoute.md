@@ -18,7 +18,7 @@ title: Tasks Route
 
 
 
-## **Update, replace, or create new using Tekton Task YAML** <a name="apply12"></a>
+## **Update, replace, or create new using Tekton Task YAML**<a href="#apply12"></a>
 
 > PUT /api/v2/task/{name}?replace=true
 
@@ -55,7 +55,7 @@ No authorization required
 [**Task**](./models/Task.md)
 
 
-## **Create a new Task using Tekton Task YAML** <a name="create12"></a>
+## **Create a new Task using Tekton Task YAML**<a href="#create12"></a>
 
 > POST /api/v2/task
 
@@ -90,7 +90,7 @@ No authorization required
 [**Task**](./models/Task.md)
 
 
-## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.** <a name="get41"></a>
+## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**<a href="#get41"></a>
 
 > GET /api/v2/task/{name}?version=56
 
@@ -123,7 +123,7 @@ No authorization required
 [**Task**](./models/Task.md)
 
 
-## **Retrieve the changlog** <a name="getChangelog2"></a>
+## **Retrieve the changlog**<a href="#getChangelog2"></a>
 
 > GET /api/v2/task/{name}/changelog
 
@@ -156,7 +156,7 @@ No authorization required
 [**List**](./models/ChangeLogVersion.md)
 
 
-## **Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates** <a name="query5"></a>
+## **Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**<a href="#query5"></a>
 
 > GET /api/v2/task/query?labels=,statuses=active,inactive,names=switch,event-wait,limit=10,page=0,sort=ASC
 
@@ -193,7 +193,7 @@ No authorization required
 [**TaskResponsePage**](./models/TaskResponsePage.md)
 
 
-## **** <a name="validateYaml1"></a>
+## ****<a href="#validateYaml1"></a>
 
 > POST /api/v2/task/validate
 

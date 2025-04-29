@@ -25,7 +25,7 @@ title: Team Management Route
 
 
 
-## **Create new team** <a name="createTeam"></a>
+## **Create new team**<a href="#createTeam"></a>
 
 > POST /api/v2/team
 
@@ -59,7 +59,7 @@ No authorization required
 [**Team**](./models/Team.md)
 
 
-## **** <a name="deleteApproverGroup"></a>
+## ****<a href="#deleteApproverGroup"></a>
 
 > DELETE /api/v2/team/{team}/approvers
 
@@ -94,7 +94,7 @@ No authorization required
 null (empty response body)
 
 
-## **** <a name="deleteParameters"></a>
+## ****<a href="#deleteParameters"></a>
 
 > DELETE /api/v2/team/{team}/parameters/{name}
 
@@ -127,7 +127,7 @@ No authorization required
 null (empty response body)
 
 
-## **Delete a team** <a name="deleteWorkflow1"></a>
+## **Delete a team**<a href="#deleteWorkflow1"></a>
 
 > DELETE /api/v2/team/{team}
 
@@ -159,7 +159,7 @@ No authorization required
 null (empty response body)
 
 
-## **** <a name="getDefaultQuotas"></a>
+## ****<a href="#getDefaultQuotas"></a>
 
 > GET /api/v2/team/quotas/default
 
@@ -187,7 +187,7 @@ No authorization required
 [**Quotas**](./models/Quotas.md)
 
 
-## **** <a name="getRoles"></a>
+## ****<a href="#getRoles"></a>
 
 > GET /api/v2/team/roles
 
@@ -215,7 +215,7 @@ No authorization required
 [**List**](./models/Role.md)
 
 
-## **Get team** <a name="getTeam"></a>
+## **Get team**<a href="#getTeam"></a>
 
 > GET /api/v2/team/{team}
 
@@ -247,7 +247,7 @@ No authorization required
 [**Team**](./models/Team.md)
 
 
-## **Search for Teams** <a name="getTeams"></a>
+## **Search for Teams**<a href="#getTeams"></a>
 
 > GET /api/v2/team/query?labels=,statuses=active,inactive,teams=my-amazing-team,boomerangs-return,limit=10,page=0,order=0,sort=0
 
@@ -285,7 +285,7 @@ No authorization required
 [**PageTeam**](./models/PageTeam.md)
 
 
-## **** <a name="leave"></a>
+## ****<a href="#leave"></a>
 
 > DELETE /api/v2/team/{team}/leave
 
@@ -317,7 +317,7 @@ No authorization required
 null (empty response body)
 
 
-## **** <a name="removeMembers"></a>
+## ****<a href="#removeMembers"></a>
 
 > DELETE /api/v2/team/{team}/members
 
@@ -352,7 +352,7 @@ No authorization required
 null (empty response body)
 
 
-## **** <a name="resetQuotas"></a>
+## ****<a href="#resetQuotas"></a>
 
 > DELETE /api/v2/team/{team}/quotas
 
@@ -384,7 +384,7 @@ No authorization required
 null (empty response body)
 
 
-## **Patch or update a team** <a name="updateTeam"></a>
+## **Patch or update a team**<a href="#updateTeam"></a>
 
 > PATCH /api/v2/team/{team}
 
@@ -419,7 +419,7 @@ No authorization required
 [**Team**](./models/Team.md)
 
 
-## **Validate team name and check uniqueness.** <a name="validateTeamName"></a>
+## **Validate team name and check uniqueness.**<a href="#validateTeamName"></a>
 
 > POST /api/v2/team/validate-name
 
