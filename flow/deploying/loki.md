@@ -1,9 +1,9 @@
 ---
-title: Installing Loki
+title: Logging with Loki
 order: 02
 ---
 
-# Installing and Configuring Loki
+# Logging with Loki
 
 ## About
 

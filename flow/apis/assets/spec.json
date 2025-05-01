@@ -886,6 +886,7 @@
       },
       "put": {
         "tags": ["Parameters"],
+        "summary": "Update global Params",
         "operationId": "update",
         "requestBody": {
           "content": {
@@ -903,97 +904,21 @@
                 "schema": { "$ref": "#/components/schemas/AbstractParam" }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AbstractParam" }
+              }
+            }
           }
         }
       },
       "post": {
         "tags": ["Parameters"],
-        "summary": "Create new global Param",
+        "summary": "Create a global Param",
         "operationId": "create_1",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/AbstractParam" }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": { "$ref": "#/components/schemas/AbstractParam" }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "*/*": {
-                "schema": { "$ref": "#/components/schemas/AbstractParam" }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/global-params": {
-      "get": {
-        "tags": ["System"],
-        "summary": "Get all global Params",
-        "operationId": "getAll_1",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": { "$ref": "#/components/schemas/AbstractParam" }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": { "$ref": "#/components/schemas/AbstractParam" }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["System"],
-        "operationId": "update_1",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/AbstractParam" }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": { "$ref": "#/components/schemas/AbstractParam" }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["System"],
-        "summary": "Create new global Param",
-        "operationId": "create_2",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1270,6 +1195,8 @@
     "/api/v2/team/{team}/task/validate": {
       "post": {
         "tags": ["Team Tasks"],
+        "summary": "Validate Tekton Task YAML",
+        "description": "Validates the Task YAML as a Tekton Task",
         "operationId": "validateYaml",
         "requestBody": {
           "content": {
@@ -1279,7 +1206,10 @@
           },
           "required": true
         },
-        "responses": { "200": { "description": "OK" } }
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
       }
     },
     "/api/v2/team/validate-name": {
@@ -1347,6 +1277,8 @@
     "/api/v2/task/validate": {
       "post": {
         "tags": ["Tasks"],
+        "summary": "Validate Tekton Task YAML",
+        "description": "Validates the Task YAML as a Tekton Task",
         "operationId": "validateYaml_1",
         "requestBody": {
           "content": {
@@ -1356,7 +1288,10 @@
           },
           "required": true
         },
-        "responses": { "200": { "description": "OK" } }
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
       }
     },
     "/api/v2/integration/slack/interactivity": {
@@ -1476,6 +1411,7 @@
     "/api/v2/event": {
       "post": {
         "tags": ["Webhooks and Events"],
+        "summary": "Accept CloudEvent",
         "operationId": "acceptEvent_1",
         "parameters": [
           {
@@ -1509,6 +1445,7 @@
     "/api/v2/callback": {
       "get": {
         "tags": ["Webhooks and Events"],
+        "summary": "Accept Wait for Event",
         "operationId": "acceptWaitForEvent_1",
         "parameters": [
           {
@@ -1537,6 +1474,7 @@
       },
       "post": {
         "tags": ["Webhooks and Events"],
+        "summary": "Accept Wait for Event with JSON Payload",
         "operationId": "acceptWaitForEvent",
         "parameters": [
           {
@@ -1678,7 +1616,7 @@
       },
       "delete": {
         "tags": ["Team Management"],
-        "summary": "Delete a team",
+        "summary": "Delete Team",
         "operationId": "deleteWorkflow_1",
         "parameters": [
           {
@@ -3239,10 +3177,22 @@
     "/api/v2/team/roles": {
       "get": {
         "tags": ["Team Management"],
+        "summary": "Retrieve Team Roles",
         "operationId": "getRoles",
         "responses": {
           "200": {
             "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Role" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
               "*/*": {
                 "schema": {
@@ -3258,10 +3208,17 @@
     "/api/v2/team/quotas/default": {
       "get": {
         "tags": ["Team Management"],
+        "summary": "Retrieve Default Team Quota",
         "operationId": "getDefaultQuotas",
         "responses": {
           "200": {
             "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Quotas" } }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
               "*/*": { "schema": { "$ref": "#/components/schemas/Quotas" } }
             }
@@ -3758,6 +3715,7 @@
     "/api/v2/team/{team}/quotas": {
       "delete": {
         "tags": ["Team Management"],
+        "summary": "Reset Team Quota",
         "operationId": "resetQuotas",
         "parameters": [
           {
@@ -3768,12 +3726,16 @@
             "schema": { "type": "string" }
           }
         ],
-        "responses": { "200": { "description": "OK" } }
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
       }
     },
     "/api/v2/team/{team}/parameters/{name}": {
       "delete": {
         "tags": ["Team Management"],
+        "summary": "Delete Team Parameter",
         "operationId": "deleteParameters",
         "parameters": [
           {
@@ -3790,12 +3752,16 @@
             "schema": { "type": "string" }
           }
         ],
-        "responses": { "200": { "description": "OK" } }
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
       }
     },
     "/api/v2/team/{team}/members": {
       "delete": {
         "tags": ["Team Management"],
+        "summary": "Remove Team Members",
         "operationId": "removeMembers",
         "parameters": [
           {
@@ -3818,12 +3784,16 @@
           },
           "required": true
         },
-        "responses": { "200": { "description": "OK" } }
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
       }
     },
     "/api/v2/team/{team}/leave": {
       "delete": {
         "tags": ["Team Management"],
+        "summary": "Leave Team",
         "operationId": "leave",
         "parameters": [
           {
@@ -3834,12 +3804,16 @@
             "schema": { "type": "string" }
           }
         ],
-        "responses": { "200": { "description": "OK" } }
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
       }
     },
     "/api/v2/team/{team}/approvers": {
       "delete": {
         "tags": ["Team Management"],
+        "summary": "Delete Approver Groups",
         "operationId": "deleteApproverGroup",
         "parameters": [
           {
@@ -3858,36 +3832,20 @@
           },
           "required": true
         },
-        "responses": { "200": { "description": "OK" } }
-      }
-    },
-    "/api/v2/parameters/{name}": {
-      "delete": {
-        "tags": ["Parameters"],
-        "summary": "Delete specific global Param",
-        "operationId": "delete_1",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "string" }
-          }
-        ],
         "responses": {
           "200": { "description": "OK" },
           "400": { "description": "Bad Request" }
         }
       }
     },
-    "/api/v2/global-params/{key}": {
+    "/api/v2/parameters/{name}": {
       "delete": {
-        "tags": ["System"],
-        "summary": "Delete specific global Param",
-        "operationId": "delete_2",
+        "tags": ["Parameters"],
+        "summary": "Delete a global Param",
+        "operationId": "delete_1",
         "parameters": [
           {
-            "name": "key",
+            "name": "name",
             "in": "path",
             "required": true,
             "schema": { "type": "string" }
@@ -4590,21 +4548,21 @@
             "type": "object",
             "properties": {
               "seconds": { "type": "integer", "format": "int64" },
+              "zero": { "type": "boolean" },
               "units": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
-                    "durationEstimated": { "type": "boolean" },
                     "dateBased": { "type": "boolean" },
-                    "timeBased": { "type": "boolean" }
+                    "timeBased": { "type": "boolean" },
+                    "durationEstimated": { "type": "boolean" }
                   }
                 }
               },
               "positive": { "type": "boolean" },
-              "negative": { "type": "boolean" },
               "nano": { "type": "integer", "format": "int32" },
-              "zero": { "type": "boolean" }
+              "negative": { "type": "boolean" }
             }
           },
           "results": {
@@ -4940,17 +4898,17 @@
           "data": { "$ref": "#/components/schemas/CloudEventData" },
           "specVersion": { "type": "string", "enum": ["0.3", "1.0"] },
           "source": { "type": "string", "format": "uri" },
-          "time": { "type": "string", "format": "date-time" },
           "subject": { "type": "string" },
+          "time": { "type": "string", "format": "date-time" },
           "id": { "type": "string" },
           "type": { "type": "string" },
-          "dataSchema": { "type": "string", "format": "uri" },
+          "dataContentType": { "type": "string" },
           "attributeNames": {
             "uniqueItems": true,
             "type": "array",
             "items": { "type": "string" }
           },
-          "dataContentType": { "type": "string" },
+          "dataSchema": { "type": "string", "format": "uri" },
           "extensionNames": {
             "uniqueItems": true,
             "type": "array",
@@ -4998,11 +4956,11 @@
       "PageableObject": {
         "type": "object",
         "properties": {
+          "offset": { "type": "integer", "format": "int64" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "offset": { "type": "integer", "format": "int64" },
           "paged": { "type": "boolean" },
           "pageNumber": { "type": "integer", "format": "int32" },
           "pageSize": { "type": "integer", "format": "int32" },
@@ -5088,44 +5046,44 @@
       "PageUser": {
         "type": "object",
         "properties": {
-          "totalPages": { "type": "integer", "format": "int32" },
           "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
+          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/User" }
           },
+          "number": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "size": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
         }
       },
       "PageToken": {
         "type": "object",
         "properties": {
-          "totalPages": { "type": "integer", "format": "int32" },
           "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
+          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/Token" }
           },
+          "number": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "size": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
         }
       },
@@ -5149,22 +5107,22 @@
       "PageWorkflowRun": {
         "type": "object",
         "properties": {
-          "totalPages": { "type": "integer", "format": "int32" },
           "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
+          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/WorkflowRun" }
           },
+          "number": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "size": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
         }
       },
@@ -5234,22 +5192,22 @@
       "PageWorkflowSchedule": {
         "type": "object",
         "properties": {
-          "totalPages": { "type": "integer", "format": "int32" },
           "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
+          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/WorkflowSchedule" }
           },
+          "number": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "size": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
         }
       },
@@ -5349,22 +5307,22 @@
       "PageAction": {
         "type": "object",
         "properties": {
-          "totalPages": { "type": "integer", "format": "int32" },
           "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
+          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/Action" }
           },
+          "number": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "size": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
         }
       },
@@ -5384,22 +5342,22 @@
       "PageTeam": {
         "type": "object",
         "properties": {
-          "totalPages": { "type": "integer", "format": "int32" },
           "totalElements": { "type": "integer", "format": "int64" },
+          "totalPages": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
+          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/Team" }
           },
+          "number": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "size": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "numberOfElements": { "type": "integer", "format": "int32" },
+          "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
         }
       },

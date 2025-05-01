@@ -11,7 +11,7 @@ title: Tasks Route
 | [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#retrieve-a-specific-task-as-tekton-task-yaml-if-no-version-specified-the-latest-version-is-returned) | GET | `/api/v2/task/{name}` |
 | [**Retrieve the changlog**](#retrieve-the-changlog) | GET | `/api/v2/task/{name}/changelog` |
 | [**Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#search-for-task-if-teams-are-provided-it-will-query-the-teams-if-no-teams-are-provided-it-will-query-global-task-templates) | GET | `/api/v2/task/query` |
-| [****](#) | POST | `/api/v2/task/validate` |
+| [**Validate Tekton Task YAML**](#validate-tekton-task-yaml) | POST | `/api/v2/task/validate` |
 
 
 
@@ -190,10 +190,11 @@ No authorization required
 [**TaskResponsePage**](./models/TaskResponsePage)
 
 
-## ****
+## **Validate Tekton Task YAML**
 
 > POST /api/v2/task/validate
 
+Validates the Task YAML as a Tekton Task
 
 #### Request Parameters
 

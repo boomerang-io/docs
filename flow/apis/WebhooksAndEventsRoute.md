@@ -6,14 +6,14 @@ title: Webhooks And Events Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [****](#) | POST | `/api/v2/event` |
-| [****](#) | POST | `/api/v2/callback` |
-| [****](#) | GET | `/api/v2/callback` |
+| [**Accept CloudEvent**](#accept-cloud-event) | POST | `/api/v2/event` |
+| [**Accept Wait for Event with JSON Payload**](#accept-wait-for-event-with-json-payload) | POST | `/api/v2/callback` |
+| [**Accept Wait for Event**](#accept-wait-for-event) | GET | `/api/v2/callback` |
 | [**Trigger WorkflowRun via Webhook.**](#trigger-workflow-run-via-webhook) | POST | `/api/v2/webhook` |
 
 
 
-## ****
+## **Accept CloudEvent**
 
 > POST /api/v2/event?workflow=workflow_example
 
@@ -48,7 +48,7 @@ No authorization required
 **Object**
 
 
-## ****
+## **Accept Wait for Event with JSON Payload**
 
 > POST /api/v2/callback?workflowrun=workflowrun_example,topic=topic_example,status=status_example
 
@@ -85,7 +85,7 @@ No authorization required
 null (empty response body)
 
 
-## ****
+## **Accept Wait for Event**
 
 > GET /api/v2/callback?workflowrun=workflowrun_example,topic=topic_example,status=status_example
 

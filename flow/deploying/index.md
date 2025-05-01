@@ -1,4 +1,4 @@
 ---
 title: Deploying
-order: 4
+order: 6
 ---

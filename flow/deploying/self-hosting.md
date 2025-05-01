@@ -1,13 +1,13 @@
 ---
-title: Installing
+title: Self Hosting
 order: 1
 ---
 
-# Installing
+# Self Hosting
 
-Boomerang Flow is packaged as a Helm<sup>®</sup> 3 chart with the values documented in the chart. Please make sure to read the [prerequisites](../installing/pre-requisites) prior to installing.
+Boomerang Flow is packaged as a Helm<sup>®</sup> 3 chart with the values documented in the chart. Please make sure to read the [prerequisites](#pre-requisites) prior to installing.
 
-## Prerequisites
+## Pre-requisites
 
 You are expected to have one of the supported Kubernetes<sup>®</sup> platforms available with the additional software requirements presented in the following sections.
 

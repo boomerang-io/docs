@@ -5,41 +5,26 @@ order: 3
 
 # Security Architecture
 
-Boomerang Flow has a number of security protocols in place. The following architecture information provides details on how these are applicable.
+The following architecture information provides details on security protocols in place and how these are applicable.
 
 ## Authentication
 
-Boomerang Flow relies on the Boomerang `OAuth Proxy` (a fork of `oauth2_proxy`) to provide user authentication in the form of basic authentication or integrated with a provider such as GitHub<sup>®</sup> or Google.
+The solution relies on **[oauth2_proxy](https://github.com/oauth2-proxy)** to provide user authentication in the form of basic authentication or integrated with a provider such as GitHub<sup>®</sup> or Google.
 
-There are also Tokens for securing API endpoints and Workflows by either Global, Team, or Workflow tokens.
+There are also Tokens for securing API endpoints by either Global, Team, Workflow, or User tokens.
 
 ### Tokens
 
-Tokens are used to secure the API endpoints as well as Workflow triggers. There are two formats of Tokens currently implemented in Boomerang Flow;
+Tokens are used to secure the API endpoints. The format used by our API Tokens is as follows;
 
-- The legacy token format is currently used by Workflow Triggers and the _deprecated_ System Tokens
-- The new token format used by our API Tokens which have identifiable prefixes of `bfg_` for Global and `bft_` for Team tokens.
+| Scope    | Prefix | Access                                                                                        |
+| -------- | ------ | --------------------------------------------------------------------------------------------- |
+| Global   | `bfg_` | Allows you to retrieve information or perform an action on any team, user, or workflow.       |
+| Team     | `bft_` | Allows you to retrieve information or perform an action of a specific team or team workflows. |
+| Workflow | `bfw_` | Allows you to retrieve information or perform an action of a specific workflow.               |
+| User     | `bfu_` | Allows you to retrieve information or perform an action of a specific user.                   |
 
-> You can learn more about the new Token format by reading this [GitHub Blog](https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/) or by [understanding our scoping implementation](https://github.com/boomerang-io/flow.service.workflow).
-
-#### API Tokens
-
-API Tokens can be of two different scopes, easily identified by their Token prefix.
-
-| Scope  | Token Prefix | Access                                                                                     |
-| ------ | ------------ | ------------------------------------------------------------------------------------------ |
-| Global | `bfg_`       | Allows you to retrieve information or perform an action on any team, user, or workflow.    |
-| Team   | `bft_`       | Allows you to retrieve information perform an action of a specific team or team workflows. |
-
-#### Workflow Tokens
-
-Workflow tokens are used by the eventing framework to trigger workflows or to respond to certain actions.
-
-> In time these will migrate to be a scoped token called via the APIs and be prefixed with `bfw_` for Workflow tokens.
-
-#### System Tokens [Deprecated]
-
-These are used to protect internally available endpoints, that have no available ingress, for integration with other applications that are internal to the Kubernetes cluster.
+> You can learn more about the Token format by reading this [GitHub Blog](https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/) or by [understanding our scoping implementation](https://github.com/boomerang-io/flow.service).
 
 ## Authorization
 

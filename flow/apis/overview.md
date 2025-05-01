@@ -65,10 +65,10 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 | Route | Endpoint | 
 | ------------- | ------------- |
-| [**Create new global Param**](./ParametersRoute#create-new-global-param) | **POST** /api/v2/parameters |
-| [**Delete specific global Param**](./ParametersRoute#delete-specific-global-param) | **DELETE** /api/v2/parameters/{name} |
+| [**Create a global Param**](./ParametersRoute#create-a-global-param) | **POST** /api/v2/parameters |
+| [**Delete a global Param**](./ParametersRoute#delete-a-global-param) | **DELETE** /api/v2/parameters/{name} |
 | [**Get all global Params**](./ParametersRoute#get-all-global-params) | **GET** /api/v2/parameters |
-| [****](./ParametersRoute#) | **PUT** /api/v2/parameters |
+| [**Update global Params**](./ParametersRoute#update-global-params) | **PUT** /api/v2/parameters |
 
 ### Profile
 
@@ -93,15 +93,11 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 | Route | Endpoint | 
 | ------------- | ------------- |
-| [**Create new global Param**](./SystemRoute#create-new-global-param) | **POST** /api/v2/global-params |
-| [**Delete specific global Param**](./SystemRoute#delete-specific-global-param) | **DELETE** /api/v2/global-params/{key} |
-| [**Get all global Params**](./SystemRoute#get-all-global-params) | **GET** /api/v2/global-params |
 | [**Retrieve Boomerang Flow Settings**](./SystemRoute#retrieve-boomerang-flow-settings) | **GET** /api/v2/settings |
 | [**Retrieve feature flags.**](./SystemRoute#retrieve-feature-flags) | **GET** /api/v2/features |
 | [**Retrieve this instances context, features, and navigation.**](./SystemRoute#retrieve-this-instances-context-features-and-navigation) | **GET** /api/v2/context |
 | [**Retrieve navigation.**](./SystemRoute#retrieve-navigation) | **GET** /api/v2/navigation |
 | [**Register and activate an installation of Flow**](./SystemRoute#register-and-activate-an-installation-of-flow) | **PUT** /api/v2/activate |
-| [****](./SystemRoute#) | **PUT** /api/v2/global-params |
 | [**Update Boomerang Flow Settings**](./SystemRoute#update-boomerang-flow-settings) | **PUT** /api/v2/settings |
 
 ### Task Runs
@@ -119,23 +115,23 @@ APIs that required authentication, can use an appropriately scoped token in the 
 | [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](./TasksRoute#retrieve-a-specific-task-as-tekton-task-yaml-if-no-version-specified-the-latest-version-is-returned) | **GET** /api/v2/task/{name} |
 | [**Retrieve the changlog**](./TasksRoute#retrieve-the-changlog) | **GET** /api/v2/task/{name}/changelog |
 | [**Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](./TasksRoute#search-for-task-if-teams-are-provided-it-will-query-the-teams-if-no-teams-are-provided-it-will-query-global-task-templates) | **GET** /api/v2/task/query |
-| [****](./TasksRoute#) | **POST** /api/v2/task/validate |
+| [**Validate Tekton Task YAML**](./TasksRoute#validate-tekton-task-yaml) | **POST** /api/v2/task/validate |
 
 ### Team Management
 
 | Route | Endpoint | 
 | ------------- | ------------- |
 | [**Create new team**](./TeamManagementRoute#create-new-team) | **POST** /api/v2/team |
-| [****](./TeamManagementRoute#) | **DELETE** /api/v2/team/{team}/approvers |
-| [****](./TeamManagementRoute#) | **DELETE** /api/v2/team/{team}/parameters/{name} |
-| [**Delete a team**](./TeamManagementRoute#delete-a-team) | **DELETE** /api/v2/team/{team} |
-| [****](./TeamManagementRoute#) | **GET** /api/v2/team/quotas/default |
-| [****](./TeamManagementRoute#) | **GET** /api/v2/team/roles |
+| [**Delete Approver Groups**](./TeamManagementRoute#delete-approver-groups) | **DELETE** /api/v2/team/{team}/approvers |
+| [**Delete Team Parameter**](./TeamManagementRoute#delete-team-parameter) | **DELETE** /api/v2/team/{team}/parameters/{name} |
+| [**Delete Team**](./TeamManagementRoute#delete-team) | **DELETE** /api/v2/team/{team} |
+| [**Retrieve Default Team Quota**](./TeamManagementRoute#retrieve-default-team-quota) | **GET** /api/v2/team/quotas/default |
+| [**Retrieve Team Roles**](./TeamManagementRoute#retrieve-team-roles) | **GET** /api/v2/team/roles |
 | [**Get team**](./TeamManagementRoute#get-team) | **GET** /api/v2/team/{team} |
 | [**Search for Teams**](./TeamManagementRoute#search-for-teams) | **GET** /api/v2/team/query |
-| [****](./TeamManagementRoute#) | **DELETE** /api/v2/team/{team}/leave |
-| [****](./TeamManagementRoute#) | **DELETE** /api/v2/team/{team}/members |
-| [****](./TeamManagementRoute#) | **DELETE** /api/v2/team/{team}/quotas |
+| [**Leave Team**](./TeamManagementRoute#leave-team) | **DELETE** /api/v2/team/{team}/leave |
+| [**Remove Team Members**](./TeamManagementRoute#remove-team-members) | **DELETE** /api/v2/team/{team}/members |
+| [**Reset Team Quota**](./TeamManagementRoute#reset-team-quota) | **DELETE** /api/v2/team/{team}/quotas |
 | [**Patch or update a team**](./TeamManagementRoute#patch-or-update-a-team) | **PATCH** /api/v2/team/{team} |
 | [**Validate team name and check uniqueness.**](./TeamManagementRoute#validate-team-name-and-check-uniqueness) | **POST** /api/v2/team/validate-name |
 
@@ -149,7 +145,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 | [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](./TeamTasksRoute#retrieve-a-specific-task-as-tekton-task-yaml-if-no-version-specified-the-latest-version-is-returned) | **GET** /api/v2/team/{team}/task/{name} |
 | [**Retrieve the changlog**](./TeamTasksRoute#retrieve-the-changlog) | **GET** /api/v2/team/{team}/task/{name}/changelog |
 | [**Search for Tasks. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](./TeamTasksRoute#search-for-tasks-if-teams-are-provided-it-will-query-the-teams-if-no-teams-are-provided-it-will-query-global-task-templates) | **GET** /api/v2/team/{team}/task/query |
-| [****](./TeamTasksRoute#) | **POST** /api/v2/team/{team}/task/validate |
+| [**Validate Tekton Task YAML**](./TeamTasksRoute#validate-tekton-task-yaml) | **POST** /api/v2/team/{team}/task/validate |
 
 ### Token Management
 
@@ -172,9 +168,9 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 | Route | Endpoint | 
 | ------------- | ------------- |
-| [****](./WebhooksAndEventsRoute#) | **POST** /api/v2/event |
-| [****](./WebhooksAndEventsRoute#) | **POST** /api/v2/callback |
-| [****](./WebhooksAndEventsRoute#) | **GET** /api/v2/callback |
+| [**Accept CloudEvent**](./WebhooksAndEventsRoute#accept-cloud-event) | **POST** /api/v2/event |
+| [**Accept Wait for Event with JSON Payload**](./WebhooksAndEventsRoute#accept-wait-for-event-with-json-payload) | **POST** /api/v2/callback |
+| [**Accept Wait for Event**](./WebhooksAndEventsRoute#accept-wait-for-event) | **GET** /api/v2/callback |
 | [**Trigger WorkflowRun via Webhook.**](./WebhooksAndEventsRoute#trigger-workflow-run-via-webhook) | **POST** /api/v2/webhook |
 
 ### Workflow Runs

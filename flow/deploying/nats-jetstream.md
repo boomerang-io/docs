@@ -1,9 +1,9 @@
 ---
-title: Installing NATS Jetstream
+title: Events with NATS Jetstream
 order: 03
 ---
 
-# Installing and Configuring NATS with Jetstream
+# Events with NATS Jetstream
 
 ## About
 

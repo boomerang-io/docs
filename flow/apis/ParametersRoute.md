@@ -6,14 +6,14 @@ title: Parameters Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Create new global Param**](#create-new-global-param) | POST | `/api/v2/parameters` |
-| [**Delete specific global Param**](#delete-specific-global-param) | DELETE | `/api/v2/parameters/{name}` |
+| [**Create a global Param**](#create-a-global-param) | POST | `/api/v2/parameters` |
+| [**Delete a global Param**](#delete-a-global-param) | DELETE | `/api/v2/parameters/{name}` |
 | [**Get all global Params**](#get-all-global-params) | GET | `/api/v2/parameters` |
-| [****](#) | PUT | `/api/v2/parameters` |
+| [**Update global Params**](#update-global-params) | PUT | `/api/v2/parameters` |
 
 
 
-## **Create new global Param**
+## **Create a global Param**
 
 > POST /api/v2/parameters
 
@@ -47,7 +47,7 @@ No authorization required
 [**AbstractParam**](./models/AbstractParam)
 
 
-## **Delete specific global Param**
+## **Delete a global Param**
 
 > DELETE /api/v2/parameters/{name}
 
@@ -107,7 +107,7 @@ No authorization required
 [**List**](./models/AbstractParam)
 
 
-## ****
+## **Update global Params**
 
 > PUT /api/v2/parameters
 

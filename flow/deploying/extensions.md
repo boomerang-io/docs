@@ -1,5 +1,5 @@
 ---
-title: Installing Extensions
+title: Extensions
 order: 04
 ---
 

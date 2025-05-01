@@ -7,16 +7,16 @@ title: Team Management Route
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Create new team**](#create-new-team) | POST | `/api/v2/team` |
-| [****](#) | DELETE | `/api/v2/team/{team}/approvers` |
-| [****](#) | DELETE | `/api/v2/team/{team}/parameters/{name}` |
-| [**Delete a team**](#delete-a-team) | DELETE | `/api/v2/team/{team}` |
-| [****](#) | GET | `/api/v2/team/quotas/default` |
-| [****](#) | GET | `/api/v2/team/roles` |
+| [**Delete Approver Groups**](#delete-approver-groups) | DELETE | `/api/v2/team/{team}/approvers` |
+| [**Delete Team Parameter**](#delete-team-parameter) | DELETE | `/api/v2/team/{team}/parameters/{name}` |
+| [**Delete Team**](#delete-team) | DELETE | `/api/v2/team/{team}` |
+| [**Retrieve Default Team Quota**](#retrieve-default-team-quota) | GET | `/api/v2/team/quotas/default` |
+| [**Retrieve Team Roles**](#retrieve-team-roles) | GET | `/api/v2/team/roles` |
 | [**Get team**](#get-team) | GET | `/api/v2/team/{team}` |
 | [**Search for Teams**](#search-for-teams) | GET | `/api/v2/team/query` |
-| [****](#) | DELETE | `/api/v2/team/{team}/leave` |
-| [****](#) | DELETE | `/api/v2/team/{team}/members` |
-| [****](#) | DELETE | `/api/v2/team/{team}/quotas` |
+| [**Leave Team**](#leave-team) | DELETE | `/api/v2/team/{team}/leave` |
+| [**Remove Team Members**](#remove-team-members) | DELETE | `/api/v2/team/{team}/members` |
+| [**Reset Team Quota**](#reset-team-quota) | DELETE | `/api/v2/team/{team}/quotas` |
 | [**Patch or update a team**](#patch-or-update-a-team) | PATCH | `/api/v2/team/{team}` |
 | [**Validate team name and check uniqueness.**](#validate-team-name-and-check-uniqueness) | POST | `/api/v2/team/validate-name` |
 
@@ -56,7 +56,7 @@ No authorization required
 [**Team**](./models/Team)
 
 
-## ****
+## **Delete Approver Groups**
 
 > DELETE /api/v2/team/{team}/approvers
 
@@ -91,7 +91,7 @@ No authorization required
 null (empty response body)
 
 
-## ****
+## **Delete Team Parameter**
 
 > DELETE /api/v2/team/{team}/parameters/{name}
 
@@ -124,7 +124,7 @@ No authorization required
 null (empty response body)
 
 
-## **Delete a team**
+## **Delete Team**
 
 > DELETE /api/v2/team/{team}
 
@@ -156,7 +156,7 @@ No authorization required
 null (empty response body)
 
 
-## ****
+## **Retrieve Default Team Quota**
 
 > GET /api/v2/team/quotas/default
 
@@ -184,7 +184,7 @@ No authorization required
 [**Quotas**](./models/Quotas)
 
 
-## ****
+## **Retrieve Team Roles**
 
 > GET /api/v2/team/roles
 
@@ -282,7 +282,7 @@ No authorization required
 [**PageTeam**](./models/PageTeam)
 
 
-## ****
+## **Leave Team**
 
 > DELETE /api/v2/team/{team}/leave
 
@@ -314,7 +314,7 @@ No authorization required
 null (empty response body)
 
 
-## ****
+## **Remove Team Members**
 
 > DELETE /api/v2/team/{team}/members
 
@@ -349,7 +349,7 @@ No authorization required
 null (empty response body)
 
 
-## ****
+## **Reset Team Quota**
 
 > DELETE /api/v2/team/{team}/quotas
 
