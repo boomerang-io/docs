@@ -98,3 +98,20 @@ Reference:
 
 - [Using variable substitution](https://github.com/tektoncd/pipeline/blob/master/docs/Tasks.md#using-variable-substitution)
 - [Variable Substitutions Supported by Tasks and Pipelines](https://github.com/tektoncd/pipeline/blob/master/docs/variables.md)
+
+### Parameter Types
+
+| Flow Param Type        | Tekton Param Type      |
+| ---------------------- | ---------------------- |
+| text                   | string                 |
+| textarea               | string                 |
+| email                  | string                 |
+| number                 | string                 |
+| url                    | string                 |
+| boolean                | string                 |
+| password               | string                 |
+| select                 | string                 |
+| multiselect _future_   | array -> enum _future_ |
+| json                   | object                 |
+| texteditor             | string                 |
+| texteditor::<language> | string                 |

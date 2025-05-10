@@ -5,6 +5,8 @@ order: 1
 
 # Create a new Workflow
 
+> Note: This guide is intended for v3 and has not been updated for v4.
+
 ## Create with the Wizard
 
 The process for creating a Workflow involves specifying basic properties for the Workflow, then continuing with the Workflow Editor to define the steps included in the Workflow.
