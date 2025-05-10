@@ -5,7 +5,7 @@ order: 10
 
 # Writing Tasks
 
-##
+> Note: This guide is intended for v3 and has not been updated for v4.
 
 ## Migrating from Workers to Tasks
 

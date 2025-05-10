@@ -5,6 +5,8 @@ order: 6
 
 # Using the Slack App
 
+> Note: This guide is intended for v3 and has not been updated for v4.
+
 An embedded contextual experience letting you kick-off automation right within Slack, giving you complete control over what needs to be done.
 
 The SRE team could be using it to respond to incidents, or the marketing team could be sending emails, or you could use it to on-board new team members. Whatever the need, everything can be automated and then triggered from Slack.

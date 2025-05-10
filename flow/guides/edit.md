@@ -5,6 +5,8 @@ order: 2
 
 # Customize a Workflow with Editor
 
+> Note: This guide is intended for v3 and has not been updated for v4.
+
 Click any Workflow tile to open the Editor page for that Workflow. The editor is where Workflows are created and managed. You define everything to do with your Workflow, including designing the model, triggers, options, and properties.
 
 ### Features

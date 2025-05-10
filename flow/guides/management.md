@@ -5,6 +5,8 @@ order: 1
 
 # Manage an existing Workflow
 
+> Note: This guide is intended for v3 and has not been updated for v4.
+
 The unique features offered by Flow help you in creating a Workflow. Executing a Workflow is also determined by these features.
 
 From Launchpad, click the Boomerang Flow tile.
