@@ -17,51 +17,47 @@ There are also Tokens for securing API endpoints by either Global, Team, Workflo
 
 Tokens are used to secure the API endpoints. The format used by our API Tokens is as follows;
 
-| Scope    | Prefix | Access                                                                                        |
-| -------- | ------ | --------------------------------------------------------------------------------------------- |
-| Global   | `bfg_` | Allows you to retrieve information or perform an action on any team, user, or workflow.       |
-| Team     | `bft_` | Allows you to retrieve information or perform an action of a specific team or team workflows. |
-| Workflow | `bfw_` | Allows you to retrieve information or perform an action of a specific workflow.               |
-| User     | `bfu_` | Allows you to retrieve information or perform an action of a specific user.                   |
+| Scope    | Prefix | Access                                                                                                |
+| -------- | ------ | ----------------------------------------------------------------------------------------------------- |
+| Global   | `bfg_` | Allows you to retrieve information or perform an action on any team, user, or workflow.               |
+| Team     | `bft_` | Allows you to retrieve information or perform an action of a specific team or team workflows.         |
+| Workflow | `bfw_` | Allows you to retrieve information or perform an action of a specific workflow.                       |
+| User     | `bfu_` | Allows you to retrieve information or perform an action of a specific user.                           |
+| Session  | `bfs_` | Allows you to retrieve information or perform an action of a specific user. For the specific session. |
 
 > You can learn more about the Token format by reading this [GitHub Blog](https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/) or by [understanding our scoping implementation](https://github.com/boomerang-io/flow.service).
 
 ## Authorization
 
-Authorization is split into Global roles and also Team Entitlements.
+### Permissions
 
-**Roles**
+Authorization is based on permissions that are made of actions that can be performed on the resources. Actions are split up into; create, read, write, delete, and action. The resources are all the entities within the system.
 
-| Level  | Role     | Access                                                                       |
-| ------ | -------- | ---------------------------------------------------------------------------- |
-| global | admin    | Full access to Flow: Ability to access and manage all teams and system       |
-| global | operator | Access to Flow across teams: Ability to access and manage all teams          |
-| global | user     | No access unless in a team with an entitlement                               |
-| team   | user     | Default role within a team: Can do most functions other than Flow management |
+- are in the format of `resource/action`. For example, `workflow/create` or `team/read`.
+- `**` can be used to repplace the resource or action. For example, `workflow/**` or `**/**`.
 
-## Access control
+### Scope
 
-| Interface                | Administrator (Global) | Operator (Global) | User (Global) | User (Team)    |
-| ------------------------ | ---------------------- | ----------------- | ------------- | -------------- |
-| Workflows                | View & Execute         | View & Execute    | -             | View & Execute |
-| Actions                  | View & Execute         | View & Execute    | -             | View & Execute |
-| Activity                 | View                   | View              | View          | View           |
-| Insights                 | View                   | View              | View          | View           |
-| Manage - Team Parameters | Edit                   | Edit              | -             | -              |
-| Manage - Team Tasks      | Edit                   | Edit              | -             | -              |
-| Manage - Team Tokens     | Edit                   | Edit              | -             | -              |
-| Admin - Teams            | Edit                   | Edit              | -             | -              |
-| Admin - Users            | Edit                   | Edit              | -             | -              |
-| Admin - Parameters       | Edit                   | Edit              | -             | -              |
-| Admin - Tokens           | Edit                   | Edit              | -             | -              |
-| Admin - Quotas           | Edit                   | Edit              | -             | -              |
-| Admin - Settings         | Edit                   | Edit              | -             | -              |
-| Admin - Task Manaers     | Edit                   | Edit              | -             | -              |
-| Admin - System Workflows | Edit                   | Edit              | -             | -              |
+Once you have a permission, it is then bound by the scope that you apply to it. For example a user can have a permission to `workflow/create` but only on a specific team. This is done by scoping the permission to the team.
+
+### Roles
+
+Roles can be assigned at a global scope or at a team scope and provide a grouping of permissions. The following table provides an overview of the roles and their permissions.
+
+| Type   | Role     | Description                                                                                                                                | Permissions                        |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------- |
+| global | admin    | Ability to access and manage all teams and system                                                                                          | `**/**`                            |
+| global | operator | Ability to access and manage all teams                                                                                                     | `**/read`, `**/write`, `**/action` |
+| User   | user     | Ability to view their own profile                                                                                                          | `profile/**`                       |
+| team   | owner    | Applied to user at team creation time. Can do create, read, write, delete, action on all resources within the team and on the team itself. | `**/**`                            |
+| team   | editor   | Similar to owner, without the delete action.                                                                                               | `**/read`, `**/write`, `**/action` |
+| team   | reader   | Read on all resources within the team.                                                                                                     | `**/read`                          |
 
 ## Audit
 
-Only available when integrated to IBM Consulting Essentials.
+Every action taken within the system is stored in the audit table.
+
+> Note: there is currently no UI to be able to view the audit logs.
 
 ## SSL certificates
 
