@@ -7,7 +7,7 @@ order: 2
 
 The Workflows page is the central area to perform actions on all your personal and team based Workflows. From here you see each Workflow as a tile and is where you create, edit, and run your Workflows.
 
-![Workflows](./assets/workflows-tiles.png)
+![Workflows](./assets/img/workflows-tiles.png)
 
 The following functionality is available on the Workflows page.
 
@@ -28,13 +28,13 @@ A workflow will show various status' depending on the state of the workflow. The
 - warning(orange circle): unable to manually trigger the workflow
 - warning(orange circle): reached a quota limit
 
-![Workflows Trigger Disabled](./assets/workflows-trigger-disabled.png)
+![Workflows Trigger Disabled](./assets/img/workflows-trigger-disabled.png)
 
 ### Upgrades Available
 
 The Workflow tile will also indicate, through a yellow warning icon, if there are upgrades available for a Task within the Workflow.
 
-![Workflows Upgrades Available](./assets/workflows-upgrade.png)
+![Workflows Upgrades Available](./assets/img/workflows-upgrade.png)
 
 ## Workflow Editor
 

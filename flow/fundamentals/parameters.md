@@ -22,7 +22,7 @@ The following table lists the parameters and when they are available to be subst
 
 The substitution is performed by the Workflow service when a Workflow is executed.
 
-![Parameter Layering](./assets/img/Boomerang-Flow-Parameters.png)
+![Parameter Layering](./assets/img/parameters.png)
 
 | Parameter Scope | Available When?                                                                                                          | Syntax                                    | Example                                          |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------- | ------------------------------------------------ |
@@ -31,7 +31,7 @@ The substitution is performed by the Workflow service when a Workflow is execute
 | Workflow        | Throughout the Workflow lifecycle. Created and set by a user through Editor inputs.                                      | `$(workflow.params.<parameter>)`          | `$(workflow.params.slackChannel)`                |
 | Context         | Specific reserved parameters available at the execution of a Workflow.                                                   | `$(context.params.<parameter>)`           | `$(context.params.workflowrun-id)`               |
 | Params          | The flattened parameters with all inheritance and substitution resolved.                                                 | `$(params.<parameter>)`                   | `$(params.slackChannel)`                         |
-| Task Results    | At completion of a Task execution, these parameters can be referenced by other Tasks during the same Workflow execution. | `$(Task.<Task name>.results.<parameter>)` | `$(Task.My Wait For Event.results.eventPayload)` |
+| Task Results    | At completion of a Task execution, these parameters can be referenced by other Tasks during the same Workflow execution. | `$(task.<Task name>.results.<parameter>)` | `$(task.My Wait For Event.results.eventPayload)` |
 
 Although Tasks themselves have input parameters, these are defined as part of the Task template and are only able to be referenced within the Task template or by the Task code itself.
 
