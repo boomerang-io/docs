@@ -169,8 +169,8 @@ APIs that required authentication, can use an appropriately scoped token in the 
 | Route | Endpoint | 
 | ------------- | ------------- |
 | [**Accept CloudEvent**](./WebhooksAndEventsRoute#accept-cloud-event) | **POST** /api/v2/event |
-| [**Accept Wait for Event with JSON Payload**](./WebhooksAndEventsRoute#accept-wait-for-event-with-json-payload) | **POST** /api/v2/callback |
-| [**Accept Wait for Event**](./WebhooksAndEventsRoute#accept-wait-for-event) | **GET** /api/v2/callback |
+| [**Accept Wait for Event Callback with JSON Payload**](./WebhooksAndEventsRoute#accept-wait-for-event-callback-with-json-payload) | **POST** /api/v2/callback |
+| [**Accept Wait for Event Callbcak**](./WebhooksAndEventsRoute#accept-wait-for-event-callbcak) | **GET** /api/v2/callback |
 | [**Trigger WorkflowRun via Webhook.**](./WebhooksAndEventsRoute#trigger-workflow-run-via-webhook) | **POST** /api/v2/webhook |
 
 ### Workflow Runs
@@ -256,6 +256,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
  - [PageableObject](./models/PageableObject)
  - [ParamSpec](./models/ParamSpec)
  - [Quotas](./models/Quotas)
+ - [ResolvedPermissions](./models/ResolvedPermissions)
  - [ResultSpec](./models/ResultSpec)
  - [Role](./models/Role)
  - [RunParam](./models/RunParam)

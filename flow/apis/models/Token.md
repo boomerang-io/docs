@@ -15,7 +15,7 @@ title: Token Model
 | **expirationDate** | **Date** |  | [optional] [default to null] |
 | **valid** | **Boolean** |  | [optional] [default to null] |
 | **principal** | **String** |  | [optional] [default to null] |
-| **permissions** | **List** |  | [optional] [default to null] |
+| **permissions** | [**List**](ResolvedPermissions) |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

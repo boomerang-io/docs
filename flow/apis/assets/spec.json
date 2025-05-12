@@ -978,7 +978,7 @@
         "operationId": "acceptWebhookEvent",
         "parameters": [
           {
-            "name": "workflow",
+            "name": "ref",
             "in": "query",
             "description": "Workflow reference the request relates to",
             "required": false,
@@ -1415,9 +1415,9 @@
         "operationId": "acceptEvent_1",
         "parameters": [
           {
-            "name": "workflow",
+            "name": "ref",
             "in": "query",
-            "description": "The Workflow the request relates to",
+            "description": "The Workflow reference the request relates to",
             "required": false,
             "schema": { "type": "string" }
           }
@@ -1445,13 +1445,13 @@
     "/api/v2/callback": {
       "get": {
         "tags": ["Webhooks and Events"],
-        "summary": "Accept Wait for Event",
+        "summary": "Accept Wait for Event Callbcak",
         "operationId": "acceptWaitForEvent_1",
         "parameters": [
           {
-            "name": "workflowrun",
+            "name": "ref",
             "in": "query",
-            "description": "The WorkflowRun the request relates to",
+            "description": "The WorkflowRun reference the request relates to",
             "required": true,
             "schema": { "type": "string" }
           },
@@ -1474,13 +1474,13 @@
       },
       "post": {
         "tags": ["Webhooks and Events"],
-        "summary": "Accept Wait for Event with JSON Payload",
+        "summary": "Accept Wait for Event Callback with JSON Payload",
         "operationId": "acceptWaitForEvent",
         "parameters": [
           {
-            "name": "workflowrun",
+            "name": "ref",
             "in": "query",
-            "description": "The WorkflowRun the request relates to",
+            "description": "The WorkflowRun reference the request relates to",
             "required": true,
             "schema": { "type": "string" }
           },
@@ -2600,6 +2600,17 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ChangeLogVersion" }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
             "content": {
               "*/*": {
                 "schema": {
@@ -4548,21 +4559,21 @@
             "type": "object",
             "properties": {
               "seconds": { "type": "integer", "format": "int64" },
-              "zero": { "type": "boolean" },
               "units": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
+                    "durationEstimated": { "type": "boolean" },
                     "dateBased": { "type": "boolean" },
-                    "timeBased": { "type": "boolean" },
-                    "durationEstimated": { "type": "boolean" }
+                    "timeBased": { "type": "boolean" }
                   }
                 }
               },
               "positive": { "type": "boolean" },
+              "negative": { "type": "boolean" },
               "nano": { "type": "integer", "format": "int32" },
-              "negative": { "type": "boolean" }
+              "zero": { "type": "boolean" }
             }
           },
           "results": {
@@ -4896,12 +4907,12 @@
         "type": "object",
         "properties": {
           "data": { "$ref": "#/components/schemas/CloudEventData" },
-          "specVersion": { "type": "string", "enum": ["0.3", "1.0"] },
-          "source": { "type": "string", "format": "uri" },
-          "subject": { "type": "string" },
-          "time": { "type": "string", "format": "date-time" },
           "id": { "type": "string" },
           "type": { "type": "string" },
+          "time": { "type": "string", "format": "date-time" },
+          "source": { "type": "string", "format": "uri" },
+          "specVersion": { "type": "string", "enum": ["0.3", "1.0"] },
+          "subject": { "type": "string" },
           "dataContentType": { "type": "string" },
           "attributeNames": {
             "uniqueItems": true,
@@ -4961,10 +4972,10 @@
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
+          "unpaged": { "type": "boolean" },
           "paged": { "type": "boolean" },
           "pageNumber": { "type": "integer", "format": "int32" },
-          "pageSize": { "type": "integer", "format": "int32" },
-          "unpaged": { "type": "boolean" }
+          "pageSize": { "type": "integer", "format": "int32" }
         }
       },
       "SortObject": {
@@ -5048,14 +5059,14 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
+          "number": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
-          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/User" }
           },
-          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
@@ -5070,14 +5081,14 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
+          "number": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
-          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/Token" }
           },
-          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
@@ -5085,6 +5096,17 @@
           "numberOfElements": { "type": "integer", "format": "int32" },
           "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
+        }
+      },
+      "ResolvedPermissions": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": ["session", "user", "team", "workflow", "global"]
+          },
+          "principal": { "type": "string" },
+          "actions": { "type": "array", "items": { "type": "string" } }
         }
       },
       "Token": {
@@ -5101,7 +5123,10 @@
           "expirationDate": { "type": "string", "format": "date-time" },
           "valid": { "type": "boolean" },
           "principal": { "type": "string" },
-          "permissions": { "type": "array", "items": { "type": "string" } }
+          "permissions": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ResolvedPermissions" }
+          }
         }
       },
       "PageWorkflowRun": {
@@ -5109,14 +5134,14 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
+          "number": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
-          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/WorkflowRun" }
           },
-          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
@@ -5194,14 +5219,14 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
+          "number": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
-          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/WorkflowSchedule" }
           },
-          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
@@ -5309,14 +5334,14 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
+          "number": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
-          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/Action" }
           },
-          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
@@ -5344,14 +5369,14 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
+          "number": { "type": "integer", "format": "int32" },
           "first": { "type": "boolean" },
           "last": { "type": "boolean" },
-          "size": { "type": "integer", "format": "int32" },
           "content": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/Team" }
           },
-          "number": { "type": "integer", "format": "int32" },
+          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }

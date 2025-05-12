@@ -7,15 +7,15 @@ title: Webhooks And Events Route
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
 | [**Accept CloudEvent**](#accept-cloud-event) | POST | `/api/v2/event` |
-| [**Accept Wait for Event with JSON Payload**](#accept-wait-for-event-with-json-payload) | POST | `/api/v2/callback` |
-| [**Accept Wait for Event**](#accept-wait-for-event) | GET | `/api/v2/callback` |
+| [**Accept Wait for Event Callback with JSON Payload**](#accept-wait-for-event-callback-with-json-payload) | POST | `/api/v2/callback` |
+| [**Accept Wait for Event Callbcak**](#accept-wait-for-event-callbcak) | GET | `/api/v2/callback` |
 | [**Trigger WorkflowRun via Webhook.**](#trigger-workflow-run-via-webhook) | POST | `/api/v2/webhook` |
 
 
 
 ## **Accept CloudEvent**
 
-> POST /api/v2/event?workflow=workflow_example
+> POST /api/v2/event?ref=ref_example
 
 
 #### Request Parameters
@@ -23,7 +23,7 @@ title: Webhooks And Events Route
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
-| **workflow** | **String** | false | The Workflow the request relates to | Defaults to null. | workflow_example
+| **ref** | **String** | false | The Workflow reference the request relates to | Defaults to null. | ref_example
 
 
 #### Request Body
@@ -48,9 +48,9 @@ No authorization required
 **Object**
 
 
-## **Accept Wait for Event with JSON Payload**
+## **Accept Wait for Event Callback with JSON Payload**
 
-> POST /api/v2/callback?workflowrun=workflowrun_example,topic=topic_example,status=status_example
+> POST /api/v2/callback?ref=ref_example,topic=topic_example,status=status_example
 
 
 #### Request Parameters
@@ -58,7 +58,7 @@ No authorization required
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
-| **workflowrun** | **String** | true | The WorkflowRun the request relates to | Defaults to null. | workflowrun_example
+| **ref** | **String** | true | The WorkflowRun reference the request relates to | Defaults to null. | ref_example
 | **topic** | **String** | true | The topic to publish to | Defaults to null. | topic_example
 | **status** | **String** | false | The status to set for the WaitForEvent TaskRun. Succeeded | Failed. | Defaults to succeeded. | status_example
 
@@ -85,9 +85,9 @@ No authorization required
 null (empty response body)
 
 
-## **Accept Wait for Event**
+## **Accept Wait for Event Callbcak**
 
-> GET /api/v2/callback?workflowrun=workflowrun_example,topic=topic_example,status=status_example
+> GET /api/v2/callback?ref=ref_example,topic=topic_example,status=status_example
 
 
 #### Request Parameters
@@ -95,7 +95,7 @@ null (empty response body)
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
-| **workflowrun** | **String** | true | The WorkflowRun the request relates to | Defaults to null. | workflowrun_example
+| **ref** | **String** | true | The WorkflowRun reference the request relates to | Defaults to null. | ref_example
 | **topic** | **String** | true | The topic to publish to | Defaults to null. | topic_example
 | **status** | **String** | false | The status to set for the WaitForEvent TaskRun. Succeeded | Failed. | Defaults to succeeded. | status_example
 
@@ -121,7 +121,7 @@ null (empty response body)
 
 ## **Trigger WorkflowRun via Webhook.**
 
-> POST /api/v2/webhook?workflow=workflow_example
+> POST /api/v2/webhook?ref=ref_example
 
 
 #### Request Parameters
@@ -129,7 +129,7 @@ null (empty response body)
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
-| **workflow** | **String** | false | Workflow reference the request relates to | Defaults to null. | workflow_example
+| **ref** | **String** | false | Workflow reference the request relates to | Defaults to null. | ref_example
 
 
 #### Request Body
