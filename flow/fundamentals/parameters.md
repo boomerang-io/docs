@@ -16,6 +16,21 @@ There are a number of caveats with parameters.
 - Must only contain alphanumeric characters, hyphens (-), and underscores (\_).
 - Must begin with a letter or an underscore (\_).
 
+### Simple JSONPath support
+
+If you are referencing a parameter with JSON as the value and wish to access a subset of the value, you can use a simplified JSONPath dot notation. This is extremely useful with dynamic webhook, event, or callback payloads which would be under the `data` or `event` parameter keys.
+
+#### Example
+
+```json
+{
+  "name": "Boomerang Flow",
+  "hello": "world"
+}
+```
+
+If you were to access this payload and your Task was named the default `Bobs Task`, you can access the value of `hello` via `$(task.Bobs Task.results.data.hello)`, which would result in a value of `world`.
+
 ## Parameter Availability
 
 The following table lists the parameters and when they are available to be substituted in an execution. Additionally, parameters have an inheritance order based on the layering order indicated below. For example, defining a parameter with the same name at the Team and Workflow level will lead the Workflow parameter to override and replace the value for the Team parameter, unless referenced directly using scope.
@@ -123,3 +138,7 @@ Reference:
 | json                   | object                 |
 | texteditor             | string                 |
 | texteditor::<language> | string                 |
+
+```
+
+```

@@ -27,7 +27,7 @@ See the [Webhooks and Events API Route documentation](../api/WebhooksAndEventsRo
 
 This would then be available as a parameter on the Workflow execution as `payload` with a value of `{"foo": "bar"}`.
 
-### Wait For Event
+### Wait For Event Callback
 
 There is a special case of webhook reserved for the **Wait For Event** Task as part of an executing Workflow.
 
@@ -35,32 +35,18 @@ There is a special case of webhook reserved for the **Wait For Event** Task as p
 
 See the [Webhooks and Events API Route documentation](../api/WebhooksAndEventsRoute#accept-wait-for-event) for more details.
 
-### Sample Wait For Event Payload
+This endpoint will resolve all tasks waiting on the particular topic within the WorkflowRun. This is useful if there are multiple paths within the Workflow that you need to trigger from the same Wait For Event and you want to use the same callback URL.
 
-| CloudEvents Attribute | Value                                        |
-| --------------------- | -------------------------------------------- |
-| Type                  | `io.boomerang.eventing.wfe`                  |
-| Subject               | `/<WorkflowId>/<WorkflowActivityId>/<topic>` |
-
-| CloudEvents Extension | Value                  |
-| --------------------- | ---------------------- |
-| Status                | `success` or `failure` |
+### Sample Wait For Event Callback Payload
 
 ```json
 {
-  "specversion": "1.0",
-  "type": "io.boomerang.eventing.wfe",
-  "subject": "/5f7e2c8969f04975a0fff357/6010b41bbadf2e7743e03324/hello",
-  "source": "/origin",
-  "id": "C234-1234-1234",
-  "time": "2018-04-05T17:31:00Z",
-  "status": "success",
-  "datacontenttype": "application/json",
-  "data": {
-    "hello": "world"
-  }
+  "name": "Boomerang Flow",
+  "hello": "world"
 }
 ```
+
+If you were to access this payload and your Task was named the default `Wait For Event`, you can access the value of `hello` via `$(task.Wait For Event.results.data.hello)`, which would result in a value of `world`.
 
 ### Event
 
