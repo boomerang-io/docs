@@ -9,6 +9,14 @@ We have completely rebuilt Boomerang Flow from the ground up to provide a more r
 
 [View the full release notes on GitHub](https://github.com/boomerang-io/community/releases/tag/4.0.0) where you can find what has been added, changed, improved, or deprecated in each release.
 
+## Migrating
+
+The loader can take a while to run when completing the migration from v3 to v4. We recommend to extend the time out or run the loader outside of the Helm chart to ensure that the migration is completed successfully. The loader will run automatically when you upgrade to v4.0.0.
+
+### Workflows
+
+You need to ensure that all team workflows have unique names. This is because names are turned into slugs and need to be unique within a team.
+
 ## Deprecations
 
 The following table describes the deprecations, when they are announced, and when they will be fully removed.
