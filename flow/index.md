@@ -3,7 +3,6 @@ title: Welcome
 order: 1
 description: Learn how to create better automation.
 toc: true
-hidden: true
 ---
 
 # Welcome to Boomerang Flow 👋
