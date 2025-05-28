@@ -1,6 +1,6 @@
 ---
 title: What's New
-order: 4
+order: 3
 ---
 
 # What's new
