@@ -105,21 +105,21 @@ The <b>Fundamentals</b> will help you in mastering the basics. Get yourself gear
       <p>Provides ability for teams to manage users, set team parameters, define team tasks, create API tokens, and define approval groups.</p>
     </docs-card>
   </a>
-  <a href="../fundamentals/administer" aria-label="Administer">
-    <docs-card>
-      <h4 class="text-blue-brand">Administer</h4>
-      <p>Provides ability for Administrators to control the instance of Boomerang Flow.</p>
-    </docs-card>
-  </a>
 </docs-cards>
 
 ## Self Hosting
 
 <docs-cards>
-  <a href="/installation/installing" aria-label="Installation steps">
+  <a href="/hosting/installing" aria-label="Installation steps">
     <docs-card>
       <h4 class="text-green-brand">Shall we dance?</h4>
       <p>Learn what it takes, and how, to install your own Boomerang Flow.</p>
+    </docs-card>
+  </a>
+  <a href="../fundamentals/administer" aria-label="Administer">
+    <docs-card>
+      <h4 class="text-blue-brand">Administer</h4>
+      <p>Provides ability for Administrators to control the instance of Boomerang Flow.</p>
     </docs-card>
   </a>
 </docs-cards>

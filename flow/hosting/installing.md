@@ -1,11 +1,11 @@
 ---
-title: Self Hosting
+title: Installing
 order: 1
 ---
 
 # Self Hosting
 
-Boomerang Flow is packaged as a Helm<sup>®</sup> 3 chart with the values documented in the chart. Please make sure to read the [prerequisites](#pre-requisites) prior to installing.
+This section provides guidiance on installing the open source Boomerang Flow application on your own Kubernetes<sup>®</sup> cluster. The installation is done via Helm<sup>®</sup> 3, and the prerequisites are documented below.
 
 ## Pre-requisites
 
@@ -27,35 +27,27 @@ MongoDB<sup>®</sup> is a mandatory dependency that needs to be installed prior.
 
 We recommend that you install and create the Persistent Volume Claim (PVC) with `retain`, with a minimum recommended storage of `2Gi`.
 
-**Sample Installation Steps**
-
-Install a mmongodb instance for our Boomerang Flow will store the data.
+**Sample Bitnami Installation Steps**
 
 > Note: view the additional values available to be set via the [Bitnami chart installation instructions](https://github.com/bitnami/charts/tree/main/bitnami/mongodb/#installing-the-chart)
 
 ```sh
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
-helm upgrade --install  mongodb -n flowabl-dev bitnami/mongodb --set auth.databases={boomerang} --set auth.usernames={boomerang} --set readinessProbe.timeoutSeconds=20
+helm upgrade --install  mongodb -n flow bitnami/mongodb --set auth.databases={boomerang} --set auth.usernames={boomerang} --set readinessProbe.timeoutSeconds=20
 ```
 
 ### Tekton
 
-Tekton<sup>®</sup> is another mandatory dependency that needs to be installed for Flow to properly function. The best way is to use the [Tekton Operator or Helm Chart](https://github.com/tektoncd/operator/releases). Installation steps for the Operator can be found [here](https://tekton.dev/docs/pipelines/install/). The Tekton version can be found in the [Application Architecture](../architecture/application).
+Tekton<sup>®</sup> is another mandatory dependency that needs to be installed. Installation steps can be found [here](https://tekton.dev/docs/installation/pipelines/).
 
-### NATS Jetstream
-
-If you want to enable eventing, NATS Jetstream must be available to act as the messaging system. You can install NATS Jetstream via its [Helm chart found here](https://artifacthub.io/packages/helm/nats/nack).
-
-You can also [read our more in depth guide](boomerang-flow/installing/installing-nats-jetstream).
+```sh
+kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+```
 
 ### Cert Manager [Optional]
 
 We recommend installing / using [Cert Manager](https://cert-manager.io/docs/installation/helm/) to generate your TLS certificates.
-
-### IBM Consulting Essentials
-
-When standalone mode is disabled, integration to the Core services provided by IBM<sup>®</sup> Consulting Essentials is required.
 
 ## Installation steps
 
