@@ -1,15 +1,17 @@
 ---
 title: Webhook & Events
-order: 5
+order: 2
 ---
 
 # Webhook & Events Architecture
+
+> Note: This is still to be updated for v4
 
 Boomerang Flow supports events through an eventing implementation, based on CloudEvents and HTTPS/NATS. You can also optionally choose to extend this with other eventing systems, like Azure<sup>®</sup> Event Grid and KNative eventing, for example.
 
 In turn, these events are used as triggers (based on Workflow triggers) to invoke a Workflow, or to interact with an in-flight Workflow, through the **Wait for Event** Task.
 
-![Boomerang Infrastructure Architecture](./assets/img/boomerang-flow-architecture-eventing.png)
+![Boomerang Infrastructure Architecture](./assets/architecture-events-triggers.png)
 
 ## Endpoints
 

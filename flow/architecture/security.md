@@ -1,6 +1,6 @@
 ---
 title: Security
-order: 3
+order: 5
 ---
 
 # Security Architecture

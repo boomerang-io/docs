@@ -1,6 +1,6 @@
 ---
 title: Logging
-order: 03
+order: 3
 ---
 
 # Logging

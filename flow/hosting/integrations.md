@@ -1,6 +1,6 @@
 ---
 title: Integrations
-order: 04
+order: 4
 ---
 
 # Installing and Configuring Integrations
