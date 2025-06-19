@@ -1,11 +1,17 @@
 ---
-title: Extensions
+title: Integrations
 order: 04
 ---
 
-# Installing and Configuring Extensions
+# Installing and Configuring Integrations
 
 The following information will provide detail on how to configure a built in extension in your own installation.
+
+## GitHub App
+
+To have Workflows automatically trigger by GitHub Events you will need to create a GitHub App and configure it to send events to your Flow installation.
+
+> Note: This integration is in beta. Reach out on Slack if you would like to learn more.
 
 ## Slack App
 

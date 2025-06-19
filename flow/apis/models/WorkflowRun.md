@@ -24,6 +24,7 @@ title: Workflow Run Model
 | **tasks** | [**List**](TaskRun) |  | [optional] [default to null] |
 | **debug** | **Boolean** |  | [optional] [default to null] |
 | **workflowName** | **String** |  | [optional] [default to null] |
+| **workflowDisplayName** | **String** |  | [optional] [default to null] |
 | **workflowVersion** | **Integer** |  | [optional] [default to null] |
 | **trigger** | **String** |  | [optional] [default to null] |
 | **initiatedByRef** | **String** |  | [optional] [default to null] |

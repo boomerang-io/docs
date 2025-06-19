@@ -171,7 +171,7 @@ APIs that required authentication, can use an appropriately scoped token in the 
 | [**Accept CloudEvent**](./WebhooksAndEventsRoute#accept-cloud-event) | **POST** /api/v2/event |
 | [**Accept Wait for Event Callback with JSON Payload**](./WebhooksAndEventsRoute#accept-wait-for-event-callback-with-json-payload) | **POST** /api/v2/callback |
 | [**Accept Wait for Event Callbcak**](./WebhooksAndEventsRoute#accept-wait-for-event-callbcak) | **GET** /api/v2/callback |
-| [**Trigger WorkflowRun via Webhook.**](./WebhooksAndEventsRoute#trigger-workflow-run-via-webhook) | **POST** /api/v2/webhook |
+| [**Accept Webhook payloads from various sources.**](./WebhooksAndEventsRoute#accept-webhook-payloads-from-various-sources) | **POST** /api/v2/webhook |
 
 ### Workflow Runs
 
@@ -199,18 +199,18 @@ APIs that required authentication, can use an appropriately scoped token in the 
 
 | Route | Endpoint | 
 | ------------- | ------------- |
-| [**Update, replace, or create new, Workflow for Canvas**](./WorkflowsRoute#update-replace-or-create-new-workflow-for-canvas) | **PUT** /api/v2/team/{team}/workflow/{workflow}/compose |
+| [**Update, replace, or create new, Workflow for Canvas**](./WorkflowsRoute#update-replace-or-create-new-workflow-for-canvas) | **PUT** /api/v2/team/{team}/workflow/{name}/compose |
 | [**Update, replace, or create new, Workflow**](./WorkflowsRoute#update-replace-or-create-new-workflow) | **PUT** /api/v2/team/{team}/workflow |
-| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](./WorkflowsRoute#convert-workflow-to-compose-model-for-ui-designer-and-detailed-activity-screens) | **GET** /api/v2/team/{team}/workflow/{workflow}/compose |
+| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](./WorkflowsRoute#convert-workflow-to-compose-model-for-ui-designer-and-detailed-activity-screens) | **GET** /api/v2/team/{team}/workflow/{name}/compose |
 | [**Create a new workflow**](./WorkflowsRoute#create-a-new-workflow) | **POST** /api/v2/team/{team}/workflow |
-| [**Delete a workflow**](./WorkflowsRoute#delete-a-workflow) | **DELETE** /api/v2/team/{team}/workflow/{workflow} |
-| [**Duplicates the workflow.**](./WorkflowsRoute#duplicates-the-workflow) | **POST** /api/v2/team/{team}/workflow/{workflow}/duplicate |
-| [**Export the Workflow as JSON.**](./WorkflowsRoute#export-the-workflow-as-json) | **GET** /api/v2/team/{team}/workflow/{workflow}/export |
-| [**Retrieve the parameters.**](./WorkflowsRoute#retrieve-the-parameters) | **GET** /api/v2/team/{team}/workflow/{workflow}/available-parameters |
-| [**Retrieve the changlog**](./WorkflowsRoute#retrieve-the-changlog) | **GET** /api/v2/team/{team}/workflow/{workflow}/changelog |
-| [**Retrieve a Workflow**](./WorkflowsRoute#retrieve-a-workflow) | **GET** /api/v2/team/{team}/workflow/{workflow} |
+| [**Delete a workflow**](./WorkflowsRoute#delete-a-workflow) | **DELETE** /api/v2/team/{team}/workflow/{name} |
+| [**Duplicates the workflow.**](./WorkflowsRoute#duplicates-the-workflow) | **POST** /api/v2/team/{team}/workflow/{name}/duplicate |
+| [**Export the Workflow as JSON.**](./WorkflowsRoute#export-the-workflow-as-json) | **GET** /api/v2/team/{team}/workflow/{name}/export |
+| [**Retrieve the parameters.**](./WorkflowsRoute#retrieve-the-parameters) | **GET** /api/v2/team/{team}/workflow/{name}/available-parameters |
+| [**Retrieve the changlog**](./WorkflowsRoute#retrieve-the-changlog) | **GET** /api/v2/team/{team}/workflow/{name}/changelog |
+| [**Retrieve a Workflow**](./WorkflowsRoute#retrieve-a-workflow) | **GET** /api/v2/team/{team}/workflow/{name} |
 | [**Search for Workflows**](./WorkflowsRoute#search-for-workflows) | **GET** /api/v2/team/{team}/workflow/query |
-| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](./WorkflowsRoute#submit-a-workflow-to-be-run-will-queue-the-workflow-run-ready-for-execution) | **POST** /api/v2/team/{team}/workflow/{workflow}/submit |
+| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](./WorkflowsRoute#submit-a-workflow-to-be-run-will-queue-the-workflow-run-ready-for-execution) | **POST** /api/v2/team/{team}/workflow/{name}/submit |
 
 
 <a name="models"></a>

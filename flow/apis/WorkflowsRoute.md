@@ -6,24 +6,24 @@ title: Workflows Route
 
 | Name | Method | Endpoint |
 |------------- | ------------- | -------------|
-| [**Update, replace, or create new, Workflow for Canvas**](#update-replace-or-create-new-workflow-for-canvas) | PUT | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Update, replace, or create new, Workflow for Canvas**](#update-replace-or-create-new-workflow-for-canvas) | PUT | `/api/v2/team/{team}/workflow/{name}/compose` |
 | [**Update, replace, or create new, Workflow**](#update-replace-or-create-new-workflow) | PUT | `/api/v2/team/{team}/workflow` |
-| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#convert-workflow-to-compose-model-for-ui-designer-and-detailed-activity-screens) | GET | `/api/v2/team/{team}/workflow/{workflow}/compose` |
+| [**Convert workflow to compose model for UI Designer and detailed Activity screens.**](#convert-workflow-to-compose-model-for-ui-designer-and-detailed-activity-screens) | GET | `/api/v2/team/{team}/workflow/{name}/compose` |
 | [**Create a new workflow**](#create-a-new-workflow) | POST | `/api/v2/team/{team}/workflow` |
-| [**Delete a workflow**](#delete-a-workflow) | DELETE | `/api/v2/team/{team}/workflow/{workflow}` |
-| [**Duplicates the workflow.**](#duplicates-the-workflow) | POST | `/api/v2/team/{team}/workflow/{workflow}/duplicate` |
-| [**Export the Workflow as JSON.**](#export-the-workflow-as-json) | GET | `/api/v2/team/{team}/workflow/{workflow}/export` |
-| [**Retrieve the parameters.**](#retrieve-the-parameters) | GET | `/api/v2/team/{team}/workflow/{workflow}/available-parameters` |
-| [**Retrieve the changlog**](#retrieve-the-changlog) | GET | `/api/v2/team/{team}/workflow/{workflow}/changelog` |
-| [**Retrieve a Workflow**](#retrieve-a-workflow) | GET | `/api/v2/team/{team}/workflow/{workflow}` |
+| [**Delete a workflow**](#delete-a-workflow) | DELETE | `/api/v2/team/{team}/workflow/{name}` |
+| [**Duplicates the workflow.**](#duplicates-the-workflow) | POST | `/api/v2/team/{team}/workflow/{name}/duplicate` |
+| [**Export the Workflow as JSON.**](#export-the-workflow-as-json) | GET | `/api/v2/team/{team}/workflow/{name}/export` |
+| [**Retrieve the parameters.**](#retrieve-the-parameters) | GET | `/api/v2/team/{team}/workflow/{name}/available-parameters` |
+| [**Retrieve the changlog**](#retrieve-the-changlog) | GET | `/api/v2/team/{team}/workflow/{name}/changelog` |
+| [**Retrieve a Workflow**](#retrieve-a-workflow) | GET | `/api/v2/team/{team}/workflow/{name}` |
 | [**Search for Workflows**](#search-for-workflows) | GET | `/api/v2/team/{team}/workflow/query` |
-| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submit-a-workflow-to-be-run-will-queue-the-workflow-run-ready-for-execution) | POST | `/api/v2/team/{team}/workflow/{workflow}/submit` |
+| [**Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**](#submit-a-workflow-to-be-run-will-queue-the-workflow-run-ready-for-execution) | POST | `/api/v2/team/{team}/workflow/{name}/submit` |
 
 
 
 ## **Update, replace, or create new, Workflow for Canvas**
 
-> PUT /api/v2/team/{team}/workflow/{workflow}/compose?replace=true
+> PUT /api/v2/team/{team}/workflow/{name}/compose?replace=true
 
 
 #### Request Parameters
@@ -95,7 +95,7 @@ title: Workflows Route
 
 ## **Convert workflow to compose model for UI Designer and detailed Activity screens.**
 
-> GET /api/v2/team/{team}/workflow/{workflow}/compose?version=56
+> GET /api/v2/team/{team}/workflow/{name}/compose?version=56
 
 
 #### Request Parameters
@@ -104,7 +104,7 @@ title: Workflows Route
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow
 | **version** | **Integer** | false | Workflow Version | Defaults to null. | 56
 
 
@@ -164,7 +164,7 @@ This endpoint does not require a request body.
 
 ## **Delete a workflow**
 
-> DELETE /api/v2/team/{team}/workflow/{workflow}
+> DELETE /api/v2/team/{team}/workflow/{name}
 
 
 #### Request Parameters
@@ -173,7 +173,7 @@ This endpoint does not require a request body.
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow
 
 
 #### Request Body
@@ -197,7 +197,7 @@ null (empty response body)
 
 ## **Duplicates the workflow.**
 
-> POST /api/v2/team/{team}/workflow/{workflow}/duplicate
+> POST /api/v2/team/{team}/workflow/{name}/duplicate
 
 
 #### Request Parameters
@@ -206,7 +206,7 @@ null (empty response body)
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow
 
 
 #### Request Body
@@ -230,7 +230,7 @@ This endpoint does not require a request body.
 
 ## **Export the Workflow as JSON.**
 
-> GET /api/v2/team/{team}/workflow/{workflow}/export
+> GET /api/v2/team/{team}/workflow/{name}/export
 
 
 #### Request Parameters
@@ -239,7 +239,7 @@ This endpoint does not require a request body.
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow
 
 
 #### Request Body
@@ -263,7 +263,7 @@ This endpoint does not require a request body.
 
 ## **Retrieve the parameters.**
 
-> GET /api/v2/team/{team}/workflow/{workflow}/available-parameters
+> GET /api/v2/team/{team}/workflow/{name}/available-parameters
 
 
 #### Request Parameters
@@ -272,7 +272,7 @@ This endpoint does not require a request body.
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow
 
 
 #### Request Body
@@ -296,7 +296,7 @@ This endpoint does not require a request body.
 
 ## **Retrieve the changlog**
 
-> GET /api/v2/team/{team}/workflow/{workflow}/changelog
+> GET /api/v2/team/{team}/workflow/{name}/changelog
 
 Retrieves each versions changelog and returns them all as a list.
 
@@ -306,7 +306,7 @@ Retrieves each versions changelog and returns them all as a list.
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow
 
 
 #### Request Body
@@ -330,7 +330,7 @@ This endpoint does not require a request body.
 
 ## **Retrieve a Workflow**
 
-> GET /api/v2/team/{team}/workflow/{workflow}?version=56,withTasks=true
+> GET /api/v2/team/{team}/workflow/{name}?version=56,withTasks=true
 
 Retrieve a version of the Workflow. Defaults to latest. Optionally without Tasks
 
@@ -339,10 +339,10 @@ Retrieve a version of the Workflow. Defaults to latest. Optionally without Tasks
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
-| **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **version** | **Integer** | false | Workflow Version | Defaults to null. | 56
-| **withTasks** | **Boolean** | false | Include Workflow Tasks | Defaults to true. | true
+| **version** | **Integer** | false | Workflow version | Defaults to null. | 56
+| **withTasks** | **Boolean** | false | Include Workflow tasks in response | Defaults to true. | true
 
 
 #### Request Body
@@ -404,7 +404,7 @@ This endpoint does not require a request body.
 
 ## **Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.**
 
-> POST /api/v2/team/{team}/workflow/{workflow}/submit?start=true
+> POST /api/v2/team/{team}/workflow/{name}/submit?start=true
 
 
 #### Request Parameters
@@ -413,7 +413,7 @@ This endpoint does not require a request body.
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **team** | **String** | true | Owning team name. | Defaults to null. | my-amazing-team
-| **workflow** | **String** | true | Workflow reference | Defaults to null. | workflow_example
+| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow
 | **start** | **Boolean** | false | Start the WorkflowRun immediately after submission | Defaults to false. | true
 
 

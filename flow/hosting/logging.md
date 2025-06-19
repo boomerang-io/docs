@@ -1,11 +1,17 @@
 ---
-title: Logging with Loki
-order: 02
+title: Logging
+order: 03
 ---
 
-# Logging with Loki
+# Logging
 
-## About
+The following information will provide detail on how to configure logging features in your own installation.
+
+The default logging implementation is to retrieve the logs directly from Kubernetes pods. However this only works for as long as the pods are around and the pod retention policy.
+
+For anything longer term, more robust, and with greater performance, we recommend implementing a logging system.
+
+## Loki
 
 Grafana<sup>®</sup> Loki<sup>TM</sup> is a solution that covers the entire logging stack following the success story of Prometheus and how this technology optimizes the metrics, transmission, and indexing process. Compared to ELK, Loki uses a lightweight indexing mechanism which groups log entries into streams and tags them with a particular set of labels and values.
 
@@ -13,7 +19,7 @@ The log entries are stored as plaintext (in raw format) and are further identifi
 
 The indexing mechanism becomes effective when the logs have to be consumed aggressively and they have to be available as quick as possible. Loki does not iterate through the log content in order to generate the index map, therefore, no further content analyses will be performed. Scenarios similar to the following: _I need to capture all the HTTP 50\* errors from my front-end web servers, occurred during a POST form submission_ may better fit solutions like ELK where the platform establish indexing based on the content analysis.
 
-## Architectural Overview
+### Architectural Overview
 
 ```
                              [FRONTEND]
@@ -28,14 +34,14 @@ The indexing mechanism becomes effective when the logs have to be consumed aggre
 
 ![Architectural Overview](./assets/loki4bmrg.png)
 
-## Prerequisites
+### Prerequisites
 
 | Chart            | Version |
 | ---------------- | ------- |
 | grafana/loki     | 2.5.0   |
 | grafana/promtail | 3.5.0   |
 
-## Installing
+### Installing
 
 **Step 0**
 
@@ -182,9 +188,9 @@ level=warn ts=2021-03-13T16:40:59.636745016Z caller=logging.go:62 msg="GET /read
 
 This particular error says that no active pod, running on the target node, matches the scrape configuration. In other words, no Flow or CICD job has been scheduled on the target node.
 
-## Technical details
+### Technical details
 
-### Retention policy
+#### Retention policy
 
 ```
 config:
@@ -208,11 +214,11 @@ config:
   [...]
 ```
 
-### Pipeline Stages
+#### Pipeline Stages
 
 Depending on the container engine used by the Kubernetes flavor, the logs format may differ and therefore, in order to retrieve relevant information, the pipeline stages must be configured according to this format.
 
-#### Docker
+##### Docker
 
 ```
 config:
@@ -226,7 +232,7 @@ config:
             source: output
 ```
 
-#### CRI-O
+##### CRI-O
 
 ```
 config:
@@ -242,7 +248,7 @@ config:
           replace: " \n"
 ```
 
-### Scrape Configurations
+#### Scrape Configurations
 
 ```
 scrapeConfigs: |
@@ -322,7 +328,7 @@ config:
       target_label: __path__
 ```
 
-## Node affinity and toleration when using dedicated nodes
+### Node affinity and toleration when using dedicated nodes
 
 ```
 affinity:
@@ -342,7 +348,7 @@ tolerations:
     value: "bmrg-worker"
 ```
 
-## Securing Grafana UI access with auth-proxy
+### Securing Grafana UI access with auth-proxy
 
 In case the access to Grafana UI needs to be secured and allow access only to certain users, it can be achieved by following these steps.
 
@@ -470,7 +476,7 @@ spec:
       protocol: TCP
 ```
 
-## References
+### References
 
 - Official Loki website: [https://grafana.com/oss/loki/](https://grafana.com/oss/loki/)
 - Official Loki Github Repository: [https://github.com/grafana/loki](https://github.com/grafana/loki)

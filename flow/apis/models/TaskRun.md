@@ -28,6 +28,7 @@ title: Task Run Model
 | **workflowRef** | **String** |  | [optional] [default to null] |
 | **workflowRevisionRef** | **String** |  | [optional] [default to null] |
 | **workflowRunRef** | **String** |  | [optional] [default to null] |
+| **agentRef** | **String** |  | [optional] [default to null] |
 | **workflowName** | **String** |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)

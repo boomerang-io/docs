@@ -374,7 +374,7 @@
         "security": [{ "x-access-token": [] }, { "BearerAuth": [] }]
       }
     },
-    "/api/v2/team/{team}/workflow/{workflow}/compose": {
+    "/api/v2/team/{team}/workflow/{name}/compose": {
       "get": {
         "tags": ["Workflows"],
         "summary": "Convert workflow to compose model for UI Designer and detailed Activity screens.",
@@ -389,11 +389,12 @@
             "example": "my-amazing-team"
           },
           {
-            "name": "workflow",
+            "name": "name",
             "in": "path",
-            "description": "Workflow reference",
+            "description": "Workflow name",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": { "type": "string" },
+            "example": "my-amazing-workflow"
           },
           {
             "name": "version",
@@ -974,13 +975,31 @@
     "/api/v2/webhook": {
       "post": {
         "tags": ["Webhooks and Events"],
-        "summary": "Trigger WorkflowRun via Webhook.",
-        "operationId": "acceptWebhookEvent",
+        "summary": "Accept Webhook payloads from various sources.",
+        "operationId": "acceptWebhook",
         "parameters": [
           {
             "name": "ref",
             "in": "query",
             "description": "Workflow reference the request relates to",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "X-GitHub-Event",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "X-GitHub-Hook-Installation-Target-ID",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "x-slack-signature",
+            "in": "header",
             "required": false,
             "schema": { "type": "string" }
           }
@@ -1058,7 +1077,7 @@
         }
       }
     },
-    "/api/v2/team/{team}/workflow/{workflow}/submit": {
+    "/api/v2/team/{team}/workflow/{name}/submit": {
       "post": {
         "tags": ["Workflows"],
         "summary": "Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.",
@@ -1073,11 +1092,12 @@
             "example": "my-amazing-team"
           },
           {
-            "name": "workflow",
+            "name": "name",
             "in": "path",
-            "description": "Workflow reference",
+            "description": "Workflow name",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": { "type": "string" },
+            "example": "my-amazing-workflow"
           },
           {
             "name": "start",
@@ -1116,7 +1136,7 @@
         "security": [{ "x-access-token": [] }, { "BearerAuth": [] }]
       }
     },
-    "/api/v2/team/{team}/workflow/{workflow}/duplicate": {
+    "/api/v2/team/{team}/workflow/{name}/duplicate": {
       "post": {
         "tags": ["Workflows"],
         "summary": "Duplicates the workflow.",
@@ -1131,11 +1151,12 @@
             "example": "my-amazing-team"
           },
           {
-            "name": "workflow",
+            "name": "name",
             "in": "path",
-            "description": "Workflow reference",
+            "description": "Workflow name",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": { "type": "string" },
+            "example": "my-amazing-workflow"
           }
         ],
         "responses": {
@@ -2272,7 +2293,7 @@
         "security": [{ "x-access-token": [] }, { "BearerAuth": [] }]
       }
     },
-    "/api/v2/team/{team}/workflow/{workflow}": {
+    "/api/v2/team/{team}/workflow/{name}": {
       "get": {
         "tags": ["Workflows"],
         "summary": "Retrieve a Workflow",
@@ -2280,11 +2301,12 @@
         "operationId": "getWorkflow",
         "parameters": [
           {
-            "name": "workflow",
+            "name": "name",
             "in": "path",
-            "description": "Workflow reference",
+            "description": "Workflow name",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": { "type": "string" },
+            "example": "my-amazing-workflow"
           },
           {
             "name": "team",
@@ -2297,14 +2319,14 @@
           {
             "name": "version",
             "in": "query",
-            "description": "Workflow Version",
+            "description": "Workflow version",
             "required": false,
             "schema": { "type": "integer", "format": "int32" }
           },
           {
             "name": "withTasks",
             "in": "query",
-            "description": "Include Workflow Tasks",
+            "description": "Include Workflow tasks in response",
             "required": false,
             "schema": { "type": "boolean", "default": true }
           }
@@ -2339,11 +2361,12 @@
             "example": "my-amazing-team"
           },
           {
-            "name": "workflow",
+            "name": "name",
             "in": "path",
-            "description": "Workflow reference",
+            "description": "Workflow name",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": { "type": "string" },
+            "example": "my-amazing-workflow"
           }
         ],
         "responses": {
@@ -2353,7 +2376,7 @@
         "security": [{ "x-access-token": [] }, { "BearerAuth": [] }]
       }
     },
-    "/api/v2/team/{team}/workflow/{workflow}/export": {
+    "/api/v2/team/{team}/workflow/{name}/export": {
       "get": {
         "tags": ["Workflows"],
         "summary": "Export the Workflow as JSON.",
@@ -2368,11 +2391,12 @@
             "example": "my-amazing-team"
           },
           {
-            "name": "workflow",
+            "name": "name",
             "in": "path",
-            "description": "Workflow reference",
+            "description": "Workflow name",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": { "type": "string" },
+            "example": "my-amazing-workflow"
           }
         ],
         "responses": {
@@ -2388,7 +2412,7 @@
         "security": [{ "x-access-token": [] }, { "BearerAuth": [] }]
       }
     },
-    "/api/v2/team/{team}/workflow/{workflow}/changelog": {
+    "/api/v2/team/{team}/workflow/{name}/changelog": {
       "get": {
         "tags": ["Workflows"],
         "summary": "Retrieve the changlog",
@@ -2404,11 +2428,12 @@
             "example": "my-amazing-team"
           },
           {
-            "name": "workflow",
+            "name": "name",
             "in": "path",
-            "description": "Workflow reference",
+            "description": "Workflow name",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": { "type": "string" },
+            "example": "my-amazing-workflow"
           }
         ],
         "responses": {
@@ -2438,7 +2463,7 @@
         "security": [{ "x-access-token": [] }, { "BearerAuth": [] }]
       }
     },
-    "/api/v2/team/{team}/workflow/{workflow}/available-parameters": {
+    "/api/v2/team/{team}/workflow/{name}/available-parameters": {
       "get": {
         "tags": ["Workflows"],
         "summary": "Retrieve the parameters.",
@@ -2453,11 +2478,12 @@
             "example": "my-amazing-team"
           },
           {
-            "name": "workflow",
+            "name": "name",
             "in": "path",
-            "description": "Workflow reference",
+            "description": "Workflow name",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": { "type": "string" },
+            "example": "my-amazing-workflow"
           }
         ],
         "responses": {
@@ -4162,7 +4188,7 @@
           },
           "phase": {
             "type": "string",
-            "enum": ["pending", "running", "completed", "finalized"]
+            "enum": ["queued", "pending", "running", "completed", "finalized"]
           },
           "statusMessage": { "type": "string" },
           "taskRef": { "type": "string" },
@@ -4170,6 +4196,7 @@
           "workflowRef": { "type": "string" },
           "workflowRevisionRef": { "type": "string" },
           "workflowRunRef": { "type": "string" },
+          "agentRef": { "type": "string" },
           "workflowName": { "type": "string" }
         }
       },
@@ -4215,7 +4242,7 @@
           },
           "phase": {
             "type": "string",
-            "enum": ["pending", "running", "completed", "finalized"]
+            "enum": ["queued", "pending", "running", "completed", "finalized"]
           },
           "startTime": { "type": "string", "format": "date-time" },
           "duration": { "type": "integer", "format": "int64" },
@@ -4242,6 +4269,7 @@
           },
           "debug": { "type": "boolean" },
           "workflowName": { "type": "string" },
+          "workflowDisplayName": { "type": "string" },
           "workflowVersion": { "type": "integer", "format": "int32" },
           "trigger": { "type": "string" },
           "initiatedByRef": { "type": "string" },
@@ -4283,6 +4311,7 @@
         "properties": {
           "id": { "type": "string" },
           "name": { "type": "string" },
+          "displayName": { "type": "string" },
           "status": { "type": "string", "enum": ["active", "inactive"] },
           "version": { "type": "integer", "format": "int32" },
           "creationDate": { "type": "string", "format": "date-time" },
@@ -4404,8 +4433,8 @@
       "WorkflowCanvas": {
         "type": "object",
         "properties": {
-          "id": { "type": "string" },
           "name": { "type": "string" },
+          "displayName": { "type": "string" },
           "status": { "type": "string", "enum": ["active", "inactive"] },
           "version": { "type": "integer", "format": "int32" },
           "creationDate": { "type": "string", "format": "date-time" },
@@ -4559,20 +4588,20 @@
             "type": "object",
             "properties": {
               "seconds": { "type": "integer", "format": "int64" },
+              "nano": { "type": "integer", "format": "int32" },
+              "negative": { "type": "boolean" },
               "units": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
-                    "durationEstimated": { "type": "boolean" },
                     "dateBased": { "type": "boolean" },
-                    "timeBased": { "type": "boolean" }
+                    "timeBased": { "type": "boolean" },
+                    "durationEstimated": { "type": "boolean" }
                   }
                 }
               },
               "positive": { "type": "boolean" },
-              "negative": { "type": "boolean" },
-              "nano": { "type": "integer", "format": "int32" },
               "zero": { "type": "boolean" }
             }
           },
@@ -4848,6 +4877,7 @@
         "properties": {
           "id": { "type": "string" },
           "name": { "type": "string" },
+          "displayName": { "type": "string" },
           "status": { "type": "string", "enum": ["active", "inactive"] },
           "version": { "type": "integer", "format": "int32" },
           "creationDate": { "type": "string", "format": "date-time" },
@@ -4909,16 +4939,16 @@
           "data": { "$ref": "#/components/schemas/CloudEventData" },
           "id": { "type": "string" },
           "type": { "type": "string" },
-          "time": { "type": "string", "format": "date-time" },
-          "source": { "type": "string", "format": "uri" },
           "specVersion": { "type": "string", "enum": ["0.3", "1.0"] },
+          "source": { "type": "string", "format": "uri" },
+          "time": { "type": "string", "format": "date-time" },
           "subject": { "type": "string" },
-          "dataContentType": { "type": "string" },
           "attributeNames": {
             "uniqueItems": true,
             "type": "array",
             "items": { "type": "string" }
           },
+          "dataContentType": { "type": "string" },
           "dataSchema": { "type": "string", "format": "uri" },
           "extensionNames": {
             "uniqueItems": true,
@@ -4967,15 +4997,15 @@
       "PageableObject": {
         "type": "object",
         "properties": {
-          "offset": { "type": "integer", "format": "int64" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "unpaged": { "type": "boolean" },
+          "offset": { "type": "integer", "format": "int64" },
           "paged": { "type": "boolean" },
           "pageNumber": { "type": "integer", "format": "int32" },
-          "pageSize": { "type": "integer", "format": "int32" }
+          "pageSize": { "type": "integer", "format": "int32" },
+          "unpaged": { "type": "boolean" }
         }
       },
       "SortObject": {
@@ -5059,18 +5089,18 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "first": { "type": "boolean" },
-          "last": { "type": "boolean" },
-          "content": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/User" }
-          },
-          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/User" }
+          },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
           "numberOfElements": { "type": "integer", "format": "int32" },
           "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
@@ -5081,18 +5111,18 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "first": { "type": "boolean" },
-          "last": { "type": "boolean" },
-          "content": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/Token" }
-          },
-          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Token" }
+          },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
           "numberOfElements": { "type": "integer", "format": "int32" },
           "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
@@ -5134,18 +5164,18 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "first": { "type": "boolean" },
-          "last": { "type": "boolean" },
-          "content": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/WorkflowRun" }
-          },
-          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowRun" }
+          },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
           "numberOfElements": { "type": "integer", "format": "int32" },
           "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
@@ -5219,18 +5249,18 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "first": { "type": "boolean" },
-          "last": { "type": "boolean" },
-          "content": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/WorkflowSchedule" }
-          },
-          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/WorkflowSchedule" }
+          },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
           "numberOfElements": { "type": "integer", "format": "int32" },
           "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
@@ -5334,18 +5364,18 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "first": { "type": "boolean" },
-          "last": { "type": "boolean" },
-          "content": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/Action" }
-          },
-          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Action" }
+          },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
           "numberOfElements": { "type": "integer", "format": "int32" },
           "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }
@@ -5369,18 +5399,18 @@
         "properties": {
           "totalElements": { "type": "integer", "format": "int64" },
           "totalPages": { "type": "integer", "format": "int32" },
-          "number": { "type": "integer", "format": "int32" },
-          "first": { "type": "boolean" },
-          "last": { "type": "boolean" },
-          "content": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/Team" }
-          },
-          "size": { "type": "integer", "format": "int32" },
           "sort": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
+          "size": { "type": "integer", "format": "int32" },
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Team" }
+          },
+          "first": { "type": "boolean" },
+          "last": { "type": "boolean" },
+          "number": { "type": "integer", "format": "int32" },
           "numberOfElements": { "type": "integer", "format": "int32" },
           "pageable": { "$ref": "#/components/schemas/PageableObject" },
           "empty": { "type": "boolean" }

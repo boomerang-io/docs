@@ -21,13 +21,15 @@ Ensure you have Helm<sup>®</sup> 3 installed, as Boomerang Flow is packaged wit
 
 Ensure you have read and can meet all the dependencies listed in the [Infrastructure Architecture](../architecture/infrastructure).
 
+If you are installing locally, we recommend using [OrbStack](https://orbstack.dev/) or [Kind](https://kind.sigs.k8s.io/) to create a local Kubernetes cluster.
+
 ### MongoDB
 
 MongoDB<sup>®</sup> is a mandatory dependency that needs to be installed prior. We highly recommend using a managed serivce from MongoDB, Azure CosmosDB API for MongoDB, or the [MongoDB Helm chart from Bitnami](https://bitnami.com/stack/mongodb/helm).
 
 We recommend that you install and create the Persistent Volume Claim (PVC) with `retain`, with a minimum recommended storage of `2Gi`.
 
-**Sample Bitnami Installation Steps**
+#### Single Instance Bitnami Installation
 
 > Note: view the additional values available to be set via the [Bitnami chart installation instructions](https://github.com/bitnami/charts/tree/main/bitnami/mongodb/#installing-the-chart)
 
@@ -39,7 +41,7 @@ helm upgrade --install  mongodb -n flow bitnami/mongodb --set auth.databases={bo
 
 ### Tekton
 
-Tekton<sup>®</sup> is another mandatory dependency that needs to be installed. Installation steps can be found [here](https://tekton.dev/docs/installation/pipelines/).
+Tekton<sup>®</sup> installation steps can be found [here](https://tekton.dev/docs/installation/pipelines/).
 
 ```sh
 kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml

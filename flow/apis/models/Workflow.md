@@ -9,6 +9,7 @@ title: Workflow Model
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** |  | [optional] [default to null] |
 | **name** | **String** |  | [optional] [default to null] |
+| **displayName** | **String** |  | [optional] [default to null] |
 | **status** | **String** |  | [optional] [default to null] |
 | **version** | **Integer** |  | [optional] [default to null] |
 | **creationDate** | **Date** |  | [optional] [default to null] |

@@ -10,9 +10,9 @@ order: 1
 The application has the following main components.
 
 - **Frontend application**: This is the end user visual designer, enabling no-code Workflow building, as well as the ability to see and manage all aspects of your Workflows, including activity and insights.
-- **Backend for frontend (BFF) microservice**: This component translates the requests from the Front End application.
-- **Engine microservice**: This component manages the DAG lifecycle and trigger interactions.
-- **Handler microservice**: The Handler integrates with Kubernetes<sup>®</sup> and Tekton and is responsible for managing the execution of the Tasks, including the orchestration of the TaskRuns and the management of the TaskRun lifecycle.
+- **Backend for frontend (BFF) microservice**: Translates the requests from the Front End application.
+- **Engine microservice**: Manages the DAG lifecycle and trigger interactions.
+- **Agent microservice**: Integrates with Kubernetes<sup>®</sup> and Tekton and is responsible for managing the execution of the Tasks, including the orchestration of the TaskRuns and the management of the TaskRun lifecycle. Can be replaced with a custom implementation.
 - **Tasks**: The Task workers are containers used to execute the tasks mapped in the Workflow using Tekton<sup>®</sup> TaskRuns
 
 > Navigate to the [Application Architecture](../architecture/application) to learn more.
@@ -23,9 +23,9 @@ You can find further implementation details and feature specifications in our [a
 
 ## Execution
 
-The default handler executing the tasks within the DAG as part of the Workflow, relies on Tekton TaskRuns and Kubernetes to perform the execution of the Tasks that are a part of the the Workflow or Directed Acyclic Graph (DAG).
+The default Agent executing the tasks within the DAG as part of the Workflow, relies on Tekton TaskRuns and Kubernetes to perform the execution of the Tasks that are a part of the the Workflow or Directed Acyclic Graph (DAG).
 
-The default Handler could be replaced with a custom Handler, executing the tasks against a different cloud provider, for example Azure Container Apps.
+The default Agent can be replaced with a custom Agent, executing the tasks against a different cloud provider, for example Azure Container Apps.
 
 ## Tasks
 

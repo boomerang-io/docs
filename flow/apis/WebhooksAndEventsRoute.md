@@ -9,7 +9,7 @@ title: Webhooks And Events Route
 | [**Accept CloudEvent**](#accept-cloud-event) | POST | `/api/v2/event` |
 | [**Accept Wait for Event Callback with JSON Payload**](#accept-wait-for-event-callback-with-json-payload) | POST | `/api/v2/callback` |
 | [**Accept Wait for Event Callbcak**](#accept-wait-for-event-callbcak) | GET | `/api/v2/callback` |
-| [**Trigger WorkflowRun via Webhook.**](#trigger-workflow-run-via-webhook) | POST | `/api/v2/webhook` |
+| [**Accept Webhook payloads from various sources.**](#accept-webhook-payloads-from-various-sources) | POST | `/api/v2/webhook` |
 
 
 
@@ -119,7 +119,7 @@ No authorization required
 null (empty response body)
 
 
-## **Trigger WorkflowRun via Webhook.**
+## **Accept Webhook payloads from various sources.**
 
 > POST /api/v2/webhook?ref=ref_example
 
@@ -130,6 +130,9 @@ null (empty response body)
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | --- |---|
 | **ref** | **String** | false | Workflow reference the request relates to | Defaults to null. | ref_example
+| **X-GitHub-Event** | **String** | false |  | Defaults to null. | X-GitHub-Event_example
+| **X-GitHub-Hook-Installation-Target-ID** | **String** | false |  | Defaults to null. | X-GitHub-Hook-Installation-Target-ID_example
+| **x-slack-signature** | **String** | false |  | Defaults to null. | x-slack-signature_example
 
 
 #### Request Body

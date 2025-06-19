@@ -11,14 +11,14 @@ The following information depicts the components and dependencies that make up t
 
 ## Components
 
-The following are the default components that are part of the application architecture stack. The Handler can be replaced with a custom implementation, and the Tasks can be replaced with custom implementations.
+The following are the default components that are part of the application architecture stack. The Agent can be replaced with a custom implementation, and the Tasks can be replaced with custom implementations.
 
 | Component | Type         | Technology                     | Internal to Internal | External Ingress | Internal Dependency                                | External Dependency                                                      |
 | --------- | ------------ | ------------------------------ | -------------------- | ---------------- | -------------------------------------------------- | ------------------------------------------------------------------------ |
 | Flow      | Front End    | React + Node.js                | Flow MS              | true             |                                                    |                                                                          |
 | Workflow  | Microservice | Spring Boot (Java<sup>®</sup>) | Engine MS            | true             | MongoDB<sup>®</sup>                                |                                                                          |
-| Engine    | Microservice | Spring Boot (Java)             | Handler MS           | true             | MongoDB<sup>®</sup>                                |
-| Handler   | Microservice | Spring Boot (Java)             |                      | false            | Kubernetes<sup>®</sup>, Tekton<sup>®</sup> TaskRun |                                                                          |
+| Engine    | Microservice | Spring Boot (Java)             | Workflow MS          | false            | MongoDB<sup>®</sup>                                |
+| Agent     | Microservice | Spring Boot (Java)             | Engine MS            | false            | Kubernetes<sup>®</sup>, Tekton<sup>®</sup> TaskRun |                                                                          |
 | Task      | TaskRun      | Node.js CLI / Container        |                      | false            | Kubernetes<sup>®</sup>, Tekton<sup>®</sup> TaskRun | MongoDB<sup>®</sup> shell [image](https://hub.docker.com/r/rtsp/mongosh) |
 
 _Notes:_
