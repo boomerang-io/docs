@@ -31,7 +31,7 @@ The following optional information can also be provided to help further filter t
 
 An agent then retrieves the Workflows and Tasks assigned to its queue and needs to execute them and use the API to move the Workflow and Tasks through the lifecycle.
 
-You can read in more detail around all of the Status and Phase combinations in the [Status and Phase documentation](../architecture/statusphase).
+You can read in more detail around all of the Status and Phase combinations in the [Status and Phase documentation](./overview#status-and-phases).
 
 ### Workflows
 
