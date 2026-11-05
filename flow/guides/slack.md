@@ -1,7 +1,10 @@
 ---
 title: Using Slack
 order: 6
+hidden: true
 ---
+
+<!-- Hidden: Slack's /workflow command cannot run a workflow in v5 (flow#751). Rewrite when fixed. -->
 
 # Using the Slack App
 
