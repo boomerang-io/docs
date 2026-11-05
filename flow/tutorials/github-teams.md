@@ -1,88 +1,138 @@
 ---
-title: Github teams and organizations
+title: GitHub teams and members
 order: 2
+description: Create a GitHub team, invite a person to the organisation and the team, then delete the team again.
 ---
 
-# Using GitHub Tasks to create teams and add members
+<!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 35 of 52 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
 
-The following use cases describes how you can create a team in a GitHub<sup>®</sup> organization, invite an user to join the organization and the newly created team. For the last step in the Workflow, we will remove the team, leaving the organization as it was initially.
+# GitHub teams and members
 
-> You will _need_ a GitHub personal access token with the correct privileges (admin:org).
+This tutorial creates a team in a GitHub organisation, invites a person to the organisation and adds them to the team, waits a minute so you can see the result in GitHub, then deletes the team. It's for workflow authors, and it shows how one task reads another task's result.
 
-> You will _also need_ access to Boomerang Flow.
+## Before you start
 
-## Create your flow
+You need:
 
-First, lets create the new Workflow by navigating to the Workflows page and clicking **Create new Workflow**. At the modal, choose to **Start from scratch**, fill in the details, and select **Create**.
+- the owner or editor role in a Flow workspace;
+- owner rights in a GitHub organisation you can test in;
+- a GitHub personal access token for that owner, for example a classic token with the `admin:org` scope. Creating teams and inviting members needs organisation administration rights;
+- the email address of the person to invite. It must be the public email on their GitHub profile: the invite tasks search GitHub for the address and stop unless exactly one account matches.
 
-You are taken to the Workflow Editor for this particular Workflow. In the tabbed menu, select the **Parameters** and define four _Required_ parameters, named **url** - _the GitHub<sup>®</sup> API endpoint_, **token** - _personal access token with the correct privileges (admin:org)_, **emailAddress** - _the email address of the member that will get invited to the team_ and **org** - _the name of the GitHub organization where the team is created_. Provide the values specific to your case.
+The GitHub tasks default to the token the workspace's GitHub integration shares (see [Connect GitHub](../guides/connect-github)). That token acts with the GitHub App's permissions, which may not include managing an organisation's members, so this tutorial uses a personal access token.
 
-![Workflow Parameters](./assets/github-define-parameters.png)
+<!-- UNVERIFIED: no product source states whether the Flow GitHub App is granted organisation member administration. If it is, the four GitHub tasks can keep their URL and token defaults. -->
 
-In the left panel of the Workflows tabbed page, expand the GitHub category and drag the following Tasks onto the canvas: **Create Team in Organization**, **Invite User to Organization**, **Invite Member to Team**, and **Delete Team from Organization**. After that, expand the Utilities category and drag the following two Tasks onto the canvas: **Sleep** and **Json Path To Property**. You can chain the Tasks, as shown in the following screenshot.
+> **Note:** The person receives a real invitation from GitHub. Invite an account you own, or someone who expects it.
 
-![Workflow Design](./assets/github-workflow-design.png)
+## What you'll build
 
-Edit each Task with the following parameters, using the pencil icon at the top of the Task.
+| Task name | Catalogue task | What it does |
+| --- | --- | --- |
+| `create-team` | Create Team in Organization | Creates the team. Its result `team` holds GitHub's response as JSON. |
+| `get-team-slug` | JSONPath To Parameter | Reads the team's slug from that JSON. Its result is always `evaluation`. |
+| `invite-to-org` | Invite User to Organization | Invites the person to the organisation. |
+| `add-to-team` | Invite Member to Team | Adds the person to the team. |
+| `pause` | Sleep | Waits 60 seconds so you can look in GitHub. |
+| `delete-team` | Delete Team from Organization | Deletes the team. |
 
-For the **Create Team in Organization** Task, enter the following specifics.
+## Create the workflow
 
-- Task Name: The name of this Task. It is going to be referenced in the following Tasks `Create Team`
-- URL: Reference to the flow parameter holding the GitHub API endpoint `$(params.url)`
-- Token: Reference to the flow parameter holding the personal access token `$(params.token)`
-- Organization Name: Reference to the Flow parameter holding the name of the organization where the team is created `$(params.org)`
-- Team Name: The name of the team to be created `Team name testing`
-- Level of privacy: Scroll down and select the option `closed`
+1. In the side nav, select **Workflows**.
+2. Select **Create a new workflow**.
+3. Leave **Start from scratch** selected, and enter a **Display Name**, such as `GitHub team demo`.
+4. Select **Create**. The editor opens on the **Canvas** tab.
 
-For the **Json Path To Property** Task, enter the following specifics.
+## Add the parameters
 
-- Task Name: The name of this Task that will be referenced in the following Tasks `Get team name`
-- Json: Reference to the previous Task output result `$(Task.Create Team.results.team)`
-- Query Expression: JSON path expression pointing to the name of the newly created team `$.name`
-- Output Property Key: The output property name under which we will store the newly created team name `createdTeamName`
+1. Select the **Parameters** tab.
+2. Select **Add parameter**.
+3. Fill in **Name**, **Type**, **Default value (optional)** and **Required** from the first row of the table below, then select **Add**.
+4. Repeat for the other rows.
 
-For the **Invite User to Organization** Task, enter the following specifics.
+| Name | Type | Default value | Required |
+| --- | --- | --- | --- |
+| `github-org` | Text | your organisation's login | On |
+| `team-name` | Text | `Flow tutorial team` | On |
+| `invitee-email` | Email | none | On |
+| `github-pat` | Password | your personal access token | Off |
+| `github-api-url` | URL | `https://api.github.com` | Off |
 
-- Task Name: The name of this Task `Invite User to Organization`
-- URL, Token and Organization Name: can be filled in as in the previous Tasks
-- User Email Address: Reference to the flow parameter holding the email address of the member that will get invited to the organization `$(Workflow.params.emailAddress)`
+For GitHub Enterprise Server, set the `github-api-url` default to `https://<host>/api/v3`.
 
-For the **Invite Member to Team** Task, enter the following specifics.
+## Add the tasks
 
-- Task Name: The name of this Task `Invite Member to Team`
-- URL, Token and Organization Name: can be filled in as in the previous Tasks
-- Team Name: Reference to the output parameter defined in the **Json Path To Property** Task `$(Task.Get team name.results.createdTeamName)`
+1. Select the **Canvas** tab.
+2. In **Add a task**, open **GitHub** and drag four tasks onto the canvas: **Create Team in Organization**, **Invite User to Organization**, **Invite Member to Team** and **Delete Team from Organization**.
+3. Open **Utilities** and drag **JSONPath To Parameter** onto the canvas.
+4. Open **Workflow** and drag **Sleep** onto the canvas.
 
-For the **Sleep** Task, enter the following specifics.
+## Configure the tasks
 
-- We'll make the Workflow stop for 30 seconds enough time to check the team created in the GitHub UI `30000`.
+Select each node's edit (pencil) icon, fill in its fields, then select **Apply**.
 
-For the **Delete Team from Organization** Task, enter the following specifics.
+Set these three fields the same way on all four GitHub tasks:
 
-- Task Name: The name of this Task `Delete Team`
-- URL, Token and Organization Name: can be filled in as in the previous Tasks
-- Team Name: Reference to the output parameter defined in the **Json Path To Property** Task `$(Task.Get team name.results.createdTeamName)`
+| Field | Value |
+| --- | --- |
+| **URL** | `$(params.github-api-url)` |
+| **Github Access Token** | `$(params.github-pat)` |
+| **Organization Name** | `$(params.github-org)` |
 
-Next, wire these Tasks together by dragging a line from **Start** to **End**, going through the configured Tasks. You need to change the status checks of the links to `logic-success`.
+Then set each task's own fields:
 
-To learn more about this, navigate to _Getting to Know_ | _Editor_ | _Links_ in the Flow documentation.
+| Node | Field | Value |
+| --- | --- | --- |
+| Create Team in Organization | **Task name** | `create-team` |
+| | **Team Name** | `$(params.team-name)` |
+| | **Level of privacy** | `closed` |
+| JSONPath To Parameter | **Task name** | `get-team-slug` |
+| | **Json** | `$(tasks.create-team.results.team)` |
+| | **Query Expression** | `$.slug` |
+| Invite User to Organization | **Task name** | `invite-to-org` |
+| | **User Email Address** | `$(params.invitee-email)` |
+| | **User Role** | `member` |
+| Invite Member to Team | **Task name** | `add-to-team` |
+| | **Team Name** | `$(tasks.get-team-slug.results.evaluation)` |
+| | **User Email Address** | `$(params.invitee-email)` |
+| | **User Role** | `member` |
+| Sleep | **Task name** | `pause` |
+| | **Duration** | `60000` (milliseconds) |
+| Delete Team from Organization | **Task name** | `delete-team` |
+| | **Team Name** | `$(tasks.get-team-slug.results.evaluation)` |
 
-The last step is to save the Workflow by selecting **Create new version** from the top-right corner.
+A result reference is `$(tasks.<task name>.results.<result>)`, with the task name exactly as you entered it in **Task name**. The **Results** tab of a task's form lists the results it declares. The v3 form, `$(Task.<task name>.results.<result>)`, doesn't resolve.
 
-## Testing your Flow
+GitHub derives a team's slug from its name: `Flow tutorial team` becomes `flow-tutorial-team`. The later tasks find the team by its name or its slug.
 
-To test your Workflow, you can run this manually from the Workflows page. Identify the newly created Workflow and select **Run it**. In the Workflow Parameters window, fill in the parameter values and select **Run** or **Run and View**.
+<!-- UNVERIFIED: the team result is GitHub's full create-team response, including the organisation object, and task results share a 4,096-byte Kubernetes limit. Confirm on a live run that create-team's result fits. If it doesn't, set Response File Path on create-team to a file in the run workspace and read it with File JSONPath To Parameter. -->
 
-![Workflow Parameters](./assets/github-teams-run.png)
+## Connect the tasks and save
 
-Once the Workflow starts, you are redirected to the activity details, depicting the progress of the execution.
+1. Link the nodes in this order, dragging from each node's right port to the next node's left port: **Start**, `create-team`, `get-team-slug`, `invite-to-org`, `add-to-team`, `pause`, `delete-team`, **End**.
+2. A new link runs **always**. On each link between two tasks, select the condition icon until it shows success. The icon cycles through always, success and failure. The run then stops at the first task that fails.
+3. Select **Create new version**, enter a **Version comment** such as `First version`, then select **Create**.
 
-![Workflow Running Details](./assets/github-teams-running.png)
+![The finished canvas: the six tasks in a chain from Start to End, with the success condition on each link between tasks](./assets/github-teams-canvas.png)
 
-When the Workflow diagram shows the **Sleep** Task as running, let's open the Organization Teams GitHub UI page: `https://github.ibm.com/orgs/test-Workflow/teams`. If you defined a different value for the **org** parameter, make sure you replace it in the URL when accessing the GitHub UI.
+## Run the workflow
 
-![GitHub UI Teams page](./assets/github-teams-success-created.png)
+1. Select **Workflows**, then **Run it** on the workflow's card.
+2. In **Workflow Parameters**, check **github-org** and **team-name**, and enter **invitee-email**. Leave **github-pat** blank to use its stored default.
+3. Select **Run and View**.
 
-Coming back to the Flow Activity UI, the Workflow execution should have reach its end. Checking back the Teams GitHub UI page, you should not see the team in the organization.
+While `pause` waits, open your organisation's teams page in GitHub, `https://github.com/orgs/<org>/teams`. The team is listed. The person's team membership stays pending until they accept the organisation invitation.
 
-![GitHub UI Teams page](./assets/github-teams-completed.png)
+On the run page, select **View Details** on `get-team-slug`. Under **Results**, `evaluation` holds the slug, `flow-tutorial-team`.
+
+When the run's **Status** reads **Succeeded**, refresh the GitHub teams page: the team is gone. The organisation invitation stays open. Cancel it in GitHub if you don't want the person to join.
+
+<!-- SCREENSHOT: The run page with Status Succeeded and all six tasks Succeeded in the task log. (not capturable yet: A succeeded run needs a GitHub organisation and a personal access token) -->
+
+If a task fails, select **View Log** on it. `Number of users found based on email is not 1.` means the email isn't the public email of exactly one GitHub account. If the run stops after `create-team` succeeded, delete the team in GitHub by hand before you run again.
+
+## Next steps
+
+- [Parameters](../fundamentals/parameters): every reference form, including JSON paths into a result.
+- [Use an approval's results](./manual-approval-output): read the results a person's decision leaves behind.
+- [GitHub issues bot](./github-issues-bot): use the shared GitHub token on a schedule.

@@ -1,62 +1,131 @@
 ---
-title: Email with attachments
+title: Email a file from Box
 order: 1
+description: Download a file shared on Box into the run workspace, then send it as an email attachment with SendGrid.
 ---
 
-# Sending email with attachments hosted on Box
+<!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 43 of 57 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
 
-The following use cases describe how you can send emails with attachments hosted on Box<sup>®</sup>, using Boomerang Flow with no code. These are useful in business Workflows that requires sending emails with attachments, either generated within the Workflow or hosted on an artifact storage system like Box.
+# Email a file from Box
 
-> You will _need_ a publicly accessible file hosted on Box for the Task to download.
+This tutorial builds a workflow that downloads a file shared on Box and emails it as an attachment through SendGrid. It's for workflow authors, and it shows how two tasks in one run share a file through the run workspace.
 
-> You will _also need_ access to Boomerang Flow.
+## Before you start
 
-## Create your flow
+You need:
 
-First, lets create the new Workflow by navigating to the Workflows page and clicking **Create new Workflow**. At the modal, choose to **Start from scratch**, fill in the details, and select **Create**.
+- the owner or editor role in a Flow workspace;
+- a file on Box that anyone with the link can open, and its direct download URL. A Box direct link has the form `https://app.box.com/shared/static/<id>.pdf`;
+- a SendGrid API key that can send mail, and a sender address that SendGrid has verified;
+- a Flow installation that can create a run workspace, a Kubernetes volume, for each run. If you're not sure, ask your operator.
 
-![Create Workflow](./assets/email-attachments-create-workflow.png)
+## Create the workflow
 
-You are taken to the Workflow Editor for this particular Workflow. In the tabbed menu, select the **Parameters** and define two _Required_ parameters, named **fileName** and **downloadURL**.
+1. In the side nav, select **Workflows**.
+2. Select **Create a new workflow**.
+3. Leave **Start from scratch** selected, and enter a **Display Name**, such as `Email a Box file`. Flow fills in **Name** for you.
+4. Select **Create**. The editor opens on the **Canvas** tab.
 
-![Workflow Parameters](./assets/email-define-parameters.png)
+## Add the parameters
 
-In the left panel of the Workflows tabbed page, expand the Utilities category and drag onto the canvas the **Execute Shell** Task. After that, expand the Communication category and drag onto the canvas the **Send Email with Sendgrid** Task. These are the two Tasks that we are going to use in this tutorial.
+Parameters hold the values that change from run to run, and keep the API key out of the task. Tasks read a parameter as `$(params.<name>)`.
 
-Edit each Task with the following parameters, using the pencil icon at the top of the Task.
+1. Select the **Parameters** tab.
+2. Select **Add parameter**.
+3. Fill in **Name**, **Type**, **Default value (optional)** and **Required** from the first row of the table below, then select **Add**.
+4. Repeat for the other two rows.
 
-For the **Execute Shell** Task, enter the following specifics
+| Name | Type | Default value | Required |
+| --- | --- | --- | --- |
+| `download-url` | URL | none | On |
+| `file-name` | Text | `report.pdf` | On |
+| `sendgrid-api-key` | Password | your SendGrid API key | Off |
 
-- Directory Path: The folder where the files will get downloaded `/Workflow`
-- Shell Interpreter: `bash`
-- Shell Script: this script creates a files folder and download the file into it. Paste in the following snippet
+A Password parameter is secured: Flow stores it encrypted and hides it in the webapp and in logs.
 
+## Turn on the run workspace
+
+Each task runs in its own container, so a file one task writes is gone when that task ends. The run workspace is a volume that every task in a run mounts. Flow creates it when the run starts and removes it when the run completes.
+
+1. Select the **Configure** tab, then **Workspace**.
+2. Turn on **Shared workspace for each run**.
+3. Set **Size** to `1`.
+4. Leave **Mount path** empty. Tasks then see the run workspace at `/workspace`.
+
+![Configure › Workspace with Shared workspace for each run on, Size 1 and Mount path empty](./assets/box-file-download-workspace.png)
+
+## Add the download task
+
+1. Select the **Canvas** tab.
+2. In **Add a task**, open **Utilities** and drag **Execute Shell** onto the canvas.
+3. Select the node's edit (pencil) icon.
+4. Set **Task name** to `download`, **Directory Path** to `/workspace` and **Shell Interpreter** to `bash`.
+5. Select **Shell Script**, paste the script below, then select **Update**.
+6. Select **Apply**.
+
+```bash
+curl -fsSL "$(params.download-url)" --output "$(params.file-name)"
 ```
-mkdir files
-curl -L $(params.downloadURL) --output /Workflow/files/$(params.fileName)
-```
 
-For the **Send Email with Sendgrid** Task, enter the following specifics
+Flow replaces `$(params.download-url)` and `$(params.file-name)` with the run's values before the script runs. Because **Directory Path** is `/workspace`, the file is saved as `/workspace/<file-name>`. Leave **Directory Path** empty and the script runs in a scratch folder that no other task can see. The `-f` flag fails the task on an HTTP error instead of saving the error page as your file.
 
-- API Key: Your SendGrid's account API
-- To: The email address where the email to will be sent
-- From: The contact who is sending the email. It must match a validated identity from the SendGrid account
-- Subject: The subject of the email
-- Content Type: Either `Text` or `HTML`
-- Attachments: The files that are to be attached to the email, pointing to the downloaded file path `/Workflow/files/$(params.fileName)`
+## Add the email task
 
-![Workflow Settings](./assets/email-attachments-workflow.png)
+1. In **Add a task**, open **Communication** and drag **Send Email with Sendgrid** onto the canvas.
+2. Select its edit icon and fill in the form:
 
-Next, you wire these Tasks together by dragging a line from **Start** to **Execute Shell** then **Send Email with Sendgrid** and **End**. You do not need to change any of the status checks, as one Task should always run after the prior Task.
+   | Field | Value |
+   | --- | --- |
+   | **Task name** | `email` |
+   | **API Key** | `$(params.sendgrid-api-key)` |
+   | **To** | the recipient's email address |
+   | **From** | your SendGrid verified sender |
+   | **Subject** | `Your file: $(params.file-name)` |
+   | **Content Type** | `Text` |
+   | **Body Content** | `The file you asked for is attached.` |
+   | **Attachments** | `/workspace/$(params.file-name)` |
 
-To learn more about this, navigate to _Getting to Know_ | _Editor_ | _Links_ in the Flow documentation.
+3. Select **Apply**.
 
-The last step is to enable the Workflow persistence storage by going to the Configure tab and from the right panel switch the toggle **Enable Persistence Storage**. Press **Save** button.
+**Attachments** takes one absolute path per line. A path that doesn't exist is logged and skipped, and the email is sent without it.
 
-![Persistence Storage Settings](./assets/email-attachments-settings.png)
+> **Note:** Use revision 3 or later of Send Email with Sendgrid. Revisions 1 and 2 report success without sending anything. A task you drop on the canvas now is on revision 3. A node on an older revision shows a yellow warning icon: select it, review the fields, then select **Update task**.
 
-## Testing your Flow
+## Connect the tasks and save
 
-To test out your Workflow, you can run this manually from the Workflows page. Identify the newly created Workflow and click **Run it**. In the Workflow Parameters window fill in the parameter values and press **Run** or **Run and View**.
+1. Drag from the right port of **Start** to the left port of `download`. Link `download` to `email`, and `email` to **End** the same way.
+2. A new link runs **always**. Select the condition icon on the `download` to `email` link until it shows success, so no email goes out when the download fails. The icon cycles through always, success and failure.
+3. Select **Create new version**, enter a **Version comment** such as `First version`, then select **Create**.
 
-![Workflow Parameters](./assets/email-attachments-run.png)
+![The finished canvas: Start, download, email and End, with the success condition on the link from download to email](./assets/box-file-download-canvas.png)
+
+## Run the workflow
+
+1. Select **Workflows**, then **Run it** on the workflow's card.
+2. In **Workflow Parameters**, enter **download-url** and **file-name**. Leave **sendgrid-api-key** blank to use its stored default.
+3. Select **Run and View**.
+
+The run page lists each task in the task log as it runs. When `download` and `email` both show **Succeeded**, the run's **Status** reads **Succeeded** and the email arrives with your file attached.
+
+<!-- SCREENSHOT: The run page with Status Succeeded, and download and email Succeeded in the task log. (not capturable yet: A succeeded run needs a Box shared link and a SendGrid API key) -->
+
+If `download` fails, select **View Log** on it. A `curl` error usually means the URL isn't a direct download, or the file isn't open to anyone with the link.
+
+## Use a private Box file
+
+For a file that isn't shared publicly, replace Execute Shell with **Download File From Box**, from the **Box** category. It signs in through a Box Platform app that uses server authentication (JWT), and takes six values from that app.
+
+1. Add a Password parameter for each secret: `box-client-secret`, `box-private-key` and `box-passphrase`.
+2. Add a Text parameter for each ID: `box-enterprise-id`, `box-client-id` and `box-public-key-id`.
+3. In the task, set each **Authentication** field to its parameter, such as `$(params.box-private-key)` for the private key. The catalogue spells that field's label **Authnetication - Private Key**.
+4. Set **File ID** to the file's Box ID, and **Path** to `/workspace/$(params.file-name)`.
+
+<!-- UNVERIFIED: whether box-service 0.0.18 accepts a PEM private key entered in a single-line password field, which drops its line breaks. Test before publishing the private-file steps. -->
+
+The task's own secret fields are password fields too, so Flow encrypts what you type there. Parameters keep the credentials in one place for every Box task in the workflow, and out of the canvas.
+
+## Next steps
+
+- [Parameters](../fundamentals/parameters): the layers a reference reads, and how secured values are kept.
+- [Use an approval's results](./manual-approval-output): hold the email until a person approves it.
+- [Execute Workflow](../guides/run): the other ways to start a run.
