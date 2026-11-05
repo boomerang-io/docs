@@ -1,124 +1,101 @@
 ---
 title: Security
 order: 5
+description: How Flow authenticates callers, authorises requests, protects secrets, isolates tasks and keeps an audit trail.
 ---
 
-# Security Architecture
+<!-- Written against flow.service.workflow 5.0.0-beta.39. -->
 
-The following architecture information provides details on security protocols in place and how these are applicable.
+# Security
 
-## Authentication
+This page explains how Flow authenticates callers, authorises requests and protects data; the hosting pages cover configuration.
 
-The solution relies on **[oauth2_proxy](https://github.com/oauth2-proxy)** to provide user authentication in the form of basic authentication or integrated with a provider such as GitHub<sup>®</sup> or Google.
+## Where are the trust boundaries?
 
-There are also Tokens for securing API endpoints by either Global, Team, Workflow, or User tokens.
+The browser talks only to the webapp's server, which calls core (`flow-service-core`) for it. Core's three route prefixes are routing boundaries, not credentials:
 
-### Tokens
+- `/api/v2`, the public API. Route it from your front door.
+- `/dispatcher/v1`, the dispatcher protocol, which needs a global machine token. Route it only for a dispatcher outside core's network.
+- `/internal/v1`, sign-in for the webapp's server. Never route it from outside.
 
-Tokens are used to secure the API endpoints. The format used by our API Tokens is as follows;
+## How do people sign in?
 
-| Scope    | Prefix | Access                                                                                                |
-| -------- | ------ | ----------------------------------------------------------------------------------------------------- |
-| Global   | `bfg_` | Allows you to retrieve information or perform an action on any team, user, or workflow.               |
-| Team     | `bft_` | Allows you to retrieve information or perform an action of a specific team or team workflows.         |
-| Workflow | `bfw_` | Allows you to retrieve information or perform an action of a specific workflow.                       |
-| User     | `bfu_` | Allows you to retrieve information or perform an action of a specific user.                           |
-| Session  | `bfs_` | Allows you to retrieve information or perform an action of a specific user. For the specific session. |
+Sign-in has three modes, set up as [Configure sign-in](../hosting/sign-in) describes:
 
-> You can learn more about the Token format by reading this [GitHub Blog](https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/) or by [understanding our scoping implementation](https://github.com/boomerang-io/flow.service).
+- `oidc`: the webapp's server runs OpenID Connect sign-in, once **OIDC Issuer** and **OIDC Client ID** are set.
+- `proxy`: an authenticating proxy forwards the user's identity. Make it core's only way in.
+- `none`: security is off.
 
-## Authorization
+After sign-in, the browser holds only a 24-hour session token in the httpOnly `flow_session` cookie.
 
-### Permissions
+- **The first admin.** On an empty install, the activation code (`flow.activation-code`) makes the first admin. It has no default and must be at least 32 characters. Once a user exists, every code is refused.
+- **An admin claim.** `flow.security.admin-claim.*` names an identity-provider claim and the values that make its holder an admin. Each sign-in that reads it promotes or demotes the user and, on an empty install, replaces the activation code.
+- **Auto-Create Users.** This setting, on by default, creates an account at first sign-in. Off, a person who isn't a user yet signs in only if an admin has added them to a workspace or the admin claim admits them. Existing users are unaffected.
 
-Authorization is based on permissions that are made of actions that can be performed on the resources. Actions are split up into; create, read, write, delete, and action. The resources are all the entities within the system.
+## Tokens
 
-- are in the format of `resource/action`. For example, `workflow/create` or `team/read`.
-- `**` can be used to repplace the resource or action. For example, `workflow/**` or `**/**`.
+| Kind | Prefix | For | Grants |
+| --- | --- | --- | --- |
+| `session` | `bfs_` | A signed-in person | The user's type and workspace roles |
+| `user` | `bfu_` | A person, long-lived | The user's workspace roles, copied at creation |
+| `key` | `bfk_` | A service, AI agent or workflow | Workspace grants only |
+| `global` | `bfg_` | An administrator or a dispatcher | One global grant |
 
-### Scope
+- **The bootstrap token** (`flow.security.bootstrap-token`) is a global `**/**` token for an install where no person signs in. Keep it in a Kubernetes Secret. Rotate it by changing the value and restarting; clearing it revokes the stored token at the next start.
+- **Declared tokens** (`flow.security.tokens.<name>.*`) are narrower global machine tokens set in configuration. Every core instance must carry the same entries, because each revokes, at its start, the declared tokens its own configuration doesn't name.
+- **The dispatcher protocol** admits only a global token with an actor kind, and checks no permission.
 
-Once you have a permission, it is then bound by the scope that you apply to it. For example a user can have a permission to `workflow/create` but only on a specific team. This is done by scoping the permission to the team.
+A revoke takes up to 60 seconds to reach every instance. [Machine tokens](../hosting/machine-tokens) covers minting and rotation.
 
-### Roles
+## What can each role do?
 
-Roles can be assigned at a global scope or at a team scope and provide a grouping of permissions. The following table provides an overview of the roles and their permissions.
+A permission is `<resource>/<action>`, with `**` as a wildcard. The actions are `read`, `write`, `action` (run workflows and decide actions) and `delete`.
 
-| Type   | Role     | Description                                                                                                                                | Permissions                        |
-| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------- |
-| global | admin    | Ability to access and manage all teams and system                                                                                          | `**/**`                            |
-| global | operator | Ability to access and manage all teams                                                                                                     | `**/read`, `**/write`, `**/action` |
-| User   | user     | Ability to view their own profile                                                                                                          | `profile/**`                       |
-| team   | owner    | Applied to user at team creation time. Can do create, read, write, delete, action on all resources within the team and on the team itself. | `**/**`                            |
-| team   | editor   | Similar to owner, without the delete action.                                                                                               | `**/read`, `**/write`, `**/action` |
-| team   | reader   | Read on all resources within the team.                                                                                                     | `**/read`                          |
+| Workspace role | Permissions | Within the workspace |
+| --- | --- | --- |
+| `owner` | `**/**` | Everything, including deletes |
+| `editor` | `**/read`, `**/write`, `**/action` | Create, change and run, not delete |
+| `reader` | `**/read` | View only |
 
-## Audit
+A platform `admin` holds a global `**/**` grant, and an `operator` holds global `**/read`, `**/write` and `**/action`. Only these two types are admins. Every other type, `auditor` and `author` included, is a plain user: it holds only its own profile and its workspace roles. **Admin › Users** shows `auditor` and `author` as **User**.
 
-Every action taken within the system is stored in the audit table.
+Each request is checked twice. The route must admit the token's kind (else `401 AUTH_REQUIRED`) and find a matching permission (else HTTP 403); a route without a rule is denied. Then a caller without a global grant must reach the object through its workspace, or Flow usually answers as if the object were missing.
 
-> Note: there is currently no UI to be able to view the audit logs.
+## What happens with security off?
 
-## SSL certificates
+`flow.security.enabled=false` turns off sign-in and permission checks: every request runs as a built-in admin, audited as `system`. It's only for a headless engine embedded in another application, alongside `flow.workspace.single=true`. Never use it on a shared install: anyone who reaches core is an admin.
 
-Expects an SSL certificate for HTTPS ingress. This can be configured as per your Kubernetes<sup>®</sup> configuration.
+## How are secrets protected?
 
-## Data
+Secured parameters and secured settings are encrypted at rest with AES-256-GCM, under `flow.encrypt.secret` and `flow.encrypt.salt`, required on every install. A set secret reads as `*****`; writing `*****` keeps it and `""` clears it. Secrets never reach a service log, and the audit trail names a changed secret, never its value.
 
-Data is stored in the following locations:
+> **Warning:** A secured parameter reaches its task container as a plain environment variable, `PARAM_<NAME>`, and on Tekton it's in the TaskRun too. Anyone who can read pods or TaskRuns in the dispatcher's namespace can read it. The task image is inside your trust boundary: pass secrets only to images you trust.
 
-- Activity Logs - Kubernetes ephemeral storage and optionally ingested by a chosen logging implementation such as Elastic<sup>®</sup> or Loki
-- Audit Logs - MongoDB<sup>®</sup>
-- Application Data - MongoDB
-- Workflow Cache - Kubernetes Persistent Volumes (PV)
+## How are integrations verified?
 
-The following table provides an overview of the data management profile:
+Slack and GitHub can't hold a Flow token, so Flow checks their signatures. A Slack command, interaction or event must be signed with the **Slack Signing Secret** and be at most 5 minutes old, and a GitHub App delivery with the **GitHub Webhook Secret**. While a secret is unset, Flow refuses that service's requests.
 
-| Data Entity      | Storage        | PII | Customer Data | Source Code | Encrypted at Rest | Encrypted in Flight |
-| ---------------- | -------------- | --- | ------------- | ----------- | ----------------- | ------------------- |
-| Activity Logs    | File           | N   | N             | Y           | Y (\*\*)          | Y                   |
-| Activity Logs    | Elastic \ Loki | N   | N             | Y           | Y (\*)            | Y                   |
-| Audit Logs       | MongoDB        | Y   | N             | N           | Y (\*)            | Y                   |
-| Application Data | MongoDB        | Y   | Y             | N           | Y (\*)            | Y (\*)              |
-| Workflow Cache   | Kubernetes PV  | N   | N             | Y           | N                 | N                   |
+## How are tasks isolated?
 
-(\*) App-level encryption (\*\*) Disk-level encryption
+Flow's Kubernetes dispatcher runs each task as its own pod. `dispatcher.tasks.runtimeClassName` sets a RuntimeClass, such as gVisor or Kata Containers, on every task pod a dispatcher runs. For a second isolation tier, run a second dispatcher. Flow's service images run as non-root uid 10001, and the webapp as uid 65532, all in group 0. A task container runs as its image's user.
 
-### Retention
+## What does the audit trail record?
 
-Data is backed up based on a chosen mechanism. We recommend Velero<sup>®</sup> and Restic.
+Each audited attempt records the actor, workspace, action, resource and outcome (`SUCCESS`, `FAILED` or `DENIED`), with the source IP address and user agent, never request content. Writes to workspaces, workflows, schedules, tasks, parameters, settings and tokens are audited, as is each run's start and end. Reading **Admin › Audit** needs a global `system/read` grant. **Retention Days** keeps events 365 days by default, at least 60; a change applies within about a minute.
 
-It is retained based on the configurations of the various tools.
+## How long is data kept?
 
-## Encryption
+- **Runs:** finished runs older than **Activity Retention (days)** (365 by default, at least 60) are purged hourly with their task runs, actions, run-scoped artifacts and logs. No value turns it off.
+- **Artifacts:** run-scoped ones expire after 30 days by default, 90 at most. Workflow-scoped ones stay until replaced or deleted.
+- **Task logs:** kept for 7 days by default.
 
-Encryption can be implemented at two distinct layers and depends on what is configured at installation time and the underlying Kubernetes.
+[Runs](../fundamentals/runs) has the detail.
 
-- Network or in-flight traffic can be encrypted through configuration of the Kubernetes networking layer and the exchange of SSL certificates.
-- Data or at-rest components can be encrypted through configuration of the persistence volume layer and a passphrase.
+## Report a vulnerability
 
-## Kubernetes policies
+Report a security problem privately through [GitHub private vulnerability reporting](https://github.com/boomerang-io/flow/security/advisories/new), never in a public issue.
 
-There are a number of policy types in Kubernetes that help ensure security. We leverage a number of these.
+## Next steps
 
-### Pod security policy
-
-Pod Security Policies (PSP) / Security Context Constraints (SCC) enable fine-grained authorization and define a set of conditions that a pod must run with in order to be accepted into the system. From host access to Linux<sup>®</sup> capabilities and privileges. See [Kubernetes Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) for more information.
-
-By default all pods run under `privileged` policy. You can also define a default policy at the namespace level. Flow takes care of creating the Kubernetes Service Accounts and role bindings to the elevated policy at install time.
-
-### Image Policies
-
-We recommended leveraging cluster-wide image policies with a list of approved containers that can be accessed.
-
-### Roles
-
-The controller is the Kubernetes orchestrator. It needs elevated permissions to be able to communicate with the Kubernetes API. To achieve this, we define a Custom role with the appropriate Service account bound to this role. The controller microservice runs as this Service account.
-
-See the Helm<sup>®</sup> chart for further in-depth detail as to what Resource Groups and Verbs this role utilizes.
-
-### Task
-
-The task is the Tekton TaskRuns that runs and executes the container. It needs some elevated permissions to be created and bound to the `configmap` and Persistent Volume Claim (PVC). To achieve this, we have a Service account and a binding to a predefined role with only the required abilities.
-
-Every Task is a self-contained short-living execution runner. All artifacts and secure values are only pulled into the Task as it is executing. The Task is then removed upon completion or during scheduled cleanups, based on installed properties.
+- [Parameters](../fundamentals/parameters): how secured parameters resolve.
+- [Administer](../fundamentals/administer): the audit trail and settings in **Admin**.

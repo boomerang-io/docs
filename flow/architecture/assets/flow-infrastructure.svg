@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="100%" role="img" aria-labelledby="title desc">
+  <title id="title">Boomerang Flow v5 infrastructure</title>
+  <desc id="desc">A Kubernetes cluster. An ingress routes /apps/flow/ to the webapp pod, flow-client-web, and /api/v2/ to a Service in front of several core pods, flow-service-core. The webapp's server calls core directly on /api/v2 and /internal/v1. Core connects to its dependencies: MongoDB, an optional OpenID Connect provider, an optional OTLP collector and an S3-compatible artifact store. In the task namespace, the dispatcher pod, flow-service-dispatcher, calls core on /dispatcher/v1 and creates task pods as Tekton TaskRuns or Jobs, each with its own /data emptyDir. It also creates one run workspace PersistentVolumeClaim per run, which that run's task pods mount. Task pods reach the artifact store through signed links.</desc>
+  <defs>
+    <style>
+      text { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 13px; fill: #1f2328; }
+      .t { font-size: 14px; font-weight: 600; }
+      .g { font-weight: 600; }
+      .m { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .s { fill: #57606a; }
+      .c { text-anchor: middle; }
+      .e { text-anchor: end; }
+      .halo { paint-order: stroke; stroke: #ffffff; stroke-width: 5px; stroke-linejoin: round; }
+      .panel { fill: #ffffff; stroke: #d0d7de; stroke-width: 1; }
+      .flow { fill: #f4effc; stroke: #6e32c9; stroke-width: 1.5; }
+      .inner { fill: #ffffff; stroke: #6e32c9; stroke-width: 1; }
+      .ext { fill: #f6f8fa; stroke: #8c959f; stroke-width: 1; }
+      .extw { fill: #ffffff; stroke: #8c959f; stroke-width: 1; }
+      .pill { fill: #eaeef2; stroke: none; }
+      .group { fill: none; stroke: #8c959f; stroke-width: 1; stroke-dasharray: 6 4; }
+      .line { fill: none; stroke: #57606a; stroke-width: 1.5; }
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M0,1 L10,5 L0,9 z" fill="#57606a"/>
+    </marker>
+  </defs>
+
+  <rect class="panel" x="0.5" y="0.5" width="959" height="559" rx="12"/>
+
+  <!-- Traffic from outside -->
+  <line class="line" x1="290" y1="14" x2="290" y2="64" marker-end="url(#arrowhead)"/>
+  <text class="s" x="300" y="34">browsers, API clients and integrations</text>
+
+  <!-- Cluster -->
+  <rect class="group" x="16" y="44" width="696" height="504" rx="10"/>
+  <text class="s g" x="32" y="66">Kubernetes cluster</text>
+
+  <rect class="ext" x="210" y="64" width="160" height="40" rx="6"/>
+  <text class="t c" x="290" y="89">Ingress</text>
+
+  <!-- Webapp -->
+  <rect class="flow" x="44" y="144" width="170" height="60" rx="6"/>
+  <text class="t c" x="129" y="169">Webapp pod</text>
+  <text class="m c" x="129" y="190">flow-client-web</text>
+
+  <!-- Core Service and its replicas -->
+  <rect class="flow" x="400" y="136" width="290" height="164" rx="6"/>
+  <text class="t" x="416" y="160">core Service</text>
+  <text class="m e" x="676" y="160">flow-service-core</text>
+  <rect class="inner" x="416" y="176" width="80" height="52" rx="6"/>
+  <text class="g c" x="456" y="207">core pod</text>
+  <rect class="inner" x="506" y="176" width="80" height="52" rx="6"/>
+  <text class="g c" x="546" y="207">core pod</text>
+  <rect class="inner" x="596" y="176" width="80" height="52" rx="6"/>
+  <text class="g c" x="636" y="207">core pod</text>
+  <text class="s c" x="545" y="262">as many replicas as you need</text>
+
+  <!-- Dependencies -->
+  <text class="s g" x="752" y="124">Dependencies</text>
+  <rect class="ext" x="752" y="136" width="188" height="40" rx="6"/>
+  <text class="t c" x="846" y="161">MongoDB</text>
+  <rect class="ext" x="752" y="188" width="188" height="48" rx="6"/>
+  <text class="t c" x="846" y="207">OpenID Connect provider</text>
+  <text class="s c" x="846" y="226">optional</text>
+  <rect class="ext" x="752" y="248" width="188" height="48" rx="6"/>
+  <text class="t c" x="846" y="267">OTLP collector</text>
+  <text class="s c" x="846" y="286">optional</text>
+  <rect class="ext" x="752" y="340" width="188" height="72" rx="6"/>
+  <text class="t c" x="846" y="372">Artifact store</text>
+  <text class="c" x="846" y="392">S3-compatible</text>
+
+  <!-- Task namespace -->
+  <rect class="group" x="36" y="316" width="656" height="220" rx="10"/>
+  <text class="s g" x="52" y="338">Task namespace</text>
+
+  <rect class="flow" x="48" y="380" width="196" height="56" rx="6"/>
+  <text class="t c" x="146" y="403">Dispatcher pod</text>
+  <text class="m c" x="146" y="423">flow-service-dispatcher</text>
+
+  <rect class="ext" x="308" y="352" width="296" height="92" rx="6"/>
+  <text class="g" x="320" y="372">Task pods: Tekton TaskRuns or Jobs</text>
+  <rect class="extw" x="320" y="384" width="128" height="48" rx="6"/>
+  <text class="g c" x="384" y="401">task pod</text>
+  <rect class="pill" x="324" y="409" width="120" height="18" rx="4"/>
+  <text class="m c" x="384" y="422">/data emptyDir</text>
+  <rect class="extw" x="464" y="384" width="128" height="48" rx="6"/>
+  <text class="g c" x="528" y="401">task pod</text>
+  <rect class="pill" x="468" y="409" width="120" height="18" rx="4"/>
+  <text class="m c" x="528" y="422">/data emptyDir</text>
+
+  <rect class="ext" x="320" y="468" width="272" height="52" rx="6"/>
+  <text class="g c" x="456" y="489">Run workspace PersistentVolumeClaim</text>
+  <text class="c" x="456" y="508">one per run, shared by its task pods</text>
+
+  <!-- Ingress routes -->
+  <path class="line" d="M210,84 H129 V144" marker-end="url(#arrowhead)"/>
+  <text class="m halo" x="137" y="128">/apps/flow/</text>
+  <path class="line" d="M370,84 H545 V136" marker-end="url(#arrowhead)"/>
+  <text class="m halo" x="553" y="118">/api/v2/</text>
+
+  <!-- Webapp server to core -->
+  <line class="line" x1="214" y1="174" x2="400" y2="174" marker-end="url(#arrowhead)"/>
+  <text class="m c halo" x="307" y="166">/api/v2</text>
+  <text class="m c halo" x="307" y="192">/internal/v1</text>
+
+  <!-- Core to its dependencies -->
+  <line class="line" x1="690" y1="156" x2="752" y2="156" marker-end="url(#arrowhead)"/>
+  <line class="line" x1="690" y1="212" x2="752" y2="212" marker-end="url(#arrowhead)"/>
+  <line class="line" x1="690" y1="272" x2="752" y2="272" marker-end="url(#arrowhead)"/>
+  <path class="line" d="M690,290 H730 V358 H752" marker-end="url(#arrowhead)"/>
+
+  <!-- Dispatcher -->
+  <path class="line" d="M226,380 V256 H400" marker-end="url(#arrowhead)"/>
+  <text class="m c halo" x="313" y="248">/dispatcher/v1</text>
+  <line class="line" x1="244" y1="408" x2="308" y2="408" marker-end="url(#arrowhead)"/>
+  <text class="c halo" x="276" y="400">creates</text>
+  <path class="line" d="M146,436 V494 H320" marker-end="url(#arrowhead)"/>
+  <text class="c halo" x="233" y="486">creates</text>
+
+  <!-- Task pods mount the run workspace and reach the artifact store -->
+  <line class="line" x1="384" y1="432" x2="384" y2="468" marker-end="url(#arrowhead)"/>
+  <line class="line" x1="528" y1="432" x2="528" y2="468" marker-end="url(#arrowhead)"/>
+  <text class="s halo" x="536" y="460">mount</text>
+  <line class="line" x1="604" y1="398" x2="752" y2="398" marker-end="url(#arrowhead)"/>
+  <text class="c halo" x="648" y="390">signed links</text>
+
+  <!-- Legend -->
+  <rect class="flow" x="752" y="452" width="14" height="14" rx="3"/>
+  <text x="774" y="464">Flow component</text>
+  <rect class="ext" x="752" y="476" width="14" height="14" rx="3"/>
+  <text x="774" y="488">Kubernetes or external</text>
+</svg>

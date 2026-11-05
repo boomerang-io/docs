@@ -1,104 +1,118 @@
 ---
-title: Webhook & Events
+title: Webhooks and events
 order: 2
+description: The routes that start and resume runs from other systems, and the CloudEvents Flow sends when a run's status changes.
 ---
 
-# Webhook & Events Architecture
+<!-- Written against flow.service.workflow 5.0.0-beta.39. -->
 
-> Note: This is still to be updated for v4
+# Webhooks and events
 
-Boomerang Flow supports events through an eventing implementation, based on CloudEvents and HTTPS/NATS. You can also optionally choose to extend this with other eventing systems, like Azure<sup>®</sup> Event Grid and KNative eventing, for example.
+Other systems reach Flow over HTTP: a webhook or a CloudEvent starts a workflow run, and a callback resumes a waiting one. Flow in turn posts a CloudEvent each time a run or task run changes status. There's no message broker: every event is an HTTP request. This page is for integrators; [Triggers](../fundamentals/triggers) covers switching triggers on in a workflow.
 
-In turn, these events are used as triggers (based on Workflow triggers) to invoke a Workflow, or to interact with an in-flight Workflow, through the **Wait for Event** Task.
+![Inbound, a sender posts to /api/v2/webhook, /api/v2/event or /api/v2/callback to start or resume a run, GitHub posts signed deliveries to /api/v2/webhook, and Slack posts signed requests to /api/v2/integration/slack/*. Outbound, each status change writes a row to the outbox in MongoDB, which every core instance drains every 5 seconds to post CloudEvents to the sinks](./assets/flow-webhooks-and-events.svg)
 
-![Boomerang Infrastructure Architecture](./assets/architecture-events-triggers.png)
+Requests come in from the left and start or resume a run in core; each status change of that run then goes down into the MongoDB outbox and back up through the outbox drain, which posts it to your sinks as a CloudEvent.
 
-## Endpoints
+## Which routes accept inbound calls?
 
-### Webhook
+| Route | Does | Answers |
+| --- | --- | --- |
+| `POST /api/v2/webhook` | Starts a run, with the JSON body as its `data` parameter | `200`, no body |
+| `POST /api/v2/event` | Starts a run from a CloudEvent | `200`, with the new run |
+| `POST` or `GET /api/v2/callback` | Ends a run's waiting Wait For Event tasks | `200`, no body |
 
-The webhook endpoint will accept a generic webhook style event with query parameters.
+Each route needs a token with the `webhook/action` permission, such as a workflow token. Send it as `Authorization: Bearer <token>`, as an `x-access-token` header or, for a sender that can't set headers, as the `access_token` query parameter; proxies and access logs record URLs, so prefer a header. A refused request creates no run.
 
-See the [Webhooks and Events API Route documentation](../api/WebhooksAndEventsRoute#trigger-workflowrun-via-webhook) for more details.
+A triggered run counts against the workspace's quotas, and is refused with `WORKFLOWRUN_TRIGGER_DISABLED` while the workflow's matching trigger is off. It starts at once unless an operator sets `flow.workflowrun.auto-start-on-submit=false`, which parks runs without a run workspace until they're started through the API.
 
-**Sample Webhook Payload**
+## Start a run from a webhook
 
-```json
-{ "foo": "bar" }
+```http
+POST /api/v2/webhook?workspace=<workspace>&ref=<workflow name>
+Content-Type: application/json
 ```
 
-This would then be available as a parameter on the Workflow execution as `payload` with a value of `{"foo": "bar"}`.
+With `workspace`, `ref` is the workflow's name in that workspace; `ref` alone is its ID. The JSON body becomes the run's `data` parameter, read as `$(params.data.<field>)`. The route answers `200` with no body, so find the run on the **Activity** page or through the API. No `ref` answers `400`, and a workflow the caller can't reach `404 WORKFLOW_INVALID_REFERENCE`.
 
-### Wait For Event Callback
+## Start a run from a CloudEvent
 
-There is a special case of webhook reserved for the **Wait For Event** Task as part of an executing Workflow.
+`POST /api/v2/event` takes a [CloudEvents](https://cloudevents.io) 1.0 event in structured mode (`Content-Type: application/cloudevents+json`, attributes in the body) or binary mode (attributes in `ce-*` headers, the body as the data). The workflow is named by `ref`, read as with the webhook. Without `ref`, the first segment of the event's `subject` names it, as a name with `workspace` and an ID without, so `/deploy-service/image-pushed` names `deploy-service`. With neither, the route answers `400 WORKFLOW_INVALID_REQ`.
 
-> **Note:** This does not trigger a Workflow. This only completes a Task as part of the Workflow execution.
+The run gets two parameters:
+- `event`: the event's attributes and extensions (`type`, `source`, `id`, `subject` and so on), as the CloudEvents JSON format writes them;
+- `data`: the event's data. JSON arrives as sent, `text/*` data as a string, and anything else as base64 text. An event without data gives no `data` parameter.
 
-See the [Webhooks and Events API Route documentation](../api/WebhooksAndEventsRoute#accept-wait-for-event) for more details.
+The workflow's event trigger filters are paths into the event as sent, such as `type` or `data.tag`. For example:
 
-This endpoint will resolve all tasks waiting on the particular topic within the WorkflowRun. This is useful if there are multiple paths within the Workflow that you need to trigger from the same Wait For Event and you want to use the same callback URL.
-
-### Sample Wait For Event Callback Payload
-
-```json
-{
-  "name": "Boomerang Flow",
-  "hello": "world"
-}
+```bash
+curl -X POST "https://flow.example.com/api/v2/event?workspace=payments" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/cloudevents+json" \
+  -d '{"specversion": "1.0", "id": "e-1042", "source": "/registry",
+       "type": "com.example.image.pushed", "subject": "/deploy-service/image-pushed",
+       "datacontenttype": "application/json", "data": {"tag": "4f2a9c1"}}'
 ```
 
-If you were to access this payload and your Task was named the default `Wait For Event`, you can access the value of `hello` via `$(task.Wait For Event.results.data.hello)`, which would result in a value of `world`.
+The new run of `deploy-service` reads `$(params.data.tag)` as `4f2a9c1` and `$(params.event.type)` as `com.example.image.pushed`.
 
-### Event
+## Resume a Wait For Event task
 
-This endpoint accepts a full CloudEvent either in the JSON body or between the headers and the body. See below section on [CloudEvents Specification](#cloudevents-specification).
-
-See the [Webhooks and Events API Route documentation](../api/WebhooksAndEventsRoute#accept-cloudevent) for more details.
-
-### Sample Event Payload
-
-| CloudEvents Attribute | Value                          |
-| --------------------- | ------------------------------ |
-| Type                  | `io.boomerang.eventing.custom` |
-| Subject               | `/<WorkflowId>/<topic>`        |
-
-```json
-{
-  "specversion": "1.0",
-  "type": "io.boomerang.eventing.custom",
-  "subject": "/5f7e2c8969f04975a0fff357/hello",
-  "source": "/origin",
-  "id": "C234-1234-1234",
-  "time": "2018-04-05T17:31:00Z",
-  "datacontenttype": "application/json",
-  "data": {
-    "images": ["645e2bc24c223dc1cc3", "10196e304f6634cc582"],
-    "pushed_at": 1.417566161e9,
-    "pusher": "trustedbuilder",
-    "tag": "latest"
-  }
-}
+```http
+POST /api/v2/callback?ref=<run id>&topic=<topic>&status=succeeded&eventId=<id>
 ```
 
-## CloudEvents Specification
+The callback ends every Wait For Event task in the run whose topic matches.
+- `status` is `succeeded`, the default, or `failed`, in any case. Anything else answers `400 QUERY_INVALID_FILTERS`.
+- A JSON body becomes each task's `data` result. `GET` takes no body, so a link in an email can resume a run.
+- A repeat with the same `eventId` for the same run within 7 days is acknowledged and not applied. Without `eventId`, every delivery is applied, so a sender that retries should set one.
+- A callback that arrives before its task waits is recorded and applied when it does. An unknown run answers `404 WORKFLOWRUN_INVALID_REFERENCE`.
 
-The [CloudEvents](https://cloudevents.io/) specification allows for an industry-wide accepted implementation. See the specifications [published here](https://github.com/cloudevents/spec).
+## How are GitHub and Slack verified?
 
-We are currently using v1.0 of the specification, along with the HTTP, JSON, and NATS protocol bindings.
+- **GitHub** App deliveries arrive at `POST /api/v2/webhook` with an `X-GitHub-Event` header. Like any webhook, a delivery needs a token, so the App's webhook URL carries one in `access_token`. Each delivery must also carry `X-Hub-Signature-256`, signed with the **GitHub Webhook Secret** setting. An unsigned or wrongly signed delivery, or any delivery while the secret is unset, answers `401` and starts nothing. The installation named in the delivery picks the workspace.
+- **Slack** sends commands, interactions and events to Flow's own routes under `/api/v2/integration/slack/`, with no Flow token. Each request must be signed with the **Slack Signing Secret** and be at most 5 minutes old; while the secret is unset, every request is refused.
 
-### Data attribute
+[Integrations](../hosting/integrations) covers setting up both apps.
 
-The payload of the body is mapped to the CloudEvents data attribute, and in turn is available as parameters in the Workflow. See below [Payload and Parameters](#payload-and-parameters) for more details.
+## Send status events out
 
-### Type attribute
+With `flow.events.sink.enabled=true` (off by default), core posts a structured CloudEvent 1.0 to each configured sink whenever a run or task run changes status. [Send status events and traces](../hosting/configuring#send-status-events-and-traces) covers the sinks and their filters.
 
-The CloudEvents type is based on the webhook type and prefixed with `io.boomerang.eventing.`, for example, to become `io.boomerang.eventing.webhook` or `io.boomerang.eventing.wfe` or `io.boomerang.eventing.custom`.
+| Attribute | Value |
+| --- | --- |
+| `type` | `io.boomerang.event.status.workflowrun` or `io.boomerang.event.status.taskrun` |
+| `source` | `/apis/v1/events` |
+| `subject` | `/workflowrun/<id>/status/<status>` or `/taskrun/<id>/status/<status>` |
+| `id` | The same on every delivery of one status change; not a run ID |
+| `time` | When the change happened, not when it was sent |
+| `initiatorcontext` | Task events only: the run's `initiatorContext` label, when set |
 
-### Subject attribute
+The graph's start and end nodes send no events. `flow.events.sink.payload` sets what `data` holds, for every sink:
+- `thin`, the default: `id`, `workflowRef`, `workflowRunRef` (task events), `status`, `statusReason`, `phase`, `labels`, `creationDate`, `startTime` and `duration`. Read parameters and results back through the API.
+- `full`: the whole run or task run, with secured values shown as `*****` and scrubbed from results, the status message and annotations.
 
-The Workflow ID is passed in as the CloudEvents subject as `/<WorkflowId>` with an optional `/<topic>` to become `/<WorkflowId>/<topic>`.
+The subject, `data.status` and `data.phase` are the change the event records; the rest of `data` is the run as it stood when the event was sent.
 
-## Payloads and Parameters
+### How is delivery guaranteed?
 
-See the [Parameter Fundamentals Webook & Event Parameters](../fundamentals/parameters#webhook-and-event-parameters) for more details on how to access the payload as a parameter in the Workflow.
+Each status change writes a row to an outbox in MongoDB, which every core instance drains every 5 seconds. Delivery is at least once:
+- A failed delivery, any non-2xx answer included, is retried after about 20 seconds, then 40. After 3 failed attempts the row is marked dead.
+- A repeated `id` is a duplicate: drop it. Events can arrive out of order, so order them by `time`.
+- A crash between a status change and its outbox row loses that one event. A lost event never stalls a run.
+- Sent rows are deleted after 7 days.
+
+`GET /api/v2/system/outbox` lists rows by `status` (`pending`, `sent` or `dead`, dead by default), each failed row with its `lastError`. `PUT /api/v2/system/outbox/replay` requeues the rows named in `ids`, or every row in a `status`, with a fresh retry budget. Both need a global token with the `system` permission, not a signed-in session: see [Machine tokens](../hosting/machine-tokens).
+
+```bash
+curl -X PUT "https://flow.example.com/api/v2/system/outbox/replay?status=dead" \
+  -H "Authorization: Bearer $FLOW_GLOBAL_TOKEN"
+```
+
+The answer counts the rows requeued, such as `{"replayed": 3}`.
+
+## Next steps
+
+- [Triggers](../fundamentals/triggers): switch a workflow's webhook, event and GitHub triggers on.
+- [Webhooks and events routes](../apis/WebhooksAndEventsRoute) and [System routes](../apis/SystemRoute): the API reference.
+- [Security](./security): tokens and permissions.

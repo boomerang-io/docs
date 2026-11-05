@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" role="img" aria-labelledby="title desc">
+  <title id="title">Boomerang Flow v5 components</title>
+  <desc id="desc">A browser calls only the webapp, flow-client-web, under /apps/flow/; the webapp's server calls core, flow-service-core, on /api/v2. API clients, webhook senders, CloudEvents, GitHub and Slack also call core on /api/v2. Core holds the REST API and the engine, and connects to MongoDB and an S3-compatible artifact store. Flow's Kubernetes dispatcher, flow-service-dispatcher, and any other dispatcher call core on /dispatcher/v1. A dashed arrow shows the one call core makes to a dispatcher: reading a live log. Flow's Kubernetes dispatcher creates task pods as Tekton TaskRuns or Kubernetes Jobs.</desc>
+  <defs>
+    <style>
+      text { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 13px; fill: #1f2328; }
+      .t { font-size: 14px; font-weight: 600; }
+      .h { font-size: 15px; font-weight: 600; }
+      .m { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .s { fill: #57606a; }
+      .c { text-anchor: middle; }
+      .halo { paint-order: stroke; stroke: #ffffff; stroke-width: 5px; stroke-linejoin: round; }
+      .panel { fill: #ffffff; stroke: #d0d7de; stroke-width: 1; }
+      .flow { fill: #f4effc; stroke: #6e32c9; stroke-width: 1.5; }
+      .ext { fill: #f6f8fa; stroke: #8c959f; stroke-width: 1; }
+      .line { fill: none; stroke: #57606a; stroke-width: 1.5; }
+      .dash { stroke-dasharray: 6 4; }
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M0,1 L10,5 L0,9 z" fill="#57606a"/>
+    </marker>
+  </defs>
+
+  <rect class="panel" x="0.5" y="0.5" width="959" height="539" rx="12"/>
+
+  <!-- Legend -->
+  <rect class="flow" x="760" y="36" width="14" height="14" rx="3"/>
+  <text x="782" y="48">Flow component</text>
+  <rect class="ext" x="760" y="60" width="14" height="14" rx="3"/>
+  <text x="782" y="72">Other system</text>
+  <line class="line" x1="760" y1="91" x2="776" y2="91" marker-end="url(#arrowhead)"/>
+  <text x="782" y="95">caller to callee</text>
+
+  <!-- Callers -->
+  <rect class="ext" x="40" y="36" width="200" height="52" rx="6"/>
+  <text class="t c" x="140" y="67">Browser</text>
+
+  <rect class="ext" x="320" y="32" width="400" height="60" rx="6"/>
+  <text class="t c" x="520" y="56">API clients and integrations</text>
+  <text class="c" x="520" y="78">webhook senders · CloudEvents · GitHub · Slack</text>
+
+  <!-- Webapp -->
+  <rect class="flow" x="40" y="140" width="200" height="60" rx="6"/>
+  <text class="t c" x="140" y="165">Webapp</text>
+  <text class="m c" x="140" y="186">flow-client-web</text>
+
+  <!-- Core -->
+  <rect class="flow" x="40" y="248" width="680" height="104" rx="6"/>
+  <text class="c" x="380" y="282"><tspan class="h">Core</tspan><tspan class="m" dx="10">flow-service-core</tspan></text>
+  <text class="c" x="380" y="308">REST API, sign-in, schedules, webhooks and events, GitHub and Slack,</text>
+  <text class="c" x="380" y="327">and the engine that runs workflows</text>
+
+  <!-- Data stores -->
+  <rect class="ext" x="790" y="248" width="130" height="48" rx="6"/>
+  <text class="t c" x="855" y="277">MongoDB</text>
+  <rect class="ext" x="790" y="306" width="130" height="52" rx="6"/>
+  <text class="t c" x="855" y="327">Artifact store</text>
+  <text class="c" x="855" y="346">S3-compatible</text>
+
+  <!-- Dispatchers and task pods -->
+  <rect class="ext" x="40" y="420" width="220" height="80" rx="6"/>
+  <text class="t c" x="150" y="446">Other dispatchers</text>
+  <text class="c" x="150" y="466">any process that implements</text>
+  <text class="c" x="150" y="484">the dispatcher contract</text>
+
+  <rect class="flow" x="340" y="420" width="260" height="80" rx="6"/>
+  <text class="t c" x="470" y="453">Flow's Kubernetes dispatcher</text>
+  <text class="m c" x="470" y="475">flow-service-dispatcher</text>
+
+  <rect class="ext" x="680" y="420" width="240" height="80" rx="6"/>
+  <text class="t c" x="800" y="446">Task pods</text>
+  <text class="c" x="800" y="466">Tekton TaskRuns or</text>
+  <text class="c" x="800" y="484">Kubernetes Jobs</text>
+
+  <!-- Arrows: callers into the webapp and core -->
+  <line class="line" x1="140" y1="88" x2="140" y2="140" marker-end="url(#arrowhead)"/>
+  <text class="m halo" x="150" y="118">/apps/flow/</text>
+
+  <line class="line" x1="140" y1="200" x2="140" y2="248" marker-end="url(#arrowhead)"/>
+  <text class="m halo" x="150" y="229">/api/v2</text>
+
+  <line class="line" x1="520" y1="92" x2="520" y2="248" marker-end="url(#arrowhead)"/>
+  <text class="m halo" x="530" y="175">/api/v2</text>
+
+  <!-- Arrows: core to its data stores -->
+  <line class="line" x1="720" y1="272" x2="790" y2="272" marker-end="url(#arrowhead)"/>
+  <line class="line" x1="720" y1="332" x2="790" y2="332" marker-end="url(#arrowhead)"/>
+
+  <!-- Arrows: dispatchers poll core; core reads a live log -->
+  <line class="line" x1="150" y1="420" x2="150" y2="352" marker-end="url(#arrowhead)"/>
+  <text class="m halo" x="160" y="391">/dispatcher/v1</text>
+
+  <line class="line" x1="420" y1="420" x2="420" y2="352" marker-end="url(#arrowhead)"/>
+  <text class="m halo" x="430" y="391">/dispatcher/v1</text>
+
+  <line class="line dash" x1="560" y1="352" x2="560" y2="420" marker-end="url(#arrowhead)"/>
+  <text class="halo" x="570" y="391">live log</text>
+
+  <line class="line" x1="600" y1="460" x2="680" y2="460" marker-end="url(#arrowhead)"/>
+  <text class="c halo" x="640" y="452">creates</text>
+</svg>

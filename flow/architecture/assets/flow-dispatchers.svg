@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" role="img" aria-labelledby="title desc">
+  <title id="title">Boomerang Flow v5 dispatchers</title>
+  <desc id="desc">Core, with its task queue of task runs ready to claim, holds each poll open for up to 30 seconds. Three dispatchers call core on /dispatcher/v1, each arrow pointing from the dispatcher to core. Flow's Kubernetes dispatcher, flow-service-dispatcher, registers, polls, starts, heartbeats and ends tasks, and creates task pods as Tekton TaskRuns or Kubernetes Jobs in its namespace. A second Kubernetes dispatcher, registered only for ai tasks with flow.dispatcher.task-types=ai, creates ai task pods from boomerangio/task-ai in its own namespace. A host application runs dispatcher-sdk in-process and hands each task to its own TaskHandler. A dashed arrow shows core reading a live log from Flow's Kubernetes dispatcher.</desc>
+  <defs>
+    <style>
+      text { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 13px; fill: #1f2328; }
+      .t { font-size: 14px; font-weight: 600; }
+      .h { font-size: 15px; font-weight: 600; }
+      .g { font-weight: 600; }
+      .m { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .s { fill: #57606a; }
+      .c { text-anchor: middle; }
+      .e { text-anchor: end; }
+      .halo { paint-order: stroke; stroke: #ffffff; stroke-width: 5px; stroke-linejoin: round; }
+      .panel { fill: #ffffff; stroke: #d0d7de; stroke-width: 1; }
+      .flow { fill: #f4effc; stroke: #6e32c9; stroke-width: 1.5; }
+      .inner { fill: #ffffff; stroke: #6e32c9; stroke-width: 1; }
+      .ext { fill: #f6f8fa; stroke: #8c959f; stroke-width: 1; }
+      .extw { fill: #ffffff; stroke: #8c959f; stroke-width: 1; }
+      .group { fill: none; stroke: #8c959f; stroke-width: 1; stroke-dasharray: 6 4; }
+      .line { fill: none; stroke: #57606a; stroke-width: 1.5; }
+      .dash { stroke-dasharray: 6 4; }
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M0,1 L10,5 L0,9 z" fill="#57606a"/>
+    </marker>
+  </defs>
+
+  <rect class="panel" x="0.5" y="0.5" width="959" height="539" rx="12"/>
+
+  <!-- Core and its task queue -->
+  <rect class="flow" x="24" y="24" width="912" height="100" rx="6"/>
+  <text x="44" y="58"><tspan class="h">Core</tspan><tspan class="m" dx="10">flow-service-core</tspan></text>
+  <text x="44" y="82">decides what runs and when</text>
+  <rect class="inner" x="360" y="44" width="240" height="60" rx="6"/>
+  <text class="t c" x="480" y="70">Task queue</text>
+  <text class="c" x="480" y="90">task runs ready to claim</text>
+  <text class="e" x="916" y="66">holds each poll open</text>
+  <text class="e" x="916" y="86">for up to 30 s</text>
+
+  <!-- Flow's Kubernetes dispatcher -->
+  <rect class="group" x="24" y="232" width="292" height="288" rx="10"/>
+  <text class="s g" x="40" y="508">Kubernetes namespace</text>
+  <rect class="flow" x="40" y="268" width="260" height="76" rx="6"/>
+  <text class="t c" x="170" y="300">Flow's Kubernetes dispatcher</text>
+  <text class="m c" x="170" y="322">flow-service-dispatcher</text>
+  <rect class="ext" x="60" y="404" width="220" height="84" rx="6"/>
+  <text class="t c" x="170" y="432">Task pods</text>
+  <text class="c" x="170" y="452">Tekton TaskRuns</text>
+  <text class="c" x="170" y="470">or Kubernetes Jobs</text>
+
+  <!-- Second Kubernetes dispatcher, ai only -->
+  <rect class="group" x="334" y="232" width="292" height="288" rx="10"/>
+  <text class="s g" x="350" y="508">Its own namespace, for ai tasks</text>
+  <rect class="flow" x="350" y="268" width="260" height="76" rx="6"/>
+  <text class="t c" x="480" y="300">Second Kubernetes dispatcher</text>
+  <text class="m c" x="480" y="322">flow.dispatcher.task-types=ai</text>
+  <rect class="ext" x="370" y="404" width="220" height="84" rx="6"/>
+  <text class="t c" x="480" y="440">ai task pods</text>
+  <text class="m c" x="480" y="462">boomerangio/task-ai</text>
+
+  <!-- Host application with the SDK in-process -->
+  <rect class="ext" x="644" y="268" width="292" height="220" rx="6"/>
+  <text class="t" x="664" y="294">Host application</text>
+  <rect class="flow" x="664" y="310" width="252" height="58" rx="6"/>
+  <text class="m c" x="790" y="334">dispatcher-sdk</text>
+  <text class="c" x="790" y="354">runs the poll loop in-process</text>
+  <rect class="extw" x="664" y="404" width="252" height="60" rx="6"/>
+  <text class="t c" x="790" y="430">Your TaskHandler</text>
+  <text class="c" x="790" y="450">runs each task</text>
+
+  <!-- Dispatchers call core on /dispatcher/v1 -->
+  <line class="line" x1="100" y1="268" x2="100" y2="124" marker-end="url(#arrowhead)"/>
+  <text class="m halo" x="110" y="160">/dispatcher/v1</text>
+  <text class="halo" x="110" y="180">register · poll · start</text>
+  <text class="halo" x="110" y="198">heartbeat · end</text>
+
+  <line class="line dash" x1="280" y1="124" x2="280" y2="268" marker-end="url(#arrowhead)"/>
+  <text class="halo" x="288" y="182">live log</text>
+
+  <line class="line" x1="480" y1="268" x2="480" y2="124" marker-end="url(#arrowhead)"/>
+  <text class="m halo" x="490" y="182">/dispatcher/v1</text>
+
+  <line class="line" x1="830" y1="310" x2="830" y2="124" marker-end="url(#arrowhead)"/>
+  <text class="m e halo" x="820" y="182">/dispatcher/v1</text>
+
+  <!-- What each dispatcher runs -->
+  <line class="line" x1="170" y1="344" x2="170" y2="404" marker-end="url(#arrowhead)"/>
+  <text class="halo" x="178" y="379">creates</text>
+  <line class="line" x1="480" y1="344" x2="480" y2="404" marker-end="url(#arrowhead)"/>
+  <text class="halo" x="488" y="379">creates</text>
+  <line class="line" x1="790" y1="368" x2="790" y2="404" marker-end="url(#arrowhead)"/>
+
+  <!-- Legend -->
+  <rect class="flow" x="644" y="502" width="14" height="14" rx="3"/>
+  <text x="666" y="514">Flow component</text>
+  <rect class="ext" x="790" y="502" width="14" height="14" rx="3"/>
+  <text x="812" y="514">Other system</text>
+</svg>
