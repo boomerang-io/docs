@@ -1,148 +1,202 @@
 ---
 title: Welcome
 order: 1
-description: Learn how to create better automation.
+description: Boomerang Flow builds and runs workflows, graphs of tasks that run as containers on Kubernetes.
 toc: true
 ---
 
-# Welcome to Boomerang Flow 👋
+<!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 2 of 5 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
 
-Boomerang Flow is the easiest way to build, automate, and optimize workflows - without writing a single line of code... unless you really want to! With our fully extensible model, you can bring a script, bring a container, or write your own tasks from scratch.
+# Welcome
 
-Whether you're a solo operator or managing a team, our intuitive drag-and-drop builder helps you streamline repetitive tasks, integrate with your favourite tools, and ensure everything runs smoothly.
+Boomerang Flow builds and runs workflows: graphs of tasks that run as containers on Kubernetes. Drag tasks from the catalogue onto a canvas, link them, and run the workflow by hand, on a schedule, or from a webhook, a CloudEvent or a GitHub event. When the catalogue doesn't have the task you need, bring your own container or script.
 
-Create workflows composed of reusable logic that you define, using our tasks for automatically retriable steps and human-in-the-loop flows using actions or wait for event.
+Flow is open source under the Apache License 2.0.
 
-## Why use Boomerang Flow?
+## What Flow does
 
-✅ Automate with Ease – Build workflows visually without coding. Just drag, drop, and connect.
+- **Build visually.** Drag tasks onto the canvas and link them. A task can run once for each item in a list.
+- **Put a person in the loop.** An approval or a manual task holds the run until someone decides, and the wait doesn't count against the run's timeout.
+- **Start runs your way.** Run a workflow by hand, on a schedule, from a webhook or CloudEvent, or from a GitHub event.
+- **See every run.** Activity records each run with its task logs, results and artifacts. Pause a run, cancel it, or retry it from the tasks that failed.
+- **Keep work in workspaces.** A workspace holds workflows, members, parameters and quotas.
+- **Extend it.** Run your own container with **Run Custom Task**, add tasks in **Task Manager**, or call Flow's REST API under `/api/v2`.
 
-✅ Powerful Integrations – Connect with any APIs effortlessly.
-
-✅ Reliable Execution – Runs are queued and reliably executed to ensure stability.
-
-✅ Flexible Triggers – Start workflows manually, on a schedule, via API, or from event-driven sources.
-
-✅ Scalable & Secure – Designed for teams and enterprises with access control, logging, and monitoring.
-
-✅ Detailed Runs & Insights – View each workflow run in detail, including logs, execution history, and step-by-step progress for easy troubleshooting.
-
-✅ Fully Extensible – Bring your own task using the open-source Tekton.dev model or write custom code packaged as a BYO container.
-
-## Ready to Automate? Get Started Quickly 🎯
+## Get started
 
 <docs-cards>
-  <a href="/introduction/getting-started" aria-label="Getting Started">
+  <a href="/introduction/getting-started" aria-label="Getting started">
     <docs-card>
-      <h4 class="text-blue-brand">New here?</h4>
-      <p>Follow our 5-step Quick Start guide to build your first workflow in minutes!</p>
+      <h4 class="text-blue-brand">New to Flow?</h4>
+      <p>Create a workspace, build a workflow with one task, run it and watch it succeed. About ten minutes.</p>
     </docs-card>
   </a>
-  <a href="/introduction/faq" aria-label="Frequently Asked Questions">
+  <a href="/introduction/whats-new" aria-label="What's new">
+    <docs-card>
+      <h4 class="text-blue-brand">What's new in 5.0</h4>
+      <p>What changed since Flow 3, and what to do when you upgrade.</p>
+    </docs-card>
+  </a>
+  <a href="/introduction/faq" aria-label="Frequently asked questions">
     <docs-card>
       <h4 class="text-blue-brand">FAQ</h4>
-      <p>Get answers to your questions!</p>
+      <p>Short answers on tasks, timings, quotas and limits.</p>
     </docs-card>
   </a>
-  <a href="/tutorials/github-issues-bot" aria-label="Take a tutorial for a spin.">
+  <a href="/introduction/known-issues" aria-label="Known issues">
     <docs-card>
-      <h4 class="text-green-brand">I want to try it out...</h4>
-      <p>Spend your first few minutes in a <span style="text-decoration:underline">Tutorial</span>. Its the best way to explore practical examples to understand the features.</p>
+      <h4 class="text-red-brand">Known issues</h4>
+      <p>Defects in 5.0.0 and how to work around them.</p>
     </docs-card>
   </a>
-  <a href="/guides/management" aria-label="Want to know more?">
+  <a href="/tutorials/manual-approval-output" aria-label="Tutorials">
     <docs-card>
-      <h4 class="text-green-brand">Want to know more?</h4>
-      <p>The <b>Guides</b> are a great way to learn a specific use case. Whether it be management of the system, or running a Workflow.</p>
+      <h4 class="text-green-brand">Try a tutorial</h4>
+      <p>Work through a complete example: pause a workflow for an approval, then email who decided and what they said.</p>
     </docs-card>
   </a>
-  <a href="https://join.slack.com/t/boomerang-io/shared_invite/zt-pxo2yw2o-c3~6YvWkKNrKIwhIBAKhaw" aria-label="Remix API" target="_blank">
+  <a href="/guides/create" aria-label="Guides">
     <docs-card>
-      <h4 class="text-red-brand">I'm stuck!</h4>
-      <p>Need help? Want to contribute? Boomerang Flow is developed in the open with a helpful community. Come and chat with us in Slack!</p>
+      <h4 class="text-green-brand">Guides</h4>
+      <p>Step-by-step tasks: create, edit, configure, run and retry workflows.</p>
     </docs-card>
   </a>
 </docs-cards>
 
-## Familiarize yourself with the concepts
+## Learn the concepts
 
-The <b>Fundamentals</b> will help you in mastering the basics. Get yourself geared up with a drink and some Tim Tams, then dive deep into all the building blocks
+The **Fundamentals** cover one part of the webapp or one concept per page.
 
 <docs-cards>
-  <a href="../fundamentals/workflows" aria-label="Workflows">
+  <a href="/fundamentals/workflows" aria-label="Workflows">
     <docs-card>
       <h4 class="text-blue-brand">Workflows</h4>
-      <p>Create, view, and manage your personal and team workflows from a centralized location</p>
+      <p>Create, find, run and manage the workflows in a workspace.</p>
     </docs-card>
   </a>
-  <a href="../fundamentals/activity" aria-label="Activity">
+  <a href="/fundamentals/activity" aria-label="Activity">
     <docs-card>
       <h4 class="text-blue-brand">Activity</h4>
-      <p>View the real-time status, logs, outputs, and run times of your workflow activity past and present as well as diving deep into the individual workflows.</p>
+      <p>Every run in a workspace, filtered by workflow, status, trigger or date.</p>
     </docs-card>
   </a>
-  <a href="../fundamentals/actions" aria-label="Actions">
+  <a href="/fundamentals/runs" aria-label="Runs">
+    <docs-card>
+      <h4 class="text-blue-brand">Runs</h4>
+      <p>Statuses, pausing, cancelling, retries, timeouts and child workflows.</p>
+    </docs-card>
+  </a>
+  <a href="/fundamentals/actions" aria-label="Actions">
     <docs-card>
       <h4 class="text-blue-brand">Actions</h4>
-      <p>Access your manual actions and respond to needed approvals.</p>
+      <p>Approvals and manual tasks where a person has to decide.</p>
     </docs-card>
   </a>
-  <a href="../fundamentals/insights" aria-label="Insights">
+  <a href="/fundamentals/triggers" aria-label="Triggers">
     <docs-card>
-      <h4 class="text-blue-brand">Insights</h4>
-      <p>View metrics and statistics on Workflow executions over time, showing peak execution periods, average run times, and percentage of success and failures.</p>
+      <h4 class="text-blue-brand">Triggers</h4>
+      <p>Start runs by hand, from a webhook, a CloudEvent or GitHub.</p>
     </docs-card>
   </a>
-  <a href="../fundamentals/schedules" aria-label="Schedules">
+  <a href="/fundamentals/schedules" aria-label="Schedules">
     <docs-card>
       <h4 class="text-blue-brand">Schedules</h4>
-      <p>View, create, and manage your Workflow Schedules with a Calendar based view.</p>
+      <p>Run a workflow once, hourly, daily, on weekdays, weekly or on a cron expression.</p>
     </docs-card>
   </a>
-  <a href="../fundamentals/manage" aria-label="Manage your Team">
+  <a href="/fundamentals/tasks" aria-label="Tasks and Task Manager">
     <docs-card>
-      <h4 class="text-blue-brand">Manage your Team</h4>
-      <p>Provides ability for teams to manage users, set team parameters, define team tasks, create API tokens, and define approval groups.</p>
+      <h4 class="text-blue-brand">Tasks and Task Manager</h4>
+      <p>The catalogue Flow ships, and how to add your own tasks to a workspace in Task Manager.</p>
+    </docs-card>
+  </a>
+  <a href="/fundamentals/parameters" aria-label="Parameters">
+    <docs-card>
+      <h4 class="text-blue-brand">Parameters</h4>
+      <p>Inputs and results that flow between tasks, workflows and workspaces, and secrets.</p>
+    </docs-card>
+  </a>
+  <a href="/fundamentals/artifacts" aria-label="Artifacts and the run workspace">
+    <docs-card>
+      <h4 class="text-blue-brand">Artifacts</h4>
+      <p>Share files between the tasks of a run, and keep files between runs.</p>
+    </docs-card>
+  </a>
+  <a href="/fundamentals/integrations" aria-label="Integrations">
+    <docs-card>
+      <h4 class="text-blue-brand">Integrations</h4>
+      <p>Connect GitHub, Slack, Google or Microsoft to a workspace and share their credentials with tasks.</p>
+    </docs-card>
+  </a>
+  <a href="/fundamentals/insights" aria-label="Insights">
+    <docs-card>
+      <h4 class="text-blue-brand">Insights</h4>
+      <p>Run counts, durations and AI usage for a workspace over time.</p>
+    </docs-card>
+  </a>
+  <a href="/fundamentals/quotas" aria-label="Quotas">
+    <docs-card>
+      <h4 class="text-blue-brand">Quotas</h4>
+      <p>The limits on a workspace's workflows, runs and storage.</p>
+    </docs-card>
+  </a>
+  <a href="/fundamentals/manage" aria-label="Manage workspace">
+    <docs-card>
+      <h4 class="text-blue-brand">Manage workspace</h4>
+      <p>A workspace's members, approver groups, artifacts, quotas, tokens and settings.</p>
+    </docs-card>
+  </a>
+  <a href="/fundamentals/administer" aria-label="Admin">
+    <docs-card>
+      <h4 class="text-blue-brand">Admin</h4>
+      <p>Platform settings, workspaces, users, global parameters, tokens, tasks and the audit trail.</p>
     </docs-card>
   </a>
 </docs-cards>
 
-## Self Hosting
+## Run Flow yourself
 
 <docs-cards>
-  <a href="/hosting/installing" aria-label="Installation steps">
+  <a href="/hosting/installing" aria-label="Installing">
     <docs-card>
-      <h4 class="text-green-brand">Shall we dance?</h4>
-      <p>Learn what it takes, and how, to install your own Boomerang Flow.</p>
+      <h4 class="text-green-brand">Install</h4>
+      <p>What Flow needs and how to install it.</p>
     </docs-card>
   </a>
-  <a href="../fundamentals/administer" aria-label="Administer">
+  <a href="/hosting/configuring" aria-label="Configuring">
     <docs-card>
-      <h4 class="text-blue-brand">Administer</h4>
-      <p>Provides ability for Administrators to control the instance of Boomerang Flow.</p>
+      <h4 class="text-green-brand">Configure</h4>
+      <p>Images, ports, properties, probes and the dispatcher.</p>
+    </docs-card>
+  </a>
+  <a href="/hosting/sign-in" aria-label="Sign-in">
+    <docs-card>
+      <h4 class="text-green-brand">Sign-in</h4>
+      <p>Sign people in with OpenID Connect or a proxy, and activate a new install.</p>
+    </docs-card>
+  </a>
+  <a href="/hosting/upgrading" aria-label="Upgrading">
+    <docs-card>
+      <h4 class="text-green-brand">Upgrade from v3</h4>
+      <p>Move a Flow 3 install to v5 in place, then roll out each later release.</p>
+    </docs-card>
+  </a>
+  <a href="/architecture/security" aria-label="Security">
+    <docs-card>
+      <h4 class="text-blue-brand">Security</h4>
+      <p>How Flow authenticates people and machines, and what each role can do.</p>
+    </docs-card>
+  </a>
+  <a href="/apis/overview" aria-label="API reference">
+    <docs-card>
+      <h4 class="text-blue-brand">API reference</h4>
+      <p>Every route of the REST API under <code>/api/v2</code>.</p>
     </docs-card>
   </a>
 </docs-cards>
 
-## Getting help
+## Get help
 
-We’d love to hear from you or give you a hand getting started. Here are some ways to get in touch with us.
-
-- [Community](https://github.com/boomerang-io/community) - Learn more about the Boomerang Flow community and how to get involved
-- [Slack](https://join.slack.com/t/boomerang-io/shared_invite/zt-pxo2yw2o-c3~6YvWkKNrKIwhIBAKhaw) - Join our community and chat with us in real-time
-- [GitHub Issues](https://github.com/features/issues) - Report bugs, request features, or contribute to the project
-- [GitHub Project Board](https://github.com/orgs/boomerang-io/projects/4/views/1) - See what we’re working on and what’s coming next
-
-## Sponsors & Contributors
-
-> **Note**: Boomerang Flow is an open source project part of Boomerang-io, built cloud native on top of Kubernetes<sup>®</sup>
-
-### IBM Consulting Advantage
-
-As Boomerang Flow was contributed to open source, and continues to be sponsored by IBM, integration is enabled with IBM Consulting<sup>®</sup> Advantage. Flow is supported out-of-the box, providing additional enterprise capabilities such as audit logging, consent management, and user and team role management via the broader IBM platform. There are also Tasks available that rely on platform services.
-
-At installation time, you can configure whether to run Boomerang Flow in standalone mode (default) or integrated to IBM Consulting Advantage.
-
-### Backstop
-
-The team behind Backstop are some of the original creators of Boomerang Flow and continue to support the Open Source community. They also provide a free tier of their managed service and benefits for the open source community - [Try it out](https://useboomerang.io/flow/try)!
+- **Report a defect or request a feature** in the [Flow issue tracker](https://github.com/boomerang-io/flow/issues). Check [Known issues](/introduction/known-issues) first.
+- **Read the release notes** for each version on [GitHub](https://github.com/boomerang-io/flow/releases).
+- **Read the source:** Flow is developed in the open at [github.com/boomerang-io/flow](https://github.com/boomerang-io/flow).
