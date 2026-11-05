@@ -7,7 +7,7 @@ title: Features Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **features** | **Map** |  | [optional] [default to null] |
+| **features** | **Map** of **Any** |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

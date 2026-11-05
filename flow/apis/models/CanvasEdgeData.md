@@ -8,7 +8,7 @@ title: Canvas Edge Data Model
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **decisionCondition** | **String** |  | [optional] [default to null] |
-| **executionCondition** | **String** |  | [optional] [default to null] |
+| **executionCondition** | **String** |  | [optional] Enum: `always`, `success`, `failure`, `finally` [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

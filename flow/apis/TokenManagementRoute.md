@@ -5,38 +5,38 @@ title: Token Management Route
 # Token Management Route
 
 | Name | Method | Endpoint |
-|------------- | ------------- | -------------|
+| ---- | ------ | -------- |
 | [**Create Token**](#create-token) | POST | `/api/v2/token` |
 | [**Delete Token**](#delete-token) | DELETE | `/api/v2/token/{id}` |
+| [**Retrieve the permission catalog for building a Token**](#retrieve-the-permission-catalog-for-building-a-token) | GET | `/api/v2/token/catalog` |
 | [**Search for Tokens**](#search-for-tokens) | GET | `/api/v2/token/query` |
 
 
 
-## **Create Token**
+## Create Token
 
-> POST /api/v2/token
+`POST /api/v2/token`
 
+Requires the `token/write` permission, from a global, user, key, session token.
 
-#### Request Parameters
+#### Request parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|
+| ---- | ---- | -------- | ----------- | ----- | ------- |
 
 
-#### Request Body
-| Schema | Required | 
-| ------ | --- | 
+#### Request body
+| Schema | Required |
+| ------ | -------- |
 | [**TokenCreateRequest**](./models/TokenCreateRequest) | true |
 
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
 
-No authorization required
-
-#### Request Headers
+#### Request headers
 
 - **Content-Type**: `application/json`
 - **Accept**: `*/*`
@@ -46,29 +46,28 @@ No authorization required
 [**TokenCreateResponse**](./models/TokenCreateResponse)
 
 
-## **Delete Token**
+## Delete Token
 
-> DELETE /api/v2/token/{id}
+`DELETE /api/v2/token/{id}`
 
+Requires the `token/delete` permission, from a global, user, key, session token.
 
-#### Request Parameters
+#### Request parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|
-| **id** | **String** | true | ID of the Token | Defaults to null. | id_example
+| ---- | ---- | -------- | ----------- | ----- | ------- |
+| **id** | **String** | true | ID of the Token | Defaults to null. | id_example |
 
 
-#### Request Body
+#### Request body
 This endpoint does not require a request body.
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
 
-No authorization required
-
-#### Request Headers
+#### Request headers
 
 - **Content-Type**: `Not defined`
 - **Accept**: `*/*`
@@ -78,36 +77,69 @@ No authorization required
 **Object**
 
 
-## **Search for Tokens**
+## Retrieve the permission catalog for building a Token
 
-> GET /api/v2/token/query?types=,principals=,limit=10,page=0,order=ASC,sort=0,fromDate=1677589200000,toDate=1680267600000
+`GET /api/v2/token/catalog`
 
+Returns the resources, actions, and role presets the requesting caller could actually grant for the given scope/principal - sourced from the same catalog the enforcement path reads.
 
-#### Request Parameters
+Requires the `token/read` permission, from a global, user, key, session token.
+
+#### Request parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|
-| **limit** | **Integer** | true | Result Size | Defaults to null. | 10
-| **page** | **Integer** | true | Page Number | Defaults to null. | 0
-| **order** | **String** | true | Ascending (ASC) or Descending (DESC) sort order on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **types** | [**List**](./models/String) | false | List of types to filter for. Defaults to all. | Defaults to null. Enum: [session, user, team, workflow, global] | 
-| **principals** | [**List**](./models/String) | false | List of principals to filter for. Based on the types you are querying for. | Defaults to null. | 
-| **sort** | **String** | false | The element to sort onr | Defaults to Optional[creationDate]. | 0
-| **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000
-| **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000
+| ---- | ---- | -------- | ----------- | ----- | ------- |
+| **scope** | **String** | true | global or workspace | Defaults to null. Enum: [global, workspace, user] | scope_example |
+| **principal** | **String** | false | Workspace ref. Required when scope&#x3D;workspace. | Defaults to null. | principal_example |
 
 
-#### Request Body
+#### Request body
 This endpoint does not require a request body.
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
 
-No authorization required
+#### Request headers
 
-#### Request Headers
+- **Content-Type**: `Not defined`
+- **Accept**: `*/*`
+
+#### Response
+
+[**TokenPermissionCatalog**](./models/TokenPermissionCatalog)
+
+
+## Search for Tokens
+
+`GET /api/v2/token/query`
+
+Requires the `token/read` permission, from a global, user, key, session token.
+
+#### Request parameters
+
+
+| Name | Type | Required | Description | Notes | Example |
+| ---- | ---- | -------- | ----------- | ----- | ------- |
+| **limit** | **Integer** | true | Result Size | Defaults to null. | 10 |
+| **page** | **Integer** | true | Page Number | Defaults to 0. | 0 |
+| **order** | **String** | true | Ascending (ASC) or Descending (DESC) sort order on creationDate | Defaults to ASC. Enum: [ASC, DESC] | ASC |
+| **types** | **List** of **String** | false | List of types to filter for. Defaults to all. | Defaults to null. Enum: [session, user, key, global] |  |
+| **principals** | **List** of **String** | false | List of principals to filter for. Based on the types you are querying for. | Defaults to null. |  |
+| **sort** | **String** | false | The element to sort onr | Defaults to creationDate. | 0 |
+| **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000 |
+| **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000 |
+
+
+#### Request body
+This endpoint does not require a request body.
+
+#### Authorization
+
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
+
+#### Request headers
 
 - **Content-Type**: `Not defined`
 - **Accept**: `*/*`

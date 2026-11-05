@@ -1,102 +1,128 @@
 ---
 title: Overview
 order: 1
+description: What every Flow API route has in common, and an index of the routes and models.
 ---
+
+<!-- Generated from contracts/api-v2.yaml at {{flowTag}}{{^flowTag}}main{{/flowTag}} by flow/apis/assets/templates/README.mustache. Edit the template, not this page: see CLAUDE.md. -->
 
 # Overview
 
-We expose a series of RESTFul APIs that allows management and extensibility of every aspect of the system, driven via an API first design.
+Flow exposes a REST API under `/api/v2`. This page covers what every route has in common: where the API is, how to authenticate, and how errors, paging, labels and YAML work. The route pages list each operation with its parameters, permission and response.
 
-## Authentication
+## Where is the API?
 
-> Please refer to [security architecture](../architecture/security#tokens) for further guidance.
+Every route is under `/api/v2` on service-core. A resource that a workspace owns is under `/api/v2/workspace/{workspace}/…`, where `{workspace}` is the workspace's name. Everything else is global.
 
-APIs that required authentication, can use an appropriately scoped token in the following ways:
+```bash
+curl -H "Authorization: Bearer $FLOW_TOKEN" \
+  "https://flow.example.com/api/v2/workspace/my-workspace/workflowrun/query?statuses=failed&limit=20"
+```
 
-{{^authMethods}}
-All endpoints do not require authorization.
-{{/authMethods}}
+`/api/v2` only gains routes and fields within 5.x, so a client written against an earlier 5.x release keeps working against a later one. The health probe, `GET /health`, is outside `/api/v2` and needs no token.
+
+## Authenticate
+
+Every route needs a Flow token, except the five that Slack and GitHub call: the GitHub App callback and four Slack routes. Those verify the request themselves, and their **Authorization** section reads "No authorization required". Send the token in one of the ways below.
+
 {{#authMethods}}
-{{#last}}
-    Authentication schemes defined for the API:
-{{/last}}
-{{/authMethods}}
-{{#authMethods}}
-<a name="{{name}}"></a>
 ### {{name}}
 
-{{#isApiKey}}- **Type**: API key
-- **API key parameter name**: {{keyParamName}}
-- **Location**: {{#isKeyInQuery}}URL query string{{/isKeyInQuery}}{{#isKeyInHeader}}HTTP header{{/isKeyInHeader}}
-{{/isApiKey}}
-{{#isBasicBasic}}- **Type**: HTTP basic authentication
-{{/isBasicBasic}}
-{{#isBasicBearer}}- **Type**: HTTP Bearer Token authentication{{#bearerFormat}} ({{{.}}}){{/bearerFormat}}
+{{#isBasicBearer}}`Authorization: Bearer <token>`, an HTTP bearer token. Send a Flow token, such as a `bfk_` key token. Behind an authenticating proxy, Flow also accepts the proxy's JSON Web Token (JWT) here, which is the format the contract names{{#bearerFormat}}: `{{{.}}}`{{/bearerFormat}}.
 {{/isBasicBearer}}
-{{#isHttpSignature}}- **Type**: HTTP signature authentication
-{{/isHttpSignature}}
-{{#isOAuth}}- **Type**: OAuth
-- **Flow**: {{flow}}
-- **Authorization URL**: {{authorizationUrl}}
-- **Scopes**: {{^scopes}}N/A{{/scopes}}
-{{#scopes}}  - {{scope}}: {{description}}
-{{/scopes}}
-{{/isOAuth}}
+{{#isApiKey}}{{#isKeyInHeader}}`{{keyParamName}}: <token>`, an HTTP header. Send a Flow token here instead of in `Authorization`.
+{{/isKeyInHeader}}{{#isKeyInQuery}}`?{{keyParamName}}=<token>`, a URL query parameter. {{{description}}} Only the routes whose **Authorization** section lists `{{name}}` accept it: `POST /api/v2/webhook`, `POST /api/v2/event`, and `GET` or `POST /api/v2/callback`.
+
+> **Warning:** A token in a URL is recorded by every proxy and access log it passes through. Prefer a header. If a sender can only use the URL, give it a `key` token with only the `webhook/action` permission on its workspace.
+{{/isKeyInQuery}}{{/isApiKey}}
+{{#isBasicBasic}}HTTP basic authentication.
+{{/isBasicBasic}}
 
 {{/authMethods}}
+### Which token?
+
+Each route's description names the permission it needs and the token kinds it accepts, for example "Requires the `workflowrun/read` permission, from a global, key, user, session token." [Machine tokens](../hosting/machine-tokens) covers the token kinds and how to create them, and [Tokens](../architecture/security#tokens) covers what each kind grants.
+
+A request without a valid token is `401`, with a `WWW-Authenticate: Bearer` header. A token that lacks the route's permission is a bare `403` with no body. With `flow.security.enabled=false`, Flow checks no token at all: see [What happens with security off?](../architecture/security#what-happens-with-security-off).
+
+## Read an error
+
+An error Flow raises is a `RestErrorResponse`:
+
+```json
+{
+  "timestamp": "2026-09-01T10:00:00.000+00:00",
+  "code": 1001,
+  "reason": "QUERY_INVALID_FILTERS",
+  "message": "Invalid query filters(labels) have been provided.",
+  "status": "400 BAD_REQUEST"
+}
+```
+
+| Field | Holds |
+| --- | --- |
+| `timestamp` | When Flow raised the error |
+| `code` | A number. Below 1000 mirrors HTTP. Then 10xx is generic, 11xx workspace, 12xx workflow, 13xx workflow run, 14xx task, 15xx task run, 16xx action, 17xx schedule, 18xx parameter, 19xx integration and 20xx artifact. |
+| `reason` | The error's name, such as `WORKFLOWRUN_INVALID_REFERENCE`. Key on `reason`, not `code`: codes 1405 and 1802 each carry two reasons. |
+| `message` | A readable explanation |
+| `status` | The HTTP status, as its code and name |
+
+The response adds `cause` only when the operator sets `flow.error.include-cause=true`. The default is `false`.
+
+- A resource in the path that doesn't exist, or that you can't reach, is `404`, with a reason such as `WORKSPACE_INVALID_REF` or `WORKFLOWRUN_INVALID_REFERENCE`.
+- Blank, missing or unusable input is `400`, with a reason such as `WORKFLOW_INVALID_REQ`.
+- `PERMISSION_DENIED` carries code 403 but answers HTTP 401.
+- Two answers have no `RestErrorResponse` body: a missing permission, which is a bare `403`, and a framework error such as a malformed body or an unsupported method, which keeps Spring's problem-detail body.
+
+## Page through a list
+
+List routes, usually ending `/query`, take these query parameters:
+- `page`, counted from 0;
+- `limit`;
+- `order`, `ASC` or `DESC`;
+- `sort`, a field name, where the list is sortable.
+
+They return a page: the matches in `content`, with `totalElements`, `totalPages`, `number` and `size`. On the run, task run, workflow, task, workspace, user and token lists, leaving out `limit` returns every match. The action and schedule lists default to 10.
+
+The run, task run, action and token lists also take `fromDate` and `toDate`, in epoch milliseconds: `fromDate` is included and `toDate` is not. `statuses` and `phase` ignore case. A value that names no status or phase is `400 QUERY_INVALID_FILTERS`.
+
+## Filter by label
+
+`labels` keeps the items that carry every `key=value` pair you list. URL-encode each pair and separate the pairs with commas: `labels=Organization%3DBoomerang,customKey%3Dtest`. Each pair splits on its first `=`, so `a%3Db%3Dc` matches the value `b=c`. A pair without a key or a value is `400 QUERY_INVALID_FILTERS`.
+
+Labels under `boomerang.io/` are Flow's own. Flow sets some, such as `boomerang.io/model` on an AI task run, and drops any that a client sends. `PATCH` on a workspace replaces its labels, and `PUT` on a workflow merges them unless you add `replace=true`.
+
+## Send and receive YAML
+
+The task routes, under `/api/v2/task` and `/api/v2/workspace/{workspace}/task`, also serve and accept a task as YAML. Send `Accept: application/x-yaml` to read YAML and `Content-Type: application/x-yaml` to write it. With no `Accept` header, Flow answers JSON.
+
+The YAML is a Tekton Task. Its `boomerang.io/params` annotation carries each parameter's other fields, so a task you read and apply back unchanged stays as it was.
+
+## Use a client library
+
+`flow-sdk` is the public API as a Java library: `Flow.connect(url, token)`, then typed calls to submit, read, cancel and retry workflow runs, query runs and task runs by label, and read Insights. Each Flow release publishes it to GitHub Packages as `io.boomerang:flow-sdk`, at the release's version. Use the version of the Flow you run against. Reading GitHub Packages needs a GitHub token with `read:packages`. [Call Flow with flow-sdk](../extend/embed-flow#call-flow-with-flow-sdk) has the dependency, an example and what the library covers.
+
+Flow publishes no client for other languages. Generate one from the contract with a tool such as [OpenAPI Generator](https://openapi-generator.tech).
+
+## Get the full contract
+
+These pages are generated from [`contracts/api-v2.yaml`](https://github.com/boomerang-io/flow/blob/{{flowTag}}{{^flowTag}}main{{/flowTag}}/contracts/api-v2.yaml) at `{{flowTag}}{{^flowTag}}main{{/flowTag}}`, an OpenAPI {{openAPI.openapi}} document. The rules every route follows are in [`specifications/api-contract.md`](https://github.com/boomerang-io/flow/blob/{{flowTag}}{{^flowTag}}main{{/flowTag}}/specifications/api-contract.md). A running service-core serves the same document at `/api/docs/spec/api-v2`, and Swagger UI at `/api/docs/swagger-ui`.
 
 {{#generateApiDocs}}
-
-<a name="routes"></a>
-
 ## Routes
 
 {{#apiInfo}}{{#apis}}{{#operations}}
-### {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}}
+### {{#operation}}{{#-first}}{{#tags}}{{#-first}}{{#lambda.uncamelize}}{{name}}{{/lambda.uncamelize}}{{/-first}}{{/tags}}{{/-first}}{{/operation}}
 
-| Route | Endpoint | 
-| ------------- | ------------- |
-{{#operation}}| [**{{summary}}**](./{{apiDocPath}}{{classname}}#{{#lambda.kebabcase}}{{#lambda.titlecase}}{{summary}}{{/lambda.titlecase}}{{/lambda.kebabcase}}) | **{{httpMethod}}** {{path}} |
+| Route | Endpoint |
+| ----- | -------- |
+{{#operation}}| [**{{{summary}}}**](./{{classname}}#{{#lambda.kebabcase}}{{#lambda.titlecase}}{{#lambda.lowercase}}{{{summary}}}{{/lambda.lowercase}}{{/lambda.titlecase}}{{/lambda.kebabcase}}) | `{{httpMethod}} {{path}}` |
 {{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
 {{/generateApiDocs}}
 
 {{#generateModelDocs}}
-<a name="models"></a>
-
 ## Models
 
-{{#modelPackage}}
-{{#models}}{{#model}} - [{{classname}}]({{#lambda.lowercase}}./{{modelPackage}}/{{modelDocPath}}{{/lambda.lowercase}}{{classname}})
+{{#models}}{{#model}}- [{{classname}}](./models/{{classname}})
 {{/model}}{{/models}}
-{{/modelPackage}}
-{{^modelPackage}}
-No model defined in this package
-{{/modelPackage}}
 {{/generateModelDocs}}
-
-<a name="auth"></a>
-
-## Open API Specification
-
-The APIs are documented using the OpenAPI specification 3.0.1 and the raw specification file can can be found on [GitHub](https://github.com/boomerang-io/docs/blob/main/flow/apis/assets/spec.json). 
-
-## Versioning
-
-To make it easier to evolve and extend we version the API, such as `/apis/v1`. This is done at the API level rather than a particular context to ensure we have a consistent view and behavior for the life of a version.
-
-## SDKs
-
-We currently generate a Java client based on the OpenAPI specification, one such open source project to facilitate this is the open API-generator project. (https://github.com/OpenAPITools/openapi-generator).
-
-_In the future we will also support NodeJS and Go._
-
-## Limits
-
-Our API endpoints have limits on the number of requests that can be made with the following defaults that can be edited in the Ingress definition.
-
-| Type                      | Description                                                       | Default |
-| ------------------------- | ----------------------------------------------------------------- | ------- |
-| Connections               | Number of concurrent connections allowed from a single IP address | 3       |
-| Requests Per Minute (rpm) | Number of requests accepted from a given IP each minute           | 100     |
-
-_Reference_: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rate-limiting

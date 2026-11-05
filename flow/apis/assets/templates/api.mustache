@@ -1,55 +1,53 @@
 ---
-title: {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
+title: {{#operations}}{{#operation}}{{#-first}}{{#tags}}{{#-first}}{{#lambda.uncamelize}}{{name}}{{/lambda.uncamelize}}{{/-first}}{{/tags}}{{/-first}}{{/operation}}{{/operations}} Route
 ---
 
-# {{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}} Route
+# {{#operations}}{{#operation}}{{#-first}}{{#tags}}{{#-first}}{{#lambda.uncamelize}}{{name}}{{/lambda.uncamelize}}{{/-first}}{{/tags}}{{/-first}}{{/operation}}{{/operations}} Route
 
 | Name | Method | Endpoint |
-|------------- | ------------- | -------------|
-{{#operations}}{{#operation}}| [**{{summary}}**](#{{#lambda.kebabcase}}{{#lambda.titlecase}}{{summary}}{{/lambda.titlecase}}{{/lambda.kebabcase}}) | {{httpMethod}} | `{{path}}` |
+| ---- | ------ | -------- |
+{{#operations}}{{#operation}}| [**{{{summary}}}**](#{{#lambda.kebabcase}}{{#lambda.titlecase}}{{#lambda.lowercase}}{{{summary}}}{{/lambda.lowercase}}{{/lambda.titlecase}}{{/lambda.kebabcase}}) | {{httpMethod}} | `{{path}}` |
 {{/operation}}{{/operations}}
 
 {{#operations}}
 {{#operation}}
 
-## **{{summary}}**
+## {{{summary}}}
 
-> {{httpMethod}} {{path}}{{#hasQueryParams}}?{{#queryParams}}{{paramName}}={{example}}{{^-last}},{{/-last}}{{/queryParams}}{{/hasQueryParams}}
+`{{httpMethod}} {{path}}`
 
-{{#notes}}
-{{.}}
-{{/notes}}
+{{#unescapedNotes}}
+{{{.}}}
+{{/unescapedNotes}}
 
-#### Request Parameters
+#### Request parameters
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|{{/-last}}{{/allParams}}
-{{#allParams}}{{^isBodyParam}}| **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](./{{#lambda.lowercase}}{{modelPackage}}{{/lambda.lowercase}}/{{baseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} | {{description}} | {{#defaultValue}}Defaults to {{.}}.{{/defaultValue}}{{#allowableValues}} Enum: [{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}} | {{example}}
+| ---- | ---- | -------- | ----------- | ----- | ------- |{{/-last}}{{/allParams}}
+{{#allParams}}{{^isBodyParam}}| **{{paramName}}** | {{#isArray}}**List** of {{#items}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/items}}{{/isArray}}{{^isArray}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isArray}} | {{#required}}true{{/required}}{{^required}}false{{/required}} | {{description}} | {{#defaultValue}}Defaults to {{.}}.{{/defaultValue}}{{#allowableValues}} Enum: [{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}} | {{example}} |
 {{/isBodyParam}}{{/allParams}}
 
-#### Request Body
+#### Request body
 {{#bodyParams}}
-| Schema | Required | 
-| ------ | --- | 
-| {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{#generateModelDocs}}[**{{dataType}}**](./{{#lambda.lowercase}}{{modelPackage}}{{/lambda.lowercase}}/{{baseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{dataType}}**{{/generateModelDocs}}{{/isFile}}{{/isPrimitiveType}} | {{#required}}true{{/required}}{{^required}}false{{/required}} |
+| Schema | Required |
+| ------ | -------- |
+| {{#isArray}}**List** of {{#items}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/items}}{{/isArray}}{{^isArray}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isArray}} | {{#required}}true{{/required}}{{^required}}false{{/required}} |
 {{/bodyParams}}
 {{^bodyParams}}This endpoint does not require a request body.{{/bodyParams}}
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+{{^hasAuthMethods}}No authorization required{{/hasAuthMethods}}{{#hasAuthMethods}}One of {{#authMethods}}[{{name}}](./overview#{{#lambda.lowercase}}{{name}}{{/lambda.lowercase}}){{^-last}}, {{/-last}}{{/authMethods}}{{/hasAuthMethods}}
 
-{{^authMethods}}No authorization required{{/authMethods}}{{#authMethods}}[{{name}}](./overview#{{name}}){{^-last}}, {{/-last}}{{/authMethods}}
-
-#### Request Headers
+#### Request headers
 
 - **Content-Type**: `{{#consumes}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/consumes}}{{^consumes}}Not defined{{/consumes}}`
 - **Accept**: `{{#produces}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/produces}}{{^produces}}Not defined{{/produces}}`
 
 #### Response
 
-{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}{{#generateModelDocs}}[**{{returnType}}**](./{{#lambda.lowercase}}{{modelPackage}}{{/lambda.lowercase}}/{{returnBaseType}}){{/generateModelDocs}}{{^generateModelDocs}}**{{returnType}}**{{/generateModelDocs}}{{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}
+{{#returnType}}{{#returnProperty}}{{#isArray}}**List** of {{#items}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/items}}{{/isArray}}{{#isMap}}**Map** of {{#items}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/items}}{{/isMap}}{{^isArray}}{{^isMap}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/isMap}}{{/isArray}}{{/returnProperty}}{{/returnType}}{{^returnType}}No response body{{/returnType}}
 
 {{/operation}}
 {{/operations}}

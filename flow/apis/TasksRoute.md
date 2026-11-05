@@ -5,44 +5,45 @@ title: Tasks Route
 # Tasks Route
 
 | Name | Method | Endpoint |
-|------------- | ------------- | -------------|
-| [**Update, replace, or create new using Tekton Task YAML**](#update-replace-or-create-new-using-tekton-task-yaml) | PUT | `/api/v2/task/{name}` |
+| ---- | ------ | -------- |
+| [**Update, replace, or create a global task using Tekton Task YAML**](#update-replace-or-create-a-global-task-using-tekton-task-yaml) | PUT | `/api/v2/task/{name}` |
 | [**Create a new Task using Tekton Task YAML**](#create-a-new-task-using-tekton-task-yaml) | POST | `/api/v2/task` |
-| [**Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**](#retrieve-a-specific-task-as-tekton-task-yaml-if-no-version-specified-the-latest-version-is-returned) | GET | `/api/v2/task/{name}` |
-| [**Retrieve the changlog**](#retrieve-the-changlog) | GET | `/api/v2/task/{name}/changelog` |
-| [**Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**](#search-for-task-if-teams-are-provided-it-will-query-the-teams-if-no-teams-are-provided-it-will-query-global-task-templates) | GET | `/api/v2/task/query` |
-| [**Validate Tekton Task YAML**](#validate-tekton-task-yaml) | POST | `/api/v2/task/validate` |
+| [**Delete a Task**](#delete-a-task) | DELETE | `/api/v2/task/{name}` |
+| [**Retrieve a global task as Tekton Task YAML. If no version specified, the latest version is returned.**](#retrieve-a-global-task-as-tekton-task-yaml-if-no-version-specified-the-latest-version-is-returned) | GET | `/api/v2/task/{name}` |
+| [**Retrieve a global task's changelog**](#retrieve-a-global-tasks-changelog) | GET | `/api/v2/task/{name}/changelog` |
+| [**Search for Task. If workspaces are provided it will query the workspaces. If no workspaces are provided it will query Global Task Templates**](#search-for-task-if-workspaces-are-provided-it-will-query-the-workspaces-if-no-workspaces-are-provided-it-will-query-global-task-templates) | GET | `/api/v2/task/query` |
+| [**Validate a global task's Tekton Task YAML**](#validate-a-global-tasks-tekton-task-yaml) | POST | `/api/v2/task/validate` |
 
 
 
-## **Update, replace, or create new using Tekton Task YAML**
+## Update, replace, or create a global task using Tekton Task YAML
 
-> PUT /api/v2/task/{name}?replace=true
+`PUT /api/v2/task/{name}`
 
 The name must only contain alphanumeric and - characeters. If the name exists, apply will create a new version.
 
-#### Request Parameters
+Requires the `task/write` permission, from a global, user, session token.
+
+#### Request parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|
-| **name** | **String** | true | Name of Task | Defaults to null. | name_example
-| **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true
+| ---- | ---- | -------- | ----------- | ----- | ------- |
+| **name** | **String** | true | Name of Task | Defaults to null. | name_example |
+| **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true |
 
 
-#### Request Body
-| Schema | Required | 
-| ------ | --- | 
+#### Request body
+| Schema | Required |
+| ------ | -------- |
 | [**Task**](./models/Task) | true |
 
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
 
-No authorization required
-
-#### Request Headers
+#### Request headers
 
 - **Content-Type**: `application/json, application/x-yaml`
 - **Accept**: `*/*`
@@ -52,32 +53,32 @@ No authorization required
 [**Task**](./models/Task)
 
 
-## **Create a new Task using Tekton Task YAML**
+## Create a new Task using Tekton Task YAML
 
-> POST /api/v2/task
+`POST /api/v2/task`
 
 The name needs to be unique and must only contain alphanumeric and - characeters.
 
-#### Request Parameters
+Requires the `task/write` permission, from a global, user, session token.
+
+#### Request parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|
+| ---- | ---- | -------- | ----------- | ----- | ------- |
 
 
-#### Request Body
-| Schema | Required | 
-| ------ | --- | 
+#### Request body
+| Schema | Required |
+| ------ | -------- |
 | [**Task**](./models/Task) | true |
 
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
 
-No authorization required
-
-#### Request Headers
+#### Request headers
 
 - **Content-Type**: `application/json, application/x-yaml`
 - **Accept**: `*/*`
@@ -87,30 +88,62 @@ No authorization required
 [**Task**](./models/Task)
 
 
-## **Retrieve a specific task as Tekton Task YAML. If no version specified, the latest version is returned.**
+## Delete a Task
 
-> GET /api/v2/task/{name}?version=56
+`DELETE /api/v2/task/{name}`
 
+Requires the `task/delete` permission, from a global, user, session token.
 
-#### Request Parameters
+#### Request parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|
-| **name** | **String** | true | Name of Task | Defaults to null. | name_example
-| **version** | **Integer** | false | Task Version | Defaults to null. | 56
+| ---- | ---- | -------- | ----------- | ----- | ------- |
+| **name** | **String** | true | Name of Task | Defaults to null. | name_example |
 
 
-#### Request Body
+#### Request body
 This endpoint does not require a request body.
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
 
-No authorization required
+#### Request headers
 
-#### Request Headers
+- **Content-Type**: `Not defined`
+- **Accept**: `Not defined`
+
+#### Response
+
+No response body
+
+
+## Retrieve a global task as Tekton Task YAML. If no version specified, the latest version is returned.
+
+`GET /api/v2/task/{name}`
+
+Requires the `task/read` permission, from a global, user, session token.
+
+Requires the `task/read` permission, from a global, user, session token.
+
+#### Request parameters
+
+
+| Name | Type | Required | Description | Notes | Example |
+| ---- | ---- | -------- | ----------- | ----- | ------- |
+| **name** | **String** | true | Name of Task | Defaults to null. | name_example |
+| **version** | **Integer** | false | Task Version | Defaults to null. | 56 |
+
+
+#### Request body
+This endpoint does not require a request body.
+
+#### Authorization
+
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
+
+#### Request headers
 
 - **Content-Type**: `Not defined`
 - **Accept**: `*/*`
@@ -120,67 +153,66 @@ No authorization required
 [**Task**](./models/Task)
 
 
-## **Retrieve the changlog**
+## Retrieve a global task's changelog
 
-> GET /api/v2/task/{name}/changelog
+`GET /api/v2/task/{name}/changelog`
 
 Retrieves each versions changelog and returns them all as a list.
 
-#### Request Parameters
+Requires the `task/read` permission, from a global, user, session token.
+
+#### Request parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|
-| **name** | **String** | true | Name of Task | Defaults to null. | name_example
+| ---- | ---- | -------- | ----------- | ----- | ------- |
+| **name** | **String** | true | Name of Task | Defaults to null. | name_example |
 
 
-#### Request Body
+#### Request body
 This endpoint does not require a request body.
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
 
-No authorization required
-
-#### Request Headers
+#### Request headers
 
 - **Content-Type**: `Not defined`
 - **Accept**: `*/*`
 
 #### Response
 
-[**List**](./models/ChangeLogVersion)
+**List** of [**ChangeLogVersion**](./models/ChangeLogVersion)
 
 
-## **Search for Task. If teams are provided it will query the teams. If no teams are provided it will query Global Task Templates**
+## Search for Task. If workspaces are provided it will query the workspaces. If no workspaces are provided it will query Global Task Templates
 
-> GET /api/v2/task/query?labels=,statuses=active,inactive,names=switch,event-wait,limit=10,page=0,sort=ASC
+`GET /api/v2/task/query`
 
+Requires the `task/read` permission, from a global, user, session token.
 
-#### Request Parameters
+#### Request parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|
-| **limit** | **Integer** | true | Result Size | Defaults to null. | 10
-| **page** | **Integer** | true | Page Number | Defaults to null. | 0
-| **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to Optional[ASC]. Enum: [ASC, DESC] | ASC
-| **labels** | [**List**](./models/String) | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. | 
-| **statuses** | [**List**](./models/String) | false | List of statuses to filter for. | Defaults to null. | active,inactive
-| **names** | [**List**](./models/String) | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait
+| ---- | ---- | -------- | ----------- | ----- | ------- |
+| **limit** | **Integer** | true | Result Size | Defaults to null. | 10 |
+| **page** | **Integer** | true | Page Number | Defaults to 0. | 0 |
+| **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to ASC. Enum: [ASC, DESC] | ASC |
+| **labels** | **List** of **String** | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. |  |
+| **statuses** | **List** of **String** | false | List of statuses to filter for. | Defaults to [&quot;active&quot;]. | active,inactive |
+| **names** | **List** of **String** | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait |
 
 
-#### Request Body
+#### Request body
 This endpoint does not require a request body.
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
 
-No authorization required
-
-#### Request Headers
+#### Request headers
 
 - **Content-Type**: `Not defined`
 - **Accept**: `*/*`
@@ -190,37 +222,37 @@ No authorization required
 [**TaskResponsePage**](./models/TaskResponsePage)
 
 
-## **Validate Tekton Task YAML**
+## Validate a global task's Tekton Task YAML
 
-> POST /api/v2/task/validate
+`POST /api/v2/task/validate`
 
 Validates the Task YAML as a Tekton Task
 
-#### Request Parameters
+Requires the `task/read` permission, from a global, user, session token.
+
+#### Request parameters
 
 
 | Name | Type | Required | Description | Notes | Example |
-| ---- | ---- | -------- | ----------- | --- |---|
+| ---- | ---- | -------- | ----------- | ----- | ------- |
 
 
-#### Request Body
-| Schema | Required | 
-| ------ | --- | 
+#### Request body
+| Schema | Required |
+| ------ | -------- |
 | [**TektonTask**](./models/TektonTask) | true |
 
 
 #### Authorization
 
-> Note: this section and the documentation around what is required is still actively being updated.
+One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access-token)
 
-No authorization required
-
-#### Request Headers
+#### Request headers
 
 - **Content-Type**: `application/x-yaml`
 - **Accept**: `Not defined`
 
 #### Response
 
-null (empty response body)
+No response body
 

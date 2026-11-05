@@ -7,9 +7,9 @@ title: Action Summary Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+| **approvals** | **Long** |  | [optional] [default to null] |
 | **approvalsRate** | **Long** |  | [optional] [default to null] |
 | **manual** | **Long** |  | [optional] [default to null] |
-| **approvals** | **Long** |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

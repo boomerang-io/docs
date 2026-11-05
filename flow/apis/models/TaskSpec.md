@@ -7,12 +7,12 @@ title: Task Spec Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **arguments** | **List** |  | [optional] [default to null] |
-| **command** | **List** |  | [optional] [default to null] |
-| **params** | [**List**](AbstractParam) |  | [optional] [default to null] |
-| **envs** | [**List**](TaskEnvVar) |  | [optional] [default to null] |
+| **arguments** | **List** of **String** |  | [optional] [default to null] |
+| **command** | **List** of **String** |  | [optional] [default to null] |
+| **envs** | **List** of [**TaskEnvVar**](TaskEnvVar) |  | [optional] [default to null] |
 | **image** | **String** |  | [optional] [default to null] |
-| **results** | [**List**](ResultSpec) |  | [optional] [default to null] |
+| **params** | **List** of [**AbstractParam**](AbstractParam) |  | [optional] [default to null] |
+| **results** | **List** of [**ResultSpec**](ResultSpec) |  | [optional] [default to null] |
 | **script** | **String** |  | [optional] [default to null] |
 | **workingDir** | **String** |  | [optional] [default to null] |
 

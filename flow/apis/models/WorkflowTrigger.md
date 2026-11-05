@@ -7,11 +7,11 @@ title: Workflow Trigger Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+| **event** | [**Trigger**](Trigger) |  | [optional] [default to null] |
+| **github** | [**Trigger**](Trigger) |  | [optional] [default to null] |
 | **manual** | [**Trigger**](Trigger) |  | [optional] [default to null] |
 | **schedule** | [**Trigger**](Trigger) |  | [optional] [default to null] |
 | **webhook** | [**Trigger**](Trigger) |  | [optional] [default to null] |
-| **event** | [**Trigger**](Trigger) |  | [optional] [default to null] |
-| **github** | [**Trigger**](Trigger) |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

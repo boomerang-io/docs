@@ -7,11 +7,11 @@ title: Param Spec Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** |  | [optional] [default to null] |
-| **type** | **String** |  | [optional] [default to null] |
+| **default** | **Any** |  | [optional] [default to null] |
 | **description** | **String** |  | [optional] [default to null] |
-| **unknownFields** | **Map** |  | [optional] [default to null] |
-| **default** | [**Object**]() |  | [optional] [default to null] |
+| **name** | **String** |  | [optional] [default to null] |
+| **type** | **String** |  | [optional] Enum: `string`, `array`, `object`, `secret` [default to null] |
+| **unknownFields** | **Map** of **Any** |  | [optional] [default to null] |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 
