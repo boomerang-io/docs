@@ -1,145 +1,126 @@
 ---
 title: Parameters
 order: 9
+description: The layers a parameter comes from, how to reference one, which value wins, when values resolve, and how secured parameters stay hidden.
 ---
+
+<!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 17 of 22 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
 
 # Parameters
 
-Parameters are an important aspect of Boomerang Flow, allowing for a powerful inheritance model, and can be set and represent the many different parts of the application. They are available throughout a Workflow or Task and are substituted at execution time.
+A parameter is a named value a workflow or task reads when it runs, written as a reference such as `$(params.registry)`. This page is for workflow authors and task developers: where values come from, which one wins, and how secrets stay hidden.
 
-## Parameter Syntax
+## Where does a value come from?
 
-You can reference parameters in a Task using the `$()` syntax.
+A value can come from six places. Each has its own reference.
 
-There are a number of caveats with parameters.
+| Layer | Where you set it | Reference |
+| --- | --- | --- |
+| Global | **Admin › Parameters** | `$(global.params.x)` |
+| Workspace | **Parameters** in the side nav | `$(workspace.params.x)` |
+| Workflow | The workflow editor's **Parameters** tab, and the values a run starts with | `$(workflow.params.x)` |
+| Task | The fields of a node on the canvas | `$(params.x)`, inside the task's script, command, arguments and environment |
+| Context | Flow, for each run and task run | `$(context.params.x)` |
+| Results | An earlier task's output | `$(tasks.<name>.results.<result>)` |
 
-- Must only contain alphanumeric characters, hyphens (-), and underscores (\_).
-- Must begin with a letter or an underscore (\_).
+`$(params.x)` reads whichever layer holds `x`; the next section says which wins. A reference can also follow a JSON path into an object value or a result, such as `$(params.config.region)` or `$(tasks.lookup.results.data.owner)`. A path that matches nothing gives an empty string.
 
-### Simple JSONPath support
+The context keys are `workflowrun-trigger`, `workflowrun-initiator`, `workflowrun-ref`, `workflowrun-status`, `workflowrun-status-reason`, `workflow-name`, `workflow-displayname`, `workflow-ref`, `workflow-version`, `taskrun-ref`, `taskrun-name`, `taskrun-type`, `webhook-url`, `wfe-url` and `event-url`.
 
-If you are referencing a parameter with JSON as the value and wish to access a subset of the value, you can use a simplified JSONPath dot notation. This is extremely useful with dynamic webhook, event, or callback payloads which would be under the `data` or `event` parameter keys.
+`$(team.params.x)`, the v3 form, still reads the workspace layer. It logs a warning and goes away in the next major version, so use `$(workspace.params.x)`.
 
-#### Example
+## Which value wins?
 
-```json
-{
-  "name": "Boomerang Flow",
-  "hello": "world"
-}
+For `$(params.x)`, the highest layer that holds `x` with a value wins:
+
+1. context;
+2. task (only inside the task's script, command, arguments and environment);
+3. workflow;
+4. workspace;
+5. global.
+
+A layer whose `x` has no value doesn't win. A task's own fields never read each other: `$(params.url)` in a node's field reads the workflow's `url`, or the workspace's or global one.
+
+For example, a global parameter `registry` is `docker.io`, and the workspace sets its own `registry` to `ghcr.io`. In that workspace, `$(params.registry)` and `$(workspace.params.registry)` give `ghcr.io`, while `$(global.params.registry)` still gives `docker.io`. A workflow parameter named `registry` would win over both.
+
+## When do values resolve?
+
+Global, workspace and context values aren't copied onto a run. Flow reads them when the run starts, when each task is admitted, when a dispatcher claims the task, and when a for-each task fans out.
+
+- **A task's fields** resolve when the task is admitted, and are then fixed for that task run.
+- **The script, command, arguments and environment** are filled in when a dispatcher claims the task. A `$(workspace.params.x)` or `$(global.params.x)` written straight into them is read fresh at that point.
+- **Edits** reach tasks admitted afterwards. Each instance caches the layers for 10 seconds, so allow 10 seconds for a change to reach every instance.
+
+Substitution inserts text exactly, quotes and newlines included. Task results, and run parameters that arrive with a webhook, an event, a GitHub delivery, a Run Workflow task or a retry, are inserted as written: a `$(...)` inside them stays text.
+
+## Why did a task fail with `ParamUnresolved`?
+
+Before a task can run, Flow checks every reference in its fields, script, command, arguments and environment. `$(date)` and other shell forms stay text.
+
+| The reference names | Result |
+| --- | --- |
+| Something declared that has no value, or a task that was skipped or hasn't run | An empty string |
+| A parameter no layer declares | The task fails with reason `ParamUnresolved` |
+| A task not in the workflow, or a result it doesn't declare | The task fails with reason `ParamUnresolved` |
+
+The message names the task, the field, the reference and why, for example:
+
+```text
+Task 'deploy': script references $(params.registryTokn): no such param 'registryTokn'
 ```
 
-If you were to access this payload and your Task was named the default `Bobs Task`, you can access the value of `hello` via `$(task.Bobs Task.results.data.hello)`, which would result in a value of `world`.
+Other limits:
 
-## Parameter Availability
+- A task's resolved parameters over 16,384 bytes end it `invalid`.
+- Results over 1,048,576 bytes fail it with `ResultsTooLarge`.
+- A workspace or global parameter deleted between admission and claim fails the task with `SpecFillFailed`.
+- With **Admin › Settings › Features › Workspace Parameters** or **Global Parameters** off, that layer isn't read, so its references fail.
 
-The following table lists the parameters and when they are available to be substituted in an execution. Additionally, parameters have an inheritance order based on the layering order indicated below. For example, defining a parameter with the same name at the Team and Workflow level will lead the Workflow parameter to override and replace the value for the Team parameter, unless referenced directly using scope.
+## Names
 
-The substitution is performed by the Workflow service when a Workflow is executed.
+- A name starts with a letter or underscore, then letters, digits, hyphens and underscores (`^[a-zA-Z_][a-zA-Z0-9_-]*$`). It can't change once created.
+- References match names ignoring case: `$(params.myparam)` finds `MyParam`.
+- Names that differ only by case, `-` or `_` (`my-key` and `MY_KEY`) are refused at save with `PARAM_NAME_COLLISION`. A task receives each parameter as the environment variable `PARAM_<NAME>`, and those names would collide.
+- `names` is reserved, in any case.
+- On a for-each task, `item` and `index` are reserved: Flow adds them to each item.
 
-![Parameter Layering](./assets/img/parameters.png)
+## Types
 
-| Parameter Scope | Available When?                                                                                                          | Syntax                                    | Example                                          |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------- | ------------------------------------------------ |
-| Global          | Throughout the Workflow lifecycle. These are defined in Boomerang Flow by Administrators.                                | `$(global.params.<parameter>)`            | `$(global.params.slackChannel)`                  |
-| Team            | Throughout the Workflow lifecycle. These are defined in Boomerang Flow by teams.                                         | `$(team.params.<parameter>)`              | `$(team.params.slackChannel)`                    |
-| Workflow        | Throughout the Workflow lifecycle. Created and set by a user through Editor inputs.                                      | `$(workflow.params.<parameter>)`          | `$(workflow.params.slackChannel)`                |
-| Context         | Specific reserved parameters available at the execution of a Workflow.                                                   | `$(context.params.<parameter>)`           | `$(context.params.workflowrun-id)`               |
-| Params          | The flattened parameters with all inheritance and substitution resolved.                                                 | `$(params.<parameter>)`                   | `$(params.slackChannel)`                         |
-| Task Results    | At completion of a Task execution, these parameters can be referenced by other Tasks during the same Workflow execution. | `$(task.<Task name>.results.<parameter>)` | `$(task.My Wait For Event.results.eventPayload)` |
+A workflow parameter's **Type** is **Boolean**, **Email**, **Number**, **Password**, **Select**, **Text**, **Text Area** or **URL**. Task fields add more, such as **Slider** and the text editors. Each reaches a run as one of four value types: Password becomes `secret`, a JSON field becomes `object`, a multi-select becomes `array`, and every other type becomes `string`.
 
-Although Tasks themselves have input parameters, these are defined as part of the Task template and are only able to be referenced within the Task template or by the Task code itself.
+## Secured parameters
 
-## Context Parameters
+A secured parameter is stored encrypted, shown masked in the webapp, and scrubbed from logs. Make one with the **Password** type on a workflow or task, or the **Secured** toggle when you add a workspace or global parameter. A secured parameter can't be made unsecured.
 
-The following are the reserved parameters provided within a task
+![The Add parameter modal on the workspace Parameters page, with Secured switched on](./assets/parameters-add-secured.png)
 
-| Parameter                   | Syntax                                                                         | Description                                                                                                                                                                                  |
-| --------------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Task-name                   | `$(context.params.taskrun)`<br>`$(params.taskrun-name)`                        | This is the user-specified name of the executing Task. It is unique to a Workflow.                                                                                                           |
-| Task-ref                    | `$(context.params.taskrun-ref)`<br>`$(params.taskrun-irefd)`                   | This is the unique identifier for the established Task in this particular Workflow.                                                                                                          |
-| Task-type                   | `$(context.params.taskrun-type)`<br>`$(params.taskrun-type)`                   | This is the categorization of a particular Task. Options are `template`, `decision`, `customTask`, `approval`, `setwfproperty`, `manual`, `eventwait`, `acquirelock`, and `releaselock`.     |
-| Workflow-ref                | `$(context.params.workflow-ref)`<br>`$(params.workflow-ref)`                   | This is the unique identifier for this Workflow.                                                                                                                                             |
-| Workflow-displayname        | `$(context.params.workflow-displayname)`<br>`$(params.workflow-displayname)`   | This is the user-specified name for the Workflow.                                                                                                                                            |
-| Workflow-name               | `$(context.params.workflow-name)`<br>`$(params.workflow-name)`                 | This is the unique identifier for this Workflow.                                                                                                                                             |
-| Workflow-version            | `$(context.params.workflow-version)`<br>`$(params.workflow-version)`           | This is the revision or version of the Workflow currently being executed.                                                                                                                    |
-| Workflow-activity-id        | `$(context.params.workflowrun-ref)`<br>`$(params.workflowrun-ref)`             | This is the unique identifier for the particular execution of the Workflow.                                                                                                                  |
-| Workflow-activity-initiator | `$(context.params.workflowrun-initiator)`<br>`$(params.workflowrun-initiator)` | This is the user ID of the initiator of this activity.                                                                                                                                       |
-| trigger-type                | `$(context.params.workflowrun-trigger)`<br>`$(params.workflowrun-trigger)`     | This is the trigger that created this Workflow activity or execution.                                                                                                                        |
-| trigger-webhook-url         | `$(context.params.webhook-url)`<br>`$(params.webhook-url)`                     | This is the URL including domain name and context for the webhook endpoint. It is useful if you programmatically want to provide a callback URL from an endpoint triggered by your Workflow. |
-| trigger-wfe-url             | `$(context.params.wfe-url)`<br>`$(params.wfe-url)`                             | This is the URL, including domain name and context, for the wait for event endpoint.                                                                                                         |
-| trigger-event-url           | `$(context.params.event-url)`<br>`$(params.event-url)`                         | This is the URL, including domain name and context, for the event endpoint.                                                                                                                  |
+- A string built from a secret, such as `postgres://app:$(params.dbPassword)@db`, becomes a secret too.
+- Through the API, a set secret reads as `*****`. To keep it when you write, send `*****` or leave it out; to clear it, send `""`.
+- The task's container receives the real value, as `PARAM_<NAME>` and wherever a reference was substituted.
 
-### Context Token Parameters
+See [Use secrets](../guides/use-secrets).
 
-A subset of Context parameters are tokens, which allow you to dynamically reference a token programmatically in your Workflow. This can be useful if you are sending a wait for event endpoint in an email body and need to dynamically provide the token that will be used to authenticate.
+### What `*****` means when you start a run
 
-| Parameter      | Syntax                           | Description                                                                           |
-| -------------- | -------------------------------- | ------------------------------------------------------------------------------------- |
-| `<token-name>` | `$(context.tokens.<token-name>)` | The specific token using the token name (set at creation time) to retrieve the token. |
+On a run request (submit, start or retry), Flow treats each parameter value like this:
 
-## Webook and Event Parameters
+| You send | Flow uses |
+| --- | --- |
+| No value, or `null` | The declared or stored value, for every type |
+| `*****` for a secret parameter | The declared or stored secret |
+| `*****` for any other type | The literal text `*****` |
+| `""` | An empty value |
+| Anything else | That value |
 
-The following are the reserved parameters provided within a Workflow when trigger via a webhook or event.
+Before 5.0, a blank kept a secret. Now it clears it.
 
-| Parameter | Syntax                                        | Description                                                                                                                                                                |
-| --------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data`    | `$(workflow.params.data)` or `$(params.data)` | The entire JSON payload as a parameter. The JSONPath esque dot notation can be used to access the sub keys. For example, `$(params.data.<element>)`                        |
-| `event`   | `$(workflow.params.data)` or `$(params.data)` | The entire JSON event (including data element) as a parameter. The JSONPath esque dot notation can be used to access the sub keys. For example, `$(params.data.<element>)` |
+## Parameters an integration manages
 
-## Result Parameters
+When a workspace connects an [integration](./integrations), it can share credentials as workspace parameters, such as `github-token`. These show the tag **Managed by GitHub** (or the integration's name) and offer only **Copy reference**. Writing or deleting one is refused with `409 PARAMS_MANAGED_BY_INTEGRATION`. Stop sharing, or disconnect, to remove them.
 
-All Tasks can have result parameters, which as mentioned above, can be used by other Tasks in the Workflow. They are also available at the completion of a Workflow using the execution status API.
+## Next steps
 
-### Standard Tasks
-
-Some Standard Tasks will output result parameters.
-
-### Custom Tasks
-
-See [Custom Task architecture](../architecture/overview) for more information.
-
-As this Task is a bring-your-own container, we have provided two mechanisms for setting result parameters.
-
-| Property Type        | Location            | Description                                                                                                                                                            |
-| -------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Environment Variable | `/lifecycle/env`    | Any key value pair in the format of an environment variable can be placed in this file. At the termination of the worker, these will be turned into result parameters. |
-| Files                | `/lifecycle/<file>` | Any file in the `/lifecycle` directory at termination of the worker will be turned into a base64-encoded parameter. The key will be the filename.                      |
-
-## Comparison to Tekton Parameters
-
-Boomerang Flow parameters are very similar to what you will find in Tekton<sup>®</sup> parameters and will be familiar to some of our users.
-
-| Tekton  | Example                    | Boomerang Flow | Example                                                      |
-| ------- | -------------------------- | -------------- | ------------------------------------------------------------ |
-| -       | -                          | Global         | `$(global.params.<parameter>)` or `$(params.<parameter>)`    |
-| -       | -                          | Team           | `$(team.params.<parameter>)` or `$(params.<parameter>)`      |
-| -       | -                          | Workflow       | `$(workflow.params.<parameter>)` or `$(params.<parameter>)`  |
-| Context | `$(context.pipeline.name)` | Context        | `$(context.params.workflow-name)` or `$(params.<parameter>)` |
-| Task    | `$(params.<param name>)`   | Task           | `$(params.<param name>)`                                     |
-
-Reference:
-
-- [Using variable substitution](https://github.com/tektoncd/pipeline/blob/master/docs/Tasks.md#using-variable-substitution)
-- [Variable Substitutions Supported by Tasks and Pipelines](https://github.com/tektoncd/pipeline/blob/master/docs/variables.md)
-
-### Parameter Types
-
-| Flow Param Type        | Tekton Param Type      |
-| ---------------------- | ---------------------- |
-| text                   | string                 |
-| textarea               | string                 |
-| email                  | string                 |
-| number                 | string                 |
-| url                    | string                 |
-| boolean                | string                 |
-| password               | string                 |
-| select                 | string                 |
-| multiselect _future_   | array -> enum _future_ |
-| json                   | object                 |
-| texteditor             | string                 |
-| texteditor::<language> | string                 |
-
-```
-
-```
+- [Use secrets](../guides/use-secrets).
+- [Tasks](./tasks): the catalogue and its credential defaults.
+- [Integrations](./integrations): share credentials as parameters.
+- [Repeat a task for each item](../guides/repeat-a-task-for-each-item): `item` and `index`.

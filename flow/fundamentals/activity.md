@@ -1,58 +1,71 @@
 ---
 title: Activity
 order: 3
+description: Find any run of a workspace's workflows, filter by workflow, status, trigger and date, and open it.
 ---
+
+<!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 26 of 27 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
 
 # Activity
 
-Activity allows you to view each individual run of a Workflow. Each time you execute a Workflow, an activity is associated with this run. The system keeps information on Workflow status, Workflow duration, Task status, Task duration, output properties, and logs.
+Activity lists every run of the current workspace's workflows, newest first. Use it to answer "did last night's run work?", to find a failure, and to open a run and read its logs.
 
-There are three ways to access the Activity page:
+Open it from **Activity** in the side navigation. A workflow card's **View Activity** opens it filtered to that workflow, and Home's **Runs today** tile and **All activity** link open it too. Every member of the workspace can see it. An administrator can turn Activity off for the whole install under **Admin › Settings › Features**.
 
-- Select **View Activity** from the overflow menu on any Workflow to access the Activity page, filtered to that specific Workflow.
-- Select **Run and View** from the Run Workflow modal to access the Activity of a specific run.
-- Navigate to 'Activity' in the left-hand navigation to access a full list of all Activities.
+![Today's numbers in the header, the filter row, and a table with succeeded, failed and running runs](./assets/activity-page.png)
 
-## Overview
+## Today's numbers
 
-The Activity page provides you with a snapshot breakdown with the ability to filter by:
+The header counts today's runs in this workspace, whatever the filters below say:
 
-- Workflow
-- status
-- trigger
-- date range
+- **Runs:** every run created today.
+- **In Progress:** runs that are running or waiting.
+- **Successes** and **Failures.**
+- **Success rate:** successes and in-progress runs together, as a share of today's runs.
 
-![View Activity](./assets/img/activity-view.png)
+## Filter the list
 
-Additional information for start time and duration will be displayed, along with visual markers to match the status. Any **In Progress** Workflow will pulsate through a range of the status colors.
+| Filter | What it narrows to |
+| --- | --- |
+| **Filter by Workflow** | One or more workflows |
+| **Filter by status** | One or more statuses, such as **Failed** or **Timed Out** |
+| **Filter by trigger** | Runs started by **Schedule**, **Manual** or **Webhook** |
+| **Start date** and **End date** | Runs created in that range. The default is the last 3 months, up to today. |
 
-Click an individual activity row to view the activity run detail.
+The filters are kept in the page's address, so you can bookmark or share a filtered view.
 
-## Run Detail
+The trigger filter has no option for runs started by an event, GitHub, a parent workflow or a retry. To break those down, use [Insights](./insights), which filters on every trigger.
 
-The activity run detail is a read-only view of your Workflow design with a visual indication of both the status of each Task, as well as the link state.
+## Read the table
 
-In addition to accessing activity run detail from the Activity page, activity run detail is also accessed when the Workflow is run. To do so:
+| Column | Shows |
+| --- | --- |
+| **Name** | The workflow's display name. Select the header to sort by it. |
+| **Trigger** | How the run started: Manual, Schedule, Webhook, Event, Github, Task (a parent workflow), Retry or Engine |
+| **Initiated By** | The person, or the token's name, that started a manual, webhook or event run. Runs started by a schedule, a parent workflow or a retry show `---`; the run page links to their origin instead. |
+| **Start Time** | When the run started. A run that hasn't started yet, such as one waiting for a dispatcher or for a concurrency slot, shows `---`. |
+| **Active time** | Time spent executing, once the run has finished. Waits for approvals, manual tasks and sleeps, and pauses, are left out. |
+| **Status** | The run's [status](./runs#status-and-phase). When Flow recorded a reason, it shows under the status: `DeadlineExceeded` for a timeout, or `ConcurrencyLimit` for a run skipped over its workflow's concurrency limit. |
 
-1. Manually execute a Workflow. Click `Run It` on the Workflow tile.
+Select a row to open the run page. Pages hold 10 runs by default, and up to 100.
 
-2. An Execute Workflow modal displays with two options. Click `Run and View`, which takes you through to the detailed Activity Run screen, where you can view the Workflow progress.
+## How long runs are kept
 
-![Activity Overview](./assets/img/activity-run.png)
+Activity shows only the runs Flow still holds. Finished runs are deleted after the **Activity Retention (days)** setting, 365 days by default and never less than 60. See [Runs](./runs#how-long-runs-are-kept).
 
-### Metadata
+## Example: find out why last night's report failed
 
-Workflow metadata of; Team, Workflow Version, Initiated By, Trigger, and Start time, is displayed in the header.
+The "nightly-report" workflow runs on a schedule at 2:00 AM. In the morning:
 
-### Run Status Task Log Panel
+1. Open **Activity**.
+2. In **Filter by Workflow**, choose "nightly-report". In **Filter by status**, choose **Failed** and **Timed Out**.
+3. Select the top row.
+4. On the run page, find the task marked **Failed** in the task log and select **View Log**.
 
-On the left, you are provided with a panel with the Workflow status and duration, as well as a breakdown of each Task that was executed.
+The last lines of the log, and the task's status message under **View Details**, usually name the cause: a missing file, a refused credential, or the container's exit code.
 
-In this Task breakdown, you can access actions depending on the Task type.
+## Next steps
 
-- For any Task or Custom Task you can view logs and task detail.
-- For System Tasks, you will be provided with a range of specific actions such as **Action Approval**.
-
-#### Vew Detail
-
-![Activity Task Detail](./assets/img/activity-taskdetail.png)
+- [Runs](./runs): what the run page shows, and how to pause, cancel or retry a run.
+- [Retry a run](../guides/retry-a-run): re-run a failed run from the task that failed.
+- [Insights](./insights): success rates and durations over time.

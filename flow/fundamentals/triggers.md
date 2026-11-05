@@ -1,76 +1,95 @@
 ---
 title: Triggers
-order: 7
+order: 6
+description: The five ways a workflow run can start, and how to call the webhook, event and callback routes.
 ---
 
-# Triggers & Integrations
+<!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 17 of 26 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
 
-Workflows can be triggered in the following ways and these can be configured in the Workflow Editor via the **Configure** tab and selecting **Triggers**.
+# Triggers
 
-- Manual: allows a workflow to be triggered from the Workflows page.
-- Scheduler: allows a workflow to be triggered by the Schedules defined on the Schedules tab of the Workflow.
-- Webhook: a simple and common API driven integration method.
-- Events: a CloudEvent based trigger.
-- GitHub (_beta_): a GitHub based trigger that allows you to trigger a workflow when a commit is made to a specific branch of a repository.
+A trigger is a way a workflow's runs can start. Each workflow has five, and you switch each one on or off under **Configure › Triggers** in the editor, then save with **Create new version**. A new workflow has **Manual** on and the rest off.
 
-![Configure Triggers](./assets/img/workflow-triggers.png)
+| Trigger | Starts a run when | Parameters the run gets |
+| --- | --- | --- |
+| **Manual** | Someone selects **Run it**, or an API caller submits a manual run | The values entered, or the defaults |
+| **Scheduler** | One of the workflow's [schedules](./schedules) fires | The schedule's values |
+| **Webhook** | A system posts to the webhook route | `data`: the request body |
+| **Events** | A CloudEvent arrives that matches every filter | `event` and `data` |
+| **GitHub** | A GitHub App delivery matches the repository and event filters | `data` and `event` |
 
-## Manual
+A run through a trigger that is off is refused with `WORKFLOWRUN_TRIGGER_DISABLED`. Every triggered run counts against the workspace's [quotas](./quotas); while quotas are on, a run over one is refused with `429 QUOTA_EXCEEDED`. The run records its trigger, which Activity shows as **Manual**, **Schedule**, **Webhook**, **Event** or **GitHub**.
 
-Determines whether you can manually trigger the Workflow through the UI or API.
+![Manual and Webhook on, Events on with one filter row](./assets/triggers-configure.png)
 
-## Scheduling
+## Manual and Scheduler
 
-Workflows can be used executed on a schedule. See [Getting To Know Schedules](../fundamentals/schedules) for more detailed information.
+**Manual** lets people start the workflow with **Run it** on the Workflows page. With it off, **Run it** is unavailable.
+
+**Scheduler** lets the workflow's schedules fire. Switching it off stops every schedule at once, and switching it back on restarts the ones that were enabled before.
 
 ## Webhook
 
-Enable the Webhook trigger, then click the **View Usage Example** link. This will open a modal with endpoint you need to use to trigger the Workflow.
+Switch on **Webhook**, then select **View usage example** for the workflow's URL:
 
-![Webhook Triggers](./assets/img/workflow-triggers-webhook.png)
-
-### Triggering Workflow
-
-**Request**
-
-POST `/api/v2/trigger/webhook?workflow={workflow_id}&access_token={token}`
-
-```json
-{}
+```http
+POST /api/v2/webhook?workspace=<workspace>&ref=<workflow name>
 ```
 
-**Response**
+Send a JSON body. The body becomes the run's `data` parameter, so a task reads a field of it as `$(params.data.<field>)`. The route answers `200` with no body; find the run on the Activity page.
 
-After the submission, you will receive the Workflow Run payload which contains the run ID. This can be used to request the status of the Workflow Run via the API.
-
-```json
-{
-  "id": "5de81b5fe638b70001fa9d09"
-}
-```
-
-### Execution Status
-
-**Request**
-
-GET `/api/v2/team/{team}/workflowrun/{workflow_run_id}?access_token={token}`
-
-**Response**
-
-The response for execution status will contain the overall execution status and breakdown of individual Tasks, including the output properties of each Task if they exist.
+**Authenticate** with a token that holds the `webhook/action` permission, for example a workflow token created under **Configure › Tokens** with that permission. Send it as an `Authorization: Bearer` header, an `x-access-token` header, or, for a sender that can't set headers, an `access_token` query parameter. See [Configure a workflow](../guides/configure-workflow) for workflow tokens.
 
 ## Events
 
-Enable Event based triggers is similar to Webhook, however specifically for Cloud Events. It allows you to filter out the specific events sent to the system. This is useful for triggering workflows based on specific events that occur in your system or third-party services.
+**Events** starts a run from a [CloudEvent](https://cloudevents.io) 1.0, sent in structured mode (`Content-Type: application/cloudevents+json`) or binary mode (`ce-*` headers), to:
 
-For example, you can trigger a workflow when a new issue is created in your issue tracker or when a new user signs up for your service.
+```http
+POST /api/v2/event?workspace=<workspace>&ref=<workflow name>
+```
 
-![Webhook Triggers](./assets/img/workflow-triggers-events.png)
+Without `ref`, the first segment of the event's `subject` names the workflow. Authentication is the same as for the webhook. The route answers with the new run.
 
-See the [eventing architecture](../architecture/eventing) for more information.
+Filter which events start a run with **Add row**. Each row has a **Field**, a path into the event as sent, such as `type`, `subject` or `data.tag`; an **Operation**; and a **Value**. **equals** matches the value exactly, and **matches** treats it as a regular expression. Every row must hold. At this release an **in** row saved from this form never matches, so use **equals** or **matches**.
 
-## GitHub (_beta_)
+The run gets two parameters: `event`, the event's attributes, and `data`, its data. A task reads `$(params.data.tag)` or `$(params.event.type)`. [Eventing](../architecture/eventing) covers the protocol, and the events Flow sends out.
 
-The GitHub Trigger allows you to trigger a workflow when a valid GitHub Event is received based on the specific events you select.
+## GitHub
 
-For example, you can trigger a workflow when a new issue is created or a commit is made on a repository.
+The **GitHub** trigger, marked beta, needs the workspace's GitHub integration; until it's connected the section shows "Integration Required". See [Connect GitHub](../guides/connect-github).
+
+Choose repositories under **Repository Filter** and events under **Events Filter**. When a delivery arrives, Flow offers it to every workflow in the linked workspace whose GitHub trigger is on, and starts each one whose filters match. The run gets `data`, the delivery's payload, and `event`, with the event's `type` and `id`.
+
+## Resume a waiting run with a callback
+
+A **Wait For Event** task pauses its run until a callback names the run and the task's **Topic**:
+
+```http
+POST /api/v2/callback?ref=<run id>&topic=<topic>&status=<status>&eventId=<id>
+```
+
+- `status` is `succeeded`, the default, or `failed`, which ends the task that way. Any other value is refused with `400 QUERY_INVALID_FILTERS`.
+- A JSON body becomes the task's `data` result. `GET` works too, without a body, for example from a link in an email.
+- `eventId` is optional. A repeat with the same `eventId` for the same run is acknowledged and ignored for 7 days.
+- A callback that arrives before the task starts waiting is kept and applied when it does.
+
+An earlier task can build the URL from `$(context.params.wfe-url)` and `$(context.params.workflowrun-ref)`. The route takes the same tokens as the webhook.
+
+## Example: deploy when a build finishes
+
+A build server should start the "deploy-service" workflow in the "payments" workspace with the commit it built. Switch on **Webhook**, create a workflow token with the `webhook/action` permission, then have the build server send:
+
+```bash
+curl -X POST "https://flow.example.com/api/v2/webhook?workspace=payments&ref=deploy-service" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"commit": "4f2a9c1", "branch": "main"}'
+```
+
+The deploy task reads the commit as `$(params.data.commit)`. The run appears on the Activity page with the trigger **Webhook** and the token's name under **Initiated By**.
+
+## Next steps
+
+- [Schedules](./schedules): run a workflow on a timetable.
+- [Configure a workflow](../guides/configure-workflow): triggers, tokens and the other Configure sections.
+- [Eventing](../architecture/eventing): CloudEvents in and out of Flow.

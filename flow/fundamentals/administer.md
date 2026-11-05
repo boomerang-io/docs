@@ -1,167 +1,99 @@
 ---
-title: Administer
-order: 13
+title: Admin
+order: 14
+description: Platform administration in Flow's webapp: settings, workspaces, users, global parameters, tokens, the task catalogue and the audit trail.
 ---
 
-# Administer
+<!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 95 of 98 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
 
-> **Note:** the Administer part of Flow is restricted to administrators.
+# Admin
 
-## Teams
+**Admin** is the platform's administration page: every setting, every workspace and user, global parameters and tokens, the task catalogue, and the audit trail. This page is for platform admins and operators. Deployment configuration, such as properties and environment variables, is on the operator pages: see [Configuring](../hosting/configuring).
 
-Create and manage your teams. It provides an overview table for a high level snapshot of all Teams. You can then deep dive into each Team, its Users, its Workflows, and associated Settings.
+The **Admin** link sits at the bottom of the side nav for users whose type is admin or operator. An operator sees the settings read-only.
 
-## Users
+## Tabs
 
-View your Users and manage their role. It provides an overview table for a high level snapshot of all Users. You can deep dive into each User to view their Workflows, Teams, associated Settings and change their role.
+Each tab appears when you hold the permission it reads. Four also need a feature on.
 
-## Global Parameters
+| Tab | Holds | Also needs |
+| --- | --- | --- |
+| **Settings** | The platform settings, in nine groups | — |
+| **Workspaces** | Every workspace | **Settings › Features › Workspace Management** on |
+| **Users** | Everyone who has signed in | **Settings › Features › User Management** on |
+| **Parameters** | Global parameters | **Settings › Features › Global Parameters** on |
+| **Tokens** | Global machine tokens | Flow running with security on |
+| **Tasks** | The global task catalogue | — |
+| **Audit** | The audit trail | — |
 
-Global parameters are one of the scopes of the parameter layering available. The Global Parameter administration screen allows you to create, edit, and delete Global parameters. For more information, see [Getting to Know Parameters](../fundamentals/parameters).
-
-## Global Tokens
-
-Global Tokens is where you can create and remove global scoped API tokens that allow you to perform actions against the API endpoints on behalf of the whole platform.
-
-To understand more about scopes, see [Security Architecture](../architecture/security).
-
-To understand more about the APIs, see [API Architecture](../architecture/apis).
-
-## Team Quotas
-
-See [Getting To Know Quotas](../fundamentals/quotas) for more information.
+![Admin › Settings with the Features group open, showing the group list on the left and the save bar](./assets/administer-settings-features.png)
 
 ## Settings
 
-The centralized home to configuring _everything_. You can control everything from feature flags and extensions through to user and team defaults, and how the Tasks perform.
+The groups are listed on the left. Each value is described in a tooltip beside its label. Change values, then select **Save**, or **Discard** to drop the changes. A secured field shows **Set** when it holds a value: type over it to replace it, or select **Clear**.
 
-### Features
+| Group | Settings (default) |
+| --- | --- |
+| **Artifacts** | **Default Retention (days)** (30) · **Maximum Retention (days)** (90) · **Largest Artifact (MB)** (1024) · **Store Task Logs** (on) · **Task Log Retention (days)** (7) |
+| **Audit** | **Enabled** (on) · **Level** (`WRITE`) · **Retention Days** (365, at least 60) |
+| **Authentication** | **OIDC Issuer** · **OIDC Client ID** (both blank) |
+| **Customization** | **App Name** (`Flow`) · **Platform Name** (`Boomerang`) · **Display Platform Logo** (on) · **Logo URL** (blank) |
+| **Features** | **Activity** · **Insights** · **Workspace Quotas** · **Workflow Triggers** · **Workflow Tokens** · **Workspace Parameters** · **Global Parameters** · **Workspace Management** · **Workspace creation by users** · **Auto-Create Users** · **User Management** · **Workspace Tasks** (all on) |
+| **Integrations** | The GitHub App's **GitHub App ID**, **GitHub Private Key**, **GitHub App Name**, **GitHub Client ID**, **GitHub Client Secret** and **GitHub Webhook Secret**; the Slack app's **Slack Auth Token**, **Slack App ID**, **Slack Client ID**, **Slack Client Secret** and **Slack Signing Secret** (all blank) |
+| **Quotas** | **Maximum Concurrent Workflows** (4) · **Maximum Number of Workflows** (10) · **Max WorkflowRuns per month** (20) · **Max WorkflowRun Duration** (30 minutes) · **Max Workspace Storage** (`2Gi`) · **Max Artifact Storage** (`5Gi`) |
+| **Run limits** | **Maximum Child Workflow Nesting Depth** (5) · **Maximum For-Each Items** (256) · **Finally Timeout (minutes)** (5) · **Activity Retention (days)** (365, at least 60) |
+| **Tasks** | **Enable Debug** (on) · **Default Image Path** (`boomerangio/task-flow:3.3.0`) · **Deletion Policy** (Never) · **Enable Verified Tasks to be edited** (off) · **Maximum task duration** (0: tasks inherit the run's timeout) |
 
-This is the feature flags that are available in the system and allow you to retain control and personalize the experience for the users by enabling or disabling functionality. By _default_, all features are enabled.
+Some settings that need more than a sentence:
 
-| Feature           | Description                                                                                                    |
-| ----------------- | -------------------------------------------------------------------------------------------------------------- |
-| Activity          | The ability to interact with Workflow Activity                                                                 |
-| Insights          | The ability to interact with the Insights functionality                                                        |
-| Workflow Quotas   | Whether to enforce quotas on Workflows                                                                         |
-| Workflow Triggers | Whether to display Triggers section on the Workflows Configuration page                                        |
-| Workflow Tokens   | Whether to display Tokens section on the Workflows Configuration page                                          |
-| Team Parameters   | Allow access to, and create, Team Parameters                                                                   |
-| Global Parameters | Allow access to, and create, Global Parameters                                                                 |
-| Team Management   | Allow management and editing of teams. If disabled, the Teams page will still be visible but in read only mode |
-| User Management   | Allow management and editing of users. If disabled, the Users page will still be visible but in read only mode |
-| Team Tasks        | Allow the creation and management of Team tasks                                                                |
+- **Audit › Level** takes `DESTRUCTIVE` (deletes only), `WRITE` (every change) or `ALL` (adds sensitive reads and exports). Any other text reads as `WRITE`.
+- **Features › Workspace creation by users** lets any signed-in user create a workspace. Admins and operators always can.
+- **Features › Auto-Create Users**, switched off, lets in only people who are already users or whom an admin has added to a workspace. See [Decide who else may sign in](../hosting/sign-in#decide-who-else-may-sign-in).
+- **Features › Workspace Parameters** and **Global Parameters**, switched off, also stop those layers resolving in runs. See [Parameters](./parameters).
+- **Run limits › Activity Retention (days)** deletes each finished run older than it, with its task runs, actions, run-scoped artifacts and logs, once an hour.
+- **Tasks › Deletion Policy** decides when a finished task's Kubernetes Job or Tekton TaskRun is removed: **Never (keep until the retention period)**, **On Success (remove when a task succeeds)** or **Always (remove when a task ends)**. The log read from the worker goes with it; a stored task log stays.
 
-### Extensions
+The **Authentication** and **Default Image Path** settings are usually set at install time. See [Sign-in and the first admin](../hosting/sign-in) and [Set the task image](../hosting/configuring#set-the-task-image). The quota defaults are explained on [Quotas](./quotas).
 
-You can enter information as to how Extensions work
+## Workspaces
 
-| Setting             | Description                                                                                                                          |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Slack Auth Token    | The default auth token for authenticating as a Slack app. Only used if installing into a single workspace and not a distributed app. |
-| Slack App ID        | The App ID from your Slack apps credentials                                                                                          |
-| Slack Client ID     | The Client ID from your Slack apps credentials                                                                                       |
-| Slack Client Secret | The Client Secret from your Slack apps credentials                                                                                   |
+Every workspace, with its users, workflows and status. Select a row to open its [Manage workspace](./manage) page. **Create Workspace** asks for a **Display Name**; Flow turns it into the workspace's unique identifier. There's no delete here: an owner deletes a workspace from **Manage workspace › Settings**.
 
-### Task Configuration
+## Users
 
-Ability to modify the underlying task execution configuration.
+Everyone who has signed in, with their **Role** (**Admin**, **Operator** or **User**), **Status** and **Last sign-in**. There's no invite: people join by signing in, or when someone adds their email to a workspace.
 
-| Config                             | Description                                                                                                |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Debug                              | Will enable debug information in the log of executing Tasks                                                |
-| Default Image Path                 | If a Task doesn't define the image it will default to what is defined here                                 |
-| Deletion Policy                    | Defines the completion state that will lead to worker removal. Options are: never, on success, and always. |
-| Enable Verified Tasks to be Edited | By default, the Tasks that are shipped with Flow are considered 'verfied' and are not editable.            |
-| Task Timeout Configuration         | Number of minutes before a Task times out.                                                                 |
+Select a user to see their workspaces, labels and details. **Change role** sets their platform role to **Admin** or **User**. See [Sign-in and the first admin](../hosting/sign-in) for how the first admin is made, and how an identity provider can decide admins.
 
-### Team Defaults
+## Parameters
 
-Default quotas to apply to all Teams or to restore to when managing a Teams quotas.
+Global parameters, which every workspace can read as `$(global.params.<name>)`. A workspace parameter of the same name wins. See [Parameters](./parameters).
 
-### User Defaults
+## Tokens
 
-Default quotas to apply to all Users.
+Global machine tokens, for services, scripts, AI agents and dispatchers.
 
-### Workspace Configuration - Activity Storage
+1. Select **Create token**.
+2. Enter a **Name**, and choose the **Actor**: **Service** (a system, script or dispatcher, the default), **Agent** (an AI agent) or **None** (a person's token).
+3. Choose a **Role** (**Admin** or **Operator**), or open **Customise permissions**.
+4. Optionally set an **Expiration Date (optional)** and a **Description (optional)**, then select **Create**.
+5. Copy the token. Flow shows it once.
 
-Define how the system utilizes and interacts with storage per execution
+See [Machine tokens](../hosting/machine-tokens) for tokens declared in configuration, the bootstrap token and rotation.
 
-You can set the default Storage Size, Class Name, Access Mode (Read Write Once, Read Write Many, and Read Only Many), and Maximum Storage Size
+## Tasks
 
-### Workspace Configuration - Workflow Storage
+The global task catalogue, in the same Task Manager screens a workspace uses. A verified task can be edited only while **Settings › Tasks › Enable Verified Tasks to be edited** is on. See [Tasks](./tasks).
 
-Define how the system utilizes and interacts with storage per Workflow and persisted across executions.
+## Audit
 
-You can set the default Storage Size, Class Name, Access Mode (Read Write Once, Read Write Many, and Read Only Many), and Maximum Storage Size
+A read-only record of who did what. The tiles count **Events**, **Success**, **Failed** and **Denied** for the period, 30 days by default. Filter by actor, outcome, action, level and date, and expand a row to see the event as JSON.
 
-## Task Manager
+Deleting a workspace, parameter, workflow, schedule, artifact or run, and revoking a token, are recorded at the `DESTRUCTIVE` level. Every other change is `WRITE`. A change to a secret names the secret, never its value. With **Settings › Audit › Enabled** off, the page shows **Audit capture is off**, and nothing new is recorded.
 
-The Task Manager displays and allows you to manage all currently defined tasks, except for System Tasks.
+## Next steps
 
-![Task Manager Panel](./assets/img/administer-task-manager.png)
-
-### Viewing tasks
-
-The left panel displays the currently defined tasks by category. Expand each category to view its related tasks.
-
-### Task header
-
-The top of each task definition presents task version control. The name of the task, along with the date the task was last updated is displayed.
-
-The **Version** control in the task header allows you to cycle through past versions of the task. When viewing the current version, **Reset changes** can be used to reset any editing you have done. When viewing a previous version, the parameters from that version can be copied into a new version using **Copy to new version**.
-
-It also allows you to switch from Overview to YAML view. The YAML view supports the [Tekton Task definition](https://tekton.dev/docs/pipelines/tasks/).
-
-### Task definition
-
-Task definition is split into: **Basics**, **Definition fields**, and **Result Parameters**
-
-#### Basics
-
-The following fields are defined as **Basics**.
-
-| Field                  | Description                                                                                                |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Name**               | The identifier for task, used throughout the platform.                                                     |
-| **Category**           | The group in the left task panel that is identified with the task.                                         |
-| **Icon**               | The icon associated with that task, used throughout the platform.                                          |
-| **Description**        | A short narrative of the task.                                                                             |
-| **Image**              | The container image to use                                                                                 |
-| **Command**            | The command to run when starting the container                                                             |
-| **Arguments**          | The list of values passed into the task parameters.                                                        |
-| **Script**             | The body of a script to run. If the script field is present, the task cannot also contain a command field. |
-| **Working Directory**  | The directory inside the container to execute inside of                                                    |
-| **Envs**               | Environment key values to define and pass through to the container                                         |
-| **Contribution level** | Verified or Community                                                                                      |
-
-#### Definition fields
-
-Definition fields vary according to the task. See [Parameters](/boomerang-cicd/fundamentals/parameters).
-The displayed fields can be dragged and dropped to change their order.
-
-> **Note**: Click **Preview** in the top right corner of the page to view what the user sees for that task, when editing a task on the platform.
-
-#### Result Parameters
-
-Define the result parameters we should expect on completion of the Task. These are defined in advanced so Users know what variables they can utilize in following Tasks.
-
-### Editing tasks
-
-To edit a task, simply edit any of the parameters in the **Basics** and **Definition fields** and click **Save** in the top right corner of the page.
-
-> **Note**: Verified tasks are not editable, unless the platform Administrator has enabled editing in the Global settings.
-
-### Adding a task
-
-Click **Add a new task** at the top of the left panel. A dialog requesting value for each of the **Basics** parameters is displayed.
-
-Enter the desired values, then click **Create**.
-
-![Add Task](./assets/img/task-mgr-add-task.png)
-
-## System Workflows
-
-The System Workflows screen allows you to define and execute System Workflows that do not abide to any Quotas and are essentially considered System wide workflows.
-
-You also administer the Workflow Templates from this screen. Any workflow defined as a Template will appear in the Templates model on the Workflows screen.
+- [Configuring](../hosting/configuring): deployment properties.
+- [Sign-in and the first admin](../hosting/sign-in).
+- [Machine tokens](../hosting/machine-tokens).
+- [Manage workspace](./manage): one workspace's own settings.
