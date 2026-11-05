@@ -1,0 +1,155 @@
+---
+name: flow-tech-writer
+description: Draft, update and audit the Boomerang Flow documentation (flow/ in this repo, rendered at useboomerang.io/docs) in the Flow voice. Use when writing a new docs page, revising a page for a product change (including the v5 update), auditing pages against the released product, writing the What's new page, or regenerating the API reference. Verifies facts against the flow.service.workflow repository (specs, CHANGELOG, code) and UI labels against the v5 webapp. Writes Markdown to file for review; never commits or opens a PR unless asked.
+---
+
+# Flow tech writer
+
+Write and maintain the Boomerang Flow docs in `flow/`. The website (`boomerang-io/website`) renders them at useboomerang.io/docs. Output mode is **draft-to-file**: write verified Markdown, then report the paths and anything unverified.
+
+**Read `voice-and-tone.md` (this folder) before writing.** It holds the voice, the terminology and the banned words. This file covers process and format.
+
+## Modes
+
+- **new**: draft a page from a feature, a spec section or a GitHub issue labelled `documentation`.
+- **update**: revise a page after the product changed.
+- **audit**: check pages against the released product and report drift. Don't edit.
+- **whats-new**: write `flow/introduction/whats-new.md` for a release from `CHANGELOG.md`.
+- **api**: regenerate `flow/apis/` from the OpenAPI contract (see this repo's `CLAUDE.md`).
+
+## Sources of truth
+
+All product facts come from the product repository, `/Users/tysonlawrie/Workspaces/boomerang-io/flow.service.workflow` (v5, release tags `5.x.y`). Write release content against a tag and note which one. Never write from memory, and never from the existing pages: they describe v3/v4 and are the thing being replaced.
+
+**Start with the digests.** `.claude/v5-sources/` holds cited fact digests of the product, organised by docs page:
+- `runs-and-execution.md`;
+- `security-parameters-api.md`;
+- `dispatchers-and-operations.md`;
+- `webapp-ui.md` (every route's labels);
+- `catalogue.md` (tasks, templates, settings, roles);
+- `github-issues.md` (docs briefs, known issues, not-built features);
+- `verified-findings.md` (re-checked defects, dispatcher RBAC and Loki labels). Where it disagrees with another digest, it wins.
+
+Read the section for your page first. Then open the cited `path:line` to confirm it still holds at the tag you're writing against, since the digests are pinned to a commit. The table below is where those facts come from.
+
+| Fact | Source |
+| --- | --- |
+| How a subsystem behaves | `specifications/<subsystem>.md`: architecture, execution-model, data-model, authorization, parameters, api-contract, performance, dispatcher-contract, dispatcher-kubernetes |
+| Why it was designed that way | `specifications/decisions/`. Use these for understanding only; never cite a decision number in the docs. |
+| What changed for operators in a release | `CHANGELOG.md`, the section for the tag |
+| Install, run, reverse proxy, upgrade from v3, deployment shape | `README.md`, `service-dispatcher/README.md`, `dispatcher-sdk/README.md`, `docker-compose.yml` |
+| Properties and settings | `service-core/src/main/resources/application.properties`, `seed/settings.json`. Every property or setting a page names MUST exist there at the tag. |
+| Seeded tasks and workflow templates | `service-core/src/main/resources/seed/` |
+| UI labels, navigation and page shapes | `client-web/app/routes.ts`, `client-web/src/Features/*`, and `specifications/design-system.md` (§ Page header, § Pages) |
+| REST API | `contracts/api-v2.yaml` |
+| Dispatcher protocol | `contracts/dispatcher-v1.yaml`, `specifications/dispatcher-contract.md` |
+| Open docs work | `gh issue list --repo boomerang-io/flow --label documentation`. Each issue lists its sources and its definition of done. |
+
+## Information architecture
+
+The website renders only `flow/**`, as a two-level menu: category folder, then page. A category's `index.md` sets its title and position (`order`). Today:
+
+| Order | Category | Reader |
+| --- | --- | --- |
+| 1 | `introduction/` | Everyone: overview, getting started, FAQ, what's new |
+| 2 | `fundamentals/` | Workflow authors: one page per concept or area of the webapp |
+| 3 | `guides/` | Workflow authors and task developers: task walkthroughs |
+| 4 | `apis/` | Integrators: generated API reference |
+| 5 | `architecture/` | Operators and integrators: how Flow works inside |
+| 6 | `hosting/` | Operators: install, configure, sign-in, tokens, upgrade, dispatcher, task logs, integrations |
+| 7 | `extend/` | Developers and embedders: the task container contract, writing a dispatcher, embedding Flow |
+| 8 | `tutorials/` | Workflow authors: end-to-end worked examples |
+
+Page URLs are file paths, so renaming or retiring a page needs a redirect in the website. The plan lists them.
+
+When the IA changes, update this table in the same change.
+
+## Page format
+
+- **Frontmatter:**
+  - `title` (required): the menu label, and the slug source per CONTRIBUTING.md;
+  - `order`: position within the category;
+  - `description`: one sentence;
+  - `toc: false`: hides "On this page";
+  - `hidden: true`: leaves the page out of the menu;
+  - `tag`: a badge in the menu.
+- **The site doesn't render `title` as a heading.** Start the body with `# <Title>`, matching the frontmatter.
+- `##` and `###` build the "On this page" contents. Phrase them as tasks or questions.
+- **Format:** GitHub-flavoured Markdown, not MDX. Raw HTML is allowed. Use `<docs-cards>` / `<docs-card>` for card grids on landing and index pages; copy the markup from `flow/index.md`. Give every code block a language so it highlights.
+- **Images** go in the category's `assets/` and are referenced relatively (`./assets/<file>.png`). Alt text says what the image shows. A screenshot must come from the version the page documents.
+- **Links:** follow `CLAUDE.md` § Linking. When renaming or retiring a page, grep `flow/` for its slug and fix every inbound link.
+- **Callouts:** `> **Note:**` and `> **Warning:**`, as in the voice guide.
+
+## Page anatomy
+
+1. **`# Title` and a lede.** One or two sentences: what the page is for and who it's for.
+2. **Before you start** (guides and operator pages). What the reader needs: role, workspace, a feature setting turned on, version. Link each to its page.
+3. **Task- or question-shaped sections.** For example "Pass a value between tasks", "When to use a schedule", "Upgrade from v3". Lead with three sentences or fewer, then steps, an example or a table.
+4. **A worked example.** Use a real workflow, a real parameter reference, a real property block or a real error message. Concrete beats abstract.
+5. **Next steps.** End by handing the reader somewhere: links to the next logical pages.
+
+Depth targets:
+- **Concept and reference pages:** 300–700 words.
+- **Guides:** as long as the task needs; end every procedure on a success state ("The run appears in **Activity** with status **Succeeded**.").
+- **Operator pages:** give the failure symptom and the recovery for every step that can fail.
+
+Split a sprawling page rather than padding a thin one.
+
+## Workflow
+
+1. **Confirm the target.** The page path and the mode. For release work, the tag.
+2. **Gather the truth.** Read the sources above for the topic. For a `documentation` issue, read the issue first: it names its sources and readers.
+3. **Verify the UI** (next section).
+4. **Draft** to the voice guide and the page anatomy.
+5. **Wire the nav.** Set the frontmatter `order`. Give a new category an `index.md` with `title` and `order`. Fix inbound links. Add images.
+6. **Self-check** against the checklist below.
+7. **Report** the file paths, the tag written against, and every unverified item. Don't commit or open a PR unless asked.
+
+## Verification
+
+The docs must not describe UI, properties or behaviour that don't exist in the version they document.
+
+- **UI labels, live.** Delegate to the `flow-ui-verifier` agent (`.claude/agents/`). Give it the routes or the flow to walk. It signs in to the running stack (webapp `http://localhost:3000/apps/flow/`, IDPZero picker, `usr-flow-admin`) and reads exact labels from the accessibility tree via the Playwright MCP server (`.mcp.json`). It only reports; you write the page. If the stack is down, it says how to start it: in `flow.service.workflow`, `docker compose --profile stack up -d --build`. Don't start or reset a shared stack yourself.
+- **UI labels, from source.** When the stack isn't running, take the label from `.claude/v5-sources/webapp-ui.md` or `client-web/src/Features/*`, and say in the report that it was source-verified, not seen.
+- **Properties and settings.** Grep `application.properties` and `seed/settings.json` at the tag.
+- **The rendered page.** In the website repo, set `LOCAL_REPO_RELATIVE_PATH=../docs`, run `pnpm dev`, and open `/docs/en/local/<category>/<slug>`. Check the menu, the heading, links and images.
+- **When something can't be verified,** write around it, or mark it `<!-- UNVERIFIED: … -->` and list it in the report. Never guess: a page that describes a button that doesn't exist is worse than no page.
+
+## Screenshots
+
+Capture with `tools/screenshots/` (Playwright, with sign-in borrowed from Flow's e2e suite). Each image is an entry in `shots.ts` (`id`, docs `page`, `url`, `out` path), so every release can recapture the whole set with one command. See its README.
+
+- **Review vs publish.** Capture into `out/` for review. Use `SHOTS_DEST=flow` only for images that will be published.
+- **Clean data only for published images.** The header must read **Boomerang Flow**, and Home must show only the seeded **Example workspace**. A shared development database fails both: it has e2e leftovers and other people's workspaces. Published captures come from a fresh database.
+- **What to capture.**
+  - Use one screenshot where it saves words: a page's layout, a dense form, the result of a procedure.
+  - Never capture a screen just to show a button that the text already names.
+  - Crop to the part that matters with a `prepare` step or a locator screenshot. Don't publish full-window shots of an empty canvas.
+- **Alt text** says what the image shows ("The Workflows page with three workflow cards"), not "screenshot".
+- **When a label changes**, recapture every shot whose `page` uses it.
+
+## What's new mode
+
+Write `flow/introduction/whats-new.md` from the tag's `CHANGELOG.md` section:
+- Lead each item with the reader's benefit, in sentence fragments.
+- Use the sections **What's new**, **Improvements**, **Fixed** and **Upgrading**, omitting any that are empty.
+- Each **Upgrading** item links to its upgrade page.
+- No "we're excited to announce".
+
+## Self-check
+
+- [ ] Every UI label is verified (live or from source), bolded and written exactly as rendered.
+- [ ] Every property, setting, environment variable and error code exists at the tag.
+- [ ] No v3/v4 terms (team, agent for the worker tier, Workflow storage, `flow.mode`) outside upgrade notes.
+- [ ] Australian/British spelling, sentence-case headings, lowercase concepts. No emoji, no exclamation marks, no banned words.
+- [ ] The body starts with `# Title`; the page has a lede and ends with next steps.
+- [ ] Links resolve, images exist, and screenshots match the version.
+- [ ] Nothing describes unreleased behaviour, and limitations are stated plainly.
+
+## Guardrails
+
+- Draft to file and report the paths. Don't commit, push or open a PR unless asked.
+- `main` is published as soon as it's pushed. Before committing release content, confirm which branch it belongs on.
+- Never hand-edit the generated API pages. Change the contract or the templates, then regenerate.
+- Never ship a hollow page. Leave a page out (or `hidden: true`) until it has real content.
+- Don't duplicate the product repository's specs. Docs explain how to use and operate Flow; link to the source on GitHub when a reader needs the internals.

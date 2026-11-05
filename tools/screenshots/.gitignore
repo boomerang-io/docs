@@ -1,0 +1,6 @@
+# The saved session holds a live flow_session cookie: never commit it.
+.auth/
+node_modules/
+out/
+test-results/
+playwright-report/

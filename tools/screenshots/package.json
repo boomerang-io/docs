@@ -1,0 +1,15 @@
+{
+  "name": "flow-docs-screenshots",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Captures Boomerang Flow docs screenshots from a running v5 stack. Sign-in borrowed from flow.service.workflow/e2e.",
+  "type": "module",
+  "scripts": {
+    "capture": "playwright test",
+    "capture:headed": "playwright test --headed",
+    "list": "playwright test --list"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1"
+  }
+}
