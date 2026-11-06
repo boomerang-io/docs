@@ -2,6 +2,7 @@
 title: Connect GitHub
 order: 8
 description: Connect a workspace to GitHub, share the installation token with GitHub tasks, and start workflows from GitHub events.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 33 of 52 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -44,7 +45,8 @@ A workspace connects one GitHub installation. To connect a different one, discon
 
 Sharing writes the App's credentials into the workspace as two read-only parameters, which the GitHub tasks use by default.
 
-> **Warning:** A shared token lets every workflow author in the workspace act with the App's permissions on everything the installation can reach. Share it only in a workspace whose authors you'd trust with those permissions.
+> [!WARNING]
+> A shared token lets every workflow author in the workspace act with the App's permissions on everything the installation can reach. Share it only in a workspace whose authors you'd trust with those permissions.
 
 1. On the **GitHub** card, select **Manage**.
 2. Turn on **Share the installation token with tasks**.
@@ -115,7 +117,8 @@ Flow inserts these values as written and never expands a reference inside them, 
 
 An event can carry several actions: `issues` fires when an issue is opened, edited, closed or labelled. To act on one, add a **Switch** whose **Value** is `$(params.data.action)` and give the link to the next task the **Switch Parameter Value** `opened`. See [Branch with a switch](./workflow-editor#branch-with-a-switch).
 
-> **Warning:** Don't let a workflow's own GitHub task trigger it again. A workflow that runs on `issue_comment` and posts a comment starts a new run with every comment it posts.
+> [!WARNING]
+> Don't let a workflow's own GitHub task trigger it again. A workflow that runs on `issue_comment` and posts a comment starts a new run with every comment it posts.
 
 ## Disconnect GitHub
 
@@ -131,9 +134,13 @@ The message **Disconnected** appears, and the card reads **Not connected**. Flow
 | `The integration authorization request is invalid or has expired. Please retry connecting the integration.` | More than 10 minutes passed between **Connect** and the end of the installation | Select **Connect** again |
 | `You do not have access to link or unlink this integration for the workspace.` | You aren't a member of the workspace | Ask an owner to add you, or to connect it |
 | `The GitHub installation could not be verified against your GitHub account.` | Your GitHub account can't see the installation | Install with an account that can manage it |
-| `This workspace is already connected to another GitHub installation. Disconnect it before connecting a different one.` | The workspace already has an installation | Disconnect, then connect the other one |
 
 When workflows never start from events, ask an administrator to check **Admin › Settings › Integrations › GitHub Webhook Secret**. Without it, Flow refuses every delivery from GitHub.
+
+## Not seeing what you expected?
+
+- [Why doesn't a GitHub event start a run?](../introduction/troubleshooting#a-webhook-or-event-didnt-start-a-run)
+- [Why did a GitHub task fail with `no such workspace param 'github-token'`?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
 
 ## Next steps
 

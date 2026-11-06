@@ -2,6 +2,7 @@
 title: Home
 order: 1
 description: What the Home page shows when you sign in to Flow, and what you can do from it.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 17 of 30 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->

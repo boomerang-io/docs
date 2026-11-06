@@ -2,6 +2,7 @@
 title: Quotas
 order: 7
 description: The limits on what one workspace can use, their defaults, what 0 and an unset quota mean, and where to change them.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 27 of 29 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->

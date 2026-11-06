@@ -2,6 +2,7 @@
 title: Configure a workflow
 order: 3
 description: Set a workflow's name and labels, what starts it, its timeout, retries and concurrency, the run workspace its tasks share, its kept artifacts and its tokens.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 55 of 77 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -15,7 +16,8 @@ The **Configure** tab holds a workflow's settings: its name, what starts it, how
 - The Editor or Owner role in the workspace. See [Manage a workspace](../webapp/manage).
 - Open the workflow in the editor and select **Configure**. The sections are listed on the left: **General**, **Triggers**, **Run Options**, **Workspace**, **Artifacts** and **Tokens**.
 
-> **Note:** **Configure** has no Save button. Changes under **General**, **Triggers**, **Run Options** and **Workspace** are saved with the workflow's next version: select **Create new version** in the tab row (see [Save a version](./workflow-editor#save-a-version)). Deleting an artifact and creating or deleting a token take effect at once.
+> [!NOTE]
+> **Configure** has no Save button. Changes under **General**, **Triggers**, **Run Options** and **Workspace** are saved with the workflow's next version: select **Create new version** in the tab row (see [Save a version](./workflow-editor#save-a-version)). Deleting an artifact and creating or deleting a token take effect at once.
 
 ![Configure › Run Options, with the section list on the left and Timeout, Retries, Concurrency limit and Over the limit filled in](./assets/configure-workflow-run-options.png)
 
@@ -85,7 +87,8 @@ The next run has the run workspace. For example, an **Execute Shell** task write
 
 The run workspace doesn't outlive the run. To keep files between runs, use **Upload Artifact** and **Download Artifact** with scope **Workflow**: see [Keep files between runs](./keep-files-between-runs).
 
-> **Note:** A workflow from Flow v3 that used Workflow storage shows **Workflow storage was removed in Flow 5**. It can't run until you save a new version.
+> [!NOTE]
+> A workflow from Flow v3 that used Workflow storage shows **Workflow storage was removed in Flow 5**. It can't run until you save a new version.
 
 ## Manage kept artifacts
 
@@ -112,7 +115,8 @@ A workflow token lets another system call Flow as this workflow, for example to 
 
 **Token successfully created** shows the token. Copy it now: Flow doesn't show it again. The token appears in the list with the status **Active**. Send it in the `Authorization` header, or add `&access_token=<token>` to the webhook URL for a sender that can't set headers.
 
-> **Warning:** Anyone holding the token can act as this workflow, with its permissions, until the token expires or is deleted. Store it as a secret, and delete it from this list when it's no longer needed.
+> [!WARNING]
+> Anyone holding the token can act as this workflow, with its permissions, until the token expires or is deleted. Store it as a secret, and delete it from this list when it's no longer needed.
 
 ## Choose a template version
 
@@ -122,6 +126,12 @@ A workflow that follows a template shows "This workflow is a template." at the t
 - **Version** sets which template version runs: **Follow the latest**, or **Pin to v`<n>`** to stay on one.
 
 **Run Options**, **Workspace** and **Artifacts** show **Set by the template.** and can't be changed. The name, display name, description, icon, labels, triggers and schedules are your workspace's own. Save them with **Save settings** in the tab row; the message **Successfully saved workflow settings** appears.
+
+## Not seeing what you expected?
+
+- [Why is **Run it** greyed out?](../introduction/troubleshooting#run-it-is-greyed-out)
+- [Why didn't a webhook or event start a run?](../introduction/troubleshooting#a-webhook-or-event-didnt-start-a-run)
+- [Why did the run end **Timed Out**?](../introduction/troubleshooting#a-task-timed-out)
 
 ## Next steps
 

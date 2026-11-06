@@ -2,6 +2,7 @@
 title: Keep files between runs
 order: 7
 description: Carry files from one run of a workflow to the next with Download Artifact and Upload Artifact at scope Workflow.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 36 of 51 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -123,6 +124,11 @@ Two runs in flight at once both download the same artifact, and the upload that 
 - **Without Optional,** a download of an artifact that doesn't exist fails the task with `ArtifactRefused`.
 - **Retries don't carry files.** A retried run starts with an empty run workspace, so a re-run task can't see files a carried-over task wrote. Kept artifacts still download. See [Retry a run](./retry-a-run).
 - **Workflow storage** from Flow v3 is gone. A v3 workflow that used it shows **Workflow storage was removed in Flow 5** under **Configure › Workspace** and can't run until you save a new version; use this pattern instead.
+
+## Not seeing what you expected?
+
+- [Why did **Download Artifact** succeed but restore nothing?](../introduction/troubleshooting#a-task-succeeded-but-did-nothing)
+- [Why is the next run **Waiting** instead of running?](../introduction/troubleshooting#a-run-didnt-start)
 
 ## Next steps
 

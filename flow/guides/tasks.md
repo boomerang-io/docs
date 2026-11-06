@@ -2,6 +2,7 @@
 title: Develop a task
 order: 11
 description: Build a container that Flow runs as a task, read its parameters, return results within the size caps, and add it to a workspace in Task Manager.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 50 of 55 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -91,7 +92,11 @@ Flow checks every reference before the task runs. An unknown one fails the task 
    - when it's a directory (Tekton), one file per result, named after the result;
    - when it's a file (Jobs), one JSON object of result names and values.
 
-This shell snippet works on both executors:
+<!-- tabs -->
+
+### Shell
+
+This snippet works on both executors:
 
 ```sh
 if [ -d "$RESULTS_PATH" ]; then
@@ -103,7 +108,9 @@ fi
 
 The JSON branch doesn't escape quotes or backslashes in the value: build the object with a JSON tool when a value can hold them.
 
-For Node tasks, `@boomerang-io/task-core` 3.0.0 or later reads `PARAM_NAMES` and writes to either kind of `RESULTS_PATH`:
+### Node
+
+In a Node task, `@boomerang-io/task-core` 3.0.0 or later reads `PARAM_NAMES` and writes to either kind of `RESULTS_PATH`:
 
 ```js
 import { params, results } from "@boomerang-io/task-core";
@@ -111,6 +118,8 @@ import { params, results } from "@boomerang-io/task-core";
 const { recipient } = params;
 await results({ greeting: `Hello, ${recipient}` });
 ```
+
+<!-- /tabs -->
 
 A later task reads a result as `$(tasks.<task name>.results.<result>)`.
 
@@ -178,9 +187,15 @@ Each **Save** offers two choices in **Save changes**:
 - **Save new version** needs **Comments (required for new versions)**. Workflows keep the version they were saved with, and their nodes show a yellow warning icon that offers the update.
 - **Overwrite this version** changes the task in every workflow that uses this version. Use it only for changes that break nothing.
 
-To retire a task, select **Archive** instead of deleting it. It leaves the palette but keeps working in the workflows that use it, and **Restore** brings it back.
+To retire a task, select **Archive** instead of deleting it. It leaves the palette, and **Restore** brings it back. A workflow that still uses an archived task can't be saved or run (`TASK_INACTIVE_STATUS`), so move those workflows to another task first.
 
 **Import a template** in **Add a new task** loads a task from a `.yaml` or `.json` file instead of the form, and the **Editor** tab edits a task as YAML.
+
+## Not seeing what you expected?
+
+- [Why did my task fail with `ParamUnresolved`?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why does my task stay **Ready**, or fail with `ImagePull`?](../introduction/troubleshooting#a-run-didnt-start)
+- [Why does **View Log** show a message instead of my task's log?](../introduction/troubleshooting#live-logs-are-empty)
 
 ## Next steps
 

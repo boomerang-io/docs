@@ -2,6 +2,7 @@
 title: Manage workspace
 order: 6
 description: Manage one workspace's members and roles, approver groups, artifacts, quotas, tokens, name, labels and deletion.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 37 of 39 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -78,7 +79,8 @@ Owners and editors can create tokens. Deleting a token stops anything still usin
 - **Labels:** key-value pairs, useful when you query the API.
 - **Delete Workspace:** permanently removes the workspace with its workflows, task templates, runs and tokens. Members lose access. This needs the owner role.
 
-> **Warning:** Deleting a workspace can't be undone, and the tokens on its **Tokens** tab stop working.
+> [!WARNING]
+> Deleting a workspace can't be undone, and the tokens on its **Tokens** tab stop working.
 
 ## Next steps
 

@@ -2,6 +2,7 @@
 title: Use an approval's results
 order: 5
 description: Pause a workflow for a person's approval, then email who decided, when, and what they said.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 41 of 56 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -88,7 +89,8 @@ The approval ended with these results:
 
 Each reference names the task by the name you gave it, `approval`. The v3 form, `$(Task.<task name>.results.<result>)`, doesn't resolve.
 
-> **Note:** Use revision 3 or later of Send Email with Sendgrid. Revisions 1 and 2 report success without sending anything. A task you drop on the canvas now is on revision 3. A node on an older revision shows a yellow warning icon: select it, review the fields, then select **Update task**.
+> [!NOTE]
+> Use revision 3 or later of Send Email with Sendgrid. Revisions 1 and 2 report success without sending anything. A task you drop on the canvas now is on revision 3. A node on an older revision shows a yellow warning icon: select it, review the fields, then select **Update task**.
 
 ## Connect the tasks and save
 
@@ -129,6 +131,12 @@ To see the decision in Flow, select **View Action** on `approval`. **Manual Appr
 <!-- SCREENSHOT: The run page with Status Succeeded, approval and email Succeeded in the task log. (not capturable yet: email succeeds only with a SendGrid API key and a verified sender) -->
 
 Run the workflow again and select **Reject** instead. `approval` shows **Failed**, `email` still runs, and the email reports `status: rejected`.
+
+## Not seeing what you expected?
+
+- [Why does the run stay **Waiting**?](../introduction/troubleshooting#a-run-is-stuck-waiting)
+- [Why did `email` succeed but no email arrive?](../introduction/troubleshooting#a-task-succeeded-but-did-nothing)
+- [Why didn't one approval complete the task?](../introduction/known-issues#number-of-approvals-applies-without-an-approver-group)
 
 ## Next steps
 

@@ -2,6 +2,7 @@
 title: Use secrets
 order: 9
 description: Keep tokens and passwords in secured parameters, use them in tasks, rotate them, and know where Flow can and can't hide them.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 36 of 42 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -106,7 +107,8 @@ After you change a workspace or global secret, tasks that start from then on get
 
 ## Know what Flow can't protect
 
-> **Warning:** A task's container receives every secret in plain text: as the environment variable `PARAM_<NAME>`, and wherever a reference was substituted into its script, command, arguments or environment. Anyone who can read the task's pod in Kubernetes can read them, and on the Tekton executor they're in the TaskRun object too. Use secrets only with task images you trust, because the image can send the value anywhere.
+> [!WARNING]
+> A task's container receives every secret in plain text: as the environment variable `PARAM_<NAME>`, and wherever a reference was substituted into its script, command, arguments or environment. Anyone who can read the task's pod in Kubernetes can read them, and on the Tekton executor they're in the TaskRun object too. Use secrets only with task images you trust, because the image can send the value anywhere.
 
 - **Pod logs aren't scrubbed.** Flow scrubs a log when it serves it. Whatever the task prints is in the pod's own log in Kubernetes as printed.
 - **Rotated values reappear in old runs.** Flow scrubs runs using the secrets' current values, so after you rotate a workspace or global secret, older runs show the old value in their logs and results. Revoke the old credential where it was issued.
@@ -114,6 +116,11 @@ After you change a workspace or global secret, tasks that start from then on get
 - **Arrays and objects** that contain a secret aren't secrets themselves; only the log and result scrub covers them.
 - **Results aren't encrypted.** Never write a secret into a task result.
 - **Machine tokens never reach a task.** Give a task a credential through a secret parameter.
+
+## Not seeing what you expected?
+
+- [Why did a task fail with `no such workspace param 'deploy-token'`?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why did a run use the literal value `*****`?](../introduction/known-issues#a-run-request-that-sends--for-an-ordinary-parameter-uses-)
 
 ## Next steps
 

@@ -1,7 +1,9 @@
 ---
 title: Artifacts and the run workspace
+sidebarTitle: Artifacts
 order: 6
 description: Share files between the tasks of one run with the run workspace, and keep files after a run, or between runs, as artifacts.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 24 of 29 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->

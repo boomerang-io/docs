@@ -2,6 +2,7 @@
 title: Dispatchers
 order: 4
 description: What a dispatcher is, where one runs, and how it claims, runs and reports task runs.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->

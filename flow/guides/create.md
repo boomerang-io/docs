@@ -2,6 +2,7 @@
 title: Create a workflow
 order: 1
 description: Create a workflow from scratch, from a starter or from a file, then find, duplicate, export, update and delete the workflows in a workspace.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 29 of 49 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -50,7 +51,8 @@ A starter is a ready-made workflow that you copy into a workspace. The copy is a
 
 The new workflow opens on the **Canvas** tab with the message **Successfully created workflow from template**. The copy keeps the starter's display name; change it under **Configure › General** (see [Configure a workflow](./configure-workflow#set-the-name-description-and-icon)).
 
-> **Note:** The starters seeded with Flow have known problems. Check [Known issues](../introduction/known-issues) before you rely on one.
+> [!NOTE]
+> The starters seeded with Flow have known problems. Check [Known issues](../introduction/known-issues) before you rely on one.
 
 ## Find a workflow
 
@@ -119,7 +121,8 @@ Flow shows the message **workflow successfully updated**. Open the workflow to c
 
 ## Delete a workflow
 
-> **Warning:** Deleting a workflow can't be undone. Flow cancels the workflow's runs in progress and deletes its schedules, tokens and open actions. Once those runs have ended, it removes the workflow with its versions, runs and artifacts. Audit records are kept. Export the workflow first if you might want it back.
+> [!WARNING]
+> Deleting a workflow can't be undone. Flow cancels the workflow's runs in progress and deletes its schedules, tokens and open actions. Once those runs have ended, it removes the workflow with its versions, runs and artifacts. Audit records are kept. Export the workflow first if you might want it back.
 
 1. On the workflow's card, open the overflow menu and select **Delete**.
 2. In **Delete workflow**, select **Delete**.
@@ -127,6 +130,11 @@ Flow shows the message **workflow successfully updated**. Open the workflow to c
 The card shows **Deleting...**, then the workflow leaves the page with the message **Workflow successfully deleted**.
 
 If deletion fails, Flow shows **Request to delete workflow failed**. Check that you have the Owner role in the workspace.
+
+## Not seeing what you expected?
+
+- [Why is **Run it** greyed out on the new workflow's card?](../introduction/troubleshooting#run-it-is-greyed-out)
+- [Why doesn't a starter workflow do what its description says?](../introduction/known-issues#two-starters-depend-on-the-http-call-tasks)
 
 ## Next steps
 

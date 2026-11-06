@@ -2,6 +2,7 @@
 title: Retry a run
 order: 10
 description: Retry a finished run from the start, from the tasks that failed or from a task you choose, and let a task retry its own failures.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 32 of 37 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -114,6 +115,12 @@ A task that ran more than once shows it on the run page:
 - **In View Details,** **Attempts** lists one line per earlier attempt, such as `Attempt 1 · failed · JobFailed · 6 secs · <ended at>`, then `Attempt 2 · current`.
 
 ![A task's View Details with the Attempts section listing a failed first attempt and the current one](./assets/retry-attempts.png)
+
+## Not seeing what you expected?
+
+- [Why was the retry refused with `QUOTA_EXCEEDED`?](../introduction/troubleshooting#a-run-didnt-start)
+- [Why didn't the task retry its `ParamUnresolved` failure?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why didn't **Retries** under **Run Options** retry a failed run?](../introduction/known-issues#retries-under-run-options-only-retries-a-run-that-timed-out)
 
 ## Next steps
 

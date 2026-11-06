@@ -1,7 +1,8 @@
 ---
 title: Admin
 order: 8
-description: Platform administration in Flow's webapp: settings, workspaces, users, global parameters, tokens, the task catalogue and the audit trail.
+description: What platform admins manage on Flow's Admin page, from settings, workspaces and users to global parameters, tokens, the task catalogue and the audit trail.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 95 of 98 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->

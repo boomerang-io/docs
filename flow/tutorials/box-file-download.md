@@ -2,6 +2,7 @@
 title: Email a file from Box
 order: 3
 description: Download a file shared on Box into the run workspace, then send it as an email attachment with SendGrid.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 43 of 57 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -89,7 +90,8 @@ Flow replaces `$(params.download-url)` and `$(params.file-name)` with the run's 
 
 **Attachments** takes one absolute path per line. A path that doesn't exist is logged and skipped, and the email is sent without it.
 
-> **Note:** Use revision 3 or later of Send Email with Sendgrid. Revisions 1 and 2 report success without sending anything. A task you drop on the canvas now is on revision 3. A node on an older revision shows a yellow warning icon: select it, review the fields, then select **Update task**.
+> [!NOTE]
+> Use revision 3 or later of Send Email with Sendgrid. Revisions 1 and 2 report success without sending anything. A task you drop on the canvas now is on revision 3. A node on an older revision shows a yellow warning icon: select it, review the fields, then select **Update task**.
 
 ## Connect the tasks and save
 
@@ -123,6 +125,12 @@ For a file that isn't shared publicly, replace Execute Shell with **Download Fil
 <!-- UNVERIFIED: whether box-service 0.0.18 accepts a PEM private key entered in a single-line password field, which drops its line breaks. Test before publishing the private-file steps. -->
 
 The task's own secret fields are password fields too, so Flow encrypts what you type there. Parameters keep the credentials in one place for every Box task in the workflow, and out of the canvas.
+
+## Not seeing what you expected?
+
+- [Why does the run stay **Ready** before `download` starts?](../introduction/troubleshooting#a-run-didnt-start)
+- [Why did `download` fail with `ParamUnresolved`?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why did `email` succeed but no email arrive?](../introduction/troubleshooting#a-task-succeeded-but-did-nothing)
 
 ## Next steps
 

@@ -2,6 +2,7 @@
 title: Use AI tasks
 order: 6
 description: Call an OpenAI-compatible model from a workflow with AI Prompt or AI Agent, use the reply, and see token usage in Insights.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 48 of 61 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -101,7 +102,8 @@ EOF
 
 With **Response format** `json`, `output` is the JSON as text. Parse it in the task that reads it.
 
-> **Note:** All of a task's results share 4096 bytes on Flow's Kubernetes dispatcher. A longer reply fails the task with `ResultsTooLarge` rather than being cut short. Set **Max tokens**, or set **Output file** and pass the file on through the run workspace.
+> [!NOTE]
+> All of a task's results share 4096 bytes on Flow's Kubernetes dispatcher. A longer reply fails the task with `ResultsTooLarge` rather than being cut short. Set **Max tokens**, or set **Output file** and pass the file on through the run workspace.
 
 ## Let the model call tools with AI Agent
 
@@ -160,6 +162,12 @@ The task log names the cause of a failure.
 | Reason `ImageNotAllowed` | The dispatcher doesn't allow the task's image | Ask your operator; the dispatcher allows images starting `boomerangio/task-ai` by default |
 
 When the endpoint answers with a rate limit or a server error, or can't be reached, the task tries again, 3 attempts in all. Any other rejection, such as a bad token or an unknown model, fails at once.
+
+## Not seeing what you expected?
+
+- [Why does the task fail with `MISSING_PARAM` when no endpoint is set?](#fix-a-failed-ai-task)
+- [Why did the task fail with `ParamUnresolved` on **API token**?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why does the **Summarise a web page with AI** starter summarise nothing?](../introduction/known-issues#two-starters-depend-on-the-http-call-tasks)
 
 ## Next steps
 

@@ -1,7 +1,9 @@
 ---
 title: Pass results between tasks with an approval
+sidebarTitle: Pass results with an approval
 order: 1
-description: Build a workflow in which one task returns a result, a person approves, and a later task prints both. It needs no accounts outside Flow.
+description: Build a workflow in which one task returns a result, a person approves, and a later task prints both, with no accounts outside Flow.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39; steps run live on main e354e2c62. -->
@@ -47,7 +49,8 @@ Tasks read values through references, which Flow fills in before the task starts
 
 When a run starts, Flow asks for **Version**, with `1.0.0` filled in. Tasks read the value by the parameter's name, as `$(params.version)`.
 
-> **Note:** Give the parameter a label. The dialog says an empty label shows the name, but in 5.0.0 a parameter without a label appears in **Workflow Parameters** as an unlabelled field.
+> [!NOTE]
+> Give the parameter a label. The dialog says an empty label shows the name, but in 5.0.0 a parameter without a label appears in **Workflow Parameters** as an unlabelled field.
 
 ## Add the build task
 
@@ -184,6 +187,12 @@ To see the second:
 This time `publish` runs and its log prints `Decision: rejected by` and your name. The run ends **Succeeded**, though `approve` shows **Failed** in the task log: an always link carries on past a failure, so the run reached its end.
 
 Use a success link when the next task should happen only on approval, such as a release. Use an always link when the next task reports the outcome either way, and read `approvalStatus` in it to tell the two apart. A failure link runs the next task only on a rejection, for example to tell someone their request was turned down.
+
+## Not seeing what you expected?
+
+- [Why does `build` stay **Ready**?](../introduction/troubleshooting#a-run-didnt-start)
+- [Why did `publish` fail with `ParamUnresolved`?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why does the run stay **Waiting**?](../introduction/troubleshooting#a-run-is-stuck-waiting)
 
 ## Next steps
 

@@ -2,6 +2,7 @@
 title: GitHub issues bot
 order: 2
 description: Mark inactive GitHub issues as stale each week, and close the ones nobody picked up.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 47 of 56 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -125,6 +126,11 @@ Without the shared token, give both tasks a token and API URL from workflow para
 3. Add `github-api-url`, type **URL**, with the default `https://api.github.com`. For GitHub Enterprise Server, use `https://<host>/api/v3`.
 4. On both tasks, set **API Endpoint** to `$(params.github-api-url)` and **API Token** to `$(params.github-pat)`, then select **Apply**.
 5. Select **Create new version**, enter a **Version comment**, then select **Create**.
+
+## Not seeing what you expected?
+
+- [Why did a task fail with `no such workspace param 'github-token'`?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why didn't the schedule start a run?](../introduction/troubleshooting#a-run-didnt-start)
 
 ## Next steps
 

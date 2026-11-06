@@ -2,6 +2,7 @@
 title: Tasks
 order: 2
 description: What a task is, the catalogue Flow ships, the task types, and how to add your own tasks in Task Manager.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 34 of 40 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -49,7 +50,8 @@ The catalogue is the set of global tasks Flow seeds. The palette groups them by 
 
 The [task catalogue](../catalogue/overview) lists every catalogue task by category, with its parameters, results, image and latest revision.
 
-> **Warning:** A few catalogue tasks end `succeeded` without doing anything, such as the HTTP Call tasks on the default task image. The catalogue marks each one. See [Known issues](../introduction/known-issues).
+> [!WARNING]
+> A few catalogue tasks end `succeeded` without doing anything, such as the HTTP Call tasks on the default task image. The catalogue marks each one. See [Known issues](../introduction/known-issues).
 
 ### Credentials in catalogue tasks
 
@@ -118,7 +120,7 @@ Upload Artifact stores a file or folder from the run workspace. Download Artifac
 
 The task appears in the workspace's palette. **Overwrite this version** changes the task in every workflow that uses that version. **Save new version** leaves workflows on their version until someone upgrades the node.
 
-The webapp doesn't delete tasks. **Archive** removes a task from the palette and keeps it working in existing workflows; **Restore** brings it back.
+The webapp doesn't delete tasks. **Archive** removes a task from the palette, and **Restore** brings it back. A workflow that still uses an archived task can't be saved or run: Flow refuses it with `TASK_INACTIVE_STATUS`. Move those workflows to another task before you archive one.
 
 **Admin › Tasks** shows the same screens for the global catalogue. A verified catalogue task can be edited only while **Admin › Settings › Tasks › Enable Verified Tasks to be edited** is on.
 

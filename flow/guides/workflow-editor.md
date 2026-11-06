@@ -1,7 +1,8 @@
 ---
 title: Workflow editor
 order: 2
-description: Build a workflow in the editor - add and configure tasks, link them, branch with a switch, add parameters and notes, and save versions.
+description: Add and configure tasks in the workflow editor, link them, branch with a switch, add parameters and notes, and save versions.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 74 of 95 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -30,7 +31,8 @@ On the **Workflows** page, select a workflow's name on its card, or select **Edi
 
 The version switcher and **Create new version** sit at the right of the tab row.
 
-> **Note:** Changes on **Canvas**, **Parameters** and **Configure** are kept while you move between tabs, and saved only when you select **Create new version**. Leaving the workflow with unsaved changes asks "Are you sure? You have unsaved changes to your workflow that will be lost."
+> [!NOTE]
+> Changes on **Canvas**, **Parameters** and **Configure** are kept while you move between tabs, and saved only when you select **Create new version**. Leaving the workflow with unsaved changes asks "Are you sure? You have unsaved changes to your workflow that will be lost."
 
 The editor has no run button. Save a version, then run the workflow from the **Workflows** page: see [Run a workflow](./run).
 
@@ -211,6 +213,11 @@ A workflow that follows a template shows **Template** and **Read-only** next to 
 - there is no Notes panel and no **Create new version**: **Save settings** saves the display name, description, icon, labels and triggers you set on **Configure**.
 
 Select **Save settings**, and the message **Successfully saved workflow settings** appears. To choose which template version the workflow runs, see [Configure a workflow](./configure-workflow#choose-a-template-version).
+
+## Not seeing what you expected?
+
+- [Why did a task fail with `ParamUnresolved` after the save warned **Workspace parameter missing**?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why does an older task end **Succeeded** without doing anything?](../introduction/known-issues#some-older-task-revisions-do-nothing)
 
 ## Next steps
 

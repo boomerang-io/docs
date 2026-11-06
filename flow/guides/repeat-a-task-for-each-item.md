@@ -2,6 +2,7 @@
 title: Repeat a task for each item
 order: 5
 description: Run one task once per item of a JSON array, in parallel within one run, and collect its results in item order.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 44 of 53 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -118,6 +119,12 @@ Any item that doesn't succeed fails the whole task, with the reason `ItemFailed`
 - **Not built.** There's no batching, failure tolerance, parallel limit, re-run of only the failed items, or repeating a group of several tasks. To repeat several tasks, put them in their own workflow. The API accepts for-each on a **Run Workflow** task, which starts one child run per item, but the canvas doesn't offer it.
 
 **Insights** counts a for-each task's items under the task's name, and its **Task runs** panel can group by **For-each item**. See [Insights](../webapp/insights).
+
+## Not seeing what you expected?
+
+- [Why did the items fail with `ParamUnresolved`?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why do the items stay **Ready**?](../introduction/troubleshooting#a-run-didnt-start)
+- [Why did one item time out the whole run?](../introduction/troubleshooting#a-task-timed-out)
 
 ## Next steps
 

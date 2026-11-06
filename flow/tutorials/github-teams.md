@@ -2,6 +2,7 @@
 title: GitHub teams and members
 order: 4
 description: Create a GitHub team, invite a person to the organisation and the team, then delete the team again.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 35 of 52 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -23,7 +24,8 @@ The GitHub tasks default to the token the workspace's GitHub integration shares 
 
 <!-- UNVERIFIED: no product source states whether the Flow GitHub App is granted organisation member administration. If it is, the four GitHub tasks can keep their URL and token defaults. -->
 
-> **Note:** The person receives a real invitation from GitHub. Invite an account you own, or someone who expects it.
+> [!NOTE]
+> The person receives a real invitation from GitHub. Invite an account you own, or someone who expects it.
 
 ## What you'll build
 
@@ -130,6 +132,11 @@ When the run's **Status** reads **Succeeded**, refresh the GitHub teams page: th
 <!-- SCREENSHOT: The run page with Status Succeeded and all six tasks Succeeded in the task log. (not capturable yet: A succeeded run needs a GitHub organisation and a personal access token) -->
 
 If a task fails, select **View Log** on it. `Number of users found based on email is not 1.` means the email isn't the public email of exactly one GitHub account. If the run stops after `create-team` succeeded, delete the team in GitHub by hand before you run again.
+
+## Not seeing what you expected?
+
+- [Why did a task fail with `ParamUnresolved`?](../introduction/troubleshooting#a-task-failed-with-paramunresolved)
+- [Why does the run stay **Ready**?](../introduction/troubleshooting#a-run-didnt-start)
 
 ## Next steps
 

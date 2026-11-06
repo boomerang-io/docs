@@ -2,6 +2,7 @@
 title: Security
 order: 5
 description: How Flow authenticates callers, authorises requests, protects secrets, isolates tasks and keeps an audit trail.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->
@@ -69,7 +70,8 @@ Each request is checked twice. The route must admit the token's kind (else `401 
 
 Secured parameters and secured settings are encrypted at rest with AES-256-GCM, under `flow.encrypt.secret` and `flow.encrypt.salt`, required on every install. A set secret reads as `*****`; writing `*****` keeps it and `""` clears it. Secrets never reach a service log, and the audit trail names a changed secret, never its value.
 
-> **Warning:** A secured parameter reaches its task container as a plain environment variable, `PARAM_<NAME>`, and on Tekton it's in the TaskRun too. Anyone who can read pods or TaskRuns in the dispatcher's namespace can read it. The task image is inside your trust boundary: pass secrets only to images you trust.
+> [!WARNING]
+> A secured parameter reaches its task container as a plain environment variable, `PARAM_<NAME>`, and on Tekton it's in the TaskRun too. Anyone who can read pods or TaskRuns in the dispatcher's namespace can read it. The task image is inside your trust boundary: pass secrets only to images you trust.
 
 ## How are integrations verified?
 

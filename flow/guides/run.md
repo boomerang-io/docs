@@ -1,7 +1,8 @@
 ---
 title: Run a workflow
 order: 4
-description: Start a run from a workflow's card, give it parameter values, open the run, and fix Run it when it's disabled.
+description: Start a run from a workflow's card, give it parameter values, open the run, and find out why Run it is disabled.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 22 of 29 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -82,6 +83,12 @@ A template card with the status **Available** runs the same way: select **Run it
 - **From another system:** a webhook, a CloudEvent or a GitHub event. See [Triggers](../fundamentals/triggers).
 - **From another workflow:** the **Run Workflow** task.
 - **From a script:** the REST API. See the [API reference](../apis/overview).
+
+## Not seeing what you expected?
+
+- [Why is **Run it** greyed out?](../introduction/troubleshooting#run-it-is-greyed-out)
+- [Why does the run stay **Ready**?](../introduction/troubleshooting#a-run-didnt-start)
+- [Why is the run stuck **Waiting**?](../introduction/troubleshooting#a-run-is-stuck-waiting)
 
 ## Next steps
 
