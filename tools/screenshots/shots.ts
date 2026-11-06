@@ -212,6 +212,31 @@ const APPROVAL_EMAIL = {
   ],
 };
 
+/**
+ * tutorials/pass-results-with-an-approval: build returns `filename`, approve waits for a person,
+ * and publish (on a success link) prints the result and the approval's results. Needs no outside
+ * account. The parameter has a label: without one, Workflow Parameters shows an unlabelled field.
+ */
+const PASS_RESULTS_COMMENT = "Checked the release notes.";
+const PUBLISH_WITH_APPROVAL = {
+  name: "publish-with-approval", displayName: "Publish with approval", description: "Builds a file name from a version, waits for an approval, then publishes it.",
+  triggers: { manual: { enabled: true } },
+  params: [param("version", "text", { label: "Version", default: "1.0.0" })],
+  tasks: [
+    start,
+    {
+      ...shell("build", 'filename="my-app-$(params.version).tar.gz"\necho "Built $filename"\nif [ -d "$RESULTS_PATH" ]; then\n  printf \'%s\' "$filename" > "$RESULTS_PATH/filename"\nelse\n  printf \'{"filename":"%s"}\' "$filename" > "$RESULTS_PATH"\nfi', "start"),
+      results: [{ name: "filename", description: "The file the build made" }],
+    },
+    { name: "approve", type: "approval", taskRef: "manual-approval", params: [], dependencies: dep("build") },
+    {
+      ...shell("publish", 'echo "Publishing $(tasks.build.results.filename)"\necho "Decision: $(tasks.approve.results.approvalStatus) by $(tasks.approve.results.approvalUserName)"\necho "Comment: $(tasks.approve.results.approvalComments)"', "approve"),
+      dependencies: dep("approve", "success"),
+    },
+    end("publish"),
+  ],
+};
+
 /** tutorials/box-file-download: canvas and Configure only (a run needs Box and SendGrid). */
 const EMAIL_A_BOX_FILE = {
   name: "email-a-box-file", displayName: "Email a Box file", description: "Downloads a file from a Box shared link and emails it.",
@@ -312,6 +337,36 @@ const ensure = {
         await call(req, "PUT", `${WS_API}/action`, [{ id: action.id, approved: true, comments: "Release notes checked." }]);
       }
       return run;
+    }),
+  /** publish-with-approval: a run (version 1.0.0) waiting on `approve`; nobody decides it. */
+  passResultsWaiting: (req: APIRequestContext) =>
+    memo("pass-results-waiting", async () => {
+      await ensureWorkflow(req, PUBLISH_WITH_APPROVAL);
+      return ensureRun(req, "publish-with-approval", taskIs("approve", "waiting"), taskIs("approve", "waiting"));
+    }),
+  /**
+   * publish-with-approval: a run of version 1.4.2, approved with the tutorial's comment, that
+   * succeeded on the workflow's latest version (so the image matches the current definition).
+   */
+  passResultsApproved: (req: APIRequestContext) =>
+    memo("pass-results-approved", async () => {
+      const wf = await ensureWorkflow(req, PUBLISH_WITH_APPROVAL);
+      const done = (r: Run & { workflowVersion?: number }) =>
+        r.workflowVersion === wf.version && succeeded(r) && taskIs("publish", "succeeded")(r);
+      for (const r of await runsOf(req, "publish-with-approval")) {
+        const full = await getRun(req, r.id);
+        if (done(full)) return full;
+      }
+      test.setTimeout(8 * 60_000);
+      const submitted = await call<Run>(req, "POST", `${WS_API}/workflow/publish-with-approval/submit?start=true`, {
+        params: [{ name: "version", value: "1.4.2" }],
+      });
+      await waitRun(req, submitted.id, taskIs("approve", "waiting"));
+      const actions = await call(req, "GET", `${WS_API}/action/query?types=approval&statuses=submitted&limit=50`);
+      const action = ((actions?.content ?? []) as any[]).find((a) => a.workflowRunRef === submitted.id);
+      if (!action) throw new Error(`no open approval for run ${submitted.id}`);
+      await call(req, "PUT", `${WS_API}/action`, [{ id: action.id, approved: true, comments: PASS_RESULTS_COMMENT }]);
+      return waitRun(req, submitted.id, (r) => r.phase === "completed");
     }),
   /** Every run the pages above show, so Activity and Insights list them all. */
   allRuns: async (req: APIRequestContext) => {
@@ -873,6 +928,47 @@ export const SHOTS: Shot[] = [
   },
 
   /* ---- tutorials ---- */
+  {
+    id: "tut-pass-results-canvas", page: "tutorials/pass-results-with-an-approval", placeholder: "tutorials/pass-results-with-an-approval.md:120",
+    url: "/{ws}/workflows", out: "tutorials/assets/pass-results-canvas.png",
+    prepare: async (page) => {
+      await ensureWorkflow(page.request, PUBLISH_WITH_APPROVAL);
+      await editor(page, "publish-with-approval", "canvas");
+      await expect(canvasNodes(page)).toHaveCount(5);
+      await fitCanvas(page);
+    },
+    clip: aroundNodes,
+  },
+  {
+    id: "tut-pass-results-approve", page: "tutorials/pass-results-with-an-approval", placeholder: "tutorials/pass-results-with-an-approval.md:141",
+    url: "/{ws}/actions/approvals", out: "tutorials/assets/pass-results-approve.png",
+    prepare: async (page) => {
+      await ensure.passResultsWaiting(page.request);
+      await go(page, "/{ws}/actions/approvals");
+      const row = page.getByRole("row").filter({ hasText: "Publish with approval" }).filter({ hasText: "Waiting" }).first();
+      const d = await open(page, row.getByRole("cell", { name: "approve", exact: true }), "Action details");
+      await d.getByRole("textbox", { name: "Comments (optional)" }).fill(PASS_RESULTS_COMMENT);
+      await blur(page);
+      await page.waitForTimeout(300);
+    },
+    target: (page) => dialog(page, "Action details"),
+  },
+  {
+    id: "tut-pass-results-run", page: "tutorials/pass-results-with-an-approval", placeholder: "tutorials/pass-results-with-an-approval.md:150",
+    url: "/{ws}/activity", out: "tutorials/assets/pass-results-run.png",
+    prepare: async (page) => runPage(page, await ensure.passResultsApproved(page.request)),
+    clip: top(560),
+  },
+  {
+    id: "tut-pass-results-log", page: "tutorials/pass-results-with-an-approval", placeholder: "tutorials/pass-results-with-an-approval.md:160",
+    url: "/{ws}/activity", out: "tutorials/assets/pass-results-log.png",
+    prepare: async (page) => {
+      await runPage(page, await ensure.passResultsApproved(page.request));
+      const d = await open(page, taskEntry(page, "publish").getByRole("button", { name: "View Log" }), "Execution Log");
+      await expect(d.getByText(/Publishing my-app-1\.4\.2\.tar\.gz/).first()).toBeVisible({ timeout: 20_000 });
+    },
+    target: (page) => dialog(page, "Execution Log"),
+  },
   {
     id: "box-file-download-workspace", page: "tutorials/box-file-download", placeholder: "tutorials/box-file-download.md:55",
     url: "/{ws}/workflows", out: "tutorials/assets/box-file-download-workspace.png",

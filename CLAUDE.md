@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Markdown source for the Boomerang Flow and Boomerang Bosun documentation at useboomerang.io/docs. The repo is content plus one tool: `tools/screenshots/`, a Playwright project that captures docs screenshots from a running Flow stack (see its README). There is no build, lint, or test tooling. Write and update Flow pages with the `flow-tech-writer` skill. The site is rendered by https://github.com/boomerang-io/website using the [Remix Docs Template](https://github.com/boomerang-io/remix-docs-template?tab=readme-ov-file#frontmatter), which defines the frontmatter rules. The home page cards and the sidenav category config (`contentConfig.js`) also live in that website repo, not here.
+Markdown source for the Boomerang Flow and Boomerang Bosun documentation at useboomerang.io/docs. The repo is content plus two tools: `tools/screenshots/`, a Playwright project that walks the webapp and captures docs screenshots from a running Flow stack, and `tools/catalogue/`, which generates the task catalogue from Flow's seed (see each README). There is no build, lint, or test tooling. Write and update Flow pages with the `flow-tech-writer` skill. The site is rendered by https://github.com/boomerang-io/website using the [Remix Docs Template](https://github.com/boomerang-io/remix-docs-template?tab=readme-ov-file#frontmatter), which defines the frontmatter rules. The home page cards and the sidenav category config (`contentConfig.js`) also live in that website repo, not here.
 
 - `main` is published automatically.
 - Versioned docs come from git tags named `<product>@<version>`, for example `flow@3.12.0` and `flow@4.0.0`.
@@ -13,7 +13,9 @@ Markdown source for the Boomerang Flow and Boomerang Bosun documentation at useb
 
 The layout is `<product>/<category>/<doc>.md`. The products are `flow/` and `bosun/`.
 
-- **Category `index.md` files contain frontmatter only** (`title`, `order`). Their `order` sets the category's position in the sidenav. Each doc's `order` sets its position within its category.
+- **Category `index.md` files contain frontmatter only** (`title`, `order`). Their `order` sets the category's position in the sidenav, and each doc's `order` sets its position within its category. Content in a category `index.md` isn't reachable at a URL, so give a section's landing a named page (for example `catalogue/overview.md`).
+- **Orders start at 1.** The website sorts with `order || Infinity`, so `order: 0` puts a page last.
+- **Flow's sections, in menu order:** introduction, fundamentals (titled Concepts), webapp (Using the webapp), guides, catalogue (generated), apis (generated), architecture, hosting, extend, tutorials. The `flow-tech-writer` skill has the full table.
 - **Product `index.md`** (`flow/index.md`, `bosun/index.md`) is the landing page. It is built from `<docs-cards>`/`<docs-card>` HTML blocks. `bosun/index.md` has `hidden: true`.
 - Common frontmatter keys: `title`, `order`, `description`, `toc`, `hidden`.
 - Images go in an `assets/` folder inside the category and are referenced relatively, for example `./assets/img/foo.png`.
@@ -75,3 +77,28 @@ Then check the result:
 Templating references:
 - [CodegenOperation variables](https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/CodegenOperation.java)
 - [Mustache lambdas](https://openapi-generator.tech/docs/templating#mustache-lambdas)
+
+## Task catalogue (generated)
+
+`flow/catalogue/` is generated from Flow's task seed, except `index.md`, which is frontmatter only (a body there gets the slug `catalogue` and no page). Don't hand-edit `overview.md` or the category pages. Change the seed in the Flow repo, or `tools/catalogue/notes.json`, and regenerate at each release tag, as for the API reference. See `tools/catalogue/README.md`.
+
+- `tools/catalogue/generate.py` (Python 3, standard library) reads `seed/tasks.json`, `seed/task-revisions.json` and `seed/settings.json` with `git show <tag>:<path>`, and writes `overview.md` plus one page per palette category, each at its latest revision.
+- `tools/catalogue/notes.json` holds the hand-kept notes per task and revision, the category notes, and the tasks only a migration adds (`upload-artifact` and `download-artifact`, from `_0018__SeedArtifactTasks`), with their params read from the Java by hand.
+
+```bash
+FLOW_REPO=../flow.service.workflow
+FLOW_TAG=5.0.0-beta.39
+
+git -C "$FLOW_REPO" fetch --tags
+python3 tools/catalogue/generate.py --flow-repo "$FLOW_REPO" --tag "$FLOW_TAG"
+```
+
+Then:
+
+1. Read the warnings. The generator stops on a note for a task or revision the seed doesn't have. It warns when a migration task's names are missing from its Java source, when a migration task has moved into the seed, and when a note's `defaultImage` no longer matches the seeded default image.
+2. Check `git -C "$FLOW_REPO" log <previous-tag>..<tag> -- service-core/src/main/java/io/boomerang/migration/` for a new migration that adds a task outside the seed, and add it to `migrationTasks`.
+3. Review every note in `notes.json` against the release and `introduction/known-issues.md`. Remove a note whose defect is fixed.
+4. A category page is removed when its category is gone. Fix inbound links to it. Pages outside `catalogue/` link only to `../catalogue/overview`.
+5. Check every link and anchor in `flow/catalogue/` resolves.
+
+`--check` writes nothing and exits 1 when the pages differ from what the tag generates.
