@@ -1,7 +1,8 @@
 ---
 title: Welcome
 order: 1
-description: Boomerang Flow builds and runs workflows, graphs of tasks that run as containers on Kubernetes.
+description: What Boomerang Flow does, and where to start in these docs whether you build workflows, run Flow or build on it.
+verified: "5.0.0-beta.39"
 toc: true
 ---
 

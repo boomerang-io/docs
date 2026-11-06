@@ -2,6 +2,7 @@
 title: Troubleshooting
 order: 3
 description: What to check when a run doesn't start, a task fails or waits, a trigger does nothing, sign-in fails or a log is empty, with Flow's exact messages.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. Messages quoted from service-core and service-dispatcher messages.properties and the code at that tag; UI labels source-verified in client-web. -->
@@ -9,6 +10,8 @@ description: What to check when a run doesn't start, a task fails or waits, a tr
 # Troubleshooting
 
 Each section starts from what you see, then lists causes, how to tell them apart, and fixes. Workflow authors' problems come first; operators' come last.
+
+Looking up an error code? See [Error codes](./error-codes).
 
 On the run page, the run's reason shows beside its status, and **View run error** shows its message. For a task, select **View Details** to read its **Message**, **Reason** and **Attempts**. An API caller gets the error code in the response's `reason` field.
 
@@ -78,6 +81,7 @@ The task is **Succeeded**, but its work didn't happen, or a later task gets empt
 | --- | --- | --- |
 | An HTTP Call task | **Execute Basic HTTP Call** or **Execute Advanced HTTP Call**. Neither sends a request on the default image, `boomerangio/task-flow:3.3.0`. | Call with `curl --fail` in **Execute Shell**. See [Known issues](./known-issues#the-http-call-tasks-do-nothing). |
 | An old task revision | Send Email with Sendgrid 1 or 2, Find Repositories in Org 1, or Run Python Script 1 | Upgrade the node. See [Known issues](./known-issues#some-older-task-revisions-do-nothing). |
+| A Slack message task | **Send Simple Slack Message** or **Send Slack Message with File Contents**; the task log shows `ReferenceError: datetime is not defined`. **Send Custom Slack Message** also ends **Succeeded** when Slack rejects the request. | Use **Send Custom Slack Message**, and check its log for a Slack error. See [Known issues](./known-issues#two-slack-message-tasks-send-nothing). |
 | **Run Workflow** didn't wait | **Wait for the child run to finish** is off | Turn it on, or check the child run. |
 | An optional download found nothing | **Download Artifact** set `found` to `false` | Check the artifact's name and scope. |
 

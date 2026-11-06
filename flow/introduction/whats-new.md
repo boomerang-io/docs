@@ -1,12 +1,15 @@
 ---
 title: What's new
-order: 6
+order: 8
 description: What changed in Boomerang Flow 5.0.0, for anyone coming from Flow 3.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 28 of 39 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. Facts from CHANGELOG.md "Unreleased: 5.0.0" at that tag. -->
 
 # What's new
+
+This page tells the story of 5.0.0. For every change in each release, with the upgrade steps each one needs, see [Release notes](./release-notes).
 
 Boomerang Flow 5.0.0 rebuilds Flow's engine, webapp and API. Flow 4 was never released for general use, so this page compares 5.0.0 with Flow 3. It covers the changes workflow authors and operators notice; the [release notes on GitHub](https://github.com/boomerang-io/flow/releases) list every change.
 

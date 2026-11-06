@@ -1,7 +1,9 @@
 ---
 title: Frequently asked questions
-order: 4
+sidebarTitle: FAQ
+order: 5
 description: Short answers to common questions about workflows, tasks, timings and limits in Boomerang Flow.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 25 of 29 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->

@@ -1,7 +1,8 @@
 ---
 title: Known issues
-order: 5
+order: 6
 description: Defects in Boomerang Flow 5.0.0 that you might hit, with a workaround for each where there is one.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 17 of 26 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -43,7 +44,13 @@ The editor's **Add a task** panel adds the latest revision, so a new node is nev
 
 **Upload Slack File with Message**, every revision, calls a Slack method that Slack has retired, so the task fails.
 
-**Workaround:** for a text file, **Send Slack Message with File Contents** posts the file's contents in a message through an incoming webhook.
+**Workaround:** use **Send Custom Slack Message** to post the content as a message. **Send Slack Message with File Contents** isn't a workaround: it fails too (see below).
+
+### Two Slack message tasks send nothing
+
+**Send Simple Slack Message** and **Send Slack Message with File Contents** fail inside the task image (`ReferenceError: datetime is not defined` in the task log) yet end **Succeeded**, so nothing reaches Slack. **Send Custom Slack Message** works, but it also ends **Succeeded** when Slack rejects the request, so check its log when a message doesn't arrive.
+
+**Workaround:** use **Send Custom Slack Message**, and check the task log for a Slack error after a run.
 
 **Tracked in:** [tasks#46](https://github.com/boomerang-io/tasks/issues/46)
 

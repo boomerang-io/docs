@@ -2,6 +2,7 @@
 title: Getting started
 order: 2
 description: Build and run your first workflow, from signing in to a succeeded run in Activity.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 53 of 63 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
@@ -42,7 +43,8 @@ The sections below follow the same steps. A finished step shows **Done**. To hid
 
 The side nav's workspace items, such as **Workflows** and **Activity**, are greyed out on Home. They work once you open a workspace.
 
-> **Note:** On a new install, the person who activates it becomes the admin and the owner of the **System and Administration** workspace, which comes with three starter workflows. So they see **Welcome back** instead, with steps 1 and 2 of **Get started** already **Done**. To follow this page with a workspace of your own, select **New workspace** at the top of Home, then continue from step 2 below.
+> [!NOTE]
+> On a new install, the person who activates it becomes the admin and the owner of the **System and Administration** workspace, which comes with three starter workflows. So they see **Welcome back** instead, with steps 1 and 2 of **Get started** already **Done**. To follow this page with a workspace of your own, select **New workspace** at the top of Home, then continue from step 2 below.
 
 ![Home for a new user with no workspace: the G’day greeting, Create your first workspace, and Get started at step 1](./assets/first-run-home-new-user.png)
 
@@ -70,7 +72,8 @@ If Home has no **Create workspace** button and says "Workflows live in workspace
 
 The workflow editor opens on its **Canvas** tab, with two nodes: **Start** and **End**.
 
-> **Note:** Home also lists ready-made starters under **Start a workflow**. Two of them use the HTTP Call tasks, which don't work in 5.0.0. See [Known issues](./known-issues). This page starts from scratch.
+> [!NOTE]
+> Home also lists ready-made starters under **Start a workflow**. Two of them use the HTTP Call tasks, which don't work in 5.0.0. See [Known issues](./known-issues). This page starts from scratch.
 
 ## Add a task
 

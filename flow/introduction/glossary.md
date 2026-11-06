@@ -1,7 +1,8 @@
 ---
 title: Glossary
-order: 7
+order: 9
 description: The terms Boomerang Flow and these docs use, each defined in a sentence or two, with a link to the page that explains it.
+verified: "5.0.0-beta.39"
 toc: false
 ---
 
