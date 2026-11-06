@@ -1,5 +1,6 @@
 ---
 title: User Settings Model
+verified: "5.0.0-beta.39"
 ---
 
 # User Settings Model
@@ -7,10 +8,10 @@ title: User Settings Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **hasConsented** | **Boolean** |  | [optional] [default to null] |
-| **isFirstVisit** | **Boolean** |  | [optional] [default to null] |
-| **isShowGetStarted** | **Boolean** |  | [optional] [default to null] |
-| **isShowHelp** | **Boolean** |  | [optional] [default to null] |
+| **hasConsented** | **Boolean** |  | [optional]  |
+| **isFirstVisit** | **Boolean** |  | [optional]  |
+| **isShowGetStarted** | **Boolean** |  | [optional]  |
+| **isShowHelp** | **Boolean** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

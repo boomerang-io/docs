@@ -1,5 +1,6 @@
 ---
 title: Change Log Model
+verified: "5.0.0-beta.39"
 ---
 
 # Change Log Model
@@ -7,9 +8,9 @@ title: Change Log Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **author** | **String** |  | [optional] [default to null] |
-| **date** | **Date** |  | [optional] [default to null] |
-| **reason** | **String** |  | [optional] [default to null] |
+| **author** | **String** |  | [optional]  |
+| **date** | **Date** |  | [optional]  |
+| **reason** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

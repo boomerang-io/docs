@@ -1,5 +1,6 @@
 ---
 title: Run Attempt Model
+verified: "5.0.0-beta.39"
 ---
 
 # Run Attempt Model
@@ -7,14 +8,14 @@ title: Run Attempt Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **claimedAt** | **Date** |  | [optional] [default to null] |
-| **dispatcherRef** | **String** |  | [optional] [default to null] |
-| **duration** | **Long** |  | [optional] [default to null] |
-| **endedAt** | **Date** |  | [optional] [default to null] |
-| **number** | **Integer** |  | [optional] [default to null] |
-| **status** | **String** |  | [optional] Enum: `notstarted`, `ready`, `running`, `waiting`, `succeeded`, `failed`, `invalid`, `skipped`, `cancelled`, `timedout` [default to null] |
-| **statusMessage** | **String** |  | [optional] [default to null] |
-| **statusReason** | **String** |  | [optional] [default to null] |
+| **claimedAt** | **Date** |  | [optional]  |
+| **dispatcherRef** | **String** |  | [optional]  |
+| **duration** | **Long** |  | [optional]  |
+| **endedAt** | **Date** |  | [optional]  |
+| **number** | **Integer** |  | [optional]  |
+| **status** | **String** |  | [optional] Enum: `notstarted`, `ready`, `running`, `waiting`, `succeeded`, `failed`, `invalid`, `skipped`, `cancelled`, `timedout`  |
+| **statusMessage** | **String** |  | [optional]  |
+| **statusReason** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

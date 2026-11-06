@@ -1,5 +1,6 @@
 ---
 title: Step Model
+verified: "5.0.0-beta.39"
 ---
 
 # Step Model
@@ -7,13 +8,13 @@ title: Step Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **args** | **List** of **String** |  | [optional] [default to null] |
-| **command** | **List** of **String** |  | [optional] [default to null] |
-| **env** | **List** of [**TaskEnvVar**](TaskEnvVar) |  | [optional] [default to null] |
-| **image** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **script** | **String** |  | [optional] [default to null] |
-| **workingDir** | **String** |  | [optional] [default to null] |
+| **args** | **List** of **String** |  | [optional]  |
+| **command** | **List** of **String** |  | [optional]  |
+| **env** | **List** of [**TaskEnvVar**](TaskEnvVar) |  | [optional]  |
+| **image** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **script** | **String** |  | [optional]  |
+| **workingDir** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

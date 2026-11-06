@@ -1,5 +1,6 @@
 ---
 title: Sort Object Model
+verified: "5.0.0-beta.39"
 ---
 
 # Sort Object Model
@@ -7,9 +8,9 @@ title: Sort Object Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **empty** | **Boolean** |  | [optional] [default to null] |
-| **sorted** | **Boolean** |  | [optional] [default to null] |
-| **unsorted** | **Boolean** |  | [optional] [default to null] |
+| **empty** | **Boolean** |  | [optional]  |
+| **sorted** | **Boolean** |  | [optional]  |
+| **unsorted** | **Boolean** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

@@ -1,5 +1,6 @@
 ---
 title: Setting Model
+verified: "5.0.0-beta.39"
 ---
 
 # Setting Model
@@ -7,14 +8,14 @@ title: Setting Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **config** | **List** of [**SettingConfig**](SettingConfig) |  | [optional] [default to null] |
-| **description** | **String** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **key** | **String** |  | [optional] [default to null] |
-| **lastModiifed** | **Date** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **tool** | **String** |  | [optional] [default to null] |
-| **type** | **String** |  | [optional] Enum: `AppsList`, `ValuesList` [default to null] |
+| **config** | **List** of [**SettingConfig**](SettingConfig) |  | [optional]  |
+| **description** | **String** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **key** | **String** |  | [optional]  |
+| **lastModiifed** | **Date** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **tool** | **String** |  | [optional]  |
+| **type** | **String** |  | [optional] Enum: `AppsList`, `ValuesList`  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

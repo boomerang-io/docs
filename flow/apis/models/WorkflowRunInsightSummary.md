@@ -1,5 +1,6 @@
 ---
 title: Workflow Run Insight Summary Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Run Insight Summary Model
@@ -7,15 +8,15 @@ title: Workflow Run Insight Summary Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **daily** | **List** of [**Day**](Day) |  | [optional] [default to null] |
-| **from** | **Date** |  | [optional] [default to null] |
-| **previous** | [**Totals**](Totals) |  | [optional] [default to null] |
-| **previousFrom** | **Date** |  | [optional] [default to null] |
-| **previousTo** | **Date** |  | [optional] [default to null] |
-| **to** | **Date** |  | [optional] [default to null] |
-| **totals** | [**Totals**](Totals) |  | [optional] [default to null] |
-| **usage** | [**WorkflowRunInsightUsage**](WorkflowRunInsightUsage) |  | [optional] [default to null] |
-| **workflows** | **List** of [**WorkflowRow**](WorkflowRow) |  | [optional] [default to null] |
+| **daily** | **List** of [**Day**](Day) |  | [optional]  |
+| **from** | **Date** |  | [optional]  |
+| **previous** | [**Totals**](Totals) |  | [optional]  |
+| **previousFrom** | **Date** |  | [optional]  |
+| **previousTo** | **Date** |  | [optional]  |
+| **to** | **Date** |  | [optional]  |
+| **totals** | [**Totals**](Totals) |  | [optional]  |
+| **usage** | [**WorkflowRunInsightUsage**](WorkflowRunInsightUsage) |  | [optional]  |
+| **workflows** | **List** of [**WorkflowRow**](WorkflowRow) |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

@@ -1,5 +1,6 @@
 ---
 title: Approver Group Request Model
+verified: "5.0.0-beta.39"
 ---
 
 # Approver Group Request Model
@@ -7,9 +8,9 @@ title: Approver Group Request Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **approvers** | **List** of **String** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
+| **approvers** | **List** of **String** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

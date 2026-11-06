@@ -1,5 +1,6 @@
 ---
 title: Header Platform Message Model
+verified: "5.0.0-beta.39"
 ---
 
 # Header Platform Message Model
@@ -7,9 +8,9 @@ title: Header Platform Message Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **kind** | **String** |  | [optional] [default to null] |
-| **message** | **String** |  | [optional] [default to null] |
-| **title** | **String** |  | [optional] [default to null] |
+| **kind** | **String** |  | [optional]  |
+| **message** | **String** |  | [optional]  |
+| **title** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

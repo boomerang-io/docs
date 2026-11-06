@@ -1,5 +1,7 @@
 ---
 title: Integrations
+description: "Operations for Integrations: Handles the integrations with 3rd parties such as Slack and GitHub."
+verified: "5.0.0-beta.39"
 ---
 
 # Integrations
@@ -31,7 +33,7 @@ Requires the `integration/read` permission, from a key, user, session, global to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true |  | Defaults to null. | workspace_example |
+| **workspace** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -50,6 +52,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**Integration**](./models/Integration)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/integration?workspace=$WORKSPACE" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/integration -->
+<!-- api-examples:end -->
+
 
 ## Receive the GitHub App installation setup callback
 
@@ -62,10 +74,10 @@ No permission check: GitHub App setup callback reached by a browser redirect fro
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **installation\_id** | **Integer** | true |  | Defaults to null. | 56 |
-| **code** | **String** | true |  | Defaults to null. | code_example |
-| **state** | **String** | true |  | Defaults to null. | state_example |
-| **setup\_action** | **String** | false |  | Defaults to null. | setup\_action_example |
+| **installation\_id** | **Integer** | true |  |  |  |
+| **code** | **String** | true |  |  |  |
+| **state** | **String** | true |  |  |  |
+| **setup\_action** | **String** | false |  |  |  |
 
 
 #### Request body
@@ -84,6 +96,15 @@ No authorization required
 
 No response body
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/integration/github/callback?installation_id=$INSTALLATION_ID&code=$CODE&state=$STATE"
+```
+
+<!-- api-examples:start GET /api/v2/integration/github/callback -->
+<!-- api-examples:end -->
+
 
 ## Retrieve the installation ID and store against a workspace
 
@@ -96,8 +117,8 @@ Requires the `integration/read` permission, from a key, user, session, global to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **id** | **Integer** | false |  | Defaults to null. | 56 |
-| **workspace** | **String** | false |  | Defaults to null. | workspace_example |
+| **id** | **Integer** | false |  |  |  |
+| **workspace** | **String** | false |  |  |  |
 
 
 #### Request body
@@ -115,6 +136,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 **Object**
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/integration/github/installation" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/integration/github/installation -->
+<!-- api-examples:end -->
 
 
 ## Unlinks the GitHub Installation ID from a Workspace
@@ -149,6 +180,29 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/integration/github/unlink" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/integration/github/unlink -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "workspace": "my-workspace",
+  "ref": "<installation id>"
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Install URL Redirect
 
@@ -176,6 +230,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/integration/slack/install" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/integration/slack/install -->
+<!-- api-examples:end -->
+
 
 ## Receive Slack Oauth2 request
 
@@ -188,8 +252,8 @@ No permission check: Reached by Slack, which cannot hold a Flow token, so permit
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **code** | **String** | true |  | Defaults to null. | code_example |
-| **state** | **String** | false |  | Defaults to null. | state_example |
+| **code** | **String** | true |  |  |  |
+| **state** | **String** | false |  |  |  |
 
 
 #### Request body
@@ -207,6 +271,15 @@ No authorization required
 #### Response
 
 **Object**
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/integration/slack/auth?code=$CODE"
+```
+
+<!-- api-examples:start GET /api/v2/integration/slack/auth -->
+<!-- api-examples:end -->
 
 
 ## Receive Slack Slash Commands
@@ -220,8 +293,8 @@ No permission check: Reached by Slack, which cannot hold a Flow token, so permit
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **x-slack-request-timestamp** | **String** | false |  | Defaults to null. | x-slack-request-timestamp_example |
-| **x-slack-signature** | **String** | false |  | Defaults to null. | x-slack-signature_example |
+| **x-slack-request-timestamp** | **String** | false |  |  |  |
+| **x-slack-signature** | **String** | false |  |  |  |
 
 
 #### Request body
@@ -240,6 +313,15 @@ No authorization required
 
 **Object**
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/integration/slack/commands"
+```
+
+<!-- api-examples:start POST /api/v2/integration/slack/commands -->
+<!-- api-examples:end -->
+
 
 ## Receive Slack Events
 
@@ -252,8 +334,8 @@ No permission check: Reached by Slack, which cannot hold a Flow token, so permit
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **x-slack-request-timestamp** | **String** | false |  | Defaults to null. | x-slack-request-timestamp_example |
-| **x-slack-signature** | **String** | false |  | Defaults to null. | x-slack-signature_example |
+| **x-slack-request-timestamp** | **String** | false |  |  |  |
+| **x-slack-signature** | **String** | false |  |  |  |
 
 
 #### Request body
@@ -275,6 +357,17 @@ No authorization required
 
 **Object**
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/integration/slack/events" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+<!-- api-examples:start POST /api/v2/integration/slack/events -->
+<!-- api-examples:end -->
+
 
 ## Receive Slack Interactivity
 
@@ -287,8 +380,8 @@ No permission check: Reached by Slack, which cannot hold a Flow token, so permit
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **x-slack-request-timestamp** | **String** | false |  | Defaults to null. | x-slack-request-timestamp_example |
-| **x-slack-signature** | **String** | false |  | Defaults to null. | x-slack-signature_example |
+| **x-slack-request-timestamp** | **String** | false |  |  |  |
+| **x-slack-signature** | **String** | false |  |  |  |
 
 
 #### Request body
@@ -307,6 +400,15 @@ No authorization required
 
 **Object**
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/integration/slack/interactivity"
+```
+
+<!-- api-examples:start POST /api/v2/integration/slack/interactivity -->
+<!-- api-examples:end -->
+
 
 ## Shares an integration's credentials with the Workspace's tasks as managed Workspace parameters, or stops sharing them: GitHub's installation token, Slack's bot token, or the values entered for a form integration such as Google or Microsoft
 
@@ -319,7 +421,7 @@ Requires the `integration/write` permission, from a key, user, session, global t
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **integration** | **String** | true |  | Defaults to null. | integration_example |
+| **integration** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -340,6 +442,29 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 No response body
+
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/integration/$INTEGRATION/share" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/integration/{integration}/share -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "workspace": "my-workspace",
+  "shared": true
+}
+```
+
+<!-- api-examples:end -->
 
 
 ## Disconnects the Slack installation from a Workspace
@@ -373,4 +498,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 No response body
+
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/integration/slack/unlink" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+<!-- api-examples:start POST /api/v2/integration/slack/unlink -->
+<!-- api-examples:end -->
 

@@ -1,5 +1,6 @@
 ---
 title: Action Request Model
+verified: "5.0.0-beta.39"
 ---
 
 # Action Request Model
@@ -7,9 +8,9 @@ title: Action Request Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **approved** | **Boolean** |  | [optional] [default to null] |
-| **comments** | **String** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
+| **approved** | **Boolean** |  | [optional]  |
+| **comments** | **String** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

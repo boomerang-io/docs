@@ -1,5 +1,6 @@
 ---
 title: Audit Stats Model
+verified: "5.0.0-beta.39"
 ---
 
 # Audit Stats Model
@@ -7,13 +8,13 @@ title: Audit Stats Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **captureEnabled** | **Boolean** |  | [optional] [default to null] |
-| **from** | **Date** |  | [optional] [default to null] |
-| **level** | **String** |  | [optional] Enum: `DESTRUCTIVE`, `WRITE`, `ALL` [default to null] |
-| **outcomes** | **Map** of **Long** |  | [optional] [default to null] |
-| **retentionDays** | **Integer** |  | [optional] [default to null] |
-| **to** | **Date** |  | [optional] [default to null] |
-| **total** | **Long** |  | [optional] [default to null] |
+| **captureEnabled** | **Boolean** |  | [optional]  |
+| **from** | **Date** |  | [optional]  |
+| **level** | **String** |  | [optional] Enum: `DESTRUCTIVE`, `WRITE`, `ALL`  |
+| **outcomes** | **Map** of **Long** |  | [optional]  |
+| **retentionDays** | **Integer** |  | [optional]  |
+| **to** | **Date** |  | [optional]  |
+| **total** | **Long** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

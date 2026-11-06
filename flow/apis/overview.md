@@ -2,6 +2,7 @@
 title: Overview
 order: 1
 description: What every Flow API route has in common, and an index of the routes and models.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Generated from contracts/api-v2.yaml at 5.0.0-beta.39 by flow/apis/assets/templates/README.mustache. Edit the template, not this page: see CLAUDE.md. -->
@@ -16,10 +17,23 @@ Every route is under `/api/v2` on service-core. A resource that a workspace owns
 
 ```bash
 curl -H "Authorization: Bearer $FLOW_TOKEN" \
-  "https://flow.example.com/api/v2/workspace/my-workspace/workflowrun/query?statuses=failed&limit=20"
+  "$FLOW_URL/api/v2/workspace/my-workspace/workflowrun/query?statuses=failed&limit=20"
 ```
 
-`/api/v2` only gains routes and fields within 5.x, so a client written against an earlier 5.x release keeps working against a later one. The health probe, `GET /health`, is outside `/api/v2` and needs no token.
+`/api/v2` only gains routes and fields within 5.x, so a client written against an earlier 5.x release keeps working against a later one. The [API changelog](./changelog) lists what changed from the v4 API. The health probe, `GET /health`, is outside `/api/v2` and needs no token.
+
+## Try a route with curl
+
+Each operation on the route pages ends with an example `curl` request. The request reads service-core's origin and your token from the shell, and each value in the path from a variable named after it:
+
+```bash
+export FLOW_URL=http://localhost:7700   # service-core's origin, without /api/v2
+export FLOW_TOKEN=bfk_...               # a Flow token
+export WORKSPACE=example-workspace      # a workspace name
+export RUN_ID=6aed1feb739ea20d87d5b99e  # a workflow run ID
+```
+
+Where a route takes a JSON body, the request either sends `body.json`, shown under it as the example request body, or a body built from the request schema's required fields, with placeholder values to replace. Some operations also show an example response, captured from a running Flow and shortened.
 
 ## Authenticate
 
@@ -34,7 +48,8 @@ Every route needs a Flow token, except the five that Slack and GitHub call: the 
 
 `?access_token=<token>`, a URL query parameter. A token in the URL, for webhook senders that cannot set a header. Only the routes whose **Authorization** section lists `access_token` accept it: `POST /api/v2/webhook`, `POST /api/v2/event`, and `GET` or `POST /api/v2/callback`.
 
-> **Warning:** A token in a URL is recorded by every proxy and access log it passes through. Prefer a header. If a sender can only use the URL, give it a `key` token with only the `webhook/action` permission on its workspace.
+> [!WARNING]
+> A token in a URL is recorded by every proxy and access log it passes through. Prefer a header. If a sender can only use the URL, give it a `key` token with only the `webhook/action` permission on its workspace.
 
 
 ### x-access-token
@@ -46,7 +61,7 @@ Every route needs a Flow token, except the five that Slack and GitHub call: the 
 
 Each route's description names the permission it needs and the token kinds it accepts, for example "Requires the `workflowrun/read` permission, from a global, key, user, session token." [Machine tokens](../hosting/machine-tokens) covers the token kinds and how to create them, and [Tokens](../architecture/security#tokens) covers what each kind grants.
 
-A request without a valid token is `401`, with a `WWW-Authenticate: Bearer` header. A token that lacks the route's permission is a bare `403` with no body. With `flow.security.enabled=false`, Flow checks no token at all: see [What happens with security off?](../architecture/security#what-happens-with-security-off).
+A request without a valid token is `401`, with a `WWW-Authenticate: Bearer` header. A `403` means the credential lacks the permission the route needs. With `flow.security.enabled=false`, Flow checks no token at all: see [What happens with security off?](../architecture/security#what-happens-with-security-off).
 
 ## Read an error
 
@@ -65,17 +80,18 @@ An error Flow raises is a `RestErrorResponse`:
 | Field | Holds |
 | --- | --- |
 | `timestamp` | When Flow raised the error |
-| `code` | A number. Below 1000 mirrors HTTP. Then 10xx is generic, 11xx workspace, 12xx workflow, 13xx workflow run, 14xx task, 15xx task run, 16xx action, 17xx schedule, 18xx parameter, 19xx integration and 20xx artifact. |
-| `reason` | The error's name, such as `WORKFLOWRUN_INVALID_REFERENCE`. Key on `reason`, not `code`: codes 1405 and 1802 each carry two reasons. |
+| `code` | A number. Below 1000 it mirrors the HTTP status, except 101, which two user errors carry. Then 10xx is generic, 11xx workspace, 12xx workflow, 13xx workflow run, 14xx task, 15xx task run, 16xx action, 17xx schedule, 18xx parameter, 19xx integration and 20xx artifact. |
+| `reason` | The error's name, such as `WORKFLOWRUN_INVALID_REFERENCE`. Key on `reason`, not `code`: four codes each carry two reasons. 101 is `USER_NOT_FOUND` or `USER_UNABLE_TO_DELETE`, 429 is `TOO_MANY_REQUESTS` or `WORKFLOW_TRIGGER_DISABLED`, 1405 is `TASK_INVALID_WORKFLOWREF` or `TASK_DELETE_IN_USE`, and 1802 is `PARAMS_NON_UNIQUE_REFERENCE` or `PARAMS_NON_UNIQUE_KEY`. |
 | `message` | A readable explanation |
 | `status` | The HTTP status, as its code and name |
 
-The response adds `cause` only when the operator sets `flow.error.include-cause=true`. The default is `false`.
+The response also carries `cause`, which is `null` unless the operator sets `flow.error.include-cause=true`. The default is `false`.
 
 - A resource in the path that doesn't exist, or that you can't reach, is `404`, with a reason such as `WORKSPACE_INVALID_REF` or `WORKFLOWRUN_INVALID_REFERENCE`.
 - Blank, missing or unusable input is `400`, with a reason such as `WORKFLOW_INVALID_REQ`.
 - `PERMISSION_DENIED` carries code 403 but answers HTTP 401.
-- Two answers have no `RestErrorResponse` body: a missing permission, which is a bare `403`, and a framework error such as a malformed body or an unsupported method, which keeps Spring's problem-detail body.
+- A missing permission is `403`: the credential lacks the permission the route needs.
+- A framework error, such as a malformed body or an unsupported method, keeps Spring's problem-detail body instead of a `RestErrorResponse`.
 
 ## Page through a list
 

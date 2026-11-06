@@ -1,5 +1,6 @@
 ---
 title: Pageable Object Model
+verified: "5.0.0-beta.39"
 ---
 
 # Pageable Object Model
@@ -7,12 +8,12 @@ title: Pageable Object Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **offset** | **Long** |  | [optional] [default to null] |
-| **pageNumber** | **Integer** |  | [optional] [default to null] |
-| **pageSize** | **Integer** |  | [optional] [default to null] |
-| **paged** | **Boolean** |  | [optional] [default to null] |
-| **sort** | [**SortObject**](SortObject) |  | [optional] [default to null] |
-| **unpaged** | **Boolean** |  | [optional] [default to null] |
+| **offset** | **Long** |  | [optional]  |
+| **pageNumber** | **Integer** |  | [optional]  |
+| **pageSize** | **Integer** |  | [optional]  |
+| **paged** | **Boolean** |  | [optional]  |
+| **sort** | [**SortObject**](SortObject) |  | [optional]  |
+| **unpaged** | **Boolean** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

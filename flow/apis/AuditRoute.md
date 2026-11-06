@@ -1,5 +1,7 @@
 ---
 title: Audit
+description: "Operations for Audit: Query the security audit trail: who did what, when, and with what outcome."
+verified: "5.0.0-beta.39"
 ---
 
 # Audit
@@ -24,18 +26,18 @@ Requires the `system/read` permission, from a session, user, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **actor** | **String** | false | Actor id or name, any part of either, ignoring case | Defaults to null. | actor_example |
-| **action** | **List** of **String** | false | AuditAction names to filter for | Defaults to null. Enum: [CREATE, READ, UPDATE, DELETE, DUPLICATE, SUBMIT, EXPORT, IMPORT, TOKEN_CREATE, TOKEN_REVOKE] | CREATE,DELETE |
-| **outcome** | **List** of **String** | false | AuditOutcome names to filter for | Defaults to null. Enum: [SUCCESS, FAILED, DENIED] | DENIED |
-| **level** | **List** of **String** | false | The level the event was captured at | Defaults to null. Enum: [DESTRUCTIVE, WRITE, ALL] | DESTRUCTIVE |
-| **resourceType** | **List** of **String** | false | Resource types to filter for | Defaults to null. | workflow |
-| **resourceId** | **String** | false | A single resource id | Defaults to null. | resourceId_example |
-| **workspaceId** | **List** of **String** | false | Owning workspace ids to filter for | Defaults to null. |  |
-| **from** | **Date** | false | ISO-8601 instant; defaults to 30 days ago | Defaults to null. | 2026-09-01T00:00:00Z |
-| **to** | **Date** | false | ISO-8601 instant, exclusive | Defaults to null. | 2026-10-01T00:00:00Z |
-| **page** | **Integer** | false | Page Number | Defaults to 0. | 0 |
-| **limit** | **Integer** | false | Result Size, capped at 100 | Defaults to 25. | 25 |
-| **order** | **String** | false | Ascending or Descending (default) by time | Defaults to DESC. Enum: [ASC, DESC] | order_example |
+| **actor** | **String** | false | Actor id or name, any part of either, ignoring case |  |  |
+| **action** | **List** of **String** | false | AuditAction names to filter for |  Enum: [CREATE, READ, UPDATE, DELETE, DUPLICATE, SUBMIT, EXPORT, IMPORT, TOKEN_CREATE, TOKEN_REVOKE] | `CREATE,DELETE` |
+| **outcome** | **List** of **String** | false | AuditOutcome names to filter for |  Enum: [SUCCESS, FAILED, DENIED] | `DENIED` |
+| **level** | **List** of **String** | false | The level the event was captured at |  Enum: [DESTRUCTIVE, WRITE, ALL] | `DESTRUCTIVE` |
+| **resourceType** | **List** of **String** | false | Resource types to filter for |  | `workflow` |
+| **resourceId** | **String** | false | A single resource id |  |  |
+| **workspaceId** | **List** of **String** | false | Owning workspace ids to filter for |  |  |
+| **from** | **Date** | false | ISO-8601 instant; defaults to 30 days ago |  | `2026-09-01T00:00:00Z` |
+| **to** | **Date** | false | ISO-8601 instant, exclusive |  | `2026-10-01T00:00:00Z` |
+| **page** | **Integer** | false | Page Number | Defaults to `0`. | `0` |
+| **limit** | **Integer** | false | Result Size, capped at 100 | Defaults to `25`. | `25` |
+| **order** | **String** | false | Ascending or Descending (default) by time | Defaults to `DESC`. Enum: [ASC, DESC] |  |
 
 
 #### Request body
@@ -54,6 +56,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**PageAuditEvent**](./models/PageAuditEvent)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/audit" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/audit -->
+<!-- api-examples:end -->
+
 
 ## Count the audit trail by outcome
 
@@ -68,15 +80,15 @@ Requires the `system/read` permission, from a session, user, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **actor** | **String** | false |  | Defaults to null. | actor_example |
-| **action** | **List** of **String** | false |  | Defaults to null. Enum: [CREATE, READ, UPDATE, DELETE, DUPLICATE, SUBMIT, EXPORT, IMPORT, TOKEN_CREATE, TOKEN_REVOKE] |  |
-| **outcome** | **List** of **String** | false |  | Defaults to null. Enum: [SUCCESS, FAILED, DENIED] |  |
-| **level** | **List** of **String** | false |  | Defaults to null. Enum: [DESTRUCTIVE, WRITE, ALL] |  |
-| **resourceType** | **List** of **String** | false |  | Defaults to null. |  |
-| **resourceId** | **String** | false |  | Defaults to null. | resourceId_example |
-| **workspaceId** | **List** of **String** | false |  | Defaults to null. |  |
-| **from** | **Date** | false |  | Defaults to null. | 2013-10-20T19:20:30+01:00 |
-| **to** | **Date** | false |  | Defaults to null. | 2013-10-20T19:20:30+01:00 |
+| **actor** | **String** | false |  |  |  |
+| **action** | **List** of **String** | false |  |  Enum: [CREATE, READ, UPDATE, DELETE, DUPLICATE, SUBMIT, EXPORT, IMPORT, TOKEN_CREATE, TOKEN_REVOKE] |  |
+| **outcome** | **List** of **String** | false |  |  Enum: [SUCCESS, FAILED, DENIED] |  |
+| **level** | **List** of **String** | false |  |  Enum: [DESTRUCTIVE, WRITE, ALL] |  |
+| **resourceType** | **List** of **String** | false |  |  |  |
+| **resourceId** | **String** | false |  |  |  |
+| **workspaceId** | **List** of **String** | false |  |  |  |
+| **from** | **Date** | false |  |  |  |
+| **to** | **Date** | false |  |  |  |
 
 
 #### Request body
@@ -94,4 +106,14 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**AuditStats**](./models/AuditStats)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/audit/stats" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/audit/stats -->
+<!-- api-examples:end -->
 

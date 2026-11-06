@@ -1,5 +1,6 @@
 ---
 title: Features Model
+verified: "5.0.0-beta.39"
 ---
 
 # Features Model
@@ -7,7 +8,7 @@ title: Features Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **features** | **Map** of **Any** |  | [optional] [default to null] |
+| **features** | **Map** of **Any** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

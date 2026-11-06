@@ -1,5 +1,6 @@
 ---
 title: Integration Model
+verified: "5.0.0-beta.39"
 ---
 
 # Integration Model
@@ -7,18 +8,18 @@ title: Integration Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **description** | **String** |  | [optional] [default to null] |
-| **fields** | **List** of [**AbstractParam**](AbstractParam) |  | [optional] [default to null] |
-| **icon** | **String** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **instructions** | **String** |  | [optional] [default to null] |
-| **kind** | **String** |  | [optional] Enum: `app`, `form` [default to null] |
-| **link** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **ref** | **String** |  | [optional] [default to null] |
-| **shared** | **Boolean** |  | [optional] [default to null] |
-| **status** | **String** |  | [optional] Enum: `unlinked`, `linked` [default to null] |
-| **type** | **String** |  | [optional] [default to null] |
+| **description** | **String** |  | [optional]  |
+| **fields** | **List** of [**AbstractParam**](AbstractParam) |  | [optional]  |
+| **icon** | **String** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **instructions** | **String** |  | [optional]  |
+| **kind** | **String** |  | [optional] Enum: `app`, `form`  |
+| **link** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **ref** | **String** |  | [optional]  |
+| **shared** | **Boolean** |  | [optional]  |
+| **status** | **String** |  | [optional] Enum: `unlinked`, `linked`  |
+| **type** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

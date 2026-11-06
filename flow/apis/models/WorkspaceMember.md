@@ -1,5 +1,6 @@
 ---
 title: Workspace Member Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workspace Member Model
@@ -7,10 +8,10 @@ title: Workspace Member Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **email** | **String** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **role** | **String** |  | [optional] [default to null] |
+| **email** | **String** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **role** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

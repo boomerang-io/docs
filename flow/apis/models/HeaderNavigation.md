@@ -1,5 +1,6 @@
 ---
 title: Header Navigation Model
+verified: "5.0.0-beta.39"
 ---
 
 # Header Navigation Model
@@ -7,10 +8,10 @@ title: Header Navigation Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **isDropdown** | **Boolean** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **options** | **List** of [**HeaderOption**](HeaderOption) |  | [optional] [default to null] |
-| **url** | **String** |  | [optional] [default to null] |
+| **isDropdown** | **Boolean** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **options** | **List** of [**HeaderOption**](HeaderOption) |  | [optional]  |
+| **url** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

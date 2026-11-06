@@ -1,5 +1,6 @@
 ---
 title: Resolved Permissions Model
+verified: "5.0.0-beta.39"
 ---
 
 # Resolved Permissions Model
@@ -7,9 +8,9 @@ title: Resolved Permissions Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **actions** | **List** of **String** |  | [optional] [default to null] |
-| **principal** | **String** |  | [optional] [default to null] |
-| **scope** | **String** |  | [optional] Enum: `global`, `workspace`, `user` [default to null] |
+| **actions** | **List** of **String** |  | [optional]  |
+| **principal** | **String** |  | [optional]  |
+| **scope** | **String** |  | [optional] Enum: `global`, `workspace`, `user`  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

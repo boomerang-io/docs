@@ -1,5 +1,6 @@
 ---
 title: Page Event Outbox Entity Model
+verified: "5.0.0-beta.39"
 ---
 
 # Page Event Outbox Entity Model
@@ -7,17 +8,17 @@ title: Page Event Outbox Entity Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **content** | **List** of [**EventOutboxEntity**](EventOutboxEntity) |  | [optional] [default to null] |
-| **empty** | **Boolean** |  | [optional] [default to null] |
-| **first** | **Boolean** |  | [optional] [default to null] |
-| **last** | **Boolean** |  | [optional] [default to null] |
-| **number** | **Integer** |  | [optional] [default to null] |
-| **numberOfElements** | **Integer** |  | [optional] [default to null] |
-| **pageable** | [**PageableObject**](PageableObject) |  | [optional] [default to null] |
-| **size** | **Integer** |  | [optional] [default to null] |
-| **sort** | [**SortObject**](SortObject) |  | [optional] [default to null] |
-| **totalElements** | **Long** |  | [optional] [default to null] |
-| **totalPages** | **Integer** |  | [optional] [default to null] |
+| **content** | **List** of [**EventOutboxEntity**](EventOutboxEntity) |  | [optional]  |
+| **empty** | **Boolean** |  | [optional]  |
+| **first** | **Boolean** |  | [optional]  |
+| **last** | **Boolean** |  | [optional]  |
+| **number** | **Integer** |  | [optional]  |
+| **numberOfElements** | **Integer** |  | [optional]  |
+| **pageable** | [**PageableObject**](PageableObject) |  | [optional]  |
+| **size** | **Integer** |  | [optional]  |
+| **sort** | [**SortObject**](SortObject) |  | [optional]  |
+| **totalElements** | **Long** |  | [optional]  |
+| **totalPages** | **Integer** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

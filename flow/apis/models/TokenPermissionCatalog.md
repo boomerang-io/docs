@@ -1,5 +1,6 @@
 ---
 title: Token Permission Catalog Model
+verified: "5.0.0-beta.39"
 ---
 
 # Token Permission Catalog Model
@@ -7,9 +8,9 @@ title: Token Permission Catalog Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **actions** | **List** of **String** |  | [optional] [default to null] |
-| **resources** | **List** of **String** |  | [optional] [default to null] |
-| **rolePresets** | **Map** of **List** |  | [optional] [default to null] |
+| **actions** | **List** of **String** |  | [optional]  |
+| **resources** | **List** of **String** |  | [optional]  |
+| **rolePresets** | **Map** of **List** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

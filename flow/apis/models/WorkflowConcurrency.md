@@ -1,5 +1,6 @@
 ---
 title: Workflow Concurrency Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Concurrency Model
@@ -7,8 +8,8 @@ title: Workflow Concurrency Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **limit** | **Integer** |  | [optional] [default to null] |
-| **overflow** | **String** |  | [optional] Enum: `queue`, `skip` [default to null] |
+| **limit** | **Integer** |  | [optional]  |
+| **overflow** | **String** |  | [optional] Enum: `queue`, `skip`  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

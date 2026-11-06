@@ -1,5 +1,7 @@
 ---
 title: System
+description: "Operations for System: Register the instance, retrieve context and navigation, and manage global admin areas."
+verified: "5.0.0-beta.39"
 ---
 
 # System
@@ -43,6 +45,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**Setting**](./models/Setting)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/settings" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/settings -->
+<!-- api-examples:end -->
+
 
 ## Retrieve feature flags.
 
@@ -69,6 +81,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**Features**](./models/Features)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/features" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/features -->
+<!-- api-examples:end -->
 
 
 ## Retrieve this instances context, features, and navigation.
@@ -97,6 +119,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**HeaderNavigationResponse**](./models/HeaderNavigationResponse)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/context" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/context -->
+<!-- api-examples:end -->
+
 
 ## Retrieve navigation.
 
@@ -109,7 +141,7 @@ Requires the `system/read` permission, from a session, user, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | false | Workspace as owner reference | Defaults to null. | my-amazing-workspace |
+| **workspace** | **String** | false | Workspace as owner reference |  | `my-amazing-workspace` |
 
 
 #### Request body
@@ -127,6 +159,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 **List** of [**Navigation**](./models/Navigation)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/navigation" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/navigation -->
+<!-- api-examples:end -->
 
 
 ## Update Boomerang Flow Settings
@@ -163,6 +205,30 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**Setting**](./models/Setting)
 
+#### Example request
+
+```bash
+curl -X PATCH "$FLOW_URL/api/v2/settings" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start PATCH /api/v2/settings -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "artifacts": {
+    "retention.default.days": "14"
+  }
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## List outbox rows, dead ones by default.
 
@@ -177,9 +243,9 @@ Requires the `system/read` permission, from a global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **status** | **String** | false | Delivery status to list | Defaults to dead. Enum: [pending, sent, dead] | dead |
-| **page** | **Integer** | false | Page Number | Defaults to 0. | 0 |
-| **limit** | **Integer** | false | Result Size | Defaults to 100. | 100 |
+| **status** | **String** | false | Delivery status to list | Defaults to `dead`. Enum: [pending, sent, dead] | `dead` |
+| **page** | **Integer** | false | Page Number | Defaults to `0`. | `0` |
+| **limit** | **Integer** | false | Result Size | Defaults to `100`. | `100` |
 
 
 #### Request body
@@ -197,6 +263,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**PageEventOutboxEntity**](./models/PageEventOutboxEntity)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/system/outbox" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/system/outbox -->
+<!-- api-examples:end -->
 
 
 ## Register and activate an installation of Flow
@@ -231,6 +307,28 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **Boolean**
 
+#### Example request
+
+```bash
+curl -X PUT "$FLOW_URL/api/v2/activate" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start PUT /api/v2/activate -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "otc": "<activation code, 32 or more characters>"
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Replay outbox rows
 
@@ -245,9 +343,9 @@ Requires the `system/write` permission, from a global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **ids** | **List** of **String** | false | Outbox row ids to replay | Defaults to null. |  |
-| **status** | **String** | false | Replay every row in this status | Defaults to dead. Enum: [pending, sent, dead] | dead |
-| **olderThan** | **Long** | false | Only replay rows that occurred before this epoch millisecond | Defaults to null. | 789 |
+| **ids** | **List** of **String** | false | Outbox row ids to replay |  |  |
+| **status** | **String** | false | Replay every row in this status | Defaults to `dead`. Enum: [pending, sent, dead] | `dead` |
+| **olderThan** | **Long** | false | Only replay rows that occurred before this epoch millisecond |  |  |
 
 
 #### Request body
@@ -265,4 +363,14 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**OutboxReplayResponse**](./models/OutboxReplayResponse)
+
+#### Example request
+
+```bash
+curl -X PUT "$FLOW_URL/api/v2/system/outbox/replay" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start PUT /api/v2/system/outbox/replay -->
+<!-- api-examples:end -->
 

@@ -1,5 +1,6 @@
 ---
 title: Header Platform Model
+verified: "5.0.0-beta.39"
 ---
 
 # Header Platform Model
@@ -7,17 +8,17 @@ title: Header Platform Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **appName** | **String** |  | [optional] [default to null] |
-| **baseEnvUrl** | **String** |  | [optional] [default to null] |
-| **baseServicesUrl** | **String** |  | [optional] [default to null] |
-| **communityUrl** | **String** |  | [optional] [default to null] |
-| **displayLogo** | **Boolean** |  | [optional] [default to null] |
-| **logoURL** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **platformName** | **String** |  | [optional] [default to null] |
-| **sendMail** | **Boolean** |  | [optional] [default to null] |
-| **signOutUrl** | **String** |  | [optional] [default to null] |
-| **version** | **String** |  | [optional] [default to null] |
+| **appName** | **String** |  | [optional]  |
+| **baseEnvUrl** | **String** |  | [optional]  |
+| **baseServicesUrl** | **String** |  | [optional]  |
+| **communityUrl** | **String** |  | [optional]  |
+| **displayLogo** | **Boolean** |  | [optional]  |
+| **logoURL** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **platformName** | **String** |  | [optional]  |
+| **sendMail** | **Boolean** |  | [optional]  |
+| **signOutUrl** | **String** |  | [optional]  |
+| **version** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

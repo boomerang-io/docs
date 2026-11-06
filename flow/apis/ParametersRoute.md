@@ -1,5 +1,7 @@
 ---
 title: Parameters
+description: "Operations for Parameters: Create, update and delete global parameters, available to every workspace and workflow."
+verified: "5.0.0-beta.39"
 ---
 
 # Parameters
@@ -45,6 +47,47 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**AbstractParam**](./models/AbstractParam)
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/parameters" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/parameters -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "name": "slack-channel",
+  "type": "text",
+  "label": "Slack channel",
+  "description": "Where build notices go.",
+  "value": "#builds"
+}
+```
+
+#### Example response
+
+`200 OK`:
+
+```json
+{
+  "description": "Where build notices go.",
+  "label": "Slack channel",
+  "name": "slack-channel",
+  "readOnly": false,
+  "type": "text",
+  "value": "#builds"
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Delete a global Param
 
@@ -57,7 +100,7 @@ Requires the `system/delete` permission, from a session, user, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **name** | **String** | true |  | Defaults to null. | name_example |
+| **name** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -75,6 +118,20 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 No response body
+
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/parameters/$PARAMETER" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/parameters/{name} -->
+#### Example response
+
+`200 OK`, with no body.
+
+<!-- api-examples:end -->
 
 
 ## Get all global Params
@@ -103,6 +160,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**AbstractParam**](./models/AbstractParam)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/parameters" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/parameters -->
+<!-- api-examples:end -->
+
 
 ## Update a global Param
 
@@ -117,7 +184,7 @@ Requires the `system/write` permission, from a session, user, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **name** | **String** | true |  | Defaults to null. | name_example |
+| **name** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -138,4 +205,26 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**AbstractParam**](./models/AbstractParam)
+
+#### Example request
+
+```bash
+curl -X PATCH "$FLOW_URL/api/v2/parameters/$PARAMETER" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start PATCH /api/v2/parameters/{name} -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "value": "#deployments"
+}
+```
+
+<!-- api-examples:end -->
 

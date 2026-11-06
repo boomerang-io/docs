@@ -1,5 +1,6 @@
 ---
 title: Approver Group Model
+verified: "5.0.0-beta.39"
 ---
 
 # Approver Group Model
@@ -7,10 +8,10 @@ title: Approver Group Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **approvers** | **List** of [**WorkspaceMember**](WorkspaceMember) |  | [optional] [default to null] |
-| **creationDate** | **Date** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
+| **approvers** | **List** of [**WorkspaceMember**](WorkspaceMember) |  | [optional]  |
+| **creationDate** | **Date** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

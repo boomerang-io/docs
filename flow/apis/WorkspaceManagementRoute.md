@@ -1,5 +1,7 @@
 ---
 title: Workspace Management
+description: "Operations for Workspace Management: Manage Workspaces, Workspace Members, Quotas, ApprovalGroups and Parameters."
+verified: "5.0.0-beta.39"
 ---
 
 # Workspace Management
@@ -54,6 +56,29 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Workspace**](./models/Workspace)
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/workspace" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/workspace -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "name": "my-workspace",
+  "displayName": "My workspace"
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Delete Approver Groups
 
@@ -66,7 +91,7 @@ Requires the `workspace/delete` permission, from a session, user, key, global to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Workspace as owner reference. | Defaults to null. | workspace_example |
+| **workspace** | **String** | true | Workspace as owner reference. |  |  |
 
 
 #### Request body
@@ -88,6 +113,28 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE/approvers" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace}/approvers -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+[
+  "<approver group id>"
+]
+```
+
+<!-- api-examples:end -->
+
 
 ## Delete Workspace Parameter
 
@@ -100,8 +147,8 @@ Requires the `workspace/delete` permission, from a session, user, key, global to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Workspace as owner reference. | Defaults to null. | workspace_example |
-| **name** | **String** | true |  | Defaults to null. | name_example |
+| **workspace** | **String** | true | Workspace as owner reference. |  |  |
+| **name** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -119,6 +166,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 No response body
+
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE/parameters/$PARAMETER" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace}/parameters/{name} -->
+<!-- api-examples:end -->
 
 
 ## Delete Workspace
@@ -132,7 +189,7 @@ Requires the `workspace/delete` permission, from a session, user, key, global to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | ID of Workspace | Defaults to null. | workspace_example |
+| **workspace** | **String** | true | ID of Workspace |  |  |
 
 
 #### Request body
@@ -150,6 +207,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 No response body
+
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace} -->
+<!-- api-examples:end -->
 
 
 ## Retrieve Default Workspace Quota
@@ -178,6 +245,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Quotas**](./models/Quotas)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/quotas/default" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/quotas/default -->
+<!-- api-examples:end -->
+
 
 ## Retrieve Workspace Roles
 
@@ -205,6 +282,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**Role**](./models/Role)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/roles" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/roles -->
+<!-- api-examples:end -->
+
 
 ## Get workspace
 
@@ -217,7 +304,7 @@ Requires the `workspace/read` permission, from a session, user, key, global toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Workspace as owner reference. | Defaults to null. | my-amazing-workspace |
+| **workspace** | **String** | true | Workspace as owner reference. |  | `my-amazing-workspace` |
 
 
 #### Request body
@@ -236,6 +323,70 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Workspace**](./models/Workspace)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace} -->
+#### Example response
+
+`200 OK`:
+
+```json
+{
+  "approverGroups": [],
+  "creationDate": "2026-11-05T21:23:47.310Z",
+  "displayName": "Example workspace",
+  "externalRef": null,
+  "id": "6aecf3e3755e5fc7e99bea30",
+  "labels": {},
+  "members": [
+    {
+      "email": "grace.hopper@flow.local",
+      "id": "6aecf30e755e5fc7e99bea28",
+      "name": "Grace Hopper",
+      "role": "owner"
+    }
+  ],
+  "name": "example-workspace",
+  "parameters": [
+    {
+      "description": "The deploy service's API token.",
+      "hiddenValue": true,
+      "label": "Deploy token",
+      "name": "deploy-token",
+      "readOnly": false,
+      "type": "password",
+      "value": "*****"
+    }
+  ],
+  "quotas": {
+    "artifactRetentionDays": 30,
+    "currentArtifactStorage": 145,
+    "currentConcurrentRuns": 3,
+    "currentRunAverageDuration": 54060,
+    "currentRunTotalDuration": 1135265,
+    "currentRuns": 21,
+    "currentWorkflowCount": 18,
+    "maxArtifactStorage": 5,
+    "maxConcurrentRuns": 4,
+    "maxWorkflowCount": 20,
+    "maxWorkflowRunDuration": 30,
+    "maxWorkflowRunMonthly": 100,
+    "maxWorkspaceStorage": 2,
+    "monthlyResetDate": "2026-12-01T00:00:00.000Z"
+  },
+  "status": "active",
+  "type": null,
+  "workflows": []
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Search for Workspaces
 
@@ -248,15 +399,15 @@ Requires the `workspace/read` permission, from a session, user, key, global toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **limit** | **Integer** | true | Result Size | Defaults to null. | 10 |
-| **page** | **Integer** | true | Page Number | Defaults to 0. | 0 |
-| **search** | **String** | false | Free-text search on Workspace name and displayName (prefix match, case-insensitive). | Defaults to null. | search_example |
-| **labels** | **List** of **String** | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. |  |
-| **statuses** | **List** of **String** | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive |
-| **workspaces** | **List** of **String** | false | List of Workspace names to filter for. | Defaults to null. | my-amazing-workspace,boomerangs-return |
-| **externalRef** | **String** | false | The one workspace carrying this external reference. | Defaults to null. | externalRef_example |
-| **order** | **String** | false | Ascending or Descending (default) order | Defaults to DESC. Enum: [ASC, DESC] | 0 |
-| **sort** | **String** | false | The element to sort on | Defaults to name. | 0 |
+| **limit** | **Integer** | true | Result Size |  | `10` |
+| **page** | **Integer** | true | Page Number | Defaults to `0`. | `0` |
+| **search** | **String** | false | Free-text search on Workspace name and displayName (prefix match, case-insensitive). |  |  |
+| **labels** | **List** of **String** | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) |  |  |
+| **statuses** | **List** of **String** | false | List of statuses to filter for. Defaults to all. |  | `active,inactive` |
+| **workspaces** | **List** of **String** | false | List of Workspace names to filter for. |  | `my-amazing-workspace,boomerangs-return` |
+| **externalRef** | **String** | false | The one workspace carrying this external reference. |  |  |
+| **order** | **String** | false | Ascending or Descending (default) order | Defaults to `DESC`. Enum: [ASC, DESC] | `0` |
+| **sort** | **String** | false | The element to sort on | Defaults to `name`. | `0` |
 
 
 #### Request body
@@ -275,6 +426,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**PageWorkspace**](./models/PageWorkspace)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/query?limit=10&page=0" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/query -->
+<!-- api-examples:end -->
+
 
 ## Leave Workspace
 
@@ -287,7 +448,7 @@ Requires the `workspace/read` permission, from a user, session token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Workspace as owner reference. | Defaults to null. | workspace_example |
+| **workspace** | **String** | true | Workspace as owner reference. |  |  |
 
 
 #### Request body
@@ -306,6 +467,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE/leave" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace}/leave -->
+<!-- api-examples:end -->
+
 
 ## Remove Workspace Members
 
@@ -318,7 +489,7 @@ Requires the `workspace/delete` permission, from a session, user, key, global to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Workspace as owner reference. | Defaults to null. | my-amazing-workspace |
+| **workspace** | **String** | true | Workspace as owner reference. |  | `my-amazing-workspace` |
 
 
 #### Request body
@@ -340,6 +511,30 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE/members" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace}/members -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+[
+  {
+    "id": "<user id>"
+  }
+]
+```
+
+<!-- api-examples:end -->
+
 
 ## Reset Workspace Quota
 
@@ -352,7 +547,7 @@ Requires the `workspace/delete` permission, from a session, user, key, global to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Workspace as owner reference. | Defaults to null. | workspace_example |
+| **workspace** | **String** | true | Workspace as owner reference. |  |  |
 
 
 #### Request body
@@ -371,6 +566,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE/quotas" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace}/quotas -->
+<!-- api-examples:end -->
+
 
 ## Patch or update a workspace
 
@@ -383,7 +588,7 @@ Requires the `workspace/write` permission, from a session, user, key, global tok
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | ID of Workspace | Defaults to null. | workspace_example |
+| **workspace** | **String** | true | ID of Workspace |  |  |
 
 
 #### Request body
@@ -404,6 +609,28 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**Workspace**](./models/Workspace)
+
+#### Example request
+
+```bash
+curl -X PATCH "$FLOW_URL/api/v2/workspace/$WORKSPACE" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start PATCH /api/v2/workspace/{workspace} -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "displayName": "Platform workspace"
+}
+```
+
+<!-- api-examples:end -->
 
 
 ## Validate workspace name and check uniqueness.
@@ -437,4 +664,26 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 **Object**
+
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/workspace/validate-name" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/workspace/validate-name -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "name": "my-workspace"
+}
+```
+
+<!-- api-examples:end -->
 

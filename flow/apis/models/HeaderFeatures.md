@@ -1,5 +1,6 @@
 ---
 title: Header Features Model
+verified: "5.0.0-beta.39"
 ---
 
 # Header Features Model
@@ -7,11 +8,11 @@ title: Header Features Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **consent.enabled** | **Boolean** |  | [optional] [default to null] |
-| **docs.enabled** | **Boolean** |  | [optional] [default to null] |
-| **internal.enabled** | **Boolean** |  | [optional] [default to null] |
-| **notifications.enabled** | **Boolean** |  | [optional] [default to null] |
-| **support.enabled** | **Boolean** |  | [optional] [default to null] |
+| **consent.enabled** | **Boolean** |  | [optional]  |
+| **docs.enabled** | **Boolean** |  | [optional]  |
+| **internal.enabled** | **Boolean** |  | [optional]  |
+| **notifications.enabled** | **Boolean** |  | [optional]  |
+| **support.enabled** | **Boolean** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

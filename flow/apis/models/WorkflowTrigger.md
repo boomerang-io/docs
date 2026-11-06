@@ -1,5 +1,6 @@
 ---
 title: Workflow Trigger Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Trigger Model
@@ -7,11 +8,11 @@ title: Workflow Trigger Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **event** | [**Trigger**](Trigger) |  | [optional] [default to null] |
-| **github** | [**Trigger**](Trigger) |  | [optional] [default to null] |
-| **manual** | [**Trigger**](Trigger) |  | [optional] [default to null] |
-| **schedule** | [**Trigger**](Trigger) |  | [optional] [default to null] |
-| **webhook** | [**Trigger**](Trigger) |  | [optional] [default to null] |
+| **event** | [**Trigger**](Trigger) |  | [optional]  |
+| **github** | [**Trigger**](Trigger) |  | [optional]  |
+| **manual** | [**Trigger**](Trigger) |  | [optional]  |
+| **schedule** | [**Trigger**](Trigger) |  | [optional]  |
+| **webhook** | [**Trigger**](Trigger) |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

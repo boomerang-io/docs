@@ -1,5 +1,6 @@
 ---
 title: Actioner Model
+verified: "5.0.0-beta.39"
 ---
 
 # Actioner Model
@@ -7,12 +8,12 @@ title: Actioner Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **approved** | **Boolean** |  | [optional] [default to null] |
-| **approverEmail** | **String** |  | [optional] [default to null] |
-| **approverId** | **String** |  | [optional] [default to null] |
-| **approverName** | **String** |  | [optional] [default to null] |
-| **comments** | **String** |  | [optional] [default to null] |
-| **date** | **Date** |  | [optional] [default to null] |
+| **approved** | **Boolean** |  | [optional]  |
+| **approverEmail** | **String** |  | [optional]  |
+| **approverId** | **String** |  | [optional]  |
+| **approverName** | **String** |  | [optional]  |
+| **comments** | **String** |  | [optional]  |
+| **date** | **Date** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

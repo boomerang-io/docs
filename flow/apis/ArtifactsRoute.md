@@ -1,5 +1,7 @@
 ---
 title: Artifacts
+description: "Operations for Artifacts: List, download and delete the files tasks upload to runs."
+verified: "5.0.0-beta.39"
 ---
 
 # Artifacts
@@ -25,8 +27,8 @@ Requires the `workflowrun/delete` permission, from a global, key, user, session 
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | workspace_example |
-| **artifactId** | **String** | true | Artifact ID | Defaults to null. | artifactId_example |
+| **workspace** | **String** | true | Owning workspace name. |  |  |
+| **artifactId** | **String** | true | Artifact ID |  |  |
 
 
 #### Request body
@@ -44,6 +46,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 No response body
+
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE/artifacts/$ARTIFACT_ID" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace}/artifacts/{artifactId} -->
+<!-- api-examples:end -->
 
 
 ## Delete a run's artifact, by name, and its file
@@ -57,9 +69,9 @@ Requires the `workflowrun/delete` permission, from a global, key, user, session 
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | workspace_example |
-| **workflowRunId** | **String** | true | WorkflowRun ID | Defaults to null. | workflowRunId_example |
-| **name** | **String** | true | Artifact name | Defaults to null. | name_example |
+| **workspace** | **String** | true | Owning workspace name. |  |  |
+| **workflowRunId** | **String** | true | WorkflowRun ID |  |  |
+| **name** | **String** | true | Artifact name |  |  |
 
 
 #### Request body
@@ -78,6 +90,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflowrun/$RUN_ID/artifacts/$ARTIFACT" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace}/workflowrun/{workflowRunId}/artifacts/{name} -->
+<!-- api-examples:end -->
+
 
 ## Download an artifact's file
 
@@ -90,9 +112,9 @@ Requires the `workflowrun/read` permission, from a global, key, user, session to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | workspace_example |
-| **workflowRunId** | **String** | true | WorkflowRun ID | Defaults to null. | workflowRunId_example |
-| **name** | **String** | true | Artifact name | Defaults to null. | name_example |
+| **workspace** | **String** | true | Owning workspace name. |  |  |
+| **workflowRunId** | **String** | true | WorkflowRun ID |  |  |
+| **name** | **String** | true | Artifact name |  |  |
 
 
 #### Request body
@@ -111,6 +133,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **Any**
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflowrun/$RUN_ID/artifacts/$ARTIFACT" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/workflowrun/{workflowRunId}/artifacts/{name} -->
+<!-- api-examples:end -->
+
 
 ## List a WorkflowRun's artifacts, expired ones included
 
@@ -123,8 +155,8 @@ Requires the `workflowrun/read` permission, from a global, key, user, session to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | workspace_example |
-| **workflowRunId** | **String** | true | WorkflowRun ID | Defaults to null. | workflowRunId_example |
+| **workspace** | **String** | true | Owning workspace name. |  |  |
+| **workflowRunId** | **String** | true | WorkflowRun ID |  |  |
 
 
 #### Request body
@@ -143,6 +175,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**Artifact**](./models/Artifact)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflowrun/$RUN_ID/artifacts" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/workflowrun/{workflowRunId}/artifacts -->
+<!-- api-examples:end -->
+
 
 ## List the workspace's artifacts, largest first
 
@@ -155,12 +197,12 @@ Requires the `workflowrun/read` permission, from a global, key, user, session to
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | workspace_example |
-| **statuses** | **List** of **String** | false | Artifact statuses to include. Defaults to available. | Defaults to null. Enum: [uploading, available, expired] | available,expired |
-| **scope** | **String** | false | Only artifacts of this scope: run or workflow. Defaults to both. | Defaults to null. Enum: [run, workflow, log] | workflow |
-| **workflow** | **String** | false | Only artifacts of this workflow, by name. | Defaults to null. | nightly-build |
-| **page** | **Integer** | false | Page Number | Defaults to 0. | 0 |
-| **limit** | **Integer** | false | Result Size | Defaults to 10. | 10 |
+| **workspace** | **String** | true | Owning workspace name. |  |  |
+| **statuses** | **List** of **String** | false | Artifact statuses to include. Defaults to available. |  Enum: [uploading, available, expired] | `available,expired` |
+| **scope** | **String** | false | Only artifacts of this scope: run or workflow. Defaults to both. |  Enum: [run, workflow, log] | `workflow` |
+| **workflow** | **String** | false | Only artifacts of this workflow, by name. |  | `nightly-build` |
+| **page** | **Integer** | false | Page Number | Defaults to `0`. | `0` |
+| **limit** | **Integer** | false | Result Size | Defaults to `10`. | `10` |
 
 
 #### Request body
@@ -178,4 +220,14 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**PageArtifact**](./models/PageArtifact)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/artifacts" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/artifacts -->
+<!-- api-examples:end -->
 

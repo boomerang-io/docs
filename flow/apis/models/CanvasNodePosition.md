@@ -1,5 +1,6 @@
 ---
 title: Canvas Node Position Model
+verified: "5.0.0-beta.39"
 ---
 
 # Canvas Node Position Model
@@ -7,8 +8,8 @@ title: Canvas Node Position Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **x** | **BigDecimal** |  | [optional] [default to null] |
-| **y** | **BigDecimal** |  | [optional] [default to null] |
+| **x** | **BigDecimal** |  | [optional]  |
+| **y** | **BigDecimal** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

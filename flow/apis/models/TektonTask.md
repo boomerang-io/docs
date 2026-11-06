@@ -1,5 +1,6 @@
 ---
 title: Tekton Task Model
+verified: "5.0.0-beta.39"
 ---
 
 # Tekton Task Model
@@ -7,10 +8,10 @@ title: Tekton Task Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **apiVersion** | **String** |  | [optional] [default to null] |
-| **kind** | **String** |  | [optional] [default to null] |
-| **metadata** | [**TektonMetadata**](TektonMetadata) |  | [optional] [default to null] |
-| **spec** | [**TektonSpec**](TektonSpec) |  | [optional] [default to null] |
+| **apiVersion** | **String** |  | [optional]  |
+| **kind** | **String** |  | [optional]  |
+| **metadata** | [**TektonMetadata**](TektonMetadata) |  | [optional]  |
+| **spec** | [**TektonSpec**](TektonSpec) |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

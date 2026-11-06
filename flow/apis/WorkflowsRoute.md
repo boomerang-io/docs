@@ -1,5 +1,7 @@
 ---
 title: Workflows
+description: "Operations for Workflows: Create, list, and manage your Workflows."
+verified: "5.0.0-beta.39"
 ---
 
 # Workflows
@@ -33,9 +35,9 @@ Requires the `workflow/write` permission, from a global, key, user, session toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **name** | **String** | true | Name of the workflow | Defaults to null. | name_example |
-| **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **name** | **String** | true | Name of the workflow |  |  |
+| **replace** | **Boolean** | false | Replace existing version | Defaults to `false`. |  |
 
 
 #### Request body
@@ -57,6 +59,18 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**WorkflowCanvas**](./models/WorkflowCanvas)
 
+#### Example request
+
+```bash
+curl -X PUT "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW/compose" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+<!-- api-examples:start PUT /api/v2/workspace/{workspace}/workflow/{name}/compose -->
+<!-- api-examples:end -->
+
 
 ## Update, replace, or create new, Workflow
 
@@ -69,8 +83,8 @@ Requires the `workflow/write` permission, from a global, key, user, session toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **replace** | **Boolean** | false | Replace existing version | Defaults to `false`. |  |
 
 
 #### Request body
@@ -92,6 +106,18 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Workflow**](./models/Workflow)
 
+#### Example request
+
+```bash
+curl -X PUT "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+<!-- api-examples:start PUT /api/v2/workspace/{workspace}/workflow -->
+<!-- api-examples:end -->
+
 
 ## Convert workflow to compose model for UI Designer and detailed Activity screens.
 
@@ -104,9 +130,9 @@ Requires the `workflow/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow |
-| **version** | **Integer** | false | Workflow Version | Defaults to null. | 56 |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **name** | **String** | true | Workflow name |  | `my-amazing-workflow` |
+| **version** | **Integer** | false | Workflow Version |  |  |
 
 
 #### Request body
@@ -125,6 +151,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**WorkflowCanvas**](./models/WorkflowCanvas)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW/compose" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/workflow/{name}/compose -->
+<!-- api-examples:end -->
+
 
 ## Create a new workflow
 
@@ -137,7 +173,7 @@ Requires the `workflow/write` permission, from a global, key, user, session toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
 
 
 #### Request body
@@ -159,6 +195,29 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Workflow**](./models/Workflow)
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/workspace/{workspace}/workflow -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "name": "my-workflow",
+  "displayName": "My workflow"
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Delete a workflow
 
@@ -171,8 +230,8 @@ Requires the `workflow/delete` permission, from a global, key, user, session tok
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **name** | **String** | true | Workflow name |  | `my-amazing-workflow` |
 
 
 #### Request body
@@ -191,6 +250,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace}/workflow/{name} -->
+<!-- api-examples:end -->
+
 
 ## Duplicates the workflow.
 
@@ -203,8 +272,8 @@ Requires the `workflow/write` permission, from a global, key, user, session toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **name** | **String** | true | Workflow name |  | `my-amazing-workflow` |
 
 
 #### Request body
@@ -223,6 +292,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Workflow**](./models/Workflow)
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW/duplicate" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start POST /api/v2/workspace/{workspace}/workflow/{name}/duplicate -->
+<!-- api-examples:end -->
+
 
 ## Export the Workflow as JSON.
 
@@ -235,8 +314,8 @@ Requires the `workflow/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **name** | **String** | true | Workflow name |  | `my-amazing-workflow` |
 
 
 #### Request body
@@ -255,6 +334,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **File**
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW/export" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/workflow/{name}/export -->
+<!-- api-examples:end -->
+
 
 ## Retrieve the parameters.
 
@@ -267,8 +356,8 @@ Requires the `workflow/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **name** | **String** | true | Workflow name |  | `my-amazing-workflow` |
 
 
 #### Request body
@@ -287,6 +376,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of **String**
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW/available-parameters" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/workflow/{name}/available-parameters -->
+<!-- api-examples:end -->
+
 
 ## Retrieve a workflow's changelog
 
@@ -301,8 +400,8 @@ Requires the `workflow/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **name** | **String** | true | Workflow name |  | `my-amazing-workflow` |
 
 
 #### Request body
@@ -321,6 +420,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**ChangeLogVersion**](./models/ChangeLogVersion)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW/changelog" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/workflow/{name}/changelog -->
+<!-- api-examples:end -->
+
 
 ## Retrieve a Workflow
 
@@ -335,10 +444,10 @@ Requires the `workflow/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **version** | **Integer** | false | Workflow version | Defaults to null. | 56 |
-| **withTasks** | **Boolean** | false | Include Workflow tasks in response | Defaults to true. | true |
+| **name** | **String** | true | Workflow name |  | `my-amazing-workflow` |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **version** | **Integer** | false | Workflow version |  |  |
+| **withTasks** | **Boolean** | false | Include Workflow tasks in response | Defaults to `true`. |  |
 
 
 #### Request body
@@ -357,6 +466,118 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Workflow**](./models/Workflow)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/workflow/{name} -->
+#### Example response
+
+`200 OK`:
+
+```json
+{
+  "name": "hello-flow",
+  "displayName": "Hello Flow",
+  "status": "active",
+  "version": 1,
+  "creationDate": "2026-11-05T21:59:34.347Z",
+  "description": "Says hello from an Execute Shell task.",
+  "labels": {},
+  "annotations": {
+    "boomerang.io/kind": "Workflow",
+    "boomerang.io/generation": "4"
+  },
+  "params": [],
+  "tasks": [
+    {
+      "name": "start",
+      "type": "start",
+      "dependencies": [],
+      "annotations": {},
+      "labels": {},
+      "params": [],
+      "results": [],
+      "unknownFields": {},
+      "upgradesAvailable": false
+    },
+    {
+      "name": "Execute Shell",
+      "type": "script",
+      "dependencies": [
+        {
+          "executionCondition": "always",
+          "taskRef": "start"
+        }
+      ],
+      "annotations": {},
+      "labels": {},
+      "params": [
+        {
+          "name": "script",
+          "value": "echo \"Hello from Boomerang Flow\""
+        }
+      ],
+      "results": [],
+      "taskRef": "execute-shell",
+      "taskVersion": 2,
+      "unknownFields": {},
+      "upgradesAvailable": false
+    },
+    {
+      "name": "end",
+      "type": "end",
+      "dependencies": [
+        {
+          "executionCondition": "always",
+          "taskRef": "Execute Shell"
+        }
+      ],
+      "annotations": {},
+      "labels": {},
+      "params": [],
+      "results": [],
+      "unknownFields": {},
+      "upgradesAvailable": false
+    }
+  ],
+  "changelog": {
+    "author": "6aecf30e755e5fc7e99bea28",
+    "date": "2026-11-05T21:59:34.347Z",
+    "reason": "Initial Workflow"
+  },
+  "triggers": {
+    "event": {
+      "enabled": false,
+      "conditions": []
+    },
+    "github": {
+      "enabled": false,
+      "conditions": []
+    },
+    "manual": {
+      "enabled": true,
+      "conditions": []
+    },
+    "schedule": {
+      "enabled": false,
+      "conditions": []
+    },
+    "webhook": {
+      "enabled": false,
+      "conditions": []
+    }
+  },
+  "type": "workflow",
+  "upgradesAvailable": false
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Change what a workflow is
 
@@ -371,8 +592,8 @@ Requires the `workflow/write` permission, from a global, key, user, session toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **name** | **String** | true | Workflow name |  | `my-amazing-workflow` |
 
 
 #### Request body
@@ -394,6 +615,28 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Workflow**](./models/Workflow)
 
+#### Example request
+
+```bash
+curl -X PATCH "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start PATCH /api/v2/workspace/{workspace}/workflow/{name} -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "type": "workflow"
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Search for Workflows
 
@@ -406,14 +649,14 @@ Requires the `workflow/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **limit** | **Integer** | true | Result Size | Defaults to null. | 10 |
-| **page** | **Integer** | true | Page Number | Defaults to 0. | 0 |
-| **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to ASC. Enum: [ASC, DESC] | ASC |
-| **labels** | **List** of **String** | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. |  |
-| **statuses** | **List** of **String** | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive |
-| **workflows** | **List** of **String** | false | List of workflows to filter for. | Defaults to null. |  |
-| **types** | **List** of **String** | false | Which kinds to list: workflow, template, starter. Defaults to all: the workspace&#39;s own workflows and the templates and starters it has not made its own. | Defaults to null. | template |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **limit** | **Integer** | true | Result Size |  | `10` |
+| **page** | **Integer** | true | Page Number | Defaults to `0`. | `0` |
+| **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to `ASC`. Enum: [ASC, DESC] | `ASC` |
+| **labels** | **List** of **String** | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) |  |  |
+| **statuses** | **List** of **String** | false | List of statuses to filter for. Defaults to all. |  | `active,inactive` |
+| **workflows** | **List** of **String** | false | List of workflows to filter for. |  |  |
+| **types** | **List** of **String** | false | Which kinds to list: workflow, template, starter. Defaults to all: the workspace&#39;s own workflows and the templates and starters it has not made its own. |  | `template` |
 
 
 #### Request body
@@ -432,6 +675,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**WorkflowResponsePage**](./models/WorkflowResponsePage)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/query?limit=10&page=0&sort=ASC" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/workflow/query -->
+<!-- api-examples:end -->
+
 
 ## Submit a Workflow to be run. Will queue the WorkflowRun ready for execution.
 
@@ -444,9 +697,9 @@ Requires the `workflow/action` permission, from a global, key, user, session tok
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **name** | **String** | true | Workflow name | Defaults to null. | my-amazing-workflow |
-| **start** | **Boolean** | false | Start the WorkflowRun after submission (default). Pass start&#x3D;false to park the run at ready for a later PUT /workflowrun/{id}/start. | Defaults to true. | true |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **name** | **String** | true | Workflow name |  | `my-amazing-workflow` |
+| **start** | **Boolean** | false | Start the WorkflowRun after submission (default). Pass start&#x3D;false to park the run at ready for a later PUT /workflowrun/{id}/start. | Defaults to `true`. |  |
 
 
 #### Request body
@@ -467,4 +720,29 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**WorkflowRun**](./models/WorkflowRun)
+
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/workspace/$WORKSPACE/workflow/$WORKFLOW/submit" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/workspace/{workspace}/workflow/{name}/submit -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "trigger": "manual",
+  "labels": {
+    "ticket": "OPS-12"
+  }
+}
+```
+
+<!-- api-examples:end -->
 

@@ -1,5 +1,6 @@
 ---
 title: Workflow Workspace Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Workspace Model
@@ -7,10 +8,10 @@ title: Workflow Workspace Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **accessMode** | **String** |  | [optional] [default to null] |
-| **className** | **String** |  | [optional] [default to null] |
-| **mountPath** | **String** |  | [optional] [default to null] |
-| **size** | **String** |  | [optional] [default to null] |
+| **accessMode** | **String** |  | [optional]  |
+| **className** | **String** |  | [optional]  |
+| **mountPath** | **String** |  | [optional]  |
+| **size** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

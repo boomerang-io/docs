@@ -1,5 +1,6 @@
 ---
 title: Task Env Var Model
+verified: "5.0.0-beta.39"
 ---
 
 # Task Env Var Model
@@ -7,8 +8,8 @@ title: Task Env Var Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** |  | [optional] [default to null] |
-| **value** | **String** |  | [optional] [default to null] |
+| **name** | **String** |  | [optional]  |
+| **value** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

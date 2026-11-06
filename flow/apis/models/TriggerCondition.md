@@ -1,5 +1,6 @@
 ---
 title: Trigger Condition Model
+verified: "5.0.0-beta.39"
 ---
 
 # Trigger Condition Model
@@ -7,10 +8,10 @@ title: Trigger Condition Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **field** | **String** |  | [optional] [default to null] |
-| **operation** | **String** |  | [optional] Enum: `equals`, `matches`, `in` [default to null] |
-| **value** | **String** |  | [optional] [default to null] |
-| **values** | **List** of **String** |  | [optional] [default to null] |
+| **field** | **String** |  | [optional]  |
+| **operation** | **String** |  | [optional] Enum: `equals`, `matches`, `in`  |
+| **value** | **String** |  | [optional]  |
+| **values** | **List** of **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

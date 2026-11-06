@@ -1,5 +1,6 @@
 ---
 title: Change Log Version Model
+verified: "5.0.0-beta.39"
 ---
 
 # Change Log Version Model
@@ -7,10 +8,10 @@ title: Change Log Version Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **author** | **String** |  | [optional] [default to null] |
-| **date** | **Date** |  | [optional] [default to null] |
-| **reason** | **String** |  | [optional] [default to null] |
-| **version** | **Integer** |  | [optional] [default to null] |
+| **author** | **String** |  | [optional]  |
+| **date** | **Date** |  | [optional]  |
+| **reason** | **String** |  | [optional]  |
+| **version** | **Integer** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

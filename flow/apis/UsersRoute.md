@@ -1,5 +1,7 @@
 ---
 title: Users
+description: "Operations for Users: List, Create, update and delete Users."
+verified: "5.0.0-beta.39"
 ---
 
 # Users
@@ -25,7 +27,7 @@ Requires the `user/write` permission, from a session, user, key, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **userId** | **String** | true |  | Defaults to null. | userId_example |
+| **userId** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -47,6 +49,18 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X PATCH "$FLOW_URL/api/v2/user/$USER_ID" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+<!-- api-examples:start PATCH /api/v2/user/{userId} -->
+<!-- api-examples:end -->
+
 
 ## Delete a Boomerang Flow user
 
@@ -59,7 +73,7 @@ Requires the `user/delete` permission, from a session, user, key, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **userId** | **String** | true |  | Defaults to null. | userId_example |
+| **userId** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -78,6 +92,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/user/$USER_ID" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/user/{userId} -->
+<!-- api-examples:end -->
+
 
 ## Get a Users details
 
@@ -90,7 +114,7 @@ Requires the `user/read` permission, from a session, user, key, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **userId** | **String** | true |  | Defaults to null. | userId_example |
+| **userId** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -109,6 +133,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**User**](./models/User)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/user/$USER_ID" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/user/{userId} -->
+<!-- api-examples:end -->
+
 
 ## Get a Users Workspace memberships
 
@@ -121,7 +155,7 @@ Requires the `user/read` permission, from a session, user, key, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **userId** | **String** | true |  | Defaults to null. | userId_example |
+| **userId** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -140,6 +174,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**WorkspaceSummary**](./models/WorkspaceSummary)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/user/$USER_ID/workspaces" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/user/{userId}/workspaces -->
+<!-- api-examples:end -->
+
 
 ## Search for Users
 
@@ -152,13 +196,13 @@ Requires the `user/read` permission, from a session, user, key, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **limit** | **Integer** | true | Result Size | Defaults to null. | 10 |
-| **page** | **Integer** | true | Page Number | Defaults to 0. | 0 |
-| **labels** | **List** of **String** | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. |  |
-| **status** | **List** of **String** | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,inactive |
-| **ids** | **List** of **String** | false | List of ids to filter for. | Defaults to null. |  |
-| **order** | **String** | false | Ascending or Descending (default) order | Defaults to DESC. Enum: [ASC, DESC] | 0 |
-| **sort** | **String** | false | The element to sort on | Defaults to name. | 0 |
+| **limit** | **Integer** | true | Result Size |  | `10` |
+| **page** | **Integer** | true | Page Number | Defaults to `0`. | `0` |
+| **labels** | **List** of **String** | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) |  |  |
+| **status** | **List** of **String** | false | List of statuses to filter for. Defaults to all. |  | `active,inactive` |
+| **ids** | **List** of **String** | false | List of ids to filter for. |  |  |
+| **order** | **String** | false | Ascending or Descending (default) order | Defaults to `DESC`. Enum: [ASC, DESC] | `0` |
+| **sort** | **String** | false | The element to sort on | Defaults to `name`. | `0` |
 
 
 #### Request body
@@ -176,4 +220,14 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**PageUser**](./models/PageUser)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/user/query?limit=10&page=0" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/user/query -->
+<!-- api-examples:end -->
 

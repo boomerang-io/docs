@@ -1,6 +1,7 @@
 ---
 title: {{#lambda.uncamelize}}{{classname}}{{/lambda.uncamelize}} Model
----
+{{#flowTag}}verified: "{{flowTag}}"
+{{/flowTag}}---
 
 {{#models}}
 {{#model}}
@@ -11,10 +12,10 @@ title: {{#lambda.uncamelize}}{{classname}}{{/lambda.uncamelize}} Model
 |------------ | ------------- | ------------- | -------------|
 {{#parent}}
 {{#parentVars}}
-| **{{name}}** | {{#isArray}}**List** of {{#items}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/items}}{{/isArray}}{{#isMap}}**Map** of {{#items}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/items}}{{/isMap}}{{^isArray}}{{^isMap}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/isMap}}{{/isArray}} | {{description}} | {{^required}}[optional] {{/required}}{{#readOnly}}[readonly] {{/readOnly}}{{#isEnum}}Enum: {{#allowableValues}}{{#values}}`{{{.}}}`{{^-last}}, {{/-last}}{{/values}}{{/allowableValues}} {{/isEnum}}{{#defaultValue}}[default to {{{.}}}]{{/defaultValue}} |
+| **{{name}}** | {{#isArray}}**List** of {{#items}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/items}}{{/isArray}}{{#isMap}}**Map** of {{#items}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/items}}{{/isMap}}{{^isArray}}{{^isMap}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/isMap}}{{/isArray}} | {{description}} | {{^required}}[optional] {{/required}}{{#readOnly}}[readonly] {{/readOnly}}{{#isEnum}}Enum: {{#allowableValues}}{{#values}}`{{{.}}}`{{^-last}}, {{/-last}}{{/values}}{{/allowableValues}} {{/isEnum}}{{#vendorExtensions.x-default}}[default to {{{.}}}]{{/vendorExtensions.x-default}} |
 {{/parentVars}}
 {{/parent}}
-{{#vars}}| **{{name}}** | {{#isArray}}**List** of {{#items}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/items}}{{/isArray}}{{#isMap}}**Map** of {{#items}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/items}}{{/isMap}}{{^isArray}}{{^isMap}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/isMap}}{{/isArray}} | {{description}} | {{^required}}[optional] {{/required}}{{#readOnly}}[readonly] {{/readOnly}}{{#isEnum}}Enum: {{#allowableValues}}{{#values}}`{{{.}}}`{{^-last}}, {{/-last}}{{/values}}{{/allowableValues}} {{/isEnum}}{{#defaultValue}}[default to {{{.}}}]{{/defaultValue}} |
+{{#vars}}| **{{name}}** | {{#isArray}}**List** of {{#items}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/items}}{{/isArray}}{{#isMap}}**Map** of {{#items}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/items}}{{/isMap}}{{^isArray}}{{^isMap}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**]({{complexType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/isMap}}{{/isArray}} | {{description}} | {{^required}}[optional] {{/required}}{{#readOnly}}[readonly] {{/readOnly}}{{#isEnum}}Enum: {{#allowableValues}}{{#values}}`{{{.}}}`{{^-last}}, {{/-last}}{{/values}}{{/allowableValues}} {{/isEnum}}{{#vendorExtensions.x-default}}[default to {{{.}}}]{{/vendorExtensions.x-default}} |
 {{/vars}}
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)

@@ -1,5 +1,6 @@
 ---
 title: Task Run Row Model
+verified: "5.0.0-beta.39"
 ---
 
 # Task Run Row Model
@@ -7,24 +8,24 @@ title: Task Run Row Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **attempt** | **Integer** |  | [optional] [default to null] |
-| **creationDate** | **Date** |  | [optional] [default to null] |
-| **duration** | **Long** |  | [optional] [default to null] |
-| **foreach** | **Boolean** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **index** | **Integer** |  | [optional] [default to null] |
-| **labels** | **Map** of **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **phase** | **String** |  | [optional] Enum: `queued`, `pending`, `running`, `completed` [default to null] |
-| **startTime** | **Date** |  | [optional] [default to null] |
-| **status** | **String** |  | [optional] Enum: `notstarted`, `ready`, `running`, `waiting`, `succeeded`, `failed`, `invalid`, `skipped`, `cancelled`, `timedout` [default to null] |
-| **statusReason** | **String** |  | [optional] [default to null] |
-| **taskRef** | **String** |  | [optional] [default to null] |
-| **type** | **String** |  | [optional] Enum: `start`, `end`, `template`, `custom`, `generic`, `decision`, `approval`, `setwfproperty`, `manual`, `eventwait`, `acquirelock`, `releaselock`, `runworkflow`, `runscheduledworkflow`, `script`, `ai`, `setwfstatus`, `sleep`, `uploadartifact`, `downloadartifact` [default to null] |
-| **workflowName** | **String** |  | [optional] [default to null] |
-| **workflowRef** | **String** |  | [optional] [default to null] |
-| **workflowRunRef** | **String** |  | [optional] [default to null] |
-| **workspace** | **String** |  | [optional] [default to null] |
+| **attempt** | **Integer** |  | [optional]  |
+| **creationDate** | **Date** |  | [optional]  |
+| **duration** | **Long** |  | [optional]  |
+| **foreach** | **Boolean** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **index** | **Integer** |  | [optional]  |
+| **labels** | **Map** of **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **phase** | **String** |  | [optional] Enum: `queued`, `pending`, `running`, `completed`  |
+| **startTime** | **Date** |  | [optional]  |
+| **status** | **String** |  | [optional] Enum: `notstarted`, `ready`, `running`, `waiting`, `succeeded`, `failed`, `invalid`, `skipped`, `cancelled`, `timedout`  |
+| **statusReason** | **String** |  | [optional]  |
+| **taskRef** | **String** |  | [optional]  |
+| **type** | **String** |  | [optional] Enum: `start`, `end`, `template`, `custom`, `generic`, `decision`, `approval`, `setwfproperty`, `manual`, `eventwait`, `acquirelock`, `releaselock`, `runworkflow`, `runscheduledworkflow`, `script`, `ai`, `setwfstatus`, `sleep`, `uploadartifact`, `downloadartifact`  |
+| **workflowName** | **String** |  | [optional]  |
+| **workflowRef** | **String** |  | [optional]  |
+| **workflowRunRef** | **String** |  | [optional]  |
+| **workspace** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

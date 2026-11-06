@@ -1,5 +1,6 @@
 ---
 title: Task Model
+verified: "5.0.0-beta.39"
 ---
 
 # Task Model
@@ -7,21 +8,21 @@ title: Task Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **annotations** | **Map** of **Any** |  | [optional] [default to null] |
-| **category** | **String** |  | [optional] [default to null] |
-| **changelog** | [**ChangeLog**](ChangeLog) |  | [optional] [default to null] |
-| **creationDate** | **Date** |  | [optional] [default to null] |
-| **description** | **String** |  | [optional] [default to null] |
-| **displayName** | **String** |  | [optional] [default to null] |
-| **icon** | **String** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **labels** | **Map** of **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **spec** | [**TaskSpec**](TaskSpec) |  | [optional] [default to null] |
-| **status** | **String** |  | [optional] Enum: `active`, `inactive` [default to null] |
-| **type** | **String** |  | [optional] Enum: `start`, `end`, `template`, `custom`, `generic`, `decision`, `approval`, `setwfproperty`, `manual`, `eventwait`, `acquirelock`, `releaselock`, `runworkflow`, `runscheduledworkflow`, `script`, `ai`, `setwfstatus`, `sleep`, `uploadartifact`, `downloadartifact` [default to null] |
-| **verified** | **Boolean** |  | [optional] [default to null] |
-| **version** | **Integer** |  | [optional] [default to null] |
+| **annotations** | **Map** of **Any** |  | [optional]  |
+| **category** | **String** |  | [optional]  |
+| **changelog** | [**ChangeLog**](ChangeLog) |  | [optional]  |
+| **creationDate** | **Date** |  | [optional]  |
+| **description** | **String** |  | [optional]  |
+| **displayName** | **String** |  | [optional]  |
+| **icon** | **String** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **labels** | **Map** of **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **spec** | [**TaskSpec**](TaskSpec) |  | [optional]  |
+| **status** | **String** |  | [optional] Enum: `active`, `inactive`  |
+| **type** | **String** |  | [optional] Enum: `start`, `end`, `template`, `custom`, `generic`, `decision`, `approval`, `setwfproperty`, `manual`, `eventwait`, `acquirelock`, `releaselock`, `runworkflow`, `runscheduledworkflow`, `script`, `ai`, `setwfstatus`, `sleep`, `uploadartifact`, `downloadartifact`  |
+| **verified** | **Boolean** |  | [optional]  |
+| **version** | **Integer** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

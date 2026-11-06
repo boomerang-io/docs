@@ -1,5 +1,6 @@
 ---
 title: GH Link Request Model
+verified: "5.0.0-beta.39"
 ---
 
 # GH Link Request Model
@@ -7,8 +8,8 @@ title: GH Link Request Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **ref** | **String** |  | [optional] [default to null] |
-| **workspace** | **String** |  | [optional] [default to null] |
+| **ref** | **String** |  | [optional]  |
+| **workspace** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

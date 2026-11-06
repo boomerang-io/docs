@@ -1,5 +1,6 @@
 ---
 title: Artifact Model
+verified: "5.0.0-beta.39"
 ---
 
 # Artifact Model
@@ -7,19 +8,19 @@ title: Artifact Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **contentType** | **String** |  | [optional] [default to null] |
-| **creationDate** | **Date** |  | [optional] [default to null] |
-| **expirationDate** | **Date** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **retentionDays** | **Integer** |  | [optional] [default to null] |
-| **scope** | **String** |  | [optional] Enum: `run`, `workflow`, `log` [default to null] |
-| **sha256** | **String** |  | [optional] [default to null] |
-| **size** | **Long** |  | [optional] [default to null] |
-| **status** | **String** |  | [optional] Enum: `uploading`, `available`, `expired` [default to null] |
-| **taskRunRef** | **String** |  | [optional] [default to null] |
-| **workflowRef** | **String** |  | [optional] [default to null] |
-| **workflowRunRef** | **String** |  | [optional] [default to null] |
+| **contentType** | **String** |  | [optional]  |
+| **creationDate** | **Date** |  | [optional]  |
+| **expirationDate** | **Date** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **retentionDays** | **Integer** |  | [optional]  |
+| **scope** | **String** |  | [optional] Enum: `run`, `workflow`, `log`  |
+| **sha256** | **String** |  | [optional]  |
+| **size** | **Long** |  | [optional]  |
+| **status** | **String** |  | [optional] Enum: `uploading`, `available`, `expired`  |
+| **taskRunRef** | **String** |  | [optional]  |
+| **workflowRef** | **String** |  | [optional]  |
+| **workflowRunRef** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

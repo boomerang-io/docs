@@ -1,5 +1,6 @@
 ---
 title: Canvas Node Data Model
+verified: "5.0.0-beta.39"
 ---
 
 # Canvas Node Data Model
@@ -7,16 +8,16 @@ title: Canvas Node Data Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **foreach** | [**WorkflowTaskForeach**](WorkflowTaskForeach) |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **params** | **List** of [**RunParam**](RunParam) |  | [optional] [default to null] |
-| **results** | **List** of [**ResultSpec**](ResultSpec) |  | [optional] [default to null] |
-| **retry** | [**WorkflowTaskRetry**](WorkflowTaskRetry) |  | [optional] [default to null] |
-| **taskRef** | **String** |  | [optional] [default to null] |
-| **taskVersion** | **Integer** |  | [optional] [default to null] |
-| **timeout** | **Long** |  | [optional] [default to null] |
-| **upgradesAvailable** | **Boolean** |  | [optional] [default to null] |
-| **workspace** | **Boolean** |  | [optional] [default to null] |
+| **foreach** | [**WorkflowTaskForeach**](WorkflowTaskForeach) |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **params** | **List** of [**RunParam**](RunParam) |  | [optional]  |
+| **results** | **List** of [**ResultSpec**](ResultSpec) |  | [optional]  |
+| **retry** | [**WorkflowTaskRetry**](WorkflowTaskRetry) |  | [optional]  |
+| **taskRef** | **String** |  | [optional]  |
+| **taskVersion** | **Integer** |  | [optional]  |
+| **timeout** | **Long** |  | [optional]  |
+| **upgradesAvailable** | **Boolean** |  | [optional]  |
+| **workspace** | **Boolean** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

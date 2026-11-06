@@ -1,5 +1,6 @@
 ---
 title: Workflow Task Retry Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Task Retry Model
@@ -7,8 +8,8 @@ title: Workflow Task Retry Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **backoff** | [**RetryBackoff**](RetryBackoff) |  | [optional] [default to null] |
-| **max** | **Integer** |  | [optional] [default to null] |
+| **backoff** | [**RetryBackoff**](RetryBackoff) |  | [optional]  |
+| **max** | **Integer** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

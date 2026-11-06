@@ -1,5 +1,7 @@
 ---
 title: Schedules
+description: "Operations for Schedules: Create, list and manage your Schedules."
+verified: "5.0.0-beta.39"
 ---
 
 # Schedules
@@ -27,7 +29,7 @@ Requires the `schedule/write` permission, from a global, key, user, session toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
 
 
 #### Request body
@@ -49,6 +51,32 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**WorkflowSchedule**](./models/WorkflowSchedule)
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/workspace/$WORKSPACE/schedule" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/workspace/{workspace}/schedule -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "name": "Weekday mornings",
+  "workflowRef": "my-workflow",
+  "type": "cron",
+  "cronSchedule": "0 9 * * 1-5",
+  "timezone": "Australia/Melbourne"
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Delete a Schedule.
 
@@ -61,8 +89,8 @@ Requires the `schedule/delete` permission, from a global, key, user, session tok
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **scheduleId** | **String** | true |  | Defaults to null. | scheduleId_example |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **scheduleId** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -81,6 +109,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/workspace/$WORKSPACE/schedule/$SCHEDULE_ID" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/workspace/{workspace}/schedule/{scheduleId} -->
+<!-- api-examples:end -->
+
 
 ## Retrieve a Schedule.
 
@@ -93,8 +131,8 @@ Requires the `schedule/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **scheduleId** | **String** | true |  | Defaults to null. | scheduleId_example |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **scheduleId** | **String** | true |  |  |  |
 
 
 #### Request body
@@ -113,6 +151,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**WorkflowSchedule**](./models/WorkflowSchedule)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/schedule/$SCHEDULE_ID" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/schedule/{scheduleId} -->
+<!-- api-examples:end -->
+
 
 ## Retrieve Calendars for Schedules by Dates.
 
@@ -125,10 +173,10 @@ Requires the `schedule/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **schedules** | **List** of **String** | true |  | Defaults to null. |  |
-| **fromDate** | **Long** | true |  | Defaults to null. | 789 |
-| **toDate** | **Long** | true |  | Defaults to null. | 789 |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **schedules** | **List** of **String** | true |  |  |  |
+| **fromDate** | **Long** | true |  |  |  |
+| **toDate** | **Long** | true |  |  |  |
 
 
 #### Request body
@@ -147,6 +195,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**WorkflowScheduleCalendar**](./models/WorkflowScheduleCalendar)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/schedule/calendars?schedules=$SCHEDULE_ID&fromDate=1767225600000&toDate=1769904000000" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/schedule/calendars -->
+<!-- api-examples:end -->
+
 
 ## Search for Schedules
 
@@ -159,12 +217,12 @@ Requires the `schedule/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **limit** | **Integer** | true | Result Size | Defaults to 10. | 10 |
-| **page** | **Integer** | true | Page Number | Defaults to 0. | 0 |
-| **statuses** | **List** of **String** | false | List of statuses to filter for. Defaults to all. | Defaults to null. | active,archived |
-| **types** | **List** of **String** | false | List of types to filter for. Defaults to all. | Defaults to null. | cron,advancedCron |
-| **workflows** | **List** of **String** | false | List of workflows to filter for. | Defaults to null. |  |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **limit** | **Integer** | true | Result Size | Defaults to `10`. | `10` |
+| **page** | **Integer** | true | Page Number | Defaults to `0`. | `0` |
+| **statuses** | **List** of **String** | false | List of statuses to filter for. Defaults to all. |  | `active,archived` |
+| **types** | **List** of **String** | false | List of types to filter for. Defaults to all. |  | `cron,advancedCron` |
+| **workflows** | **List** of **String** | false | List of workflows to filter for. |  |  |
 
 
 #### Request body
@@ -183,6 +241,68 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**PageWorkflowSchedule**](./models/PageWorkflowSchedule)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/schedule/query?limit=10&page=0" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/schedule/query -->
+#### Example response
+
+`200 OK`:
+
+```json
+{
+  "content": [
+    {
+      "creationDate": "2026-11-06T00:41:39.712Z",
+      "cronSchedule": "0 3 * * 0",
+      "description": "Clears old artifacts early on Sunday.",
+      "id": "6aecfc6b755e5fc7e99bec3b",
+      "labels": {},
+      "name": "Weekly clean-up",
+      "nextFireAt": "2026-11-07T16:00:00.000Z",
+      "nextScheduleDate": "2026-11-07T16:00:00.000Z",
+      "params": [],
+      "retryCount": 0,
+      "status": "active",
+      "timezone": "Australia/Melbourne",
+      "type": "cron",
+      "workflowRef": "clean-up-artifacts"
+    }
+  ],
+  "empty": false,
+  "first": true,
+  "last": true,
+  "number": 0,
+  "numberOfElements": 3,
+  "pageable": {
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 10,
+    "paged": true,
+    "sort": {
+      "empty": false,
+      "sorted": true,
+      "unsorted": false
+    },
+    "unpaged": false
+  },
+  "size": 10,
+  "sort": {
+    "empty": false,
+    "sorted": true,
+    "unsorted": false
+  },
+  "totalElements": 3,
+  "totalPages": 1
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Apply a Schedule.
 
@@ -195,7 +315,7 @@ Requires the `schedule/write` permission, from a global, key, user, session toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
 
 
 #### Request body
@@ -217,6 +337,33 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**WorkflowSchedule**](./models/WorkflowSchedule)
 
+#### Example request
+
+```bash
+curl -X PUT "$FLOW_URL/api/v2/workspace/$WORKSPACE/schedule" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start PUT /api/v2/workspace/{workspace}/schedule -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "id": "<schedule id>",
+  "name": "Weekday mornings",
+  "workflowRef": "my-workflow",
+  "type": "cron",
+  "cronSchedule": "0 9 * * 1-5",
+  "timezone": "Australia/Melbourne"
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Validate a Schedules CRON.
 
@@ -229,8 +376,8 @@ Requires the `schedule/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **cron** | **String** | true | A CRON expression to validate | Defaults to null. | cron_example |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **cron** | **String** | true | A CRON expression to validate |  |  |
 
 
 #### Request body
@@ -248,4 +395,14 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**CronValidationResponse**](./models/CronValidationResponse)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/schedule/validate-cron?cron=0%209%20*%20*%201" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/schedule/validate-cron -->
+<!-- api-examples:end -->
 

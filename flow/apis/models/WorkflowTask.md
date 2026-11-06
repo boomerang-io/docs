@@ -1,5 +1,6 @@
 ---
 title: Workflow Task Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Task Model
@@ -7,21 +8,21 @@ title: Workflow Task Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **annotations** | **Map** of **Any** |  | [optional] [default to null] |
-| **dependencies** | **List** of [**WorkflowTaskDependency**](WorkflowTaskDependency) |  | [optional] [default to null] |
-| **foreach** | [**WorkflowTaskForeach**](WorkflowTaskForeach) |  | [optional] [default to null] |
-| **labels** | **Map** of **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **params** | **List** of [**RunParam**](RunParam) |  | [optional] [default to null] |
-| **results** | **List** of [**ResultSpec**](ResultSpec) |  | [optional] [default to null] |
-| **retry** | [**WorkflowTaskRetry**](WorkflowTaskRetry) |  | [optional] [default to null] |
-| **taskRef** | **String** |  | [optional] [default to null] |
-| **taskVersion** | **Integer** |  | [optional] [default to null] |
-| **timeout** | **Long** |  | [optional] [default to null] |
-| **type** | **String** |  | [optional] Enum: `start`, `end`, `template`, `custom`, `generic`, `decision`, `approval`, `setwfproperty`, `manual`, `eventwait`, `acquirelock`, `releaselock`, `runworkflow`, `runscheduledworkflow`, `script`, `ai`, `setwfstatus`, `sleep`, `uploadartifact`, `downloadartifact` [default to null] |
-| **unknownFields** | **Map** of **Any** |  | [optional] [default to null] |
-| **upgradesAvailable** | **Boolean** |  | [optional] [default to null] |
-| **workspace** | **Boolean** |  | [optional] [default to null] |
+| **annotations** | **Map** of **Any** |  | [optional]  |
+| **dependencies** | **List** of [**WorkflowTaskDependency**](WorkflowTaskDependency) |  | [optional]  |
+| **foreach** | [**WorkflowTaskForeach**](WorkflowTaskForeach) |  | [optional]  |
+| **labels** | **Map** of **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **params** | **List** of [**RunParam**](RunParam) |  | [optional]  |
+| **results** | **List** of [**ResultSpec**](ResultSpec) |  | [optional]  |
+| **retry** | [**WorkflowTaskRetry**](WorkflowTaskRetry) |  | [optional]  |
+| **taskRef** | **String** |  | [optional]  |
+| **taskVersion** | **Integer** |  | [optional]  |
+| **timeout** | **Long** |  | [optional]  |
+| **type** | **String** |  | [optional] Enum: `start`, `end`, `template`, `custom`, `generic`, `decision`, `approval`, `setwfproperty`, `manual`, `eventwait`, `acquirelock`, `releaselock`, `runworkflow`, `runscheduledworkflow`, `script`, `ai`, `setwfstatus`, `sleep`, `uploadartifact`, `downloadartifact`  |
+| **unknownFields** | **Map** of **Any** |  | [optional]  |
+| **upgradesAvailable** | **Boolean** |  | [optional]  |
+| **workspace** | **Boolean** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

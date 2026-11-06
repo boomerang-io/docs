@@ -1,5 +1,6 @@
 ---
 title: Task Spec Model
+verified: "5.0.0-beta.39"
 ---
 
 # Task Spec Model
@@ -7,14 +8,14 @@ title: Task Spec Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **arguments** | **List** of **String** |  | [optional] [default to null] |
-| **command** | **List** of **String** |  | [optional] [default to null] |
-| **envs** | **List** of [**TaskEnvVar**](TaskEnvVar) |  | [optional] [default to null] |
-| **image** | **String** |  | [optional] [default to null] |
-| **params** | **List** of [**AbstractParam**](AbstractParam) |  | [optional] [default to null] |
-| **results** | **List** of [**ResultSpec**](ResultSpec) |  | [optional] [default to null] |
-| **script** | **String** |  | [optional] [default to null] |
-| **workingDir** | **String** |  | [optional] [default to null] |
+| **arguments** | **List** of **String** |  | [optional]  |
+| **command** | **List** of **String** |  | [optional]  |
+| **envs** | **List** of [**TaskEnvVar**](TaskEnvVar) |  | [optional]  |
+| **image** | **String** |  | [optional]  |
+| **params** | **List** of [**AbstractParam**](AbstractParam) |  | [optional]  |
+| **results** | **List** of [**ResultSpec**](ResultSpec) |  | [optional]  |
+| **script** | **String** |  | [optional]  |
+| **workingDir** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

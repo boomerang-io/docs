@@ -1,5 +1,7 @@
 ---
 title: Tasks
+description: "Operations for Tasks: Create and Manage the global Task definitions."
+verified: "5.0.0-beta.39"
 ---
 
 # Tasks
@@ -29,8 +31,8 @@ Requires the `task/write` permission, from a global, user, session token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **name** | **String** | true | Name of Task | Defaults to null. | name_example |
-| **replace** | **Boolean** | false | Replace existing version | Defaults to false. | true |
+| **name** | **String** | true | Name of Task |  |  |
+| **replace** | **Boolean** | false | Replace existing version | Defaults to `false`. |  |
 
 
 #### Request body
@@ -51,6 +53,39 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**Task**](./models/Task)
+
+#### Example request
+
+```bash
+curl -X PUT "$FLOW_URL/api/v2/task/$TASK" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start PUT /api/v2/task/{name} -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "name": "hello-world",
+  "displayName": "Hello world",
+  "type": "template",
+  "spec": {
+    "image": "alpine:3.20",
+    "command": [
+      "echo"
+    ],
+    "arguments": [
+      "Hello from Flow"
+    ]
+  }
+}
+```
+
+<!-- api-examples:end -->
 
 
 ## Create a new Task using Tekton Task YAML
@@ -87,6 +122,39 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Task**](./models/Task)
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/task" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/task -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "name": "hello-world",
+  "displayName": "Hello world",
+  "type": "template",
+  "spec": {
+    "image": "alpine:3.20",
+    "command": [
+      "echo"
+    ],
+    "arguments": [
+      "Hello from Flow"
+    ]
+  }
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Delete a Task
 
@@ -99,7 +167,7 @@ Requires the `task/delete` permission, from a global, user, session token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **name** | **String** | true | Name of Task | Defaults to null. | name_example |
+| **name** | **String** | true | Name of Task |  |  |
 
 
 #### Request body
@@ -118,6 +186,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X DELETE "$FLOW_URL/api/v2/task/$TASK" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start DELETE /api/v2/task/{name} -->
+<!-- api-examples:end -->
+
 
 ## Retrieve a global task as Tekton Task YAML. If no version specified, the latest version is returned.
 
@@ -132,8 +210,8 @@ Requires the `task/read` permission, from a global, user, session token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **name** | **String** | true | Name of Task | Defaults to null. | name_example |
-| **version** | **Integer** | false | Task Version | Defaults to null. | 56 |
+| **name** | **String** | true | Name of Task |  |  |
+| **version** | **Integer** | false | Task Version |  |  |
 
 
 #### Request body
@@ -152,6 +230,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Task**](./models/Task)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/task/$TASK" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/task/{name} -->
+<!-- api-examples:end -->
+
 
 ## Retrieve a global task's changelog
 
@@ -166,7 +254,7 @@ Requires the `task/read` permission, from a global, user, session token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **name** | **String** | true | Name of Task | Defaults to null. | name_example |
+| **name** | **String** | true | Name of Task |  |  |
 
 
 #### Request body
@@ -185,6 +273,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 **List** of [**ChangeLogVersion**](./models/ChangeLogVersion)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/task/$TASK/changelog" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/task/{name}/changelog -->
+<!-- api-examples:end -->
+
 
 ## Search for Task. If workspaces are provided it will query the workspaces. If no workspaces are provided it will query Global Task Templates
 
@@ -197,12 +295,12 @@ Requires the `task/read` permission, from a global, user, session token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **limit** | **Integer** | true | Result Size | Defaults to null. | 10 |
-| **page** | **Integer** | true | Page Number | Defaults to 0. | 0 |
-| **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to ASC. Enum: [ASC, DESC] | ASC |
-| **labels** | **List** of **String** | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) | Defaults to null. |  |
-| **statuses** | **List** of **String** | false | List of statuses to filter for. | Defaults to [&quot;active&quot;]. | active,inactive |
-| **names** | **List** of **String** | false | List of Task Names  to filter for. Defaults to all. | Defaults to null. | switch,event-wait |
+| **limit** | **Integer** | true | Result Size |  | `10` |
+| **page** | **Integer** | true | Page Number | Defaults to `0`. | `0` |
+| **sort** | **String** | true | Ascending (ASC) or Descending (DESC) sort on creationDate | Defaults to `ASC`. Enum: [ASC, DESC] | `ASC` |
+| **labels** | **List** of **String** | false | List of url encoded labels. For example Organization&#x3D;Boomerang,customKey&#x3D;test would be encoded as Organization%3DBoomerang,customKey%3Dtest) |  |  |
+| **statuses** | **List** of **String** | false | List of statuses to filter for. | Defaults to `["active"]`. | `active,inactive` |
+| **names** | **List** of **String** | false | List of Task Names  to filter for. Defaults to all. |  | `switch,event-wait` |
 
 
 #### Request body
@@ -220,6 +318,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**TaskResponsePage**](./models/TaskResponsePage)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/task/query?limit=10&page=0&sort=ASC" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/task/query -->
+<!-- api-examples:end -->
 
 
 ## Validate a global task's Tekton Task YAML
@@ -255,4 +363,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 No response body
+
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/task/validate" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/x-yaml" \
+  --data-binary @task.yaml
+```
+
+<!-- api-examples:start POST /api/v2/task/validate -->
+<!-- api-examples:end -->
 

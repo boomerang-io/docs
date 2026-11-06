@@ -1,5 +1,6 @@
 ---
 title: Task Row Model
+verified: "5.0.0-beta.39"
 ---
 
 # Task Row Model
@@ -7,14 +8,14 @@ title: Task Row Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **cost** | **Double** |  | [optional] [default to null] |
-| **failed** | **Long** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **p50Duration** | **Long** |  | [optional] [default to null] |
-| **p95Duration** | **Long** |  | [optional] [default to null] |
-| **runs** | **Long** |  | [optional] [default to null] |
-| **taskRef** | **String** |  | [optional] [default to null] |
-| **totalTokens** | **Long** |  | [optional] [default to null] |
+| **cost** | **Double** |  | [optional]  |
+| **failed** | **Long** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **p50Duration** | **Long** |  | [optional]  |
+| **p95Duration** | **Long** |  | [optional]  |
+| **runs** | **Long** |  | [optional]  |
+| **taskRef** | **String** |  | [optional]  |
+| **totalTokens** | **Long** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

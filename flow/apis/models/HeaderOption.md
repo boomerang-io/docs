@@ -1,5 +1,6 @@
 ---
 title: Header Option Model
+verified: "5.0.0-beta.39"
 ---
 
 # Header Option Model
@@ -7,10 +8,10 @@ title: Header Option Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **imageId** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **templateId** | **String** |  | [optional] [default to null] |
-| **url** | **String** |  | [optional] [default to null] |
+| **imageId** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **templateId** | **String** |  | [optional]  |
+| **url** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

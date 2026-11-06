@@ -1,5 +1,6 @@
 ---
 title: Role Model
+verified: "5.0.0-beta.39"
 ---
 
 # Role Model
@@ -7,11 +8,11 @@ title: Role Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **description** | **String** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **permissions** | **List** of **String** |  | [optional] [default to null] |
-| **type** | **String** |  | [optional] Enum: `global`, `workspace`, `user` [default to null] |
+| **description** | **String** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **permissions** | **List** of **String** |  | [optional]  |
+| **type** | **String** |  | [optional] Enum: `global`, `workspace`, `user`  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

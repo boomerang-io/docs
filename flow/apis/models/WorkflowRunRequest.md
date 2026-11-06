@@ -1,5 +1,6 @@
 ---
 title: Workflow Run Request Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Run Request Model
@@ -7,13 +8,13 @@ title: Workflow Run Request Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **annotations** | **Map** of **Any** |  | [optional] [default to null] |
-| **debug** | **Boolean** |  | [optional] [default to null] |
-| **labels** | **Map** of **String** |  | [optional] [default to null] |
-| **params** | **List** of [**RunParam**](RunParam) |  | [optional] [default to null] |
-| **retries** | **Long** |  | [optional] [default to null] |
-| **timeout** | **Long** |  | [optional] [default to null] |
-| **workspace** | [**WorkflowWorkspace**](WorkflowWorkspace) |  | [optional] [default to null] |
+| **annotations** | **Map** of **Any** |  | [optional]  |
+| **debug** | **Boolean** |  | [optional]  |
+| **labels** | **Map** of **String** |  | [optional]  |
+| **params** | **List** of [**RunParam**](RunParam) |  | [optional]  |
+| **retries** | **Long** |  | [optional]  |
+| **timeout** | **Long** |  | [optional]  |
+| **workspace** | [**WorkflowWorkspace**](WorkflowWorkspace) |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

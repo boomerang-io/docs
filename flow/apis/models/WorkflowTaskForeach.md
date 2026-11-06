@@ -1,5 +1,6 @@
 ---
 title: Workflow Task Foreach Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Task Foreach Model
@@ -7,7 +8,7 @@ title: Workflow Task Foreach Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | **Any** |  | [optional] [default to null] |
+| **items** | **Any** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

@@ -1,5 +1,6 @@
 ---
 title: Model Usage Model
+verified: "5.0.0-beta.39"
 ---
 
 # Model Usage Model
@@ -7,14 +8,14 @@ title: Model Usage Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **aiTaskRuns** | **Long** |  | [optional] [default to null] |
-| **cachedPromptTokens** | **Long** |  | [optional] [default to null] |
-| **completionTokens** | **Long** |  | [optional] [default to null] |
-| **cost** | **Double** |  | [optional] [default to null] |
-| **model** | **String** |  | [optional] [default to null] |
-| **promptTokens** | **Long** |  | [optional] [default to null] |
-| **reasoningTokens** | **Long** |  | [optional] [default to null] |
-| **totalTokens** | **Long** |  | [optional] [default to null] |
+| **aiTaskRuns** | **Long** |  | [optional]  |
+| **cachedPromptTokens** | **Long** |  | [optional]  |
+| **completionTokens** | **Long** |  | [optional]  |
+| **cost** | **Double** |  | [optional]  |
+| **model** | **String** |  | [optional]  |
+| **promptTokens** | **Long** |  | [optional]  |
+| **reasoningTokens** | **Long** |  | [optional]  |
+| **totalTokens** | **Long** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

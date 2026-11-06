@@ -1,5 +1,6 @@
 ---
 title: Event Outbox Entity Model
+verified: "5.0.0-beta.39"
 ---
 
 # Event Outbox Entity Model
@@ -7,19 +8,19 @@ title: Event Outbox Entity Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **attempts** | **Integer** |  | [optional] [default to null] |
-| **deadAt** | **Date** |  | [optional] [default to null] |
-| **from** | [**RunState**](RunState) |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **lastError** | **String** |  | [optional] [default to null] |
-| **occurredAt** | **Date** |  | [optional] [default to null] |
-| **ref** | **String** |  | [optional] [default to null] |
-| **refType** | **String** |  | [optional] [default to null] |
-| **retry** | [**RunRetry**](RunRetry) |  | [optional] [default to null] |
-| **routing** | [**Routing**](Routing) |  | [optional] [default to null] |
-| **sentAt** | **Date** |  | [optional] [default to null] |
-| **status** | **String** |  | [optional] Enum: `pending`, `sent`, `dead` [default to null] |
-| **to** | [**RunState**](RunState) |  | [optional] [default to null] |
+| **attempts** | **Integer** |  | [optional]  |
+| **deadAt** | **Date** |  | [optional]  |
+| **from** | [**RunState**](RunState) |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **lastError** | **String** |  | [optional]  |
+| **occurredAt** | **Date** |  | [optional]  |
+| **ref** | **String** |  | [optional]  |
+| **refType** | **String** |  | [optional]  |
+| **retry** | [**RunRetry**](RunRetry) |  | [optional]  |
+| **routing** | [**Routing**](Routing) |  | [optional]  |
+| **sentAt** | **Date** |  | [optional]  |
+| **status** | **String** |  | [optional] Enum: `pending`, `sent`, `dead`  |
+| **to** | [**RunState**](RunState) |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

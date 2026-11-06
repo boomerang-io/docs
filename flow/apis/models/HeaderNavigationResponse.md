@@ -1,5 +1,6 @@
 ---
 title: Header Navigation Response Model
+verified: "5.0.0-beta.39"
 ---
 
 # Header Navigation Response Model
@@ -7,11 +8,11 @@ title: Header Navigation Response Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **featuredServices** | **List** of [**HeaderOption**](HeaderOption) |  | [optional] [default to null] |
-| **features** | [**HeaderFeatures**](HeaderFeatures) |  | [optional] [default to null] |
-| **navigation** | **List** of [**HeaderNavigation**](HeaderNavigation) |  | [optional] [default to null] |
-| **platform** | [**HeaderPlatform**](HeaderPlatform) |  | [optional] [default to null] |
-| **platformMessage** | [**HeaderPlatformMessage**](HeaderPlatformMessage) |  | [optional] [default to null] |
+| **featuredServices** | **List** of [**HeaderOption**](HeaderOption) |  | [optional]  |
+| **features** | [**HeaderFeatures**](HeaderFeatures) |  | [optional]  |
+| **navigation** | **List** of [**HeaderNavigation**](HeaderNavigation) |  | [optional]  |
+| **platform** | [**HeaderPlatform**](HeaderPlatform) |  | [optional]  |
+| **platformMessage** | [**HeaderPlatformMessage**](HeaderPlatformMessage) |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

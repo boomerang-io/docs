@@ -1,5 +1,6 @@
 ---
 title: Workflow Run Purge Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Run Purge Model
@@ -7,9 +8,9 @@ title: Workflow Run Purge Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **purged** | **Integer** |  | [optional] [default to null] |
-| **remaining** | **Long** |  | [optional] [default to null] |
-| **scheduled** | **Integer** |  | [optional] [default to null] |
+| **purged** | **Integer** |  | [optional]  |
+| **remaining** | **Long** |  | [optional]  |
+| **scheduled** | **Integer** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

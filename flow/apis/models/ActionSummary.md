@@ -1,5 +1,6 @@
 ---
 title: Action Summary Model
+verified: "5.0.0-beta.39"
 ---
 
 # Action Summary Model
@@ -7,9 +8,9 @@ title: Action Summary Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **approvals** | **Long** |  | [optional] [default to null] |
-| **approvalsRate** | **Long** |  | [optional] [default to null] |
-| **manual** | **Long** |  | [optional] [default to null] |
+| **approvals** | **Long** |  | [optional]  |
+| **approvalsRate** | **Long** |  | [optional]  |
+| **manual** | **Long** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

@@ -1,5 +1,7 @@
 ---
 title: Actions
+description: "Operations for Actions: Create and manage Manual and Approval Actions."
+verified: "5.0.0-beta.39"
 ---
 
 # Actions
@@ -24,7 +26,7 @@ Requires the `action/action` permission, from a session, user, key, global token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
 
 
 #### Request body
@@ -46,6 +48,32 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 No response body
 
+#### Example request
+
+```bash
+curl -X PUT "$FLOW_URL/api/v2/workspace/$WORKSPACE/action" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start PUT /api/v2/workspace/{workspace}/action -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+[
+  {
+    "id": "<action id>",
+    "approved": true,
+    "comments": "Looks good"
+  }
+]
+```
+
+<!-- api-examples:end -->
+
 
 ## Retrieve a specific Action by Id
 
@@ -58,8 +86,8 @@ Requires the `action/read` permission, from a session, user, key, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **actionId** | **String** | true | ID of Action | Defaults to null. | actionId_example |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **actionId** | **String** | true | ID of Action |  |  |
 
 
 #### Request body
@@ -78,6 +106,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**Action**](./models/Action)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/action/$ACTION_ID" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/action/{actionId} -->
+<!-- api-examples:end -->
+
 
 ## Search for Actions
 
@@ -90,16 +128,16 @@ Requires the `action/read` permission, from a session, user, key, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **limit** | **Integer** | true | Result Size | Defaults to 10. | 10 |
-| **page** | **Integer** | true | Page Number | Defaults to 0. | 0 |
-| **types** | **List** of **String** | false | List of types to filter for. Defaults to all. | Defaults to null. Enum: [approval, manual] | manual,approval |
-| **statuses** | **List** of **String** | false | List of statuses to filter for. Defaults to all. | Defaults to null. Enum: [approved, submitted, rejected, cancelled] | approved,rejected,submitted |
-| **workflows** | **List** of **String** | false | List of workflows to filter for. | Defaults to null. |  |
-| **order** | **String** | false | Ascending or Descending (default) order | Defaults to DESC. Enum: [ASC, DESC] | 0 |
-| **sort** | **String** | false | The element to sort on | Defaults to creationDate. | 0 |
-| **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000 |
-| **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000 |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **limit** | **Integer** | true | Result Size | Defaults to `10`. | `10` |
+| **page** | **Integer** | true | Page Number | Defaults to `0`. | `0` |
+| **types** | **List** of **String** | false | List of types to filter for. Defaults to all. |  Enum: [approval, manual] | `manual,approval` |
+| **statuses** | **List** of **String** | false | List of statuses to filter for. Defaults to all. |  Enum: [approved, submitted, rejected, cancelled] | `approved,rejected,submitted` |
+| **workflows** | **List** of **String** | false | List of workflows to filter for. |  |  |
+| **order** | **String** | false | Ascending or Descending (default) order | Defaults to `DESC`. Enum: [ASC, DESC] | `0` |
+| **sort** | **String** | false | The element to sort on | Defaults to `creationDate`. | `0` |
+| **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch |  | `1677589200000` |
+| **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch |  | `1680267600000` |
 
 
 #### Request body
@@ -118,6 +156,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**PageAction**](./models/PageAction)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/action/query?limit=10&page=0" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/action/query -->
+<!-- api-examples:end -->
+
 
 ## Get Actions Summary
 
@@ -130,11 +178,11 @@ Requires the `action/read` permission, from a session, user, key, global token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **workflows** | **List** of **String** | false | List of workflows to filter for. | Defaults to null. |  |
-| **statuses** | **List** of **String** | false | Statuses to count. Defaults to submitted (waiting). | Defaults to null. Enum: [approved, submitted, rejected, cancelled] |  |
-| **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch | Defaults to null. | 1677589200000 |
-| **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch | Defaults to null. | 1680267600000 |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **workflows** | **List** of **String** | false | List of workflows to filter for. |  |  |
+| **statuses** | **List** of **String** | false | Statuses to count. Defaults to submitted (waiting). |  Enum: [approved, submitted, rejected, cancelled] |  |
+| **fromDate** | **Long** | false | The unix timestamp / date to search from in milliseconds since epoch |  | `1677589200000` |
+| **toDate** | **Long** | false | The unix timestamp / date to search to in milliseconds since epoch |  | `1680267600000` |
 
 
 #### Request body
@@ -152,4 +200,14 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**ActionSummary**](./models/ActionSummary)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/action/summary" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/action/summary -->
+<!-- api-examples:end -->
 

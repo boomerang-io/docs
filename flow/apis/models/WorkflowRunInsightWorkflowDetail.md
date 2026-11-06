@@ -1,5 +1,6 @@
 ---
 title: Workflow Run Insight Workflow Detail Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Run Insight Workflow Detail Model
@@ -7,17 +8,17 @@ title: Workflow Run Insight Workflow Detail Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **failures** | **List** of [**Failure**](Failure) |  | [optional] [default to null] |
-| **from** | **Date** |  | [optional] [default to null] |
-| **p50QueueWait** | **Long** |  | [optional] [default to null] |
-| **p95QueueWait** | **Long** |  | [optional] [default to null] |
-| **retriedRuns** | **Long** |  | [optional] [default to null] |
-| **runs** | **Long** |  | [optional] [default to null] |
-| **tasks** | **List** of [**TaskRow**](TaskRow) |  | [optional] [default to null] |
-| **to** | **Date** |  | [optional] [default to null] |
-| **usage** | [**WorkflowRunInsightUsage**](WorkflowRunInsightUsage) |  | [optional] [default to null] |
-| **workflowName** | **String** |  | [optional] [default to null] |
-| **workflowRef** | **String** |  | [optional] [default to null] |
+| **failures** | **List** of [**Failure**](Failure) |  | [optional]  |
+| **from** | **Date** |  | [optional]  |
+| **p50QueueWait** | **Long** |  | [optional]  |
+| **p95QueueWait** | **Long** |  | [optional]  |
+| **retriedRuns** | **Long** |  | [optional]  |
+| **runs** | **Long** |  | [optional]  |
+| **tasks** | **List** of [**TaskRow**](TaskRow) |  | [optional]  |
+| **to** | **Date** |  | [optional]  |
+| **usage** | [**WorkflowRunInsightUsage**](WorkflowRunInsightUsage) |  | [optional]  |
+| **workflowName** | **String** |  | [optional]  |
+| **workflowRef** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

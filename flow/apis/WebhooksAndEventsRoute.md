@@ -1,5 +1,7 @@
 ---
 title: Webhooks and Events
+description: "Operations for Webhooks and Events: Listen for Events or Webhook requests to trigger Workflows and provide the ability to resolve Wait For Event TaskRuns."
+verified: "5.0.0-beta.39"
 ---
 
 # Webhooks and Events
@@ -24,8 +26,8 @@ Requires the `webhook/action` permission, from a session, user, global, key toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | false | The workspace whose workflow ref names | Defaults to null. | workspace_example |
-| **ref** | **String** | false | The workflow: its id, or with workspace its name | Defaults to null. | ref_example |
+| **workspace** | **String** | false | The workspace whose workflow ref names |  |  |
+| **ref** | **String** | false | The workflow: its id, or with workspace its name |  |  |
 
 
 #### Request body
@@ -47,6 +49,35 @@ One of [access_token](./overview#access_token), [BearerAuth](./overview#bearerau
 
 **Object**
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/event?workspace=$WORKSPACE&ref=$WORKFLOW" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/cloudevents+json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/event -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "specversion": "1.0",
+  "id": "build-42",
+  "source": "/ci",
+  "type": "io.example.build.finished",
+  "datacontenttype": "application/json",
+  "data": {
+    "tag": "1.4.2"
+  }
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Accept Wait for Event Callbcak
 
@@ -59,10 +90,10 @@ Requires the `webhook/action` permission, from a session, user, global, key toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **ref** | **String** | true | The WorkflowRun reference the request relates to | Defaults to null. | ref_example |
-| **topic** | **String** | true | The topic to publish to | Defaults to null. | topic_example |
-| **status** | **String** | false | The status to set for the WaitForEvent TaskRun. Succeeded | Failed. | Defaults to succeeded. | status_example |
-| **eventId** | **String** | false | Identifies this delivery. A repeat with the same eventId for the same run is acknowledged and not applied again, for 7 days. | Defaults to null. | eventId_example |
+| **ref** | **String** | true | The WorkflowRun reference the request relates to |  |  |
+| **topic** | **String** | true | The topic to publish to |  |  |
+| **status** | **String** | false | The status to set for the WaitForEvent TaskRun. Succeeded | Failed. | Defaults to `succeeded`. |  |
+| **eventId** | **String** | false | Identifies this delivery. A repeat with the same eventId for the same run is acknowledged and not applied again, for 7 days. |  |  |
 
 
 #### Request body
@@ -81,6 +112,16 @@ One of [access_token](./overview#access_token), [BearerAuth](./overview#bearerau
 
 No response body
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/callback?ref=$RUN_ID&topic=$TOPIC" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/callback -->
+<!-- api-examples:end -->
+
 
 ## Accept Wait for Event Callback with JSON Payload
 
@@ -93,10 +134,10 @@ Requires the `webhook/action` permission, from a session, user, global, key toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **ref** | **String** | true | The WorkflowRun reference the request relates to | Defaults to null. | ref_example |
-| **topic** | **String** | true | The topic to publish to | Defaults to null. | topic_example |
-| **status** | **String** | false | The status to set for the WaitForEvent TaskRun. Succeeded | Failed. | Defaults to succeeded. | status_example |
-| **eventId** | **String** | false | Identifies this delivery. A repeat with the same eventId for the same run is acknowledged and not applied again, for 7 days. | Defaults to null. | eventId_example |
+| **ref** | **String** | true | The WorkflowRun reference the request relates to |  |  |
+| **topic** | **String** | true | The topic to publish to |  |  |
+| **status** | **String** | false | The status to set for the WaitForEvent TaskRun. Succeeded | Failed. | Defaults to `succeeded`. |  |
+| **eventId** | **String** | false | Identifies this delivery. A repeat with the same eventId for the same run is acknowledged and not applied again, for 7 days. |  |  |
 
 
 #### Request body
@@ -118,6 +159,28 @@ One of [access_token](./overview#access_token), [BearerAuth](./overview#bearerau
 
 No response body
 
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/callback?ref=$RUN_ID&topic=$TOPIC" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/callback -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "approved": true
+}
+```
+
+<!-- api-examples:end -->
+
 
 ## Accept Webhook payloads from various sources.
 
@@ -130,12 +193,12 @@ Requires the `webhook/action` permission, from a session, user, global, key toke
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | false | The workspace whose workflow ref names | Defaults to null. | workspace_example |
-| **ref** | **String** | false | The workflow: its id, or with workspace its name | Defaults to null. | ref_example |
-| **X-GitHub-Event** | **String** | false |  | Defaults to null. | X-GitHub-Event_example |
-| **X-GitHub-Delivery** | **String** | false |  | Defaults to null. | X-GitHub-Delivery_example |
-| **X-Hub-Signature-256** | **String** | false |  | Defaults to null. | X-Hub-Signature-256_example |
-| **x-slack-signature** | **String** | false |  | Defaults to null. | x-slack-signature_example |
+| **workspace** | **String** | false | The workspace whose workflow ref names |  |  |
+| **ref** | **String** | false | The workflow: its id, or with workspace its name |  |  |
+| **X-GitHub-Event** | **String** | false |  |  |  |
+| **X-GitHub-Delivery** | **String** | false |  |  |  |
+| **X-Hub-Signature-256** | **String** | false |  |  |  |
+| **x-slack-signature** | **String** | false |  |  |  |
 
 
 #### Request body
@@ -156,4 +219,26 @@ One of [access_token](./overview#access_token), [BearerAuth](./overview#bearerau
 #### Response
 
 **Object**
+
+#### Example request
+
+```bash
+curl -X POST "$FLOW_URL/api/v2/webhook?workspace=$WORKSPACE&ref=$WORKFLOW" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @body.json
+```
+
+<!-- api-examples:start POST /api/v2/webhook -->
+#### Example request body
+
+The request sends this as `body.json`:
+
+```json
+{
+  "tag": "1.4.2"
+}
+```
+
+<!-- api-examples:end -->
 

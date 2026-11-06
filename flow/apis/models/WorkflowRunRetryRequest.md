@@ -1,5 +1,6 @@
 ---
 title: Workflow Run Retry Request Model
+verified: "5.0.0-beta.39"
 ---
 
 # Workflow Run Retry Request Model
@@ -7,10 +8,10 @@ title: Workflow Run Retry Request Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **labels** | **Map** of **String** |  | [optional] [default to null] |
-| **nodes** | **List** of **String** |  | [optional] [default to null] |
-| **params** | **List** of [**RunParam**](RunParam) |  | [optional] [default to null] |
-| **scope** | **String** |  | [optional] Enum: `all`, `failed`, `nodes` [default to null] |
+| **labels** | **Map** of **String** |  | [optional]  |
+| **nodes** | **List** of **String** |  | [optional]  |
+| **params** | **List** of [**RunParam**](RunParam) |  | [optional]  |
+| **scope** | **String** |  | [optional] Enum: `all`, `failed`, `nodes`  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

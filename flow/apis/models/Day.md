@@ -1,5 +1,6 @@
 ---
 title: Day Model
+verified: "5.0.0-beta.39"
 ---
 
 # Day Model
@@ -7,12 +8,12 @@ title: Day Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **cancelled** | **Long** |  | [optional] [default to null] |
-| **date** | **String** |  | [optional] [default to null] |
-| **failed** | **Long** |  | [optional] [default to null] |
-| **other** | **Long** |  | [optional] [default to null] |
-| **succeeded** | **Long** |  | [optional] [default to null] |
-| **timedOut** | **Long** |  | [optional] [default to null] |
+| **cancelled** | **Long** |  | [optional]  |
+| **date** | **String** |  | [optional]  |
+| **failed** | **Long** |  | [optional]  |
+| **other** | **Long** |  | [optional]  |
+| **succeeded** | **Long** |  | [optional]  |
+| **timedOut** | **Long** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

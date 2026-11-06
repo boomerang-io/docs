@@ -1,5 +1,6 @@
 ---
 title: Token Model
+verified: "5.0.0-beta.39"
 ---
 
 # Token Model
@@ -7,18 +8,18 @@ title: Token Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **actorKind** | **String** |  | [optional] Enum: `SERVICE`, `AGENT`, `WORKFLOW` [default to null] |
-| **createdBy** | **String** |  | [optional] [default to null] |
-| **creationDate** | **Date** |  | [optional] [default to null] |
-| **description** | **String** |  | [optional] [default to null] |
-| **expirationDate** | **Date** |  | [optional] [default to null] |
-| **id** | **String** |  | [optional] [default to null] |
-| **lastUsedAt** | **Date** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **permissions** | **List** of [**ResolvedPermissions**](ResolvedPermissions) |  | [optional] [default to null] |
-| **principal** | **String** |  | [optional] [default to null] |
-| **type** | **String** |  | [optional] Enum: `session`, `user`, `key`, `global` [default to null] |
-| **valid** | **Boolean** |  | [optional] [default to null] |
+| **actorKind** | **String** |  | [optional] Enum: `SERVICE`, `AGENT`, `WORKFLOW`  |
+| **createdBy** | **String** |  | [optional]  |
+| **creationDate** | **Date** |  | [optional]  |
+| **description** | **String** |  | [optional]  |
+| **expirationDate** | **Date** |  | [optional]  |
+| **id** | **String** |  | [optional]  |
+| **lastUsedAt** | **Date** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **permissions** | **List** of [**ResolvedPermissions**](ResolvedPermissions) |  | [optional]  |
+| **principal** | **String** |  | [optional]  |
+| **type** | **String** |  | [optional] Enum: `session`, `user`, `key`, `global`  |
+| **valid** | **Boolean** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

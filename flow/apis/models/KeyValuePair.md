@@ -1,5 +1,6 @@
 ---
 title: Key Value Pair Model
+verified: "5.0.0-beta.39"
 ---
 
 # Key Value Pair Model
@@ -7,8 +8,8 @@ title: Key Value Pair Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** |  | [optional] [default to null] |
-| **value** | **String** |  | [optional] [default to null] |
+| **key** | **String** |  | [optional]  |
+| **value** | **String** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

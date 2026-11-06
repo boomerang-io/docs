@@ -1,6 +1,8 @@
 ---
 title: {{#operations}}{{#operation}}{{#-first}}{{#tags}}{{#-first}}{{#lambda.uncamelize}}{{name}}{{/lambda.uncamelize}}{{/-first}}{{/tags}}{{/-first}}{{/operation}}{{/operations}}
----
+description: "{{#operations}}{{#operation}}{{#-first}}{{#tags}}{{#-first}}Operations for {{#lambda.uncamelize}}{{name}}{{/lambda.uncamelize}}{{#description}}: {{{description}}}{{/description}}{{/-first}}{{/tags}}{{/-first}}{{/operation}}{{/operations}}."
+{{#flowTag}}verified: "{{flowTag}}"
+{{/flowTag}}---
 
 # {{#operations}}{{#operation}}{{#-first}}{{#tags}}{{#-first}}{{#lambda.uncamelize}}{{name}}{{/lambda.uncamelize}}{{/-first}}{{/tags}}{{/-first}}{{/operation}}{{/operations}}
 
@@ -25,7 +27,7 @@ title: {{#operations}}{{#operation}}{{#-first}}{{#tags}}{{#-first}}{{#lambda.unc
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |{{/-last}}{{/allParams}}
-{{#allParams}}{{^isBodyParam}}| **{{paramName}}** | {{#isArray}}**List** of {{#items}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/items}}{{/isArray}}{{^isArray}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isArray}} | {{#required}}true{{/required}}{{^required}}false{{/required}} | {{description}} | {{#defaultValue}}Defaults to {{.}}.{{/defaultValue}}{{#allowableValues}} Enum: [{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}} | {{example}} |
+{{#allParams}}{{^isBodyParam}}| **{{paramName}}** | {{#isArray}}**List** of {{#items}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/items}}{{/isArray}}{{^isArray}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isArray}} | {{#required}}true{{/required}}{{^required}}false{{/required}} | {{description}} | {{#vendorExtensions.x-default}}Defaults to `{{{.}}}`.{{/vendorExtensions.x-default}}{{#allowableValues}} Enum: [{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}} | {{#vendorExtensions.x-example}}`{{{.}}}`{{/vendorExtensions.x-example}} |
 {{/isBodyParam}}{{/allParams}}
 
 #### Request body
@@ -48,6 +50,18 @@ title: {{#operations}}{{#operation}}{{#-first}}{{#tags}}{{#-first}}{{#lambda.unc
 #### Response
 
 {{#returnType}}{{#returnProperty}}{{#isArray}}**List** of {{#items}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/items}}{{/isArray}}{{#isMap}}**Map** of {{#items}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/items}}{{/isMap}}{{^isArray}}{{^isMap}}{{#isAnyType}}**Any**{{/isAnyType}}{{^isAnyType}}{{#isModel}}[**{{dataType}}**](./models/{{dataType}}){{/isModel}}{{^isModel}}**{{dataType}}**{{/isModel}}{{/isAnyType}}{{/isMap}}{{/isArray}}{{/returnProperty}}{{/returnType}}{{^returnType}}No response body{{/returnType}}
+
+#### Example request
+
+```bash
+curl -X {{httpMethod}} "{{{vendorExtensions.x-curl-url}}}"{{#hasAuthMethods}} \
+  -H "Authorization: Bearer $FLOW_TOKEN"{{/hasAuthMethods}}{{#vendorExtensions.x-curl-content-type}} \
+  -H "Content-Type: {{{.}}}"{{/vendorExtensions.x-curl-content-type}}{{#vendorExtensions.x-curl-data}} \
+  {{{.}}}{{/vendorExtensions.x-curl-data}}
+```
+
+<!-- api-examples:start {{httpMethod}} {{path}} -->
+<!-- api-examples:end -->
 
 {{/operation}}
 {{/operations}}

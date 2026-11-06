@@ -1,5 +1,7 @@
 ---
 title: Insights
+description: "Operations for Insights: Provide the ability to search and retrieve Insights."
+verified: "5.0.0-beta.39"
 ---
 
 # Insights
@@ -28,13 +30,13 @@ Requires the `insights/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | my-amazing-workspace |
-| **fromDate** | **Long** | false |  | Defaults to null. | 789 |
-| **toDate** | **Long** | false |  | Defaults to null. | 789 |
-| **workflows** | **List** of **String** | false |  | Defaults to null. |  |
-| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. | Defaults to null. |  |
-| **statuses** | **List** of **String** | false |  | Defaults to null. |  |
-| **triggers** | **List** of **String** | false |  | Defaults to null. |  |
+| **workspace** | **String** | true | Owning workspace name. |  | `my-amazing-workspace` |
+| **fromDate** | **Long** | false |  |  |  |
+| **toDate** | **Long** | false |  |  |  |
+| **workflows** | **List** of **String** | false |  |  |  |
+| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. |  |  |
+| **statuses** | **List** of **String** | false |  |  |  |
+| **triggers** | **List** of **String** | false |  |  |  |
 
 
 #### Request body
@@ -52,6 +54,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**WorkflowRunInsightSummary**](./models/WorkflowRunInsightSummary)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/insights" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/insights -->
+<!-- api-examples:end -->
 
 
 ## Summarise runs across workspaces over a period
@@ -67,13 +79,13 @@ Requires the `insights/read` permission, from a global, user, session token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspaces** | **List** of **String** | false | Workspace names to aggregate over; absent means every workspace. One that does not exist contributes nothing. | Defaults to null. |  |
-| **fromDate** | **Long** | false |  | Defaults to null. | 789 |
-| **toDate** | **Long** | false |  | Defaults to null. | 789 |
-| **workflows** | **List** of **String** | false |  | Defaults to null. |  |
-| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. | Defaults to null. |  |
-| **statuses** | **List** of **String** | false |  | Defaults to null. |  |
-| **triggers** | **List** of **String** | false |  | Defaults to null. |  |
+| **workspaces** | **List** of **String** | false | Workspace names to aggregate over; absent means every workspace. One that does not exist contributes nothing. |  |  |
+| **fromDate** | **Long** | false |  |  |  |
+| **toDate** | **Long** | false |  |  |  |
+| **workflows** | **List** of **String** | false |  |  |  |
+| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. |  |  |
+| **statuses** | **List** of **String** | false |  |  |  |
+| **triggers** | **List** of **String** | false |  |  |  |
 
 
 #### Request body
@@ -92,6 +104,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**WorkflowRunInsightSummary**](./models/WorkflowRunInsightSummary)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/insights" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/insights -->
+<!-- api-examples:end -->
+
 
 ## List task runs across workspaces
 
@@ -106,16 +128,16 @@ Requires the `insights/read` permission, from a global, user, session token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **labels** | **List** of **String** | true | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. Required. | Defaults to null. |  |
-| **workspaces** | **List** of **String** | false | Workspace names to aggregate over; absent means every workspace. One that does not exist contributes nothing. | Defaults to null. |  |
-| **fromDate** | **Long** | false |  | Defaults to null. | 789 |
-| **toDate** | **Long** | false |  | Defaults to null. | 789 |
-| **statuses** | **List** of **String** | false |  | Defaults to null. |  |
-| **phases** | **List** of **String** | false |  | Defaults to null. |  |
-| **tasks** | **List** of **String** | false | Task node names; a name also matches its for-each items. | Defaults to null. |  |
-| **foreach** | **Boolean** | false | true keeps for-each parents only, false leaves them out. | Defaults to null. | true |
-| **limit** | **Integer** | false | Result Size | Defaults to null. | 50 |
-| **page** | **Integer** | false | Page Number | Defaults to null. | 0 |
+| **labels** | **List** of **String** | true | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. Required. |  |  |
+| **workspaces** | **List** of **String** | false | Workspace names to aggregate over; absent means every workspace. One that does not exist contributes nothing. |  |  |
+| **fromDate** | **Long** | false |  |  |  |
+| **toDate** | **Long** | false |  |  |  |
+| **statuses** | **List** of **String** | false |  |  |  |
+| **phases** | **List** of **String** | false |  |  |  |
+| **tasks** | **List** of **String** | false | Task node names; a name also matches its for-each items. |  |  |
+| **foreach** | **Boolean** | false | true keeps for-each parents only, false leaves them out. |  |  |
+| **limit** | **Integer** | false | Result Size |  | `50` |
+| **page** | **Integer** | false | Page Number |  | `0` |
 
 
 #### Request body
@@ -134,6 +156,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**WorkflowRunInsightTaskRunPage**](./models/WorkflowRunInsightTaskRunPage)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/insights/taskruns?labels=env%3Dtest" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/insights/taskruns -->
+<!-- api-examples:end -->
+
 
 ## Group a workspace's task runs over a period
 
@@ -148,17 +180,17 @@ Requires the `insights/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | workspace_example |
-| **fromDate** | **Long** | false |  | Defaults to null. | 789 |
-| **toDate** | **Long** | false |  | Defaults to null. | 789 |
-| **workflows** | **List** of **String** | false |  | Defaults to null. |  |
-| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. | Defaults to null. |  |
-| **tasks** | **List** of **String** | false | Task node names to count. | Defaults to null. |  |
-| **types** | **List** of **String** | false | Task types to count, such as ai. | Defaults to null. |  |
-| **groupBy** | **String** | false | task, type, workflow or label:&lt;key&gt; (a task run&#39;s label, such as the server&#39;s boomerang.io/model or boomerang.io/item); one row when absent. | Defaults to null. | label:boomerang.io/model |
-| **bucket** | **String** | false | hour, day or month (UTC), by task run start. | Defaults to null. | bucket_example |
-| **spanBy** | **String** | false | label:&lt;key&gt;: per row, the first start to the last end of the task runs of the runs sharing each value of that run label. | Defaults to null. | spanBy_example |
-| **slowest** | **Integer** | false | How many slowest task runs to list, up to 100. | Defaults to 0. | 56 |
+| **workspace** | **String** | true | Owning workspace name. |  |  |
+| **fromDate** | **Long** | false |  |  |  |
+| **toDate** | **Long** | false |  |  |  |
+| **workflows** | **List** of **String** | false |  |  |  |
+| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. |  |  |
+| **tasks** | **List** of **String** | false | Task node names to count. |  |  |
+| **types** | **List** of **String** | false | Task types to count, such as ai. |  |  |
+| **groupBy** | **String** | false | task, type, workflow or label:&lt;key&gt; (a task run&#39;s label, such as the server&#39;s boomerang.io/model or boomerang.io/item); one row when absent. |  | `label:boomerang.io/model` |
+| **bucket** | **String** | false | hour, day or month (UTC), by task run start. |  |  |
+| **spanBy** | **String** | false | label:&lt;key&gt;: per row, the first start to the last end of the task runs of the runs sharing each value of that run label. |  |  |
+| **slowest** | **Integer** | false | How many slowest task runs to list, up to 100. | Defaults to `0`. |  |
 
 
 #### Request body
@@ -176,6 +208,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**WorkflowRunInsightTasks**](./models/WorkflowRunInsightTasks)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/insights/tasks" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/insights/tasks -->
+<!-- api-examples:end -->
 
 
 ## Group task runs across workspaces over a period
@@ -191,17 +233,17 @@ Requires the `insights/read` permission, from a global, user, session token.
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspaces** | **List** of **String** | false | Workspace names to aggregate over; absent means every workspace. One that does not exist contributes nothing. | Defaults to null. |  |
-| **fromDate** | **Long** | false |  | Defaults to null. | 789 |
-| **toDate** | **Long** | false |  | Defaults to null. | 789 |
-| **workflows** | **List** of **String** | false |  | Defaults to null. |  |
-| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. | Defaults to null. |  |
-| **tasks** | **List** of **String** | false | Task node names to count. | Defaults to null. |  |
-| **types** | **List** of **String** | false | Task types to count, such as ai. | Defaults to null. |  |
-| **groupBy** | **String** | false | task, type, workflow or label:&lt;key&gt;; one row when absent. | Defaults to null. | label:boomerang.io/model |
-| **bucket** | **String** | false | hour, day or month (UTC), by task run start. | Defaults to null. | bucket_example |
-| **spanBy** | **String** | false | label:&lt;key&gt;: the wall clock of the runs sharing each value of a run label. | Defaults to null. | spanBy_example |
-| **slowest** | **Integer** | false | How many of the slowest task runs to list, up to 100. | Defaults to 0. | 56 |
+| **workspaces** | **List** of **String** | false | Workspace names to aggregate over; absent means every workspace. One that does not exist contributes nothing. |  |  |
+| **fromDate** | **Long** | false |  |  |  |
+| **toDate** | **Long** | false |  |  |  |
+| **workflows** | **List** of **String** | false |  |  |  |
+| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. |  |  |
+| **tasks** | **List** of **String** | false | Task node names to count. |  |  |
+| **types** | **List** of **String** | false | Task types to count, such as ai. |  |  |
+| **groupBy** | **String** | false | task, type, workflow or label:&lt;key&gt;; one row when absent. |  | `label:boomerang.io/model` |
+| **bucket** | **String** | false | hour, day or month (UTC), by task run start. |  |  |
+| **spanBy** | **String** | false | label:&lt;key&gt;: the wall clock of the runs sharing each value of a run label. |  |  |
+| **slowest** | **Integer** | false | How many of the slowest task runs to list, up to 100. | Defaults to `0`. |  |
 
 
 #### Request body
@@ -220,6 +262,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**WorkflowRunInsightTasks**](./models/WorkflowRunInsightTasks)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/insights/tasks" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/insights/tasks -->
+<!-- api-examples:end -->
+
 
 ## Detail one workflow's runs over a period
 
@@ -234,11 +286,11 @@ Requires the `insights/read` permission, from a global, key, user, session token
 
 | Name | Type | Required | Description | Notes | Example |
 | ---- | ---- | -------- | ----------- | ----- | ------- |
-| **workspace** | **String** | true | Owning workspace name. | Defaults to null. | workspace_example |
-| **workflow** | **String** | true | Workflow name or id. | Defaults to null. | workflow_example |
-| **fromDate** | **Long** | false |  | Defaults to null. | 789 |
-| **toDate** | **Long** | false |  | Defaults to null. | 789 |
-| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. | Defaults to null. |  |
+| **workspace** | **String** | true | Owning workspace name. |  |  |
+| **workflow** | **String** | true | Workflow name or id. |  |  |
+| **fromDate** | **Long** | false |  |  |  |
+| **toDate** | **Long** | false |  |  |  |
+| **labels** | **List** of **String** | false | Run labels to narrow by, as the run query takes them: URL-encoded key&#x3D;value, comma-separated, all of which must match. |  |  |
 
 
 #### Request body
@@ -256,4 +308,14 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 [**WorkflowRunInsightWorkflowDetail**](./models/WorkflowRunInsightWorkflowDetail)
+
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/workspace/$WORKSPACE/insights/workflow/$WORKFLOW" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/workspace/{workspace}/insights/workflow/{workflow} -->
+<!-- api-examples:end -->
 

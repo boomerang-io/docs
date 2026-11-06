@@ -1,5 +1,7 @@
 ---
 title: Profile
+description: "Operations for Profile: Retrieve your profile and update your details."
+verified: "5.0.0-beta.39"
 ---
 
 # Profile
@@ -37,6 +39,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 
 [**UserProfile**](./models/UserProfile)
 
+#### Example request
+
+```bash
+curl -X GET "$FLOW_URL/api/v2/profile" \
+  -H "Authorization: Bearer $FLOW_TOKEN"
+```
+
+<!-- api-examples:start GET /api/v2/profile -->
+<!-- api-examples:end -->
+
 
 ## Patch your Profile
 
@@ -69,4 +81,16 @@ One of [BearerAuth](./overview#bearerauth), [x-access-token](./overview#x-access
 #### Response
 
 No response body
+
+#### Example request
+
+```bash
+curl -X PATCH "$FLOW_URL/api/v2/profile" \
+  -H "Authorization: Bearer $FLOW_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+<!-- api-examples:start PATCH /api/v2/profile -->
+<!-- api-examples:end -->
 

@@ -1,5 +1,6 @@
 ---
 title: Retry From Model
+verified: "5.0.0-beta.39"
 ---
 
 # Retry From Model
@@ -7,8 +8,8 @@ title: Retry From Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **nodes** | **List** of **String** |  | [optional] [default to null] |
-| **scope** | **String** |  | [optional] Enum: `all`, `failed`, `nodes` [default to null] |
+| **nodes** | **List** of **String** |  | [optional]  |
+| **scope** | **String** |  | [optional] Enum: `all`, `failed`, `nodes`  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

@@ -1,5 +1,6 @@
 ---
 title: Outbox Replay Response Model
+verified: "5.0.0-beta.39"
 ---
 
 # Outbox Replay Response Model
@@ -7,7 +8,7 @@ title: Outbox Replay Response Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **replayed** | **Long** |  | [optional] [default to null] |
+| **replayed** | **Long** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 

@@ -1,5 +1,6 @@
 ---
 title: Run Result Model
+verified: "5.0.0-beta.39"
 ---
 
 # Run Result Model
@@ -7,9 +8,9 @@ title: Run Result Model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **description** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
-| **value** | **Any** |  | [optional] [default to null] |
+| **description** | **String** |  | [optional]  |
+| **name** | **String** |  | [optional]  |
+| **value** | **Any** |  | [optional]  |
 
 [[Back to Models]](../overview#models) [[Back to Routes]](../overview#routes)
 
