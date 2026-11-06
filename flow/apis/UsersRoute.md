@@ -1,8 +1,8 @@
 ---
-title: Users Route
+title: Users
 ---
 
-# Users Route
+# Users
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

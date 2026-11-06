@@ -1,8 +1,8 @@
 ---
-title: System Route
+title: System
 ---
 
-# System Route
+# System
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

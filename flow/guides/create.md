@@ -12,8 +12,8 @@ Create a workflow in a workspace, then look after it from the **Workflows** page
 
 ## Before you start
 
-- You need a workspace and the Editor or Owner role in it. Deleting a workflow needs Owner. See [Manage a workspace](../fundamentals/manage).
-- When workspace quotas are on, the **Workflows** page shows **Workflow quota - `<n>` of `<m>` used**. At the limit, the **Create a new workflow** tile is disabled until a workflow is deleted or the quota is raised. See [Quotas](../fundamentals/quotas).
+- You need a workspace and the Editor or Owner role in it. Deleting a workflow needs Owner. See [Manage a workspace](../webapp/manage).
+- When workspace quotas are on, the **Workflows** page shows **Workflow quota - `<n>` of `<m>` used**. At the limit, the **Create a new workflow** tile is disabled until a workflow is deleted or the quota is raised. See [Quotas](../webapp/quotas).
 
 ## Open the Workflows page
 
@@ -71,7 +71,7 @@ Open a card's overflow menu. Every item is disabled while the card shows **Execu
 | Item | What it does |
 | --- | --- |
 | **Edit** | Opens the workflow on the **Canvas** tab. |
-| **View Activity** | Opens **Activity**, filtered to this workflow's runs. Shown when Activity is turned on. See [Activity](../fundamentals/activity). |
+| **View Activity** | Opens **Activity**, filtered to this workflow's runs. Shown when Activity is turned on. See [Activity](../webapp/activity). |
 | **Update** | Replaces the workflow from an exported file, as a new version. See [Update a workflow from a file](#update-a-workflow-from-a-file). |
 | **Export** | Downloads the workflow as a JSON file. |
 | **Duplicate** | Copies the workflow within the workspace. |

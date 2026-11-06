@@ -1,8 +1,8 @@
 ---
-title: Audit Route
+title: Audit
 ---
 
-# Audit Route
+# Audit
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

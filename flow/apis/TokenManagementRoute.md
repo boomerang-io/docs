@@ -1,8 +1,8 @@
 ---
-title: Token Management Route
+title: Token Management
 ---
 
-# Token Management Route
+# Token Management
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

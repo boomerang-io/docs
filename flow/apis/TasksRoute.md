@@ -1,8 +1,8 @@
 ---
-title: Tasks Route
+title: Tasks
 ---
 
-# Tasks Route
+# Tasks
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

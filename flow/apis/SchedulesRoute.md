@@ -1,8 +1,8 @@
 ---
-title: Schedules Route
+title: Schedules
 ---
 
-# Schedules Route
+# Schedules
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

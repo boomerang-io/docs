@@ -117,7 +117,7 @@ Any item that doesn't succeed fails the whole task, with the reason `ItemFailed`
 - **Not an array.** Items that don't resolve to an array fail the task with `ForeachItemsInvalid`.
 - **Not built.** There's no batching, failure tolerance, parallel limit, re-run of only the failed items, or repeating a group of several tasks. To repeat several tasks, put them in their own workflow. The API accepts for-each on a **Run Workflow** task, which starts one child run per item, but the canvas doesn't offer it.
 
-**Insights** counts a for-each task's items under the task's name, and its **Task runs** panel can group by **For-each item**. See [Insights](../fundamentals/insights).
+**Insights** counts a for-each task's items under the task's name, and its **Task runs** panel can group by **For-each item**. See [Insights](../webapp/insights).
 
 ## Next steps
 

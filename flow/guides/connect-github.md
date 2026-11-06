@@ -137,7 +137,7 @@ When workflows never start from events, ask an administrator to check **Admin â€
 
 ## Next steps
 
-- [Integrations](../fundamentals/integrations): what each integration adds.
+- [Integrations](../webapp/integrations): what each integration adds.
 - [Triggers](../fundamentals/triggers): every way a run can start.
 - [Use secrets](./use-secrets): how the shared token stays hidden.
 - [Integrations for administrators](../hosting/integrations): set up the platform's GitHub App.

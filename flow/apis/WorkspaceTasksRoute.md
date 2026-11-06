@@ -1,8 +1,8 @@
 ---
-title: Workspace Tasks Route
+title: Workspace Tasks
 ---
 
-# Workspace Tasks Route
+# Workspace Tasks
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

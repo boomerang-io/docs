@@ -1,8 +1,8 @@
 ---
-title: Actions Route
+title: Actions
 ---
 
-# Actions Route
+# Actions
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

@@ -1,8 +1,8 @@
 ---
-title: Workspace Management Route
+title: Workspace Management
 ---
 
-# Workspace Management Route
+# Workspace Management
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

@@ -184,7 +184,8 @@ To retire a task, select **Archive** instead of deleting it. It leaves the palet
 
 ## Next steps
 
-- [Tasks](../fundamentals/tasks): task types and the catalogue.
+- [Tasks](../fundamentals/tasks): task types and how tasks run.
+- [Task catalogue](../catalogue/overview): every task, its parameters and its results.
 - [Parameters](../fundamentals/parameters): the layers a reference reads.
 - [Use secrets](./use-secrets): what happens to a secret parameter in the container.
 - [Repeat a task for each item](./repeat-a-task-for-each-item): run your task once per item.

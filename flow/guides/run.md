@@ -13,7 +13,7 @@ Start a run from the workflow's card on the **Workflows** page, then follow it o
 ## Before you start
 
 - Save your changes as a version. The editor has no run button, and **Run it** runs the latest version. See [Save a version](./workflow-editor#save-a-version).
-- The Editor or Owner role in the workspace. The Reader role can't start a run. See [Manage a workspace](../fundamentals/manage).
+- The Editor or Owner role in the workspace. The Reader role can't start a run. See [Manage a workspace](../webapp/manage).
 - The workflow's **Manual** trigger on. It's on for a new workflow. See [Choose what starts a run](./configure-workflow#choose-what-starts-a-run).
 
 ## Start a run
@@ -45,7 +45,7 @@ For example, a workflow with a required Select parameter `environment` and a Tex
 To find a run later, select **View Activity** on the workflow card's overflow menu, or **Activity** in the side nav.
 
 - [Runs](../fundamentals/runs): statuses, pausing, cancelling and timeouts.
-- [Activity](../fundamentals/activity): find and filter runs.
+- [Activity](../webapp/activity): find and filter runs.
 - [Retry a run](./retry-a-run): run a failed run again.
 
 ## Why is Run it disabled?
@@ -59,7 +59,7 @@ The status icon on the card says why. Hover over it to read its tooltip.
 | "This workspace has reached the maximum number of concurrent runs (executions) allowed…" | The workspace's concurrent runs quota is reached. | Wait for a run in the workspace to end. |
 | **Deleting...** on the card | The workflow is being deleted. | None: it leaves the page when deletion finishes. |
 
-The quota checks apply only when your administrator has turned workspace quotas on. See [Quotas](../fundamentals/quotas).
+The quota checks apply only when your administrator has turned workspace quotas on. See [Quotas](../webapp/quotas).
 
 A workflow's own **Concurrency limit** doesn't disable **Run it**: a run over the limit waits or is skipped, as **Over the limit** says. See [Set the timeout, retries and concurrency](./configure-workflow#set-the-timeout-retries-and-concurrency).
 
@@ -78,7 +78,7 @@ A template card with the status **Available** runs the same way: select **Run it
 
 ## Other ways to start a run
 
-- **On a schedule:** turn on the **Scheduler** trigger and add schedules. See [Schedules](../fundamentals/schedules).
+- **On a schedule:** turn on the **Scheduler** trigger and add schedules. See [Schedules](../webapp/schedules).
 - **From another system:** a webhook, a CloudEvent or a GitHub event. See [Triggers](../fundamentals/triggers).
 - **From another workflow:** the **Run Workflow** task.
 - **From a script:** the REST API. See the [API reference](../apis/overview).

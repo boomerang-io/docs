@@ -1,8 +1,8 @@
 ---
-title: Task Runs Route
+title: Task Runs
 ---
 
-# Task Runs Route
+# Task Runs
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

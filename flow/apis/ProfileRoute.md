@@ -1,8 +1,8 @@
 ---
-title: Profile Route
+title: Profile
 ---
 
-# Profile Route
+# Profile
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

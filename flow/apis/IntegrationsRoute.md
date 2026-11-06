@@ -1,8 +1,8 @@
 ---
-title: Integrations Route
+title: Integrations
 ---
 
-# Integrations Route
+# Integrations
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

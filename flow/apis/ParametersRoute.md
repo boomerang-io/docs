@@ -1,8 +1,8 @@
 ---
-title: Parameters Route
+title: Parameters
 ---
 
-# Parameters Route
+# Parameters
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

@@ -98,4 +98,4 @@ Report a security problem privately through [GitHub private vulnerability report
 ## Next steps
 
 - [Parameters](../fundamentals/parameters): how secured parameters resolve.
-- [Administer](../fundamentals/administer): the audit trail and settings in **Admin**.
+- [Administer](../webapp/administer): the audit trail and settings in **Admin**.

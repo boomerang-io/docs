@@ -23,7 +23,7 @@ A secret is a parameter whose value Flow hides in the webapp, in API reads and i
 | A secured global parameter | **Admin › Parameters** | `$(global.params.<name>)` | Every workspace uses it |
 | A workflow parameter of type **Password** | The editor's **Parameters** tab | `$(params.<name>)` | One workflow owns it, or a person supplies it at each run |
 | A task field of type **Password** | The task's form | (the task reads its own field) | A task asks for a credential, such as **Github Access Token** |
-| A parameter an integration shares | **Integrations** | `$(workspace.params.github-token)`, `$(workspace.params.slack-token)` | GitHub or Slack, which fill the credential when you connect them, or Google or Microsoft, which take it in a form. See [Connect GitHub](./connect-github) and [Integrations](../fundamentals/integrations) |
+| A parameter an integration shares | **Integrations** | `$(workspace.params.github-token)`, `$(workspace.params.slack-token)` | GitHub or Slack, which fill the credential when you connect them, or Google or Microsoft, which take it in a form. See [Connect GitHub](./connect-github) and [Integrations](../webapp/integrations) |
 
 Prefer a workspace or global secret over typing a value into a task field. The workflow then holds only a reference, so exporting or duplicating it copies no secret.
 

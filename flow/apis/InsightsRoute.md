@@ -1,8 +1,8 @@
 ---
-title: Insights Route
+title: Insights
 ---
 
-# Insights Route
+# Insights
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

@@ -1,8 +1,8 @@
 ---
-title: Workflows Route
+title: Workflows
 ---
 
-# Workflows Route
+# Workflows
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

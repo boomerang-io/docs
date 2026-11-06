@@ -1,8 +1,8 @@
 ---
-title: Webhooks and Events Route
+title: Webhooks and Events
 ---
 
-# Webhooks and Events Route
+# Webhooks and Events
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |

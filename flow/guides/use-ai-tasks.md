@@ -142,7 +142,7 @@ The loop stops when the model answers without calling a tool. **Max turns** (10 
 - **AI task runs**, where each for-each item counts once;
 - a row per model, with **Task runs**, **Prompt**, **Completion**, **Total** and **Cost**.
 
-On the same page, the **Task runs** panel can group by **Model**. Flow labels each AI task run with its **Model**, unless that parameter is a secret. See [Insights](../fundamentals/insights).
+On the same page, the **Task runs** panel can group by **Model**. Flow labels each AI task run with its **Model**, unless that parameter is a secret. See [Insights](../webapp/insights).
 
 <!-- SCREENSHOT: The Insights page's Model usage panel with total tokens, AI task runs and a row per model. (not capturable yet: Model usage lists AI task runs; there are none without an AI endpoint) -->
 
@@ -166,4 +166,4 @@ When the endpoint answers with a rate limit or a server error, or can't be reach
 - [Use secrets](./use-secrets): keep endpoint and MCP tokens out of your workflows.
 - [Repeat a task for each item](./repeat-a-task-for-each-item): run a prompt once per item.
 - [Keep files between runs](./keep-files-between-runs): save a long reply as an artifact.
-- [Insights](../fundamentals/insights): the rest of the Insights page.
+- [Insights](../webapp/insights): the rest of the Insights page.

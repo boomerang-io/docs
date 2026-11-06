@@ -120,4 +120,4 @@ A task that ran more than once shows it on the run page:
 - [Runs](../fundamentals/runs): statuses, timeouts and how a run ends.
 - [Workflow editor](./workflow-editor): the task form's **Configure** tab.
 - [Repeat a task for each item](./repeat-a-task-for-each-item): how for-each items retry.
-- [Activity](../fundamentals/activity): find the run to retry.
+- [Activity](../webapp/activity): find the run to retry.

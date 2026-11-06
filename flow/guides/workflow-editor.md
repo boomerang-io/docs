@@ -13,8 +13,8 @@ The workflow editor is where you build a workflow: place tasks on the canvas, li
 ## Before you start
 
 - A workflow to edit. See [Create a workflow](./create).
-- The Editor or Owner role in the workspace, to save a version. See [Manage a workspace](../fundamentals/manage).
-- An idea of the tasks you need. [Tasks](../fundamentals/tasks) describes the catalogue.
+- The Editor or Owner role in the workspace, to save a version. See [Manage a workspace](../webapp/manage).
+- An idea of the tasks you need. [Tasks](../catalogue/overview) describes the catalogue.
 
 ## Open the editor
 
@@ -25,7 +25,7 @@ On the **Workflows** page, select a workflow's name on its card, or select **Edi
 | **Canvas** | The task palette, the canvas and the Notes panel. |
 | **Parameters** | The workflow's parameters. See [Add workflow parameters](#add-workflow-parameters). |
 | **Configure** | The workflow's name, triggers, run options, run workspace, kept artifacts and tokens. See [Configure a workflow](./configure-workflow). |
-| **Schedules** | The workflow's schedules. Shown when schedules are turned on. See [Schedules](../fundamentals/schedules). |
+| **Schedules** | The workflow's schedules. Shown when schedules are turned on. See [Schedules](../webapp/schedules). |
 | **Change Log** | Every saved version, who saved it and why. |
 
 The version switcher and **Create new version** sit at the right of the tab row.

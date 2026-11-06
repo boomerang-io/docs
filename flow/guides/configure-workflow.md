@@ -12,7 +12,7 @@ The **Configure** tab holds a workflow's settings: its name, what starts it, how
 
 ## Before you start
 
-- The Editor or Owner role in the workspace. See [Manage a workspace](../fundamentals/manage).
+- The Editor or Owner role in the workspace. See [Manage a workspace](../webapp/manage).
 - Open the workflow in the editor and select **Configure**. The sections are listed on the left: **General**, **Triggers**, **Run Options**, **Workspace**, **Artifacts** and **Tokens**.
 
 > **Note:** **Configure** has no Save button. Changes under **General**, **Triggers**, **Run Options** and **Workspace** are saved with the workflow's next version: select **Create new version** in the tab row (see [Save a version](./workflow-editor#save-a-version)). Deleting an artifact and creating or deleting a token take effect at once.
@@ -68,7 +68,7 @@ The webhook and event URLs name the workflow by its workspace and **Name**: `?wo
 
 **Retries** applies only to a run that times out, although its helper text says "a failed workflow". To retry failed tasks, set retries on the task (see [Retry a failed task](./workflow-editor#retry-a-failed-task)), or retry the run yourself (see [Retry a run](./retry-a-run)).
 
-The workspace's concurrent runs quota still applies: while it's reached, **Run it** is disabled whatever this workflow's limit. See [Runs](../fundamentals/runs) and [Quotas](../fundamentals/quotas).
+The workspace's concurrent runs quota still applies: while it's reached, **Run it** is disabled whatever this workflow's limit. See [Runs](../fundamentals/runs) and [Quotas](../webapp/quotas).
 
 For example, a nightly report that must never overlap itself: **Timeout** `20`, **Concurrency limit** `1`, **Over the limit** **Skip the run**. A run that starts while the last one is still going ends **Cancelled**, and the next night's run goes ahead.
 
@@ -126,6 +126,6 @@ A workflow that follows a template shows "This workflow is a template." at the t
 ## Next steps
 
 - [Run a workflow](./run): start a run and follow it.
-- [Triggers](../fundamentals/triggers) and [Schedules](../fundamentals/schedules): start runs without selecting **Run it**.
+- [Triggers](../fundamentals/triggers) and [Schedules](../webapp/schedules): start runs without selecting **Run it**.
 - [Artifacts](../fundamentals/artifacts) and [Keep files between runs](./keep-files-between-runs).
 - [Runs](../fundamentals/runs): statuses, timeouts and concurrency in a run.

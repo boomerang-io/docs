@@ -1,8 +1,8 @@
 ---
-title: Artifacts Route
+title: Artifacts
 ---
 
-# Artifacts Route
+# Artifacts
 
 | Name | Method | Endpoint |
 | ---- | ------ | -------- |
