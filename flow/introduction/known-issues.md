@@ -1,6 +1,6 @@
 ---
 title: Known issues
-order: 4
+order: 5
 description: Defects in Boomerang Flow 5.0.0 that you might hit, with a workaround for each where there is one.
 ---
 
@@ -140,5 +140,5 @@ With `dispatcher.logging.type=loki`, the dispatcher reads Loki with its own HTTP
 ## Next steps
 
 - [What's new](./whats-new): what changed in 5.0.0.
-- [Tasks](../fundamentals/tasks): the catalogue, and which tasks to avoid.
+- [Task catalogue](../catalogue/overview): every task, with notes on which revisions to avoid.
 - [Upgrading](../hosting/upgrading): moving a v3 install to v5.

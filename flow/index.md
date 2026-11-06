@@ -5,198 +5,125 @@ description: Boomerang Flow builds and runs workflows, graphs of tasks that run 
 toc: true
 ---
 
-<!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 2 of 5 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
+<!-- Written against flow.service.workflow 5.0.0-beta.39. The page quotes no UI labels; each card's text follows the lede of the page it links to. introduction/flow-in-five-minutes, introduction/troubleshooting and introduction/glossary were being written at the same time as this page: check their card text against them once they land. -->
 
 # Welcome
 
-Boomerang Flow builds and runs workflows: graphs of tasks that run as containers on Kubernetes. Drag tasks from the catalogue onto a canvas, link them, and run the workflow by hand, on a schedule, or from a webhook, a CloudEvent or a GitHub event. When the catalogue doesn't have the task you need, bring your own container or script.
+Boomerang Flow builds and runs workflows: graphs of tasks that run as containers on Kubernetes. Put tasks from the catalogue, or your own containers and scripts, onto a canvas, then run the workflow by hand, on a schedule, or from a webhook, a CloudEvent or a GitHub event.
 
-Flow is open source under the Apache License 2.0.
+## Build workflows
 
-## What Flow does
-
-- **Build visually.** Drag tasks onto the canvas and link them. A task can run once for each item in a list.
-- **Put a person in the loop.** An approval or a manual task holds the run until someone decides, and the wait doesn't count against the run's timeout.
-- **Start runs your way.** Run a workflow by hand, on a schedule, from a webhook or CloudEvent, or from a GitHub event.
-- **See every run.** Activity records each run with its task logs, results and artifacts. Pause a run, cancel it, or retry it from the tasks that failed.
-- **Keep work in workspaces.** A workspace holds workflows, members, parameters and quotas.
-- **Extend it.** Run your own container with **Run Custom Task**, add tasks in **Task Manager**, or call Flow's REST API under `/api/v2`.
-
-## Get started
+This is for you if you build, run and fix workflows in the webapp.
 
 <docs-cards>
+  <a href="/introduction/flow-in-five-minutes" aria-label="Flow in five minutes">
+    <docs-card>
+      <h4 class="text-blue-brand">Flow in five minutes</h4>
+      <p>A short tour of Flow's main ideas and how they fit together.</p>
+    </docs-card>
+  </a>
   <a href="/introduction/getting-started" aria-label="Getting started">
     <docs-card>
-      <h4 class="text-blue-brand">New to Flow?</h4>
-      <p>Create a workspace, build a workflow with one task, run it and watch it succeed. About ten minutes.</p>
+      <h4 class="text-blue-brand">Getting started</h4>
+      <p>Create a workspace, build a workflow with one task and watch it run, in about ten minutes.</p>
     </docs-card>
   </a>
-  <a href="/introduction/whats-new" aria-label="What's new">
-    <docs-card>
-      <h4 class="text-blue-brand">What's new in 5.0</h4>
-      <p>What changed since Flow 3, and what to do when you upgrade.</p>
-    </docs-card>
-  </a>
-  <a href="/introduction/faq" aria-label="Frequently asked questions">
-    <docs-card>
-      <h4 class="text-blue-brand">FAQ</h4>
-      <p>Short answers on tasks, timings, quotas and limits.</p>
-    </docs-card>
-  </a>
-  <a href="/introduction/known-issues" aria-label="Known issues">
-    <docs-card>
-      <h4 class="text-red-brand">Known issues</h4>
-      <p>Defects in 5.0.0 and how to work around them.</p>
-    </docs-card>
-  </a>
-  <a href="/tutorials/manual-approval-output" aria-label="Tutorials">
-    <docs-card>
-      <h4 class="text-green-brand">Try a tutorial</h4>
-      <p>Work through a complete example: pause a workflow for an approval, then email who decided and what they said.</p>
-    </docs-card>
-  </a>
-  <a href="/guides/create" aria-label="Guides">
-    <docs-card>
-      <h4 class="text-green-brand">Guides</h4>
-      <p>Step-by-step tasks: create, edit, configure, run and retry workflows.</p>
-    </docs-card>
-  </a>
-</docs-cards>
-
-## Learn the concepts
-
-The **Fundamentals** cover one part of the webapp or one concept per page.
-
-<docs-cards>
   <a href="/fundamentals/workflows" aria-label="Workflows">
     <docs-card>
       <h4 class="text-blue-brand">Workflows</h4>
-      <p>Create, find, run and manage the workflows in a workspace.</p>
+      <p>What a workflow is, and how to find, run and manage the workflows in a workspace.</p>
     </docs-card>
   </a>
-  <a href="/fundamentals/activity" aria-label="Activity">
+  <a href="/guides/create" aria-label="Create a workflow">
     <docs-card>
-      <h4 class="text-blue-brand">Activity</h4>
-      <p>Every run in a workspace, filtered by workflow, status, trigger or date.</p>
+      <h4 class="text-blue-brand">Create a workflow</h4>
+      <p>Start a workflow from scratch, from a starter or from a file.</p>
     </docs-card>
   </a>
-  <a href="/fundamentals/runs" aria-label="Runs">
+  <a href="/introduction/troubleshooting" aria-label="Troubleshooting">
     <docs-card>
-      <h4 class="text-blue-brand">Runs</h4>
-      <p>Statuses, pausing, cancelling, retries, timeouts and child workflows.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/actions" aria-label="Actions">
-    <docs-card>
-      <h4 class="text-blue-brand">Actions</h4>
-      <p>Approvals and manual tasks where a person has to decide.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/triggers" aria-label="Triggers">
-    <docs-card>
-      <h4 class="text-blue-brand">Triggers</h4>
-      <p>Start runs by hand, from a webhook, a CloudEvent or GitHub.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/schedules" aria-label="Schedules">
-    <docs-card>
-      <h4 class="text-blue-brand">Schedules</h4>
-      <p>Run a workflow once, hourly, daily, on weekdays, weekly or on a cron expression.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/tasks" aria-label="Tasks and Task Manager">
-    <docs-card>
-      <h4 class="text-blue-brand">Tasks and Task Manager</h4>
-      <p>The catalogue Flow ships, and how to add your own tasks to a workspace in Task Manager.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/parameters" aria-label="Parameters">
-    <docs-card>
-      <h4 class="text-blue-brand">Parameters</h4>
-      <p>Inputs and results that flow between tasks, workflows and workspaces, and secrets.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/artifacts" aria-label="Artifacts and the run workspace">
-    <docs-card>
-      <h4 class="text-blue-brand">Artifacts</h4>
-      <p>Share files between the tasks of a run, and keep files between runs.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/integrations" aria-label="Integrations">
-    <docs-card>
-      <h4 class="text-blue-brand">Integrations</h4>
-      <p>Connect GitHub, Slack, Google or Microsoft to a workspace and share their credentials with tasks.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/insights" aria-label="Insights">
-    <docs-card>
-      <h4 class="text-blue-brand">Insights</h4>
-      <p>Run counts, durations and AI usage for a workspace over time.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/quotas" aria-label="Quotas">
-    <docs-card>
-      <h4 class="text-blue-brand">Quotas</h4>
-      <p>The limits on a workspace's workflows, runs and storage.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/manage" aria-label="Manage workspace">
-    <docs-card>
-      <h4 class="text-blue-brand">Manage workspace</h4>
-      <p>A workspace's members, approver groups, artifacts, quotas, tokens and settings.</p>
-    </docs-card>
-  </a>
-  <a href="/fundamentals/administer" aria-label="Admin">
-    <docs-card>
-      <h4 class="text-blue-brand">Admin</h4>
-      <p>Platform settings, workspaces, users, global parameters, tokens, tasks and the audit trail.</p>
+      <h4 class="text-blue-brand">Troubleshooting</h4>
+      <p>Common problems, what causes them and how to fix each one.</p>
     </docs-card>
   </a>
 </docs-cards>
 
-## Run Flow yourself
+## Run Flow
+
+This is for you if you install, configure and upgrade Flow for other people to use.
 
 <docs-cards>
   <a href="/hosting/installing" aria-label="Installing">
     <docs-card>
-      <h4 class="text-green-brand">Install</h4>
-      <p>What Flow needs and how to install it.</p>
+      <h4 class="text-green-brand">Installing</h4>
+      <p>What an install needs, how to try Flow locally with Docker Compose, and how to deploy it to Kubernetes.</p>
     </docs-card>
   </a>
   <a href="/hosting/configuring" aria-label="Configuring">
     <docs-card>
-      <h4 class="text-green-brand">Configure</h4>
-      <p>Images, ports, properties, probes and the dispatcher.</p>
+      <h4 class="text-green-brand">Configuring</h4>
+      <p>The properties, routes and probes a deployment needs, and how Flow connects to its dispatcher.</p>
     </docs-card>
   </a>
-  <a href="/hosting/sign-in" aria-label="Sign-in">
+  <a href="/hosting/sign-in" aria-label="Sign-in and the first admin">
     <docs-card>
-      <h4 class="text-green-brand">Sign-in</h4>
-      <p>Sign people in with OpenID Connect or a proxy, and activate a new install.</p>
+      <h4 class="text-green-brand">Sign-in and the first admin</h4>
+      <p>Choose how people sign in, make the first admin, and decide who else may sign in.</p>
     </docs-card>
   </a>
-  <a href="/hosting/upgrading" aria-label="Upgrading">
+  <a href="/hosting/upgrading" aria-label="Upgrading from v3">
     <docs-card>
-      <h4 class="text-green-brand">Upgrade from v3</h4>
-      <p>Move a Flow 3 install to v5 in place, then roll out each later release.</p>
+      <h4 class="text-green-brand">Upgrading from v3</h4>
+      <p>Upgrade a Flow v3 installation to v5 in place, then roll out each later release.</p>
     </docs-card>
   </a>
-  <a href="/architecture/security" aria-label="Security">
+  <a href="/hosting/dispatcher" aria-label="Run the dispatcher">
     <docs-card>
-      <h4 class="text-blue-brand">Security</h4>
-      <p>How Flow authenticates people and machines, and what each role can do.</p>
-    </docs-card>
-  </a>
-  <a href="/apis/overview" aria-label="API reference">
-    <docs-card>
-      <h4 class="text-blue-brand">API reference</h4>
-      <p>Every route of the REST API under <code>/api/v2</code>.</p>
+      <h4 class="text-green-brand">Run the dispatcher</h4>
+      <p>Deploy Flow's Kubernetes dispatcher, choose its executor and grant the permissions it needs.</p>
     </docs-card>
   </a>
 </docs-cards>
 
-## Get help
+## Build on Flow
 
-- **Report a defect or request a feature** in the [Flow issue tracker](https://github.com/boomerang-io/flow/issues). Check [Known issues](/introduction/known-issues) first.
-- **Read the release notes** for each version on [GitHub](https://github.com/boomerang-io/flow/releases).
-- **Read the source:** Flow is developed in the open at [github.com/boomerang-io/flow](https://github.com/boomerang-io/flow).
+This is for you if you call Flow from another system, write tasks or a dispatcher, or build Flow into your own product.
+
+<docs-cards>
+  <a href="/apis/overview" aria-label="API reference">
+    <docs-card>
+      <h4 class="text-blue-brand">API reference</h4>
+      <p>How to authenticate to the REST API under <code>/api/v2</code>, how its errors and paging work, and every route.</p>
+    </docs-card>
+  </a>
+  <a href="/architecture/eventing" aria-label="Webhooks and events">
+    <docs-card>
+      <h4 class="text-blue-brand">Webhooks and events</h4>
+      <p>Start and resume runs from other systems, and receive a CloudEvent when a run's status changes.</p>
+    </docs-card>
+  </a>
+  <a href="/extend/task-contract" aria-label="Task container contract">
+    <docs-card>
+      <h4 class="text-blue-brand">Task container contract</h4>
+      <p>What Flow hands a task's container and what it takes back.</p>
+    </docs-card>
+  </a>
+  <a href="/extend/write-a-dispatcher" aria-label="Write a dispatcher">
+    <docs-card>
+      <h4 class="text-blue-brand">Write a dispatcher</h4>
+      <p>Build your own dispatcher with the Java dispatcher SDK, following the protocol's rules.</p>
+    </docs-card>
+  </a>
+  <a href="/extend/embed-flow" aria-label="Embed Flow">
+    <docs-card>
+      <h4 class="text-blue-brand">Embed Flow</h4>
+      <p>Use Flow as the workflow engine inside your own product, and call it with the <code>flow-sdk</code> client.</p>
+    </docs-card>
+  </a>
+</docs-cards>
+
+## Also useful
+
+[What's new in 5.0](/introduction/whats-new) · [Known issues](/introduction/known-issues) · [Task catalogue](/catalogue/overview) · [Glossary](/introduction/glossary)
+
+Flow is open source under the Apache License 2.0. To get help or report a defect, open an issue in the [Flow issue tracker](https://github.com/boomerang-io/flow/issues).

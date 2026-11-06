@@ -1,6 +1,6 @@
 ---
 title: Frequently asked questions
-order: 2
+order: 4
 description: Short answers to common questions about workflows, tasks, timings and limits in Boomerang Flow.
 ---
 
@@ -79,7 +79,7 @@ A single task can run as long as its run allows. An admin can set a ceiling for 
 
 ## Why is my run Waiting or Ready?
 
-- **Waiting**, before any task has started: the workflow's concurrency limit or the workspace's concurrent-run quota is holding the run. It starts when a run ends and frees a slot.
+- **Waiting**, before any task has started: the workflow's own concurrency limit is holding the run. It starts when a run ends and frees a slot. The workspace's **Concurrent Runs (executions)** quota works differently: a run submitted over it is refused with `QUOTA_EXCEEDED`, not held.
 - **Ready**, with "Waiting for a dispatcher to provision its workspace": the workflow has a run workspace, and no dispatcher has created it yet. If creating it fails, the run shows the cause, tries again after a minute, and fails on the third attempt.
 - A task stays **Ready**: no dispatcher has claimed it. Ask your operator to check the dispatcher.
 
@@ -96,7 +96,7 @@ These are the default workspace quotas:
 | Run workspace size | 2 GiB |
 | Artifact storage | 5 GiB |
 
-A quota of `0` means unlimited. An admin sets the platform defaults in **Admin › Settings › Quotas**. A workspace's own limits show in **Manage workspace › Quotas**. See [Quotas](../fundamentals/quotas).
+A quota of `0` means unlimited. An admin sets the platform defaults in **Admin › Settings › Quotas**. A workspace's own limits show in **Manage workspace › Quotas**. See [Quotas](../webapp/quotas).
 
 ## How long does Flow keep runs, logs and artifacts?
 

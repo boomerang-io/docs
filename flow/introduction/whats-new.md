@@ -1,6 +1,6 @@
 ---
 title: What's new
-order: 3
+order: 6
 description: What changed in Boomerang Flow 5.0.0, for anyone coming from Flow 3.
 ---
 
@@ -14,10 +14,10 @@ Boomerang Flow 5.0.0 rebuilds Flow's engine, webapp and API. Flow 4 was never re
 
 ### Workspaces, Home and Admin
 
-- **Workspaces replace teams.** A workspace holds workflows, members, parameters and quotas. Any signed-in user can create one and becomes its owner, unless an admin turns off **Workspace creation by users**. See [Manage workspace](../fundamentals/manage).
-- **Home shows your day at a glance.** Today's runs, the approvals and manual tasks waiting on you, your workspaces and recent activity, plus a three-step **Get started** list for new users. See [Home](../fundamentals/home).
+- **Workspaces replace teams.** A workspace holds workflows, members, parameters and quotas. Any signed-in user can create one and becomes its owner, unless an admin turns off **Workspace creation by users**. See [Manage workspace](../webapp/manage).
+- **Home shows your day at a glance.** Today's runs, the approvals and manual tasks waiting on you, your workspaces and recent activity, plus a three-step **Get started** list for new users. See [Home](../webapp/home).
 - **Starter workflows on Home.** **Start a workflow** copies a ready-made workflow into a workspace. Templates from a v3 install come across as starters.
-- **One Admin area.** **Admin** replaces v3's administration menu, with tabs for Settings, Workspaces, Users, Parameters, Tokens, Tasks and Audit. Each tab shows only to people allowed to use it. See [Admin](../fundamentals/administer).
+- **One Admin area.** **Admin** replaces v3's administration menu, with tabs for Settings, Workspaces, Users, Parameters, Tokens, Tasks and Audit. Each tab shows only to people allowed to use it. See [Admin](../webapp/administer).
 - **An audit trail.** **Admin › Audit** records who changed what, including settings, global parameters, catalogue tasks and schedules.
 
 ### Building workflows
@@ -31,7 +31,7 @@ Boomerang Flow 5.0.0 rebuilds Flow's engine, webapp and API. Flow 4 was never re
 - **Task retries.** A task's **Configure** tab sets **Retries**, from 0 to 10, and a **Backoff** for failures its dispatcher reports.
 - **Concurrency limits.** **Concurrency limit** under **Configure › Run Options** caps a workflow's runs in flight. Choose **Queue until a run ends** or **Skip the run** for the runs over the limit. See [Configure a workflow](../guides/configure-workflow).
 - **Child workflows pass values both ways.** **Run Workflow** passes the parameters the child workflow declares, and a child it waits for returns its results as the task's results. It can start one child per item.
-- **Integrations per workspace.** Connect GitHub, Slack, Google or Microsoft on a workspace's **Integrations** page, then **Share the installation token with tasks** for GitHub or Slack, so tasks don't need a token typed into each node. 16 new catalogue tasks cover GitHub, Microsoft Teams, SharePoint and Google Drive. See [Integrations](../fundamentals/integrations) and [Connect GitHub](../guides/connect-github).
+- **Integrations per workspace.** Connect GitHub, Slack, Google or Microsoft on a workspace's **Integrations** page, then **Share the installation token with tasks** for GitHub or Slack, so tasks don't need a token typed into each node. 16 new catalogue tasks cover GitHub, Microsoft Teams, SharePoint and Google Drive. See [Integrations](../webapp/integrations) and [Connect GitHub](../guides/connect-github).
 
 ### Running workflows
 

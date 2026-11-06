@@ -1,6 +1,6 @@
 ---
 title: Getting started
-order: 1
+order: 2
 description: Build and run your first workflow, from signing in to a succeeded run in Activity.
 ---
 
@@ -17,6 +17,8 @@ You need:
 - **A Flow install you can sign in to.** If you run Flow yourself, see [Installing](../hosting/installing) and [Sign-in](../hosting/sign-in).
 - **A dispatcher connected to Flow.** A dispatcher runs each task's container. Your operator sets one up with the install.
 - **Permission to create a workspace.** Any signed-in user can, unless an admin has turned off **Workspace creation by users**. Otherwise, ask a workspace owner to add you to their workspace and skip to [Create a workflow](#create-a-workflow).
+
+If you're new to Flow, read [Flow in five minutes](./flow-in-five-minutes) first: it explains the workspaces, workflows, tasks and runs this page uses.
 
 ## Sign in
 
@@ -138,6 +140,6 @@ Back on **Home**, **Get started** has gone, because all three steps are done, an
 - [Workflow editor](../guides/workflow-editor): configure tasks, branch with a switch, and add parameters.
 - [Parameters](../fundamentals/parameters): pass values into a run and between tasks.
 - [Actions](../fundamentals/actions): put a person in the loop with an approval.
-- [Triggers](../fundamentals/triggers) and [Schedules](../fundamentals/schedules): start runs without selecting **Run it**.
+- [Triggers](../fundamentals/triggers) and [Schedules](../webapp/schedules): start runs without selecting **Run it**.
 - [Runs](../fundamentals/runs): statuses, pausing, retries and timeouts.
 - [Known issues](./known-issues): what doesn't work yet in 5.0.0.
