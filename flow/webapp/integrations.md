@@ -1,6 +1,6 @@
 ---
 title: Integrations
-order: 11
+order: 5
 description: Connect a workspace to GitHub, Slack, Google or Microsoft, and share their credentials with the catalogue tasks as workspace parameters.
 ---
 
@@ -38,7 +38,7 @@ The card reads **Connected**, and its button changes to **Manage**. For the step
 
 ## Share credentials with tasks
 
-The catalogue's GitHub, Slack, Google and Microsoft tasks default their credential fields to these workspace parameters, such as `$(workspace.params.github-token)`. See [Credentials in catalogue tasks](./tasks#credentials-in-catalogue-tasks).
+The catalogue's GitHub, Slack, Google and Microsoft tasks default their credential fields to these workspace parameters, such as `$(workspace.params.github-token)`. See [Credentials in catalogue tasks](../fundamentals/tasks#credentials-in-catalogue-tasks).
 
 - **GitHub and Slack:** select **Manage** and switch on **Share the installation token with tasks**. Sharing is a separate choice because it lets every workflow author in the workspace act with the app's permissions.
 - **Google and Microsoft:** connecting writes the parameters. **Manage** edits them; a stored secret is kept until you type a new one, then **Save**.
@@ -68,6 +68,6 @@ Sharing, editing and disconnecting need a role that can write in the workspace: 
 ## Next steps
 
 - [Connect GitHub](../guides/connect-github).
-- [Parameters](./parameters#parameters-an-integration-manages): managed parameters.
-- [Triggers](./triggers): start workflows from GitHub events.
+- [Parameters](../fundamentals/parameters#parameters-an-integration-manages): managed parameters.
+- [Triggers](../fundamentals/triggers): start workflows from GitHub events.
 - [Admin](./administer#settings): the platform's integration settings.

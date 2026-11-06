@@ -1,6 +1,6 @@
 ---
 title: Runs
-order: 4
+order: 3
 description: How a workflow run moves from start to finish, and how to pause, cancel, retry, time-limit and nest runs.
 ---
 
@@ -12,7 +12,7 @@ A run is the record of one execution of a workflow: the version it ran, what sta
 
 ## The run page
 
-Select a row on the [Activity](./activity) page to open its run. The header shows:
+Select a row on the [Activity](../webapp/activity) page to open its run. The header shows:
 
 - **Status:** the run's status as a coloured tag. While the run executes, the tag adds how long it has been running; once it finishes, its active time, the time spent executing.
 - **Workspace** and **Version:** where the run belongs and which version of the workflow it ran.
@@ -153,4 +153,4 @@ The page moves to the new run. **build** and **approve-release** show **Reused**
 - [Retry a run](../guides/retry-a-run): the retry dialog step by step.
 - [Actions](./actions): approvals and manual tasks, the waits that people answer.
 - [Triggers](./triggers): the ways a run can start.
-- [Quotas](./quotas): the workspace limits every run counts against.
+- [Quotas](../webapp/quotas): the workspace limits every run counts against.

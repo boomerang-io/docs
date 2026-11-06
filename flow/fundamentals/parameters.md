@@ -1,6 +1,6 @@
 ---
 title: Parameters
-order: 9
+order: 4
 description: The layers a parameter comes from, how to reference one, which value wins, when values resolve, and how secured parameters stay hidden.
 ---
 
@@ -116,11 +116,11 @@ Before 5.0, a blank kept a secret. Now it clears it.
 
 ## Parameters an integration manages
 
-When a workspace connects an [integration](./integrations), it can share credentials as workspace parameters, such as `github-token`. These show the tag **Managed by GitHub** (or the integration's name) and offer only **Copy reference**. Writing or deleting one is refused with `409 PARAMS_MANAGED_BY_INTEGRATION`. Stop sharing, or disconnect, to remove them.
+When a workspace connects an [integration](../webapp/integrations), it can share credentials as workspace parameters, such as `github-token`. These show the tag **Managed by GitHub** (or the integration's name) and offer only **Copy reference**. Writing or deleting one is refused with `409 PARAMS_MANAGED_BY_INTEGRATION`. Stop sharing, or disconnect, to remove them.
 
 ## Next steps
 
 - [Use secrets](../guides/use-secrets).
 - [Tasks](./tasks): the catalogue and its credential defaults.
-- [Integrations](./integrations): share credentials as parameters.
+- [Integrations](../webapp/integrations): share credentials as parameters.
 - [Repeat a task for each item](../guides/repeat-a-task-for-each-item): `item` and `index`.

@@ -1,6 +1,6 @@
 ---
 title: Insights
-order: 15
+order: 3
 description: How reliable and how fast a workspace's workflows are over a period, where their time goes, and why they fail.
 ---
 
@@ -52,7 +52,7 @@ Durations are taken over succeeded runs, and are active time: waits for approval
 
 ## Which runs are counted
 
-Insights reads the runs Flow still holds. Runs older than the Activity retention, 365 days by default, are gone, and so are the runs of deleted workflows. The workspace's monthly run quota still counts those, so the two numbers can differ. See [Runs](./runs#how-long-runs-are-kept).
+Insights reads the runs Flow still holds. Runs older than the Activity retention, 365 days by default, are gone, and so are the runs of deleted workflows. The workspace's monthly run quota still counts those, so the two numbers can differ. See [Runs](../fundamentals/runs#how-long-runs-are-kept).
 
 ## Example: find out why a workflow has slowed down
 
@@ -67,5 +67,5 @@ The month it changed points to the cause: here, the month the source table grew 
 ## Next steps
 
 - [Activity](./activity): every run, one row at a time.
-- [Runs](./runs): timeouts, retries and concurrency limits.
+- [Runs](../fundamentals/runs): timeouts, retries and concurrency limits.
 - [Use AI tasks](../guides/use-ai-tasks): the tasks behind Model usage.

@@ -1,6 +1,6 @@
 ---
 title: Actions
-order: 5
+order: 7
 description: Approvals and manual tasks, the points in a workflow where a person decides, and where to answer them.
 ---
 
@@ -60,7 +60,7 @@ Filter with **Filter by Workflow**, **Filter by status** (**Waiting**, **Approve
 
 ### Home
 
-**Needs your attention** on [Home](./home) lists what's waiting for you across every workspace. An approval there has **Approve** and **Reject**, which send no comment. A manual task has **Open in Actions**.
+**Needs your attention** on [Home](../webapp/home) lists what's waiting for you across every workspace. An approval there has **Approve** and **Reject**, which send no comment. A manual task has **Open in Actions**.
 
 ### The run page
 
@@ -84,4 +84,4 @@ When a run reaches the approval, it appears for all three managers. Once two of 
 
 - [Runs](./runs): how waiting affects a run's status and timeout.
 - [Parameters](./parameters): read task results in later tasks.
-- [Manage](./manage): approver groups and the rest of Manage workspace.
+- [Manage](../webapp/manage): approver groups and the rest of Manage workspace.

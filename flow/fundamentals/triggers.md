@@ -1,6 +1,6 @@
 ---
 title: Triggers
-order: 6
+order: 5
 description: The five ways a workflow run can start, and how to call the webhook, event and callback routes.
 ---
 
@@ -13,12 +13,12 @@ A trigger is a way a workflow's runs can start. Each workflow has five, and you 
 | Trigger | Starts a run when | Parameters the run gets |
 | --- | --- | --- |
 | **Manual** | Someone selects **Run it**, or an API caller submits a manual run | The values entered, or the defaults |
-| **Scheduler** | One of the workflow's [schedules](./schedules) fires | The schedule's values |
+| **Scheduler** | One of the workflow's [schedules](../webapp/schedules) fires | The schedule's values |
 | **Webhook** | A system posts to the webhook route | `data`: the request body |
 | **Events** | A CloudEvent arrives that matches every filter | `event` and `data` |
 | **GitHub** | A GitHub App delivery matches the repository and event filters | `data` and `event` |
 
-A run through a trigger that is off is refused with `WORKFLOWRUN_TRIGGER_DISABLED`. Every triggered run counts against the workspace's [quotas](./quotas); while quotas are on, a run over one is refused with `429 QUOTA_EXCEEDED`. The run records its trigger, which Activity shows as **Manual**, **Schedule**, **Webhook**, **Event** or **GitHub**.
+A run through a trigger that is off is refused with `WORKFLOWRUN_TRIGGER_DISABLED`. Every triggered run counts against the workspace's [quotas](../webapp/quotas); while quotas are on, a run over one is refused with `429 QUOTA_EXCEEDED`. The run records its trigger, which Activity shows as **Manual**, **Schedule**, **Webhook**, **Event** or **GitHub**.
 
 ![Manual and Webhook on, Events on with one filter row](./assets/triggers-configure.png)
 
@@ -90,6 +90,6 @@ The deploy task reads the commit as `$(params.data.commit)`. The run appears on 
 
 ## Next steps
 
-- [Schedules](./schedules): run a workflow on a timetable.
+- [Schedules](../webapp/schedules): run a workflow on a timetable.
 - [Configure a workflow](../guides/configure-workflow): triggers, tokens and the other Configure sections.
 - [Eventing](../architecture/eventing): CloudEvents in and out of Flow.

@@ -1,6 +1,6 @@
 ---
 title: Tasks
-order: 8
+order: 2
 description: What a task is, the catalogue Flow ships, the task types, and how to add your own tasks in Task Manager.
 ---
 
@@ -43,40 +43,17 @@ A `template` or `script` task whose revision names no image runs on the image in
 
 ## The catalogue
 
-Flow 5.0 seeds 107 tasks. The palette lists the **Workflow** category first, then the rest A to Z. The number after each task is its latest revision.
+The catalogue is the set of global tasks Flow seeds. The palette groups them by category, with the **Workflow** category first and the rest A to Z, and lists each task's latest revision.
 
 ![The workflow editor's task palette, with the Workflow and AI categories expanded](./assets/tasks-palette.png)
 
-| Category | Tasks |
-| --- | --- |
-| Workflow | Acquire Lock (2) · Manual Approval (2) · Manual Task (1) · Release Lock (1) · Run Custom Task (1) · Run Scheduled Workflow (1) · Run Workflow (1) · Set Result Parameter (1) · Set Workflow Result Status (1) · Sleep (1) · Switch (1) · Wait For Event (1) |
-| AI | AI Agent (2) · AI Prompt (2) |
-| Artifactory | Artifactory File Download (2) · Artifactory File Upload (3) |
-| Artifacts | Download Artifact (1) · Upload Artifact (1) |
-| Box | Add Box Folder (1) · Add User To Box Folder (1) · Download File From Box (1) · Get Box Folder Info (1) · List Box Folders (1) · Remove Box Folder (1) · Remove User From Box Folder (1) · Upload File To Box (1) |
-| Communication | Send Email with Postmark Template (2) · Send Email with Sendgrid (3) · Send Email with Sendgrid Template (3) · Send Twilio SMS (2) |
-| Communication with Slack | Create Slack Channel (3) · Delete Slack Channel (3) · Find Slack Member By Email (4) · Find Slack Member By Id (3) · Get Slack Channel Info (3) · Get Slack Channel Members (3) · Get Slack Channels (3) · Invite Members to Channel (3) · Remove Member from Channel (3) · Send Custom Slack Message (2) · Send Simple Slack Message (2) · Send Slack Message with File Contents (2) · Upload Slack File with Message (4) |
-| File Utilities | Check File Contains String (1) · Check File or Folder Exists (1) · Create File (3) · Read File to Parameter (1) · Replace String in File (1) · Replace Tokens in Files (2) |
-| GitHub | Add Issue to Project (2) · Comment on GitHub Issue or Pull Request (1) · Create GitHub Issue (1) · Create GitHub Pull Request (1) · Create GitHub Release (1) · Create Team in Organization (4) · Delete Team from Organization (2) · Dispatch GitHub Workflow (1) · Find Issues and Label (4) · Find Issues and Remove (3) · Find Repositories in Org (4) · Get All Organizations (2) · Get All Teams in Organization (3) · Get GitHub File Contents (1) · Get Github Repository (3) · Get Organization Info (3) · Get Team In Organization (3) · Invite Collaborator to Project (2) · Invite Member to Team (3) · Invite User to Organization (3) · Make Repositories Private (2) · Remove Collaborator From Project (2) · Remove Member from Team (2) · Set GitHub Commit Status (1) |
-| Google Drive | Copy File (3) · Delete File (3) · Download Google Drive File (1) · List File Permissions (3) · List Files (3) · Share Google Drive File (1) · Upload Google Drive File (1) |
-| Google Sheets | Add Sheet (4) · Append Data (4) · Clear Data (4) · Copy Sheet To Another Spreadsheet (4) · Create Spreadsheet (4) · Delete Sheet (4) · Get Data (4) · Update Data (4) |
-| Microsoft Teams | Add Teams Member (1) · Create Teams Channel (1) · Send Teams Message (1) |
-| ServiceNow | Get Incidents (1) · Update Incidents (1) |
-| SharePoint | Download SharePoint File (1) · List SharePoint Files (1) · Upload SharePoint File (1) |
-| Utilities | Execute Advanced HTTP Call (4) · Execute Basic HTTP Call (1) · Execute Shell (2) · File JSONPath To Parameter (2) · JSONPath To Parameter (3) · MongoDB Query Execution (1) · Run Python Script (2) |
+The [task catalogue](../catalogue/overview) lists every catalogue task by category, with its parameters, results, image and latest revision.
 
-The table leaves out two kinds of task. Read Parameters from File (File Utilities) is inactive, so it's listed in Task Manager but not in the palette. Three tasks in the **IBM Services Essentials** category (Create Support Center Ticket, Send Platform Email and Send Platform Notification) call that platform's services, and work only on an installation that runs inside it.
-
-### Tasks that do nothing yet
-
-> **Warning:** Some tasks end `succeeded` without doing anything. Don't build on them until they're fixed. See [Known issues](../introduction/known-issues).
-
-- **Execute Basic HTTP Call and Execute Advanced HTTP Call** do nothing on `boomerangio/task-flow:3.3.0`, the default image, and report success. They work from task-flow 3.4.0, which isn't released yet.
-- **Send Email with Sendgrid revisions 1 and 2, Find Repositories in Org revision 1 and Run Python Script revision 1** do nothing either. Their later revisions work: Send Email with Sendgrid 3, Find Repositories in Org 2 to 4, and Run Python Script 2. If a workflow is pinned to an old revision, upgrade the node in the editor and save.
+> **Warning:** A few catalogue tasks end `succeeded` without doing anything, such as the HTTP Call tasks on the default task image. The catalogue marks each one. See [Known issues](../introduction/known-issues).
 
 ### Credentials in catalogue tasks
 
-A field of type Password is a secret: it's stored encrypted, reads back as `*****`, and is scrubbed from logs. Many catalogue tasks default their credential to a workspace parameter that an [integration](./integrations) shares, so you don't type a token into every node:
+A field of type Password is a secret: it's stored encrypted, reads back as `*****`, and is scrubbed from logs. Many catalogue tasks default their credential to a workspace parameter that an [integration](../webapp/integrations) shares, so you don't type a token into every node:
 
 | Tasks | Field | Default |
 | --- | --- | --- |
@@ -147,7 +124,8 @@ The webapp doesn't delete tasks. **Archive** removes a task from the palette and
 
 ## Next steps
 
+- [Task catalogue](../catalogue/overview): every catalogue task's parameters, results and image.
 - [Parameters](./parameters): how a task reads values and results.
 - [Artifacts and the run workspace](./artifacts): pass files between tasks and runs.
-- [Integrations](./integrations): share credentials with the catalogue tasks.
+- [Integrations](../webapp/integrations): share credentials with the catalogue tasks.
 - [Use AI tasks](../guides/use-ai-tasks).

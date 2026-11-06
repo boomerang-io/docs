@@ -1,6 +1,6 @@
 ---
 title: Artifacts and the run workspace
-order: 10
+order: 6
 description: Share files between the tasks of one run with the run workspace, and keep files after a run, or between runs, as artifacts.
 ---
 
@@ -101,5 +101,5 @@ The first run finds nothing and carries on. Every later run starts with the cach
 ## Next steps
 
 - [Keep files between runs](../guides/keep-files-between-runs).
-- [Quotas](./quotas): the storage and retention limits.
+- [Quotas](../webapp/quotas): the storage and retention limits.
 - [Tasks](./tasks): the rest of the catalogue.

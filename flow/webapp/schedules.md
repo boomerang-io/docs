@@ -1,6 +1,6 @@
 ---
 title: Schedules
-order: 7
+order: 4
 description: Run a workflow once at a set time or on a repeating timetable, with the parameter values each run starts with.
 ---
 
@@ -10,7 +10,7 @@ description: Run a workflow once at a set time or on a repeating timetable, with
 
 A schedule runs a workflow at a time you set, once or on a repeating timetable, with the parameter values each run starts with. Use one for anything that should happen without someone pressing **Run it**: a nightly report, a weekly clean-up, a one-off job at the end of the month.
 
-A workflow can have several schedules, each with its own times and values. They only fire while the workflow's **Scheduler** [trigger](./triggers) is on.
+A workflow can have several schedules, each with its own times and values. They only fire while the workflow's **Scheduler** [trigger](../fundamentals/triggers) is on.
 
 ## Where schedules live
 
@@ -81,6 +81,6 @@ The schedule appears as **Enabled**, with **Next run** shown in your own time zo
 
 ## Next steps
 
-- [Triggers](./triggers): the Scheduler trigger and the other ways a run starts.
-- [Runs](./runs): what happens once a scheduled run starts.
-- [Parameters](./parameters): the values a run starts with.
+- [Triggers](../fundamentals/triggers): the Scheduler trigger and the other ways a run starts.
+- [Runs](../fundamentals/runs): what happens once a scheduled run starts.
+- [Parameters](../fundamentals/parameters): the values a run starts with.

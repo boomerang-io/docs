@@ -1,6 +1,6 @@
 ---
 title: Manage workspace
-order: 13
+order: 6
 description: Manage one workspace's members and roles, approver groups, artifacts, quotas, tokens, name, labels and deletion.
 ---
 
@@ -10,7 +10,7 @@ description: Manage one workspace's members and roles, approver groups, artifact
 
 **Manage workspace** is one workspace's own administration: its members, approver groups, artifacts, quotas, tokens and settings. This page is for workspace owners and editors, and for members who want to know what their role allows.
 
-Open it from **Manage workspace** in the side nav, which appears while **Admin › Settings › Features › Workspace Management** is on. The header shows the workspace's **Status** and **Date Created**. The workspace's parameters, tasks and integrations have their own side-nav pages: see [Parameters](./parameters), [Tasks](./tasks#add-your-own-tasks-in-task-manager) and [Integrations](./integrations).
+Open it from **Manage workspace** in the side nav, which appears while **Admin › Settings › Features › Workspace Management** is on. The header shows the workspace's **Status** and **Date Created**. The workspace's parameters, tasks and integrations have their own side-nav pages: see [Parameters](../fundamentals/parameters), [Tasks](../fundamentals/tasks#add-your-own-tasks-in-task-manager) and [Integrations](./integrations).
 
 ![Manage workspace on its Members tab, showing the tab row and the members table](./assets/manage-members.png)
 
@@ -50,11 +50,11 @@ An approver group is a named set of members that a Manual Approval task can name
 2. Enter a **Group name**, unique in the workspace.
 3. Select the members to include, then **Create group**.
 
-Owners and editors create and edit groups. Deleting a group needs the owner role, and removes the group from every approval that names it. See [Actions](./actions).
+Owners and editors create and edit groups. Deleting a group needs the owner role, and removes the group from every approval that names it. See [Actions](../fundamentals/actions).
 
 ## Artifacts
 
-Every artifact the workspace's runs uploaded, filtered by **Scope** (**All**, **Run** or **Workflow**) and **Show expired**. While quotas are on, it shows the storage used against the **Artifact Storage** quota. See [Artifacts and the run workspace](./artifacts).
+Every artifact the workspace's runs uploaded, filtered by **Scope** (**All**, **Run** or **Workflow**) and **Show expired**. While quotas are on, it shows the storage used against the **Artifact Storage** quota. See [Artifacts and the run workspace](../fundamentals/artifacts).
 
 ## Quotas
 
@@ -84,4 +84,4 @@ Owners and editors can create tokens. Deleting a token stops anything still usin
 
 - [Quotas](./quotas).
 - [Admin](./administer): platform administration.
-- [Actions](./actions): approvals and approver groups in use.
+- [Actions](../fundamentals/actions): approvals and approver groups in use.

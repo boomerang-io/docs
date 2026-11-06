@@ -1,6 +1,6 @@
 ---
 title: Activity
-order: 3
+order: 2
 description: Find any run of a workspace's workflows, filter by workflow, status, trigger and date, and open it.
 ---
 
@@ -45,13 +45,13 @@ The trigger filter has no option for runs started by an event, GitHub, a parent 
 | **Initiated By** | The person, or the token's name, that started a manual, webhook or event run. Runs started by a schedule, a parent workflow or a retry show `---`; the run page links to their origin instead. |
 | **Start Time** | When the run started. A run that hasn't started yet, such as one waiting for a dispatcher or for a concurrency slot, shows `---`. |
 | **Active time** | Time spent executing, once the run has finished. Waits for approvals, manual tasks and sleeps, and pauses, are left out. |
-| **Status** | The run's [status](./runs#status-and-phase). When Flow recorded a reason, it shows under the status: `DeadlineExceeded` for a timeout, or `ConcurrencyLimit` for a run skipped over its workflow's concurrency limit. |
+| **Status** | The run's [status](../fundamentals/runs#status-and-phase). When Flow recorded a reason, it shows under the status: `DeadlineExceeded` for a timeout, or `ConcurrencyLimit` for a run skipped over its workflow's concurrency limit. |
 
 Select a row to open the run page. Pages hold 10 runs by default, and up to 100.
 
 ## How long runs are kept
 
-Activity shows only the runs Flow still holds. Finished runs are deleted after the **Activity Retention (days)** setting, 365 days by default and never less than 60. See [Runs](./runs#how-long-runs-are-kept).
+Activity shows only the runs Flow still holds. Finished runs are deleted after the **Activity Retention (days)** setting, 365 days by default and never less than 60. See [Runs](../fundamentals/runs#how-long-runs-are-kept).
 
 ## Example: find out why last night's report failed
 
@@ -66,6 +66,6 @@ The last lines of the log, and the task's status message under **View Details**,
 
 ## Next steps
 
-- [Runs](./runs): what the run page shows, and how to pause, cancel or retry a run.
+- [Runs](../fundamentals/runs): what the run page shows, and how to pause, cancel or retry a run.
 - [Retry a run](../guides/retry-a-run): re-run a failed run from the task that failed.
 - [Insights](./insights): success rates and durations over time.

@@ -1,6 +1,6 @@
 ---
 title: Quotas
-order: 12
+order: 7
 description: The limits on what one workspace can use, their defaults, what 0 and an unset quota mean, and where to change them.
 ---
 
@@ -40,7 +40,7 @@ A few quotas treat `0` in their own way:
 
 - **Run Duration `0`** removes the ceiling on a timeout a workflow declares. A run that declares none still takes the platform default, 30 minutes unless an admin changed it.
 - **Workspace Storage - Per Run `0`** removes the ceiling. A workflow saved without a size still gets the platform default size, `2Gi`.
-- **Artifact Retention `0`** gives run-scoped artifacts no expiry date, unless the upload task sets **Retention days**. They stay until their run is purged. See [Artifacts and the run workspace](./artifacts#how-long-is-an-artifact-kept).
+- **Artifact Retention `0`** gives run-scoped artifacts no expiry date, unless the upload task sets **Retention days**. They stay until their run is purged. See [Artifacts and the run workspace](../fundamentals/artifacts#how-long-is-an-artifact-kept).
 - **Artifact Storage** and **Artifact Retention** can't be set to `0` in the webapp, whose lowest value is 1. Set `0` through the API.
 
 ## What happens at a limit?
@@ -76,5 +76,5 @@ To change the defaults for every workspace, edit **Admin › Settings › Quotas
 ## Next steps
 
 - [Manage workspace](./manage).
-- [Artifacts and the run workspace](./artifacts): storage and retention in use.
+- [Artifacts and the run workspace](../fundamentals/artifacts): storage and retention in use.
 - [Admin](./administer): the platform defaults.

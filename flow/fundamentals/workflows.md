@@ -1,6 +1,6 @@
 ---
 title: Workflows
-order: 2
+order: 1
 description: What a workflow is, and how to find, run and manage the workflows in a workspace.
 ---
 
@@ -10,13 +10,13 @@ description: What a workflow is, and how to find, run and manage the workflows i
 
 A workflow is a graph of tasks that automates a process the same way every time. Each workflow belongs to one workspace, and every time it runs, Flow records a [run](./runs) you can follow and look back on.
 
-Use a workflow for any process you repeat: a nightly report, a release, onboarding a new starter. Build it once on the canvas, then run it by hand, on a [schedule](./schedules) or from a [trigger](./triggers).
+Use a workflow for any process you repeat: a nightly report, a release, onboarding a new starter. Build it once on the canvas, then run it by hand, on a [schedule](../webapp/schedules) or from a [trigger](./triggers).
 
 ## The Workflows page
 
 Select **Workflows** in the side navigation to see the current workspace's workflows as cards. The title counts them, for example **Workflows (3)**. Use **Search for a workflow** to filter the cards by name.
 
-When workspace quotas are on, a line such as "Workflow quota - 3 of 10 used" sits above the cards. **View more quotas** opens the workspace's limits on workflows, concurrent runs, runs a month, run workspace size and run duration. See [Quotas](./quotas).
+When workspace quotas are on, a line such as "Workflow quota - 3 of 10 used" sits above the cards. **View more quotas** opens the workspace's limits on workflows, concurrent runs, runs a month, run workspace size and run duration. See [Quotas](../webapp/quotas).
 
 ![Three workflow cards, one template card tagged Template, and the Create a new workflow tile](./assets/workflows-page.png)
 
@@ -26,7 +26,7 @@ When workspace quotas are on, a line such as "Workflow quota - 3 of 10 used" sit
 - **Run it.** Starts a run. When the workflow has parameters you can set, **Workflow Parameters** opens first; select **Run** to start, or **Run and View** to start and open the run page. **Run it** is unavailable while the workflow's **Manual** trigger is off or the workspace has reached its monthly or concurrent run quota.
 - **A status icon.** Hover over it to read why the workflow can or can't run: **Active**, **Inactive**, **Trigger disabled**, or a quota message.
 - **A warning icon,** when a task on the canvas has a newer version: "New version of a task available! To update, edit your workflow."
-- **The menu,** with **Edit**, **View Activity** (the [Activity](./activity) page filtered to this workflow), **Update** (replace it from an exported file), **Export** (download it as JSON), **Duplicate** and **Delete**.
+- **The menu,** with **Edit**, **View Activity** (the [Activity](../webapp/activity) page filtered to this workflow), **Update** (replace it from an exported file), **Export** (download it as JSON), **Duplicate** and **Delete**.
 
 Deleting a workflow can't be undone. Flow cancels any run still in flight, then removes the workflow, its runs and its schedules. The workspace's monthly run count keeps counting runs it already made.
 
@@ -55,7 +55,7 @@ Opening a workflow shows five tabs:
 | **Canvas** | Drag tasks on, link them, and set each task's parameters |
 | **Parameters** | Declare the workflow's own parameters, the values a run starts with |
 | **Configure** | Set the name and labels, [triggers](./triggers), timeout, retries, concurrency limit, run workspace, kept artifacts and tokens |
-| **Schedules** | Add and manage this workflow's [schedules](./schedules) |
+| **Schedules** | Add and manage this workflow's [schedules](../webapp/schedules) |
 | **Change Log** | Read the version history |
 
 See [The workflow editor](../guides/workflow-editor) and [Configure a workflow](../guides/configure-workflow).

@@ -25,7 +25,7 @@ The welcome band says how many runs ran today across your workspaces and how man
 | Tile | Shows | Opens |
 | --- | --- | --- |
 | **Runs today** | Today's runs, split into succeeded, failed and running | [Activity](./activity) |
-| **Waiting on you** | Approvals and manual tasks waiting for a decision | [Actions](./actions) |
+| **Waiting on you** | Approvals and manual tasks waiting for a decision | [Actions](../fundamentals/actions) |
 | **Next scheduled run** | When the next schedule fires, which one, and in which workspace | [Schedules](./schedules) |
 | **Your workspaces** | How many workspaces you're in, with their workflows and members | The workspace cards further down |
 
@@ -35,7 +35,7 @@ A tile that can't be read shows `---` and "Could not load. Refresh to try again.
 
 This list appears when an approval or a manual task is waiting for you. Each row is tagged **Approval** or **Manual task** and names the task, workflow and workspace. When an approval needs more than one decision, the row shows how many it has, such as "1/2 approvals".
 
-- On an approval, select **View run** to see the run, then **Approve** or **Reject**. The two buttons appear only if you can decide in that workspace, which takes the owner or editor role. A decision made here carries no comment; to add one, decide on the [Actions](./actions) page instead.
+- On an approval, select **View run** to see the run, then **Approve** or **Reject**. The two buttons appear only if you can decide in that workspace, which takes the owner or editor role. A decision made here carries no comment; to add one, decide on the [Actions](../fundamentals/actions) page instead.
 - On a manual task, select **Open in Actions** to read its instructions and complete it.
 
 **All actions** opens the Actions page.
@@ -73,6 +73,6 @@ A toast confirms "Your decision was recorded", and the row leaves the list. The 
 
 ## Next steps
 
-- [Workflows](./workflows): create, run and manage the workflows in a workspace.
-- [Actions](./actions): approvals and manual tasks in detail.
+- [Workflows](../fundamentals/workflows): create, run and manage the workflows in a workspace.
+- [Actions](../fundamentals/actions): approvals and manual tasks in detail.
 - [Getting started](../introduction/getting-started): build and run your first workflow.

@@ -1,6 +1,6 @@
 ---
 title: Admin
-order: 14
+order: 8
 description: Platform administration in Flow's webapp: settings, workspaces, users, global parameters, tokens, the task catalogue and the audit trail.
 ---
 
@@ -49,7 +49,7 @@ Some settings that need more than a sentence:
 - **Audit › Level** takes `DESTRUCTIVE` (deletes only), `WRITE` (every change) or `ALL` (adds sensitive reads and exports). Any other text reads as `WRITE`.
 - **Features › Workspace creation by users** lets any signed-in user create a workspace. Admins and operators always can.
 - **Features › Auto-Create Users**, switched off, lets in only people who are already users or whom an admin has added to a workspace. See [Decide who else may sign in](../hosting/sign-in#decide-who-else-may-sign-in).
-- **Features › Workspace Parameters** and **Global Parameters**, switched off, also stop those layers resolving in runs. See [Parameters](./parameters).
+- **Features › Workspace Parameters** and **Global Parameters**, switched off, also stop those layers resolving in runs. See [Parameters](../fundamentals/parameters).
 - **Run limits › Activity Retention (days)** deletes each finished run older than it, with its task runs, actions, run-scoped artifacts and logs, once an hour.
 - **Tasks › Deletion Policy** decides when a finished task's Kubernetes Job or Tekton TaskRun is removed: **Never (keep until the retention period)**, **On Success (remove when a task succeeds)** or **Always (remove when a task ends)**. The log read from the worker goes with it; a stored task log stays.
 
@@ -67,7 +67,7 @@ Select a user to see their workspaces, labels and details. **Change role** sets 
 
 ## Parameters
 
-Global parameters, which every workspace can read as `$(global.params.<name>)`. A workspace parameter of the same name wins. See [Parameters](./parameters).
+Global parameters, which every workspace can read as `$(global.params.<name>)`. A workspace parameter of the same name wins. See [Parameters](../fundamentals/parameters).
 
 ## Tokens
 
@@ -83,7 +83,7 @@ See [Machine tokens](../hosting/machine-tokens) for tokens declared in configura
 
 ## Tasks
 
-The global task catalogue, in the same Task Manager screens a workspace uses. A verified task can be edited only while **Settings › Tasks › Enable Verified Tasks to be edited** is on. See [Tasks](./tasks).
+The global task catalogue, in the same Task Manager screens a workspace uses. A verified task can be edited only while **Settings › Tasks › Enable Verified Tasks to be edited** is on. See [Tasks](../fundamentals/tasks).
 
 ## Audit
 
