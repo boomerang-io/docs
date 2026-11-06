@@ -1,6 +1,6 @@
 ---
 title: GitHub teams and members
-order: 2
+order: 4
 description: Create a GitHub team, invite a person to the organisation and the team, then delete the team again.
 ---
 

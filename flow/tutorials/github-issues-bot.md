@@ -1,6 +1,6 @@
 ---
 title: GitHub issues bot
-order: 0
+order: 2
 description: Mark inactive GitHub issues as stale each week, and close the ones nobody picked up.
 ---
 
@@ -128,6 +128,6 @@ Without the shared token, give both tasks a token and API URL from workflow para
 
 ## Next steps
 
-- [Schedules](../fundamentals/schedules): manage schedules across the workspace, including one-off and cron schedules.
+- [Schedules](../webapp/schedules): manage schedules across the workspace, including one-off and cron schedules.
 - [Triggers](../fundamentals/triggers): start a workflow from a webhook, an event or GitHub instead.
 - [GitHub teams and members](./github-teams): manage an organisation's teams with more GitHub tasks.

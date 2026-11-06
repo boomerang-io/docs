@@ -1,6 +1,6 @@
 ---
 title: Email a file from Box
-order: 1
+order: 3
 description: Download a file shared on Box into the run workspace, then send it as an email attachment with SendGrid.
 ---
 

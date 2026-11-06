@@ -1,6 +1,6 @@
 ---
 title: Use an approval's results
-order: 3
+order: 5
 description: Pause a workflow for a person's approval, then email who decided, when, and what they said.
 ---
 
