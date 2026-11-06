@@ -1,7 +1,8 @@
 ---
 title: Integrations
-order: 10
+order: 13
 description: Set up the platform's GitHub App and Slack app, and what the Google and Microsoft integrations need.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->
@@ -70,7 +71,8 @@ FLOW_SECURITY_TOKENS_GITHUB_DESCRIPTION=GitHub App deliveries
 
 Restart core, and keep `$RAW` for the webhook URL.
 
-> **Warning:** Proxies and access logs record URLs, and anyone with this URL can post to Flow's webhook, event and callback routes as this token. Keep it out of shared places, and rotate it as [Rotate a token without a gap](./machine-tokens#rotate-a-token-without-a-gap) describes.
+> [!WARNING]
+> Proxies and access logs record URLs, and anyone with this URL can post to Flow's webhook, event and callback routes as this token. Keep it out of shared places, and rotate it as [Rotate a token without a gap](./machine-tokens#rotate-a-token-without-a-gap) describes.
 
 ### Create the App on GitHub
 
@@ -118,7 +120,8 @@ Save. On the App's **Advanced** tab in GitHub, **Recent Deliveries** lists the `
 
 The Slack app lets a workspace share its bot token with the Slack tasks. Until **Slack Client ID** and **Slack Client Secret** are set, a workspace's Slack card shows **Connect** disabled, with "Not set up on this platform".
 
-> **Warning:** Slack's `/workflow` slash command can't run a workflow yet: the permission check behind it always refuses. Only `/workflow help` answers. See [Known issues](../introduction/known-issues#slacks-workflow-command-never-runs-a-workflow) and [flow#751](https://github.com/boomerang-io/flow/issues/751).
+> [!WARNING]
+> Slack's `/workflow` slash command can't run a workflow yet: the permission check behind it always refuses. Only `/workflow help` answers. See [Known issues](../introduction/known-issues#slacks-workflow-command-never-runs-a-workflow) and [flow#751](https://github.com/boomerang-io/flow/issues/751).
 
 ### Create the app from a manifest
 

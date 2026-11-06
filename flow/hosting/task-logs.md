@@ -1,7 +1,8 @@
 ---
 title: Task logs
-order: 9
+order: 12
 description: Keep finished task logs in the artifact store, follow running tasks through the dispatcher, and read live logs from Loki.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->
@@ -53,7 +54,8 @@ The dispatcher logs `TaskRun (<id>) log stored (<n> bytes).` for each upload. Wh
 | `TaskRun (<id>) log not stored: …` with a `413` | The log is over `flow.engine.task.log.max-bytes` | Raise the limit on core, or log less. The log stays readable from the pod while it exists. |
 | `Task (<id>) log not read from its pod: …` | The pod never existed or its log couldn't be read | Check the pod and the dispatcher's `pods/log` permission ([Grant the Kubernetes permissions](./dispatcher#grant-the-kubernetes-permissions)) |
 
-> **Warning:** Without a stored copy, a finished task's log lasts only as long as its pod. Under the Deletion Policy **On Success** or **Always**, the pod goes when the task ends, and so does its log. See [Clean up finished tasks](./dispatcher#clean-up-finished-tasks).
+> [!WARNING]
+> Without a stored copy, a finished task's log lasts only as long as its pod. Under the Deletion Policy **On Success** or **Always**, the pod goes when the task ends, and so does its log. See [Clean up finished tasks](./dispatcher#clean-up-finished-tasks).
 
 ## Follow a running task's log
 

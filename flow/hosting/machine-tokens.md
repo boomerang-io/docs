@@ -1,7 +1,8 @@
 ---
 title: Machine tokens
-order: 5
+order: 8
 description: Give services and dispatchers their own Flow credentials, declare them in configuration, and rotate them without a gap.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->

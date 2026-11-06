@@ -1,7 +1,8 @@
 ---
 title: Configuration reference
-order: 3
+order: 4
 description: The properties and environment variables that configure Flow v5's core, webapp and dispatcher link, grouped by area, with their defaults.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->
@@ -9,6 +10,8 @@ description: The properties and environment variables that configure Flow v5's c
 # Configuration reference
 
 This page lists the properties and environment variables that configure a Flow v5 deployment, grouped by area, with their defaults. It's for operators who know what they need to set. For a step-by-step walkthrough, see [Configuring](./configuring).
+
+These are the properties most deployments set. For the complete lists, see [All properties](./properties-reference), every property in core's and the dispatcher's `application.properties`, and [All settings](./settings-reference), every setting in **Admin › Settings**.
 
 Core and the dispatcher read properties, and an environment variable overrides any property: `flow.encrypt.secret` becomes `FLOW_ENCRYPT_SECRET`. The webapp reads only environment variables. Behaviour an admin tunes while Flow runs is a setting, not a property: see [Administer](../webapp/administer).
 
@@ -102,7 +105,7 @@ Core's own request spans, over OTLP:
 | Property | Environment variable | Default | Meaning |
 | --- | --- | --- | --- |
 | `management.tracing.export.enabled` | `MANAGEMENT_TRACING_EXPORT_ENABLED` | `false` | Export core's request spans |
-| `management.opentelemetry.tracing.export.otlp.endpoint` | `MANAGEMENT_OPENTELEMETRY_TRACING_EXPORT_OTLP_ENDPOINT` | not set | The OTLP collector to send them to |
+| `management.opentelemetry.tracing.export.otlp.endpoint` | `MANAGEMENT_OPENTELEMETRY_TRACING_EXPORT_OTLP_ENDPOINT` | not set | The OTLP collector to send them to. Spring Boot property, not in Flow's `application.properties`. |
 
 ## Deployment shape
 

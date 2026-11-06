@@ -1,7 +1,9 @@
 ---
 title: Dispatcher protocol reference
-order: 3
+sidebarTitle: Dispatcher protocol
+order: 4
 description: The rules of Flow's dispatcher protocol for registration, polling and filters, claims, start and end, requeues, terminate orders, leases, logs, storage, traces and compatibility.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->

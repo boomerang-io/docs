@@ -1,7 +1,8 @@
 ---
 title: Configuring
-order: 2
+order: 3
 description: Set the properties, routes and probes a Flow v5 deployment needs, and connect Flow to its dispatcher.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. The Helm chart facts are from charts#92 (bmrg-flow 6.0.0). -->
@@ -55,7 +56,8 @@ bmrg-flow 6.0.1, the first chart for v5, needs Flow 5.0.0-beta.39 or later. It s
 - **The startup probe:** `core.startupProbe.periodSeconds` and `core.startupProbe.failureThreshold`, 30 minutes by default.
 - **The dispatcher:** its own ServiceAccount and Role. Its executor, `dispatcher.executor`, defaults to `kube-jobs`, not `tekton`.
 
-  > **Warning:** bmrg-flow 6.0.1's dispatcher Role may lack the `deletecollection` verb that the dispatcher's clean-up needs (see [Connect the dispatcher](#connect-the-dispatcher)). Check it with `kubectl auth can-i deletecollection jobs --as=system:serviceaccount:<namespace>:<dispatcher service account>`, and add the verb to the Role if the answer is `no`.
+  > [!WARNING]
+  > bmrg-flow 6.0.1's dispatcher Role may lack the `deletecollection` verb that the dispatcher's clean-up needs (see [Connect the dispatcher](#connect-the-dispatcher)). Check it with `kubectl auth can-i deletecollection jobs --as=system:serviceaccount:<namespace>:<dispatcher service account>`, and add the verb to the Role if the answer is `no`.
 - **Any other property:** `core.env` or `dispatcher.env`, as environment variables.
 
 ## Set the required configuration
@@ -92,7 +94,8 @@ Core builds every index itself, in its migrations; nothing else creates them. It
 
 Flow encrypts secured settings, secret parameter values and stored integration tokens with `flow.encrypt.secret` and `flow.encrypt.salt`. Any string works for either. A v3 upgrade reads a second pair once, `mongo.encrypt.*`: see [Upgrade from v3](./upgrading#set-the-encryption-keys).
 
-> **Warning:** Never change the pair after the first start. Nothing re-encrypts stored values under a new key, so every stored secret stops decrypting. Keep a copy of the Secret outside the cluster. If the pair was changed, put the original back. If it's lost, every secret has to be entered again.
+> [!WARNING]
+> Never change the pair after the first start. Nothing re-encrypts stored values under a new key, so every stored secret stops decrypting. Keep a copy of the Secret outside the cluster. If the pair was changed, put the original back. If it's lost, every secret has to be entered again.
 
 ### Connect the artifact store
 
@@ -125,7 +128,8 @@ The browser talks only to the webapp, and the webapp's server calls core. Each o
 | `/api/docs/` | core, port 7700 | Optional: Swagger UI and the OpenAPI documents |
 | `/internal/v1/` | Never route it | The webapp's server, directly |
 
-> **Warning:** A prefix is a routing boundary, not a credential. Anything that reaches core's port directly reaches `/internal/v1` too. Keep core's Service inside the cluster and expose it only through the ingress.
+> [!WARNING]
+> A prefix is a routing boundary, not a credential. Anything that reaches core's port directly reaches `/internal/v1` too. Keep core's Service inside the cluster and expose it only through the ingress.
 
 Behind a reverse proxy or ingress, forward the `Host` header with its port (nginx: `proxy_set_header Host $http_host;`, not `$host`). The webapp checks each form submission's `Origin` against that host. Without the port, every form submission fails with HTTP 400. The REST API is unaffected.
 
@@ -204,7 +208,8 @@ Two properties on core set the shape. `flow.security.enabled` turns authenticati
 | The full product | `true` | `false` | Every product install: workspaces, sign-in, tokens and the webapp |
 | A headless engine | `false` | `true` | An engine embedded in another product, which owns identity and tenancy |
 
-> **Warning:** With `flow.security.enabled=false` there's no sign-in and every caller is an admin. Run that shape only for local development, or behind a route that only the embedding product can reach.
+> [!WARNING]
+> With `flow.security.enabled=false` there's no sign-in and every caller is an admin. Run that shape only for local development, or behind a route that only the embedding product can reach.
 
 A secured install that no person signs in to takes its first credential from `flow.security.bootstrap-token`. See [Machine tokens](./machine-tokens).
 

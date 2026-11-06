@@ -1,7 +1,8 @@
 ---
 title: Task container contract
-order: 1
+order: 2
 description: The exact contract between Flow and a task's container, including environment variables, parameter references, results, size caps, catalogue images and AI tasks.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->
@@ -74,7 +75,8 @@ There's no `/params` directory and no variable holding every parameter as JSON. 
 
 A `secret` parameter reaches the container as an ordinary `PARAM_<NAME>`, in plain text. Flow masks secrets on every read and scrubs the run's secret values from the logs it serves, but there's no per-task Kubernetes Secret.
 
-> **Warning:** Anyone who can read the task's pod spec can read its secrets. On the `tekton` executor, every parameter is also a parameter of the TaskRun object. Don't print a secret: until Flow serves the log, it's unscrubbed. See [Use secrets](../guides/use-secrets).
+> [!WARNING]
+> Anyone who can read the task's pod spec can read its secrets. On the `tekton` executor, every parameter is also a parameter of the TaskRun object. Don't print a secret: until Flow serves the log, it's unscrubbed. See [Use secrets](../guides/use-secrets).
 
 ## How does a task report its outcome?
 

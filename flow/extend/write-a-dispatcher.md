@@ -1,7 +1,8 @@
 ---
 title: Write a dispatcher
-order: 2
+order: 3
 description: Write a dispatcher with the Java dispatcher SDK, implement TaskHandler, pick a shape and test it.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->

@@ -1,7 +1,9 @@
 ---
 title: Sign-in and the first admin
-order: 4
+sidebarTitle: Sign-in
+order: 7
 description: Choose how people sign in to Flow, make the first admin, and decide who else may sign in.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->
@@ -69,7 +71,8 @@ With either OIDC setting empty, Flow is in proxy mode. The proxy in front of the
 
 The webapp forwards these to service-core, which starts a session. Set `flow.signOutUrl` to the proxy's sign-out URL. Signing out of Flow then ends the proxy session too; otherwise the proxy signs the person straight back in.
 
-> **Warning:** service-core trusts these headers on every route. It must be reachable only through the proxy.
+> [!WARNING]
+> service-core trusts these headers on every route. It must be reachable only through the proxy.
 
 ## Make the first admin with the activation code
 
@@ -115,7 +118,8 @@ When the code is unset, no person can become the first admin by code, and servic
 | An external user directory | Flow reads its users, and their types, from the directory at `flow.externalUrl.user`. The install always counts as activated. | Users are managed outside Flow |
 | Security off | `flow.security.enabled=false`. Every request runs as a built-in admin. | Local development or a headless engine |
 
-> **Warning:** If the code is unset and none of these applies, the first person can't get in. The webapp shows the activation screen and refuses every code. To recover, set `FLOW_ACTIVATION_CODE`, restart service-core and sign in again, or name the admin with the bootstrap token.
+> [!WARNING]
+> If the code is unset and none of these applies, the first person can't get in. The webapp shows the activation screen and refuses every code. To recover, set `FLOW_ACTIVATION_CODE`, restart service-core and sign in again, or name the admin with the bootstrap token.
 
 ### Name the first admin with the bootstrap token
 
@@ -194,7 +198,8 @@ Where Flow reads the claim depends on the sign-in mode:
 - **The webapp's own OIDC sign-in:** from the verified id_token, always. Configure the provider to put the claim in the id_token. A missing claim counts as not matching, and demotes an admin.
 - **Behind an authenticating proxy:** from the forwarded `Authorization: Bearer` token, and only with `trust-forwarded-token=true`. `x-forwarded-email` and other credentials carry no claim, so they never grant or remove admin.
 
-> **Warning:** service-core doesn't verify a forwarded token's signature. Setting `trust-forwarded-token=true` states that the proxy is the trust boundary and that service-core is reachable only through it. That is your trust decision, so make it only when the deployment guarantees both.
+> [!WARNING]
+> service-core doesn't verify a forwarded token's signature. Setting `trust-forwarded-token=true` states that the proxy is the trust boundary and that service-core is reachable only through it. That is your trust decision, so make it only when the deployment guarantees both.
 
 With a claim configured:
 

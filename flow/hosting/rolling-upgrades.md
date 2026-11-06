@@ -1,7 +1,9 @@
 ---
 title: Upgrade between v5 releases
-order: 7
+sidebarTitle: Rolling upgrades
+order: 10
 description: Roll out a later Flow v5 release with a rolling update while the previous release keeps serving.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39 (3960b0a79). -->

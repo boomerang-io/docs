@@ -1,7 +1,8 @@
 ---
 title: Upgrade from v3
-order: 6
-description: Upgrade a Flow v3 installation to v5 in place.
+order: 9
+description: Take a Flow v3 installation to v5 in place, from the backup and the encryption pair through the first start to the checks and clean-up afterwards.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39 (3960b0a79). v3 chart facts are from the charts repository: bmrg-flow 4.14.3 (the last v3 chart) and 5.5.4 (the last released chart). The v5 chart facts are from charts#92 (bmrg-flow 6.0.0). -->
@@ -102,7 +103,8 @@ Then back the Secret up:
 kubectl get secret bmrg-flow-secrets -n <namespace> -o yaml > bmrg-flow-secrets.yaml
 ```
 
-> **Warning:** Back up the Secret before you uninstall v3. `helm uninstall` deletes it, and with it the only copy of the pair. The file holds the key, so store it as you would a password.
+> [!WARNING]
+> Back up the Secret before you uninstall v3. `helm uninstall` deletes it, and with it the only copy of the pair. The file holds the key, so store it as you would a password.
 
 - **Not deployed with the chart?** Read `mongo.encrypt.secret` and `mongo.encrypt.salt` from your v3 workflow service's configuration. A v3 install that never set them holds no encrypted values.
 - **Secret gone?** Look for it in a cluster backup, such as Velero. If the pair is lost for good, see [Upgrade without v3's pair](#upgrade-without-v3s-pair).
@@ -239,7 +241,8 @@ env:
 
 To rotate at the upgrade, give v3's pair as `MONGO_ENCRYPT_SECRET` and `MONGO_ENCRYPT_SALT`, and a new pair as `FLOW_ENCRYPT_SECRET` and `FLOW_ENCRYPT_SALT`. The upgrade is the only rotation point.
 
-> **Warning:** Keep v5's pair fixed after the first start, in a Kubernetes Secret with a copy outside the cluster. Nothing re-encrypts stored values under a new key, so changing the pair later leaves every secured setting and secret parameter unreadable.
+> [!WARNING]
+> Keep v5's pair fixed after the first start, in a Kubernetes Secret with a copy outside the cluster. Nothing re-encrypts stored values under a new key, so changing the pair later leaves every secured setting and secret parameter unreadable.
 
 ### Connect the dispatcher and task logs
 
@@ -332,7 +335,8 @@ Settings are rebuilt from v5's defaults on the first start, keeping v3's values.
 
 A failed migration step stops core from starting. Nothing is served, and v3 stays stopped. Every step retries on the next start, so once you fix the cause, restart the pod and the upgrade resumes where it stopped. If you can't fix the cause, [restore the backup](#back-up) and start v3 again.
 
-> **Warning:** Never edit or delete `flow_sys_migration_changelog` by hand. It records which steps have run. Edited, it makes core skip or repeat steps against data in an unknown state. Fix the cause and restart, or restore the backup.
+> [!WARNING]
+> Never edit or delete `flow_sys_migration_changelog` by hand. It records which steps have run. Edited, it makes core skip or repeat steps against data in an unknown state. Fix the cause and restart, or restore the backup.
 
 | Symptom | Cause | Recovery |
 | --- | --- | --- |
@@ -360,7 +364,8 @@ Enter each named value again in **Admin › Settings › Integrations**: typical
 <!-- UNVERIFIED: FLOW_MIGRATION_RESET_UNREADABLE_SETTINGS and FLAMINGOCK_ENABLED are Spring's relaxed-binding forms of properties that exist at the tag; neither variable name appears verbatim in the repository. -->
 
 
-> **Warning:** The reset is one-way. The blanked values are gone from the database. If the pair turns up later, restore from the backup and upgrade again with the pair instead.
+> [!WARNING]
+> The reset is one-way. The blanked values are gone from the database. If the pair turns up later, restore from the backup and upgrade again with the pair instead.
 
 ## After the upgrade
 

@@ -1,7 +1,8 @@
 ---
 title: Embed Flow
-order: 4
+order: 5
 description: Use Flow as the workflow engine inside a host product, choose a deployment shape, call it with flow-sdk, run its tasks and read results back.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->
@@ -36,7 +37,8 @@ FLOW_WORKSPACE_SINGLE=true
 
 With security off, Flow checks no token on `/api/v2`. Every request runs as a synthetic admin: principal `system`, actor kind `SERVICE`, holding every permission on everything. It's never stored, and the audit trail records each action with `actor.principal=system`. The webapp shows no sign-in and no tokens.
 
-> **Warning:** With `flow.security.enabled=false`, anyone who can reach service-core can do anything in Flow. Put it on a network only the host product can reach. Run the webapp against it only for local development, or behind a route the host product protects.
+> [!WARNING]
+> With `flow.security.enabled=false`, anyone who can reach service-core can do anything in Flow. Put it on a network only the host product can reach. Run the webapp against it only for local development, or behind a route the host product protects.
 
 With a single workspace, Flow serves only the seeded `system` workspace:
 - a path naming any other workspace is refused with `WORKSPACE_INVALID_REF`;

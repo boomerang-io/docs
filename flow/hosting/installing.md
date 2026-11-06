@@ -1,7 +1,8 @@
 ---
 title: Installing
-order: 1
+order: 2
 description: What a Flow v5 install needs, how to try it locally with Docker Compose, and how to deploy it to Kubernetes.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->
@@ -64,9 +65,10 @@ Flow opens on **Home**, with **Admin** in the side navigation.
 | Sign-in provider | `http://idp.localhost:4380` | A passwordless user picker with two users, **Grace Hopper (Admin)** and **Alan Turing (User)** |
 | Artifact store | `http://localhost:8333` | SeaweedFS, with the `flow-artifacts` bucket |
 
-`docker compose down` stops the stack and keeps the database; `docker compose down -v` resets it.
+`docker compose --profile stack --profile dispatcher down` stops the stack and keeps the database; add `-v` to reset it. Name the same profiles as `up`: without them, `down` leaves core, the webapp and the dispatcher running.
 
-> **Warning:** The stack is for evaluation only. Its encryption keys and activation code are published in the repository, and it turns off the dispatcher's authentication. Never carry its settings into a real install.
+> [!WARNING]
+> The stack is for evaluation only. Its encryption keys and activation code are published in the repository, and it turns off the dispatcher's authentication. Never carry its settings into a real install.
 
 ### Run tasks in the local stack
 
@@ -88,17 +90,24 @@ The dispatcher is connected when `docker compose logs service-dispatcher` shows 
 | --- | --- | --- |
 | `http://localhost:3000` doesn't answer for the first minutes | Core migrates and seeds the database before it serves anything | Wait until `docker compose ps` shows `service-core` healthy |
 | A port is already allocated | Something else uses 3000, 7700, 4380, 8333, 27017 or 7702 | Stop it, then start the stack again |
-| No activation screen, and **Admin** is missing | Someone else signed in first and became the admin | Sign in as that user, or reset with `docker compose down -v` |
+| No activation screen, and **Admin** is missing | Someone else signed in first and became the admin | Sign in as that user, or reset with `docker compose --profile stack --profile dispatcher down -v` |
 | The dispatcher logs refused connections to `host.docker.internal:7700` | `FLOW_ENGINE_URL` wasn't set | Start it again with the command above |
 
-## Install with your own manifests
+## Deploy to Kubernetes
+
+Deploy Flow with your own manifests until the Helm chart for v5 is released.
+
+<!-- tabs -->
+
+### Your own manifests
 
 Each step links to the page with its properties. Use one namespace for Flow and, if you like, another for task pods.
 
 1. **Prepare the dependencies.** Create Flow's MongoDB user and the bucket. Register a public OpenID Connect client whose redirect URI is the webapp's address followed by `/apps/flow/auth/callback`, such as `https://flow.example.com/apps/flow/auth/callback`. See [Sign in with OpenID Connect](./sign-in#sign-in-with-openid-connect).
 2. **Create core's Secret,** with the MongoDB URI, the encryption pair and the activation code. See [Set the required configuration](./configuring#set-the-required-configuration).
 
-   > **Warning:** Keep a copy of the encryption pair outside the cluster. If it's lost, every stored secret has to be entered again.
+   > [!WARNING]
+   > Keep a copy of the encryption pair outside the cluster. If it's lost, every stored secret has to be entered again.
 
 3. **Deploy core,** with a startup probe that outlasts its migrations, and a Service on port 7700. See [Configure health probes](./configuring#configure-health-probes). Core is up when its log shows `Started Application`.
    - **It restarts before that line:** lengthen the startup probe.
@@ -115,11 +124,13 @@ Each step links to the page with its properties. Use one namespace for Flow and,
 
 The install works when the run ends **Succeeded** in **Activity**.
 
-## Install with the Helm chart
+### Helm chart
 
 <!-- PENDING: bmrg-flow 6.0.1 (charts#92 and #93, appVersion 5.0.0-beta.39) is merged on charts main but not released; the latest release is bmrg-flow-5.5.4. Its dispatcher Role lacks deletecollection. When 6.0.x is released, write the procedure here: helm repo add, the values to set (core.auth.oidc.*, core.artifacts.*, global.database.mongodb.*, global.ingress.*, dispatcher.executor), the activation code from the chart Secret, and re-check values names and the minimum Flow version. -->
 
 No v5 chart is released yet. bmrg-flow 6.0.1 needs Flow 5.0.0-beta.39 or later, and its dispatcher defaults to the `kube-jobs` executor. [With the Helm chart](./configuring#with-the-helm-chart) lists what it sets.
+
+<!-- /tabs -->
 
 ## Next steps
 

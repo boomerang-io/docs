@@ -1,7 +1,8 @@
 ---
 title: Run the dispatcher
-order: 8
+order: 11
 description: Deploy Flow's Kubernetes dispatcher, choose its executor and task types, grant its permissions, and size, place and clean up task pods.
+verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. -->
@@ -156,7 +157,8 @@ subjects:
     namespace: flow
 ```
 
-> **Warning:** bmrg-flow 6.0.1's dispatcher Role may lack `deletecollection`: on charts `main` it grants `delete` instead, and no `watch` on `persistentvolumeclaims`. Check each rule, and add what's missing to the Role.
+> [!WARNING]
+> bmrg-flow 6.0.1's dispatcher Role may lack `deletecollection`: on charts `main` it grants `delete` instead, and no `watch` on `persistentvolumeclaims`. Check each rule, and add what's missing to the Role.
 
 <!-- PENDING: re-check bmrg-flow's rbac-role-dispatcher.yaml when 6.0.x is released. -->
 
@@ -242,7 +244,8 @@ Every task also gets `/data`, an `emptyDir`. It's memory-backed when `kube.task.
 | `kube.image.pullPolicy` | `KUBE_IMAGE_PULLPOLICY` | `IfNotPresent` | The image pull policy |
 | `proxy.enable`, `proxy.host`, `proxy.port`, `proxy.ignore` | `PROXY_ENABLE`, and so on | `false`, blank | Passes `PROXY_HOST`, `PROXY_PORT`, `HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY` (from `proxy.ignore`) and the lower-case forms to every task |
 
-> **Warning:** A secured parameter reaches its pod as a plain environment variable, and on Tekton it's in the TaskRun too. Limit who can read pods and TaskRuns in `kube.namespace`. See [Security](../architecture/security#how-are-secrets-protected).
+> [!WARNING]
+> A secured parameter reaches its pod as a plain environment variable, and on Tekton it's in the TaskRun too. Limit who can read pods and TaskRuns in `kube.namespace`. See [Security](../architecture/security#how-are-secrets-protected).
 
 ### When a task can't start
 
