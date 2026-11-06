@@ -12,6 +12,9 @@ toc: true
 
 Boomerang Flow builds and runs workflows: graphs of tasks that run as containers on Kubernetes. Put tasks from the catalogue, or your own containers and scripts, onto a canvas, then run the workflow by hand, on a schedule, or from a webhook, a CloudEvent or a GitHub event.
 
+> [!NOTE]
+> Flow 5.0.0 is in pre-release. These docs describe [5.0.0-beta.39](https://github.com/boomerang-io/flow/releases/tag/5.0.0-beta.39) and can change before the release. For Flow 3, choose 3.12.0 in the version menu.
+
 ## Build workflows
 
 This is for you if you build, run and fix workflows in the webapp.

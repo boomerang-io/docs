@@ -21,7 +21,7 @@ Execute an Advanced HTTP Call
 - **Image:** Default task image.
 
 > [!WARNING]
-> Every revision sends no request and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image, so a later task that reads `response` or `statusCode` gets nothing. The fix is in task-flow 3.4.0, which isn't released. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing).
+> Every revision sends no request and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image, so a later task that reads `response` or `statusCode` gets nothing. Fixed in task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing).
 
 **Parameters**
 
@@ -50,7 +50,7 @@ Execute an Advanced HTTP Call
 ### Example
 
 > [!WARNING]
-> This example works from task-flow 3.4.0, which isn't released. On `boomerangio/task-flow:3.3.0`, the default task image, the task sends no request: see the warning above.
+> This example works from task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`. On `boomerangio/task-flow:3.3.0`, the default task image, the task sends no request: see the warning above.
 
 Record a deployment with an internal API, and retry while the service restarts.
 
@@ -85,7 +85,7 @@ A 502 or 503 is retried up to 3 times, 2 seconds apart. Any 2xx succeeds. Any ot
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
-| The task succeeds at once, and `statusCode` and `response` are empty | On `boomerangio/task-flow:3.3.0`, the default task image, the HTTP command is switched off. | Until task-flow 3.4.0, call the API with `curl --fail` in **Execute Shell**. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing). |
+| The task succeeds at once, and `statusCode` and `response` are empty | On `boomerangio/task-flow:3.3.0`, the default task image, the HTTP command is switched off. | Set Default Image Path to `boomerangio/task-flow:3.4.0`, or call the API with `curl --fail` in **Execute Shell**. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing). |
 | The task fails, saying the response is more than a task result can carry | The body is over 3,000 bytes, and **Response File Path** is blank. | Set **Response File Path**, and read the file in a later task. |
 | A `301` or `302` fails the task | The task doesn't follow redirects. | Call the final URL, or add the code to **HTTP response codes for successful execution**. |
 | The task fails before sending, saying the body isn't valid JSON | **Content Type** is a JSON type, and **Body** isn't valid JSON, often because a reference inserted a quote. | Correct the body. The task sends it as written. |
@@ -100,7 +100,7 @@ Execute a Basic HTTP Call
 - **Image:** Default task image.
 
 > [!WARNING]
-> Every revision sends no request and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image, so a later task that reads `response` or `statusCode` gets nothing. The fix is in task-flow 3.4.0, which isn't released. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing).
+> Every revision sends no request and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image, so a later task that reads `response` or `statusCode` gets nothing. Fixed in task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing).
 
 **Parameters**
 
@@ -178,7 +178,7 @@ Flow replaces `$(params.version)` before the script runs, and a later task reads
 | --- | --- | --- |
 | A later task reads an empty value from the result | The script didn't write the result to `$RESULTS_PATH`, or the node doesn't declare it under **Result Parameters**. Flow keeps only declared results. | Declare each result on the node, and write it as the example does. See [Return results](../guides/tasks#return-results). |
 | A later task can't find a file the script wrote | **Directory Path** is blank, so the script ran in `/data`, scratch space that only this task sees. | Turn on **Shared workspace for each run** under **Configure › Workspace**, then set **Directory Path** to `/workspace`, or write to paths under it. |
-| The task fails with `No such file or directory: /workspace/` | **Directory Path** must be an absolute path that exists, with no trailing slash. A relative path, a trailing `/`, or `/workspace` without the run workspace each fail. | Enter an absolute path such as `/workspace`. |
+| The task fails with `No such file or directory: /workspace/` | On `boomerangio/task-flow:3.3.0`, **Directory Path** must be an absolute path that exists, with no trailing slash. A relative path, a trailing `/`, or `/workspace` without the run workspace each fail. From task-flow 3.4.0, a trailing slash or a path relative to `/workspace` works. | Enter an absolute path such as `/workspace`, or move to `boomerangio/task-flow:3.4.0`. |
 | The task succeeds although a command in the script failed | Only the exit status of the script's last command counts. | Start the script with `set -e`, so the first command that fails ends the task **Failed**. |
 
 ## File JSONPath To Parameter

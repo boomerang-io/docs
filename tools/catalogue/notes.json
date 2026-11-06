@@ -17,7 +17,7 @@
         "revisions": "all",
         "defaultImage": "boomerangio/task-flow:3.3.0",
         "level": "warning",
-        "text": "Every revision sends no request and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image, so a later task that reads `response` or `statusCode` gets nothing. The fix is in task-flow 3.4.0, which isn't released. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing)."
+        "text": "Every revision sends no request and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image, so a later task that reads `response` or `statusCode` gets nothing. Fixed in task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing)."
       }
     ],
     "execute-advanced-http-call": [
@@ -25,26 +25,33 @@
         "revisions": "all",
         "defaultImage": "boomerangio/task-flow:3.3.0",
         "level": "warning",
-        "text": "Every revision sends no request and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image, so a later task that reads `response` or `statusCode` gets nothing. The fix is in task-flow 3.4.0, which isn't released. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing)."
+        "text": "Every revision sends no request and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image, so a later task that reads `response` or `statusCode` gets nothing. Fixed in task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing)."
       }
     ],
     "send-email-with-sendgrid": [
       {
-        "revisions": [1, 2],
+        "revisions": [
+          1,
+          2
+        ],
         "level": "warning",
         "text": "Revisions 1 and 2 do nothing and end `succeeded`: the command they call is no longer in the task image. Later revisions work. Upgrade a node pinned to revision 1 or 2 in the editor. See [Some older task revisions do nothing](../introduction/known-issues#some-older-task-revisions-do-nothing)."
       }
     ],
     "find-repositories-in-org": [
       {
-        "revisions": [1],
+        "revisions": [
+          1
+        ],
         "level": "warning",
         "text": "Revision 1 does nothing and ends `succeeded`: the command it calls is no longer in the task image. Later revisions work. Upgrade a node pinned to revision 1 in the editor. See [Some older task revisions do nothing](../introduction/known-issues#some-older-task-revisions-do-nothing)."
       }
     ],
     "run-python-script": [
       {
-        "revisions": [1],
+        "revisions": [
+          1
+        ],
         "level": "warning",
         "text": "Revision 1 does nothing and ends `succeeded`: the command it calls is no longer in the task image. Later revisions work. Upgrade a node pinned to revision 1 in the editor. See [Some older task revisions do nothing](../introduction/known-issues#some-older-task-revisions-do-nothing)."
       }
@@ -61,7 +68,7 @@
         "revisions": "all",
         "defaultImage": "boomerangio/task-flow:3.3.0",
         "level": "warning",
-        "text": "Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook."
+        "text": "Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook. Fixed in task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`."
       }
     ],
     "send-slack-message-with-file-contents": [
@@ -69,18 +76,22 @@
         "revisions": "all",
         "defaultImage": "boomerangio/task-flow:3.3.0",
         "level": "warning",
-        "text": "Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook."
+        "text": "Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook. Fixed in task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`."
       }
     ],
     "manual-approval": [
       {
-        "revisions": [2],
+        "revisions": [
+          2
+        ],
         "text": "The hint for **Number of Approvals (optional)** says \"Only respected if Approver Group is specified\", but Flow applies the number whether or not you choose an approver group. Leave it blank when one approval is enough. See [Number of Approvals applies without an approver group](../introduction/known-issues#number-of-approvals-applies-without-an-approver-group)."
       }
     ],
     "acquire-lock": [
       {
-        "revisions": [1],
+        "revisions": [
+          1
+        ],
         "text": "Revision 1 says **Timeout** is in seconds and defaults it to 300, but Flow reads it in milliseconds, so the lock expires after 300 milliseconds. Revision 2 says milliseconds and defaults to 300000, which is 5 minutes. Upgrade a node pinned to revision 1 in the editor."
       }
     ]
@@ -140,8 +151,8 @@
         },
         {
           "symptom": "The task fails with `No such file or directory: /workspace/`",
-          "cause": "**Directory Path** must be an absolute path that exists, with no trailing slash. A relative path, a trailing `/`, or `/workspace` without the run workspace each fail.",
-          "fix": "Enter an absolute path such as `/workspace`."
+          "cause": "On `boomerangio/task-flow:3.3.0`, **Directory Path** must be an absolute path that exists, with no trailing slash. A relative path, a trailing `/`, or `/workspace` without the run workspace each fail. From task-flow 3.4.0, a trailing slash or a path relative to `/workspace` works.",
+          "fix": "Enter an absolute path such as `/workspace`, or move to `boomerangio/task-flow:3.4.0`."
         },
         {
           "symptom": "The task succeeds although a command in the script failed",
@@ -656,7 +667,7 @@
             "text": "{\n  \"text\": \"Build $(params.version) is ready\",\n  \"blocks\": [\n    {\n      \"type\": \"section\",\n      \"text\": { \"type\": \"mrkdwn\", \"text\": \"*Build $(params.version)* is ready for review.\" }\n    }\n  ]\n}"
           }
         ],
-        "outcome": "The task posts the payload, as written, to the webhook, which posts to the channel it was created for. It returns no results. On the default task image, `boomerangio/task-flow:3.3.0`, Send Simple Slack Message and Send Slack Message with File Contents send nothing, so use this task for webhook messages."
+        "outcome": "The task posts the payload, as written, to the webhook, which posts to the channel it was created for. It returns no results. On the default task image, `boomerangio/task-flow:3.3.0`, Send Simple Slack Message and Send Slack Message with File Contents send nothing, so use this task for webhook messages, or move to `boomerangio/task-flow:3.4.0`."
       },
       "errors": [
         {
@@ -839,7 +850,7 @@
         "note": {
           "level": "warning",
           "defaultImage": "boomerangio/task-flow:3.3.0",
-          "text": "This example works from task-flow 3.4.0, which isn't released. On `boomerangio/task-flow:3.3.0`, the default task image, the task sends no request: see the warning above."
+          "text": "This example works from task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`. On `boomerangio/task-flow:3.3.0`, the default task image, the task sends no request: see the warning above."
         },
         "scenario": "Record a deployment with an internal API, and retry while the service restarts.",
         "params": [
@@ -904,7 +915,7 @@
           "defaultImage": "boomerangio/task-flow:3.3.0",
           "symptom": "The task succeeds at once, and `statusCode` and `response` are empty",
           "cause": "On `boomerangio/task-flow:3.3.0`, the default task image, the HTTP command is switched off.",
-          "fix": "Until task-flow 3.4.0, call the API with `curl --fail` in **Execute Shell**. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing)."
+          "fix": "Set Default Image Path to `boomerangio/task-flow:3.4.0`, or call the API with `curl --fail` in **Execute Shell**. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing)."
         },
         {
           "symptom": "The task fails, saying the response is more than a task result can carry",
@@ -927,7 +938,11 @@
   "migrationTasks": [
     {
       "source": "service-core/src/main/java/io/boomerang/migration/_0018__SeedArtifactTasks.java",
-      "task": { "name": "upload-artifact", "type": "uploadartifact", "status": "active" },
+      "task": {
+        "name": "upload-artifact",
+        "type": "uploadartifact",
+        "status": "active"
+      },
       "revision": {
         "displayName": "Upload Artifact",
         "description": "Upload a file or folder from the run workspace as an artifact of this run or of the workflow.",
@@ -937,12 +952,70 @@
         "spec": {
           "image": "",
           "params": [
-            { "name": "name", "label": "Artifact name", "type": "text", "required": true, "readOnly": false, "defaultValue": "", "helpertext": "Unique within the run. Letters, digits, dot, dash and underscore." },
-            { "name": "path", "label": "Path", "type": "text", "required": true, "readOnly": false, "defaultValue": "", "helpertext": "A file or folder to upload; a folder is sent as one .tar.gz. Relative to /workspace (e.g. workflowrun/reports/sbom.json), or an absolute path." },
-            { "name": "scope", "label": "Scope", "type": "select", "required": false, "readOnly": false, "defaultValue": "run", "options": [ { "key": "run", "value": "run" }, { "key": "workflow", "value": "workflow" } ], "helpertext": "run: this run only, expires on its retention date. workflow: kept for every later run of this workflow until replaced." },
-            { "name": "retention-days", "label": "Retention days", "type": "text", "required": false, "readOnly": false, "defaultValue": "", "helpertext": "Blank keeps it for the workspace's retention. You can ask for fewer days, not more. Not allowed with scope workflow." },
-            { "name": "url", "label": "Upload link", "type": "password", "required": false, "readOnly": true, "defaultValue": "", "helpertext": "Filled in by Flow when the task runs." },
-            { "name": "headers", "label": "Upload headers", "type": "text", "required": false, "readOnly": true, "defaultValue": "", "helpertext": "Filled in by Flow when the task runs." }
+            {
+              "name": "name",
+              "label": "Artifact name",
+              "type": "text",
+              "required": true,
+              "readOnly": false,
+              "defaultValue": "",
+              "helpertext": "Unique within the run. Letters, digits, dot, dash and underscore."
+            },
+            {
+              "name": "path",
+              "label": "Path",
+              "type": "text",
+              "required": true,
+              "readOnly": false,
+              "defaultValue": "",
+              "helpertext": "A file or folder to upload; a folder is sent as one .tar.gz. Relative to /workspace (e.g. workflowrun/reports/sbom.json), or an absolute path."
+            },
+            {
+              "name": "scope",
+              "label": "Scope",
+              "type": "select",
+              "required": false,
+              "readOnly": false,
+              "defaultValue": "run",
+              "options": [
+                {
+                  "key": "run",
+                  "value": "run"
+                },
+                {
+                  "key": "workflow",
+                  "value": "workflow"
+                }
+              ],
+              "helpertext": "run: this run only, expires on its retention date. workflow: kept for every later run of this workflow until replaced."
+            },
+            {
+              "name": "retention-days",
+              "label": "Retention days",
+              "type": "text",
+              "required": false,
+              "readOnly": false,
+              "defaultValue": "",
+              "helpertext": "Blank keeps it for the workspace's retention. You can ask for fewer days, not more. Not allowed with scope workflow."
+            },
+            {
+              "name": "url",
+              "label": "Upload link",
+              "type": "password",
+              "required": false,
+              "readOnly": true,
+              "defaultValue": "",
+              "helpertext": "Filled in by Flow when the task runs."
+            },
+            {
+              "name": "headers",
+              "label": "Upload headers",
+              "type": "text",
+              "required": false,
+              "readOnly": true,
+              "defaultValue": "",
+              "helpertext": "Filled in by Flow when the task runs."
+            }
           ],
           "results": []
         }
@@ -950,7 +1023,11 @@
     },
     {
       "source": "service-core/src/main/java/io/boomerang/migration/_0018__SeedArtifactTasks.java",
-      "task": { "name": "download-artifact", "type": "downloadartifact", "status": "active" },
+      "task": {
+        "name": "download-artifact",
+        "type": "downloadartifact",
+        "status": "active"
+      },
       "revision": {
         "displayName": "Download Artifact",
         "description": "Download an artifact of this run, or the workflow's kept artifact of that name, into the run workspace, checking its SHA-256.",
@@ -960,17 +1037,94 @@
         "spec": {
           "image": "",
           "params": [
-            { "name": "name", "label": "Artifact name", "type": "text", "required": true, "readOnly": false, "defaultValue": "", "helpertext": "An artifact an earlier task in this run uploaded, or with scope workflow the workflow's kept artifact of that name." },
-            { "name": "path", "label": "Destination path", "type": "text", "required": true, "readOnly": false, "defaultValue": "", "helpertext": "Where to put it; an uploaded folder is unpacked here. Relative to /workspace (e.g. workflowrun/inputs/), or an absolute path." },
-            { "name": "scope", "label": "Scope", "type": "select", "required": false, "readOnly": false, "defaultValue": "run", "options": [ { "key": "run", "value": "run" }, { "key": "workflow", "value": "workflow" } ], "helpertext": "run: this run only, expires on its retention date. workflow: kept for every later run of this workflow until replaced." },
-            { "name": "optional", "label": "Optional", "type": "boolean", "required": false, "readOnly": false, "defaultValue": "false", "helpertext": "Succeed with result found=false when no artifact of this name exists, instead of failing." },
-            { "name": "url", "label": "Download link", "type": "password", "required": false, "readOnly": true, "defaultValue": "", "helpertext": "Filled in by Flow when the task runs." },
-            { "name": "headers", "label": "Download headers", "type": "text", "required": false, "readOnly": true, "defaultValue": "", "helpertext": "Filled in by Flow when the task runs." },
-            { "name": "sha256", "label": "SHA-256", "type": "text", "required": false, "readOnly": true, "defaultValue": "", "helpertext": "Filled in by Flow when the task runs." },
-            { "name": "contentType", "label": "Content type", "type": "text", "required": false, "readOnly": true, "defaultValue": "", "helpertext": "Filled in by Flow when the task runs." }
+            {
+              "name": "name",
+              "label": "Artifact name",
+              "type": "text",
+              "required": true,
+              "readOnly": false,
+              "defaultValue": "",
+              "helpertext": "An artifact an earlier task in this run uploaded, or with scope workflow the workflow's kept artifact of that name."
+            },
+            {
+              "name": "path",
+              "label": "Destination path",
+              "type": "text",
+              "required": true,
+              "readOnly": false,
+              "defaultValue": "",
+              "helpertext": "Where to put it; an uploaded folder is unpacked here. Relative to /workspace (e.g. workflowrun/inputs/), or an absolute path."
+            },
+            {
+              "name": "scope",
+              "label": "Scope",
+              "type": "select",
+              "required": false,
+              "readOnly": false,
+              "defaultValue": "run",
+              "options": [
+                {
+                  "key": "run",
+                  "value": "run"
+                },
+                {
+                  "key": "workflow",
+                  "value": "workflow"
+                }
+              ],
+              "helpertext": "run: this run only, expires on its retention date. workflow: kept for every later run of this workflow until replaced."
+            },
+            {
+              "name": "optional",
+              "label": "Optional",
+              "type": "boolean",
+              "required": false,
+              "readOnly": false,
+              "defaultValue": "false",
+              "helpertext": "Succeed with result found=false when no artifact of this name exists, instead of failing."
+            },
+            {
+              "name": "url",
+              "label": "Download link",
+              "type": "password",
+              "required": false,
+              "readOnly": true,
+              "defaultValue": "",
+              "helpertext": "Filled in by Flow when the task runs."
+            },
+            {
+              "name": "headers",
+              "label": "Download headers",
+              "type": "text",
+              "required": false,
+              "readOnly": true,
+              "defaultValue": "",
+              "helpertext": "Filled in by Flow when the task runs."
+            },
+            {
+              "name": "sha256",
+              "label": "SHA-256",
+              "type": "text",
+              "required": false,
+              "readOnly": true,
+              "defaultValue": "",
+              "helpertext": "Filled in by Flow when the task runs."
+            },
+            {
+              "name": "contentType",
+              "label": "Content type",
+              "type": "text",
+              "required": false,
+              "readOnly": true,
+              "defaultValue": "",
+              "helpertext": "Filled in by Flow when the task runs."
+            }
           ],
           "results": [
-            { "name": "found", "description": "true when an artifact was downloaded" }
+            {
+              "name": "found",
+              "description": "true when an artifact was downloaded"
+            }
           ]
         }
       }

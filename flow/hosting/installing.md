@@ -29,6 +29,19 @@ The images are on Docker Hub, built for `linux/amd64` and `linux/arm64`. Deploy 
 - `boomerangio/flow-service-dispatcher`: Flow's Kubernetes dispatcher;
 - `boomerangio/flow-client-web`: the webapp.
 
+## Which versions has Flow been tested with?
+
+Flow states no minimum versions. Flow 5.0.0-beta.39 has been run with these, and other versions aren't tested. If a version you run doesn't work, open an issue in the [Flow issue tracker](https://github.com/boomerang-io/flow/issues).
+
+| Component | Tested with | Notes |
+| --- | --- | --- |
+| Kubernetes | 1.36 | The development cluster. bmrg-flow 6.0.1, the unreleased chart, lists 1.25 or later. |
+| Tekton Pipelines | v0.55.0 | For the `tekton` executor only. |
+| MongoDB | 7.0 | The version in Flow's Docker Compose stack. |
+| S3-compatible store | SeaweedFS 4.47 | The store in Flow's Docker Compose stack. |
+| OpenID Connect provider | IDPZero 0.3.2 | The local sign-in provider in Flow's Docker Compose stack. |
+| Task image | `boomerangio/task-flow:3.4.0` | Set it as **Default Image Path**: it fixes the HTTP Call and Slack message tasks. See [Set the task image](./configuring#set-the-task-image). |
+
 Upgrading from v3? Read [Upgrading](./upgrading) instead: the first start migrates the database, and the migration is forward-only.
 
 ## Is there a Helm chart?

@@ -6,7 +6,7 @@ verified: "5.0.0-beta.39"
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39. UI labels checked against the live webapp (build 490ba3894, 2026-11-06): 17 of 26 bolded terms seen live; the rest are states the walk didn't reach or aren't labels, and were verified in client-web source. -->
-<!-- Checked open at 5.0.0-beta.39 (3960b0a79) and task-flow 3.3.0 on 4 November 2026: flow#534, #751, #756, #322 and tasks#46 are open; no task-flow@3.4.0 tag exists. -->
+<!-- Checked open at 5.0.0-beta.39 (3960b0a79) and task-flow 3.3.0 on 4 November 2026: flow#534, #751, #756, #322 and tasks#46 are open. task-flow 3.4.0 (tasks PR #47) published to Docker Hub for amd64 and arm64 on 6 November 2026; Flow's seed still sets 3.3.0. -->
 
 # Known issues
 
@@ -24,7 +24,7 @@ These are the defects in Boomerang Flow 5.0.0 that a workflow author or operator
 curl --fail --silent --show-error https://api.example.com/status
 ```
 
-The fix is in task-flow 3.4.0, which isn't released.
+**Fixed in task-flow 3.4.0.** In **Admin › Settings › Tasks**, set **Default Image Path** to `boomerangio/task-flow:3.4.0`, and every revision of these tasks uses the fix.
 
 ### Some older task revisions do nothing
 
@@ -51,6 +51,8 @@ The editor's **Add a task** panel adds the latest revision, so a new node is nev
 **Send Simple Slack Message** and **Send Slack Message with File Contents** fail inside the task image (`ReferenceError: datetime is not defined` in the task log) yet end **Succeeded**, so nothing reaches Slack. **Send Custom Slack Message** works, but it also ends **Succeeded** when Slack rejects the request, so check its log when a message doesn't arrive.
 
 **Workaround:** use **Send Custom Slack Message**, and check the task log for a Slack error after a run.
+
+**Fixed in task-flow 3.4.0.** In **Admin › Settings › Tasks**, set **Default Image Path** to `boomerangio/task-flow:3.4.0`, and every revision of these tasks uses the fix. On 3.4.0, these two tasks and **Send Custom Slack Message** fail with Slack's answer when Slack rejects a message, instead of ending **Succeeded**.
 
 **Tracked in:** [tasks#46](https://github.com/boomerang-io/tasks/issues/46)
 

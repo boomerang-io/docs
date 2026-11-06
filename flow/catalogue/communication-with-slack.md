@@ -256,7 +256,7 @@ Post to a Slack channel through an incoming webhook when a build is ready.
 }
 ```
 
-The task posts the payload, as written, to the webhook, which posts to the channel it was created for. It returns no results. On the default task image, `boomerangio/task-flow:3.3.0`, Send Simple Slack Message and Send Slack Message with File Contents send nothing, so use this task for webhook messages.
+The task posts the payload, as written, to the webhook, which posts to the channel it was created for. It returns no results. On the default task image, `boomerangio/task-flow:3.3.0`, Send Simple Slack Message and Send Slack Message with File Contents send nothing, so use this task for webhook messages, or move to `boomerangio/task-flow:3.4.0`.
 
 ### Common problems
 
@@ -276,7 +276,7 @@ Easily configurable slack webhook message. To provide additional parameters, ple
 - **Image:** Default task image.
 
 > [!WARNING]
-> Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook.
+> Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook. Fixed in task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`.
 
 **Parameters**
 
@@ -300,7 +300,7 @@ Send slack message with file contents via webhook
 - **Image:** Default task image.
 
 > [!WARNING]
-> Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook.
+> Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook. Fixed in task-flow 3.4.0: set Default Image Path to `boomerangio/task-flow:3.4.0`.
 
 **Parameters**
 

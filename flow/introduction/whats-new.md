@@ -9,6 +9,9 @@ verified: "5.0.0-beta.39"
 
 # What's new
 
+> [!NOTE]
+> Flow 5.0.0 is in pre-release. These docs describe [5.0.0-beta.39](https://github.com/boomerang-io/flow/releases/tag/5.0.0-beta.39) and can change before the release. For Flow 3, choose 3.12.0 in the version menu.
+
 This page tells the story of 5.0.0. For every change in each release, with the upgrade steps each one needs, see [Release notes](./release-notes).
 
 Boomerang Flow 5.0.0 rebuilds Flow's engine, webapp and API. Flow 4 was never released for general use, so this page compares 5.0.0 with Flow 3. It covers the changes workflow authors and operators notice; the [release notes on GitHub](https://github.com/boomerang-io/flow/releases) list every change.

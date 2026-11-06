@@ -79,9 +79,9 @@ The task is **Succeeded**, but its work didn't happen, or a later task gets empt
 
 | Cause | How to tell | Fix |
 | --- | --- | --- |
-| An HTTP Call task | **Execute Basic HTTP Call** or **Execute Advanced HTTP Call**. Neither sends a request on the default image, `boomerangio/task-flow:3.3.0`. | Call with `curl --fail` in **Execute Shell**. See [Known issues](./known-issues#the-http-call-tasks-do-nothing). |
+| An HTTP Call task | **Execute Basic HTTP Call** or **Execute Advanced HTTP Call**. Neither sends a request on the default image, `boomerangio/task-flow:3.3.0`. | Set **Default Image Path** to `boomerangio/task-flow:3.4.0`, which fixes it, or call with `curl --fail` in **Execute Shell**. See [Known issues](./known-issues#the-http-call-tasks-do-nothing). |
 | An old task revision | Send Email with Sendgrid 1 or 2, Find Repositories in Org 1, or Run Python Script 1 | Upgrade the node. See [Known issues](./known-issues#some-older-task-revisions-do-nothing). |
-| A Slack message task | **Send Simple Slack Message** or **Send Slack Message with File Contents**; the task log shows `ReferenceError: datetime is not defined`. **Send Custom Slack Message** also ends **Succeeded** when Slack rejects the request. | Use **Send Custom Slack Message**, and check its log for a Slack error. See [Known issues](./known-issues#two-slack-message-tasks-send-nothing). |
+| A Slack message task | **Send Simple Slack Message** or **Send Slack Message with File Contents**; the task log shows `ReferenceError: datetime is not defined`. **Send Custom Slack Message** also ends **Succeeded** when Slack rejects the request. | Set **Default Image Path** to `boomerangio/task-flow:3.4.0`, which fixes them, or use **Send Custom Slack Message** and check its log. See [Known issues](./known-issues#two-slack-message-tasks-send-nothing). |
 | **Run Workflow** didn't wait | **Wait for the child run to finish** is off | Turn it on, or check the child run. |
 | An optional download found nothing | **Download Artifact** set `found` to `false` | Check the artifact's name and scope. |
 

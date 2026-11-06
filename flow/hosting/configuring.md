@@ -246,11 +246,12 @@ Catalogue tasks that name no image of their own run on the `task` settings group
 curl -X PATCH https://flow.example.com/api/v2/settings \
   -H "Authorization: Bearer $FLOW_TOKEN" \
   -H "Content-Type: application/merge-patch+json" \
-  -d '{"task": {"default.image": "registry.example.com/boomerangio/task-flow:3.3.0"}}'
+  -d '{"task": {"default.image": "registry.example.com/boomerangio/task-flow:3.4.0"}}'
 ```
 
 A change applies to runs created after it; a run already created keeps its image.
 
+- **Use task-flow 3.4.0 or later.** It fixes the HTTP Call tasks and the Slack message tasks, which do nothing on 3.3.0 (see [Known issues](../introduction/known-issues)). Set `default.image` to `boomerangio/task-flow:3.4.0`; no task revision pins an image, so every catalogue task picks it up.
 - **On upgrade,** an install whose setting still held `boomerangio/task-flow:3.1.0` moves to 3.3.0 on first start. An image you chose is kept.
 - **On arm64 nodes,** `task-flow:3.1.0` has no arm64 build: a task on it is held on `ErrImagePull` and fails after 60 seconds. Set a multi-arch tag, 3.3.0 or later.
 - **Other images:** the Upload Artifact and Download Artifact tasks run the dispatcher's `flow.dispatcher.artifact.image`, also `task-flow:3.3.0`. AI tasks declare their own image.
