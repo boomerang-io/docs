@@ -1,0 +1,298 @@
+{
+  "_about": "Hand-kept input to tools/config-reference/generate.py. Each note says where its fact comes from in `source`, a path in flow.service.workflow at the tag. Review every entry at each release: see tools/config-reference/README.md. Links are relative to flow/hosting/.",
+  "properties": {
+    "core": {
+      "flow.activation-code": {
+        "text": "Must be at least 32 characters. See [Make the first admin with the activation code](./sign-in#make-the-first-admin-with-the-activation-code).",
+        "source": "specifications/authorization.md (The activation code); CHANGELOG.md 5.0.0 Upgrading"
+      },
+      "flow.otc": {
+        "level": "warning",
+        "text": "Deprecated: use `flow.activation-code`. Flow reads it only while `flow.activation-code` is unset, and logs a deprecation warning. If both are set and differ, core doesn't start.",
+        "source": "CHANGELOG.md 5.0.0 Upgrading (The activation code is FLOW_ACTIVATION_CODE); specifications/authorization.md"
+      },
+      "flow.security.bootstrap-token": {
+        "text": "Clearing it revokes the bootstrap token at the next start. See [Machine tokens](./machine-tokens).",
+        "source": "CHANGELOG.md 5.0.0 Upgrading (Clearing flow.security.bootstrap-token revokes the bootstrap token)"
+      },
+      "flow.security.tokens.dispatcher.hash": {
+        "text": "Give every core instance the same `flow.security.tokens` entries: each instance revokes the declared tokens its own configuration doesn't name. See [Machine tokens](./machine-tokens).",
+        "source": "CHANGELOG.md 5.0.0 Upgrading (Clearing flow.security.bootstrap-token)"
+      },
+      "flow.security.enabled": {
+        "text": "See [Choose a deployment shape](./configuring#choose-a-deployment-shape).",
+        "source": "specifications/architecture.md (deployment shapes)"
+      },
+      "flow.workspace.single": {
+        "text": "See [Choose a deployment shape](./configuring#choose-a-deployment-shape).",
+        "source": "specifications/architecture.md (deployment shapes)"
+      },
+      "flow.auth.oidc.issuer": {
+        "text": "See [Sign in with OpenID Connect](./sign-in#sign-in-with-openid-connect).",
+        "source": "specifications/authorization.md (OpenID Connect seed)"
+      },
+      "flow.security.admin-claim.name": {
+        "text": "See [Let your identity provider decide admins](./sign-in#let-your-identity-provider-decide-admins).",
+        "source": "CHANGELOG.md 5.0.0 (Admins from the identity provider)"
+      },
+      "flow.encrypt.secret": {
+        "text": "See [Keep the encryption key](./configuring#keep-the-encryption-key).",
+        "source": "specifications/authorization.md (Secured settings at rest)"
+      },
+      "mongo.encrypt.secret": {
+        "text": "Read once, by the migration that re-encrypts a v3 install's secured settings. See [Set the encryption keys](./upgrading#set-the-encryption-keys).",
+        "source": "specifications/authorization.md (Secured settings at rest)"
+      },
+      "spring.mongodb.uri": {
+        "text": "Always set it: the default is a local development sample. See [Connect MongoDB](./configuring#connect-mongodb).",
+        "source": "service-core/src/main/resources/application.properties (a localhost URI)"
+      },
+      "flow.mongo.collection.prefix": {
+        "text": "Every collection is named `<prefix>_<name>`.",
+        "source": "specifications/data-model.md (opening paragraph)"
+      },
+      "flow.events.sink.enabled": {
+        "text": "`true` sends each run and task run status change to every sink as a CloudEvent. See [Send status events and traces](./configuring#send-status-events-and-traces).",
+        "source": "specifications/api-contract.md (Events out)"
+      },
+      "flow.events.sink.destinations[0].types": {
+        "sameAs": "flow.events.sink.types",
+        "source": "service-core/src/main/resources/application.properties (the Optional filters comment covers the per-destination filters)"
+      },
+      "flow.events.sink.destinations[0].statuses": {
+        "sameAs": "flow.events.sink.types",
+        "source": "service-core/src/main/resources/application.properties"
+      },
+      "flow.events.sink.destinations[0].phases": {
+        "sameAs": "flow.events.sink.types",
+        "source": "service-core/src/main/resources/application.properties"
+      },
+      "flow.events.sink.destinations[0].labels": {
+        "sameAs": "flow.events.sink.types",
+        "source": "service-core/src/main/resources/application.properties"
+      },
+      "flow.artifacts.store.*": {
+        "sameAs": "flow.artifacts.enabled",
+        "source": "service-core/src/main/resources/application.properties (the Artifacts comment covers the store properties)"
+      },
+      "flow.artifacts.upload-grace-minutes": {
+        "text": "How long, in minutes, a partly written upload is kept before Flow deletes it.",
+        "source": "specifications/data-model.md (Artifacts: the uploading status)"
+      },
+      "logging.level.*": {
+        "sameAs": "logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter",
+        "source": "service-core/src/main/resources/application.properties (the Spring Logging comment covers every level)"
+      },
+      "max.*": {
+        "text": "Not read by Flow at this release. Quotas are settings: see [Quotas](./settings-reference#quotas) in All settings.",
+        "source": "specifications/architecture.md (Quotas are not a deployment property); no reader in service-core/src/main/java"
+      },
+      "flow.apps.url": {
+        "text": "Not read by Flow at this release; `flow.apps.flow.url` is.",
+        "source": "no reader in service-core/src/main/java"
+      },
+      "flow.services.workflow.host": {
+        "text": "Read only through the `flow.workflow.*.url` properties, which start with it.",
+        "source": "service-core/src/main/resources/application.properties"
+      },
+      "flow.workflow.webhook.url": {
+        "text": "Every run gets it as the context parameter `webhook-url`: `$(context.params.webhook-url)`.",
+        "source": "specifications/parameters.md (Run context)"
+      },
+      "flow.workflow.event.url": {
+        "text": "Every run gets it as the context parameter `event-url`: `$(context.params.event-url)`.",
+        "source": "specifications/parameters.md (Run context)"
+      },
+      "flow.workflow.wfe.url": {
+        "text": "The wait-for-event route. Every run gets it as the context parameter `wfe-url`: `$(context.params.wfe-url)`.",
+        "source": "specifications/parameters.md (Run context); CHANGELOG.md 5.0.0 (The wfe-url context param)"
+      },
+      "flow.token.max-user-session-duration": {
+        "text": "Hours a session token lasts.",
+        "source": "service-core/src/main/java/io/boomerang/core/TokenService.java (getExpirationDate adds Calendar.HOUR)"
+      },
+      "flow.error.include-cause": {
+        "text": "`true` adds the underlying exception to an error response, as `cause`.",
+        "source": "service-core/src/main/java/io/boomerang/core/RestExceptionHandler.java"
+      }
+    },
+    "dispatcher": {
+      "kube.namespace": {
+        "text": "When neither resolves, the dispatcher doesn't start.",
+        "source": "specifications/dispatcher-kubernetes.md (Isolation and placement)"
+      },
+      "kube.image.pullSecret": {
+        "text": "The image pull secret on every task pod this deployment runs.",
+        "source": "specifications/dispatcher-kubernetes.md (Isolation and placement)"
+      },
+      "kube.timeout.waitUntil": {
+        "text": "Seconds the dispatcher waits for a new run workspace claim to reach `Pending` or `Bound`.",
+        "source": "specifications/dispatcher-kubernetes.md (Volumes and workspaces)"
+      },
+      "kube.task.backOffLimit": {
+        "text": "Set on each Job, with the `kube-jobs` executor.",
+        "source": "specifications/dispatcher-kubernetes.md (executor table)"
+      },
+      "kube.task.restartPolicy": {
+        "text": "Set on each Job, with the `kube-jobs` executor.",
+        "source": "specifications/dispatcher-kubernetes.md (executor table)"
+      },
+      "kube.task.ttlDays": {
+        "text": "A finished Job or TaskRun is removed this many days after it completes, whatever the deletion policy. See [Clean up finished tasks](./dispatcher#clean-up-finished-tasks).",
+        "source": "specifications/dispatcher-kubernetes.md (TaskExecutor)"
+      },
+      "kube.task.deletion": {
+        "text": "Never applies: core sends every task with the **Tasks › Deletion Policy** setting, and this is only its fallback. See [Tasks](./settings-reference#tasks) in All settings.",
+        "source": "specifications/dispatcher-kubernetes.md (TaskExecutor)"
+      },
+      "kube.task.timeout": {
+        "text": "Minutes. The per-pod backstop for a task that reaches the dispatcher with no timeout, or 0. A timeout core sets wins.",
+        "source": "specifications/dispatcher-kubernetes.md (TaskExecutor)"
+      },
+      "kube.task.storage.data.memory": {
+        "text": "`true` backs a task's `/data` with memory, for a task whose `worker.storage.data.memory` param is also `true`.",
+        "source": "specifications/dispatcher-kubernetes.md (Volumes and workspaces)"
+      },
+      "dispatcher.tasks.serviceaccount": {
+        "text": "Set on Jobs only, with the `kube-jobs` executor.",
+        "source": "specifications/dispatcher-kubernetes.md (Isolation and placement)"
+      },
+      "dispatcher.tasks.nodeselector": {
+        "text": "Applied to every task pod this deployment runs.",
+        "source": "specifications/dispatcher-kubernetes.md (Isolation and placement)"
+      },
+      "dispatcher.tasks.tolerations": {
+        "text": "Applied to every task pod this deployment runs. Empty entries are dropped.",
+        "source": "specifications/dispatcher-kubernetes.md (Isolation and placement)"
+      },
+      "dispatcher.tasks.hostaliases": {
+        "text": "Applied to every task pod this deployment runs. Empty entries are dropped.",
+        "source": "specifications/dispatcher-kubernetes.md (Isolation and placement)"
+      },
+      "dispatcher.executor": {
+        "text": "See [Choose an executor](./dispatcher#choose-an-executor).",
+        "source": "specifications/dispatcher-kubernetes.md (executor table)"
+      },
+      "dispatcher.logging.type": {
+        "text": "`default` reads a running task's log from its pod; `loki` queries Loki at `dispatcher.logging.host` and `dispatcher.logging.port`.",
+        "source": "specifications/dispatcher-kubernetes.md (Logs)"
+      },
+      "proxy.enable": {
+        "text": "`true` passes `PROXY_HOST`, `PROXY_PORT`, `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY`, and their lower-case forms, to every task container.",
+        "source": "specifications/dispatcher-kubernetes.md (What the container receives)"
+      },
+      "flow.version": {
+        "text": "Passed to every task container as `FLOW_VERSION`.",
+        "source": "specifications/dispatcher-kubernetes.md (What the container receives)"
+      },
+      "flow.dispatcher.name": {
+        "text": "The name the dispatcher registers with.",
+        "source": "specifications/dispatcher-contract.md (POST /register takes name); service-dispatcher/src/main/java/io/boomerang/config/DispatcherConfig.java"
+      },
+      "flow.engine.dispatcher.token": {
+        "text": "See [Machine tokens](./machine-tokens).",
+        "source": "specifications/dispatcher-kubernetes.md"
+      },
+      "flow.dispatcher.ai.otel.headers": {
+        "secret": true,
+        "source": "service-dispatcher/src/main/resources/application.properties (headers that may carry credentials, like the token)"
+      },
+      "flow.dispatcher.workspace.reconcile-ms": {
+        "sameAs": "flow.dispatcher.workspace.reconcile.enabled",
+        "source": "service-dispatcher/src/main/resources/application.properties"
+      },
+      "flow.dispatcher.task.reconcile-ms": {
+        "sameAs": "flow.dispatcher.task.reconcile.enabled",
+        "source": "service-dispatcher/src/main/resources/application.properties"
+      }
+    }
+  },
+  "settings": {
+    "auth": {
+      "oidc.issuer": {
+        "text": "Seeded at start from the property `flow.auth.oidc.issuer` while blank. A value set here is never overwritten by the property. See [Sign in with OpenID Connect](./sign-in#sign-in-with-openid-connect).",
+        "source": "specifications/authorization.md (OpenID Connect seed)"
+      },
+      "oidc.clientId": {
+        "text": "Seeded at start from the property `flow.auth.oidc.client-id` while blank, as **OIDC Issuer** is.",
+        "source": "specifications/authorization.md (OpenID Connect seed)"
+      }
+    },
+    "artifacts": {
+      "logs.enabled": {
+        "text": "Logs are stored only while the artifact store is on (`flow.artifacts.enabled`).",
+        "source": "specifications/dispatcher-contract.md (The stored log: 503 ARTIFACTS_NOT_CONFIGURED)"
+      }
+    },
+    "audit": {
+      "retentionDays": {
+        "applies": "within about a minute, on every instance.",
+        "source": "CHANGELOG.md 5.0.0 Changed (audit retention); specifications/data-model.md (audit indexes)"
+      }
+    },
+    "features": {
+      "workspaceQuotas": {
+        "text": "The only switch for quotas: no property turns them off. See [Turn quotas off](../webapp/quotas#turn-quotas-off).",
+        "source": "specifications/architecture.md (Quotas are not a deployment property)"
+      },
+      "workflowTokens": {
+        "text": "Has no effect while Flow runs with security off (`flow.security.enabled=false`).",
+        "source": "specifications/architecture.md (feature flags table)"
+      },
+      "workspaceManagement": {
+        "text": "Off, whatever its value, while `flow.workspace.single` is `true`.",
+        "source": "specifications/architecture.md (feature flags table)"
+      },
+      "userManagement": {
+        "text": "Off, whatever its value, while `flow.workspace.single` is `true`.",
+        "source": "specifications/architecture.md (feature flags table)"
+      },
+      "workspaceCreate": {
+        "text": "Off, whatever its value, while `flow.workspace.single` is `true`.",
+        "applies": "to sessions signed in after the change.",
+        "source": "specifications/architecture.md (feature flags table); seed/settings.json description"
+      }
+    },
+    "integration": {
+      "slack.clientId": {
+        "text": "The Integrations page lists Slack once **Slack Client ID** and **Slack Client Secret** are set.",
+        "source": "CHANGELOG.md 5.0.0 (Slack is a workspace integration)"
+      },
+      "slack.signingSecret": {
+        "text": "With none set, Flow refuses every request to its Slack commands, interactivity and events routes.",
+        "source": "CHANGELOG.md 5.0.0 Upgrading (The inbound Slack routes require Slack's request signature)"
+      },
+      "github.webhookSecret": {
+        "text": "With none set, Flow refuses every GitHub event with `401`.",
+        "source": "CHANGELOG.md 5.0.0 Upgrading (Every GitHub App delivery requires GitHub's signature)"
+      }
+    },
+    "quotas": {
+      "max.workspace.storage": {
+        "text": "Also the size a run workspace gets when its workflow leaves the size blank, lowered to the workspace's own storage quota when that's smaller.",
+        "source": "specifications/dispatcher-kubernetes.md (Volumes and workspaces)"
+      }
+    },
+    "task": {
+      "default.image": {
+        "text": "A `template` or `script` task without an image of its own runs on it. See [Set the task image](./configuring#set-the-task-image).",
+        "applies": "when a run is queued: a run already queued keeps the value it was queued with.",
+        "source": "specifications/dispatcher-contract.md (task types); CHANGELOG.md 5.0.0 Changed (A task run takes the task settings when the run is queued)"
+      },
+      "deletion.policy": {
+        "applies": "when a run is queued: a run already queued keeps the value it was queued with.",
+        "source": "CHANGELOG.md 5.0.0 Changed; specifications/data-model.md (task settings read at queue)"
+      },
+      "default.timeout": {
+        "applies": "when a run is queued: a run already queued keeps the value it was queued with.",
+        "source": "CHANGELOG.md 5.0.0 Changed; specifications/data-model.md (task settings read at queue)"
+      }
+    },
+    "workflowrun": {
+      "retention.days": {
+        "applies": "at the next hourly purge pass, which reads it.",
+        "source": "specifications/data-model.md (Artifacts: finished runs are kept for retention.days, read at each pass; an hourly pass)"
+      }
+    }
+  }
+}

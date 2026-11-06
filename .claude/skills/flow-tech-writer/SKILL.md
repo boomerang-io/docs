@@ -71,18 +71,21 @@ When the IA changes, update this table in the same change.
 ## Page format
 
 - **Frontmatter:**
-  - `title` (required): the menu label, and the slug source per CONTRIBUTING.md;
-  - `order`: position within the category;
-  - `description`: one sentence;
+  - `title` (required): the page and browser title;
+  - `order`: position within the category, starting at 1 (never 0);
+  - `description` (required): one sentence. It shows in `/llms.txt`, so make it say what the reader gets;
+  - `verified`: the Flow release the page was checked against, quoted (`verified: "5.0.0"`). The site renders "Verified against Flow …" under the H1;
+  - `sidebarTitle`: a shorter menu label when `title` is long (the page keeps `title`);
   - `toc: false`: hides "On this page";
-  - `hidden: true`: leaves the page out of the menu;
+  - `hidden: true`: leaves the page out of the menu and `/llms.txt`;
   - `tag`: a badge in the menu.
 - **The site doesn't render `title` as a heading.** Start the body with `# <Title>`, matching the frontmatter.
 - `##` and `###` build the "On this page" contents. Phrase them as tasks or questions.
 - **Format:** GitHub-flavoured Markdown, not MDX. Raw HTML is allowed. Use `<docs-cards>` / `<docs-card>` for card grids on landing and index pages; copy the markup from `flow/index.md`. Give every code block a language so it highlights.
 - **Images** go in the category's `assets/` and are referenced relatively (`./assets/<file>.png`). Alt text says what the image shows. A screenshot must come from the version the page documents.
 - **Links:** follow `CLAUDE.md` § Linking. When renaming or retiring a page, grep `flow/` for its slug and fix every inbound link.
-- **Callouts:** `> **Note:**` and `> **Warning:**`, as in the voice guide.
+- **Callouts:** GitHub alerts, `> [!NOTE]`, `> [!TIP]`, `> [!IMPORTANT]`, `> [!WARNING]` and `> [!CAUTION]`, on their own line, then `> text`. Use them sparingly.
+- **Tabs, for alternatives** (Helm vs manifests, `curl` vs SDK): put same-level headings between `<!-- tabs -->` and `<!-- /tabs -->`, with blank lines around the comments and headings. On GitHub it reads as ordinary sections.
 
 ## Page anatomy
 

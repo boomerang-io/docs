@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Markdown source for the Boomerang Flow and Boomerang Bosun documentation at useboomerang.io/docs. The repo is content plus two tools: `tools/screenshots/`, a Playwright project that walks the webapp and captures docs screenshots from a running Flow stack, and `tools/catalogue/`, which generates the task catalogue from Flow's seed (see each README). There is no build, lint, or test tooling. Write and update Flow pages with the `flow-tech-writer` skill. The site is rendered by https://github.com/boomerang-io/website using the [Remix Docs Template](https://github.com/boomerang-io/remix-docs-template?tab=readme-ov-file#frontmatter), which defines the frontmatter rules. The home page cards and the sidenav category config (`contentConfig.js`) also live in that website repo, not here.
+Markdown source for the Boomerang Flow and Boomerang Bosun documentation at useboomerang.io/docs. The repo is content plus tooling in `tools/` (see each README):
+- `screenshots/` walks the webapp and captures screenshots from a running Flow stack;
+- `catalogue/`, `errors/`, `release-notes/` and `config-reference/` generate pages from flow.service.workflow at a release tag. There is no build, lint, or test tooling. Write and update Flow pages with the `flow-tech-writer` skill. The site is rendered by https://github.com/boomerang-io/website using the [Remix Docs Template](https://github.com/boomerang-io/remix-docs-template?tab=readme-ov-file#frontmatter), which defines the frontmatter rules. The home page cards and the sidenav category config (`contentConfig.js`) also live in that website repo, not here.
 
 - `main` is published automatically.
 - Versioned docs come from git tags named `<product>@<version>`, for example `flow@3.12.0` and `flow@4.0.0`.
@@ -17,7 +19,8 @@ The layout is `<product>/<category>/<doc>.md`. The products are `flow/` and `bos
 - **Orders start at 1.** The website sorts with `order || Infinity`, so `order: 0` puts a page last.
 - **Flow's sections, in menu order:** introduction, fundamentals (titled Concepts), webapp (Using the webapp), guides, catalogue (generated), apis (generated), architecture, hosting, extend, tutorials. The `flow-tech-writer` skill has the full table.
 - **Product `index.md`** (`flow/index.md`, `bosun/index.md`) is the landing page. It is built from `<docs-cards>`/`<docs-card>` HTML blocks. `bosun/index.md` has `hidden: true`.
-- Common frontmatter keys: `title`, `order`, `description`, `toc`, `hidden`.
+- **Frontmatter the site reads:** `title`, `order` (from 1), `description` (also listed in `/llms.txt`), `verified` (quoted Flow release, shown under the H1), `sidebarTitle` (short menu label), `toc`, `hidden`, `tag`. The site also serves every page as Markdown at its URL plus `.md`, and adds a "Found a problem?" issue link.
+- **Syntax:** GitHub alerts (`> [!NOTE]`, `> [!WARNING]`) and tabs (same-level headings between `<!-- tabs -->` and `<!-- /tabs -->`).
 - Images go in an `assets/` folder inside the category and are referenced relatively, for example `./assets/img/foo.png`.
 - **The docs describe Flow v5** (5.0.0). Each rewritten page carries an HTML comment naming the Flow tag it was written against and how its UI labels were checked; re-check against the release tag before publishing. `guides/slack.md` is hidden until flow#751 is fixed.
 - `.github/CONTRIBUTING.md` recommends that a new product start with an `introduction/` category containing `overview`, `getting-started`, `whats-new`, and `known-issues`.
@@ -30,9 +33,11 @@ The layout is `<product>/<category>/<doc>.md`. The products are `flow/` and `bos
 
 ## API Reference (generated)
 
-Everything in `flow/apis/` except `index.md` is generated: `overview.md`, `*Route.md`, and `models/*.md`. Don't hand-edit these files. To change them, change the contract (in the Flow repo) or the templates, and regenerate:
+Everything in `flow/apis/` except `index.md` and the prose of `changelog.md` is generated: `overview.md`, `*Route.md` and `models/*.md`. Don't hand-edit these files. To change them, change the contract (in the Flow repo), the templates, or the examples, and regenerate:
 
 - `flow/apis/assets/api-v2.yaml`: the v5 public API contract, OpenAPI 3.1, copied from `contracts/api-v2.yaml` in `boomerang-io/flow` at a release tag. Operation summaries and descriptions come from the Java annotations there, and each operation's summary also becomes its heading and anchor in the Route page. Its tag (each operation's first tag) becomes the Route page and its title.
+- **Examples live in `tools/api-examples/examples.json`, never in the contract** (the owner's decision). They hold request bodies and real responses, captured from a running stack, keyed by `"METHOD /path"`. `inject.py` inserts them into the Route pages between markers.
+- **`changelog.md`:** the lede and summary are hand-written. The section between `<!-- apidiff:start -->` and `<!-- apidiff:end -->` comes from `tools/apidiff/diff.py`, comparing two contracts (see its README). Generation never touches it.
 - `flow/apis/assets/templates/`:
   - `README.mustache` produces `overview.md`: hand-written prose (base path, auth, errors, paging, labels, YAML, clients, the contract link) plus the generated auth schemes and route and model index. Write its prose to the `flow-tech-writer` voice guide and verify it against the tag.
   - `api.mustache` produces each `*Route.md`.
@@ -51,9 +56,11 @@ OUT="${TMPDIR:-/tmp}/flow-apigen"
 git -C "$FLOW_REPO" fetch --tags
 git -C "$FLOW_REPO" show "$FLOW_TAG:contracts/api-v2.yaml" > ./flow/apis/assets/api-v2.yaml
 
-# 2. Generate into the scratch directory. flowTag sets the contract link and version in overview.md.
-rm -rf "$OUT"
-npx @openapitools/openapi-generator-cli generate -i ./flow/apis/assets/api-v2.yaml -g markdown -o "$OUT" \
+# 2. Prepare the contract (curl URLs and bodies the templates can't build), then generate into the
+#    scratch directory. flowTag sets the contract link, version and `verified` in the pages.
+rm -rf "$OUT" && mkdir -p "$OUT"
+python3 tools/api-examples/prepare.py --in ./flow/apis/assets/api-v2.yaml --out "$OUT/api-v2.json"
+npx @openapitools/openapi-generator-cli generate -i "$OUT/api-v2.json" -g markdown -o "$OUT" \
   --skip-validate-spec -t ./flow/apis/assets/templates/ --api-name-suffix 'Route' \
   --additional-properties=flowTag="$FLOW_TAG"
 
@@ -66,6 +73,9 @@ cp "$OUT/README.md" ./flow/apis/overview.md
 cp "$OUT"/Apis/*.md ./flow/apis/
 cp "$OUT"/Models/*.md ./flow/apis/models/
 rm -rf "$OUT"
+
+# 5. Insert the docs-side examples (idempotent)
+python3 tools/api-examples/inject.py
 ```
 
 Then check the result:
@@ -102,3 +112,16 @@ Then:
 5. Check every link and anchor in `flow/catalogue/` resolves.
 
 `--check` writes nothing and exits 1 when the pages differ from what the tag generates.
+
+
+## Other generated pages
+
+Each of these is generated from flow.service.workflow at a release tag, so never hand-edit it. Edit the generator's `notes.json` (where it has one), regenerate, and read the warnings. Each generator takes `--flow-repo ../flow.service.workflow --tag <tag>` and has a `--check` mode that exits 1 when its pages are stale.
+
+| Page | Generator | Source | Hand-kept input |
+| --- | --- | --- | --- |
+| `flow/introduction/error-codes.md` | `tools/errors/generate.py` | `BoomerangError.java`, `messages.properties`, `StatusReason.java` | `tools/errors/notes.json` (Why / What to do / Related, keyed by `reason`). Stops on a key that isn't in the source. |
+| `flow/introduction/release-notes.md` | `tools/release-notes/generate.py` (also takes `--ref` and `--version`) | `CHANGELOG.md` | None. Read every **Breaking** mark in the diff: a word-matching rule sets them. `whats-new.md` stays hand-written. |
+| `flow/hosting/properties-reference.md`, `settings-reference.md` | `tools/config-reference/generate.py` | both `application.properties`, `seed/settings.json` | `tools/config-reference/notes.json`. It reports properties that `configuration-reference.md` names but the source lacks; fix the hand page. |
+
+At a release, regenerate all of these with the API reference and the task catalogue.

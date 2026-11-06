@@ -6,7 +6,8 @@ Reads, with `git show <tag>:<path>`:
   - service-core/src/main/resources/seed/settings.json (the default task image);
   - service-dispatcher/src/main/resources/application.properties (the artifact task image).
 
-Tasks that only a migration adds are listed by hand in notes.json, with the hand-kept notes.
+Tasks that only a migration adds are listed by hand in notes.json, with the hand-kept notes and
+the most-used tasks' examples and common problems ("usage").
 Writes flow/catalogue/overview.md and one page per palette category. flow/catalogue/index.md is
 frontmatter only and hand-kept. See tools/catalogue/README.md.
 
@@ -217,15 +218,78 @@ def check_notes(notes, catalogue, categories):
         raise CatalogueError("\n".join(errors))
 
 
+def check_usage(notes, catalogue, warnings):
+    """Check each task's hand-kept example and common problems against its latest revision."""
+    errors = []
+    for slug, usage in notes.get("usage", {}).items():
+        where = f"notes.json: usage for {slug}"
+        if slug not in catalogue:
+            errors.append(f"{where}: the task is not in the catalogue")
+            continue
+        item = catalogue[slug]
+        if not in_palette(item):
+            errors.append(f"{where}: the task is not in the palette, so its entry has no section")
+            continue
+        latest = item["latest"]
+        spec = latest.get("spec") or {}
+        params = {p.get("name") for p in spec.get("params") or []}
+        declared = {r.get("name") for r in spec.get("results") or []}
+        if usage.get("revision") is None:
+            errors.append(f"{where}: give the revision it was written for")
+        elif usage["revision"] != latest["version"]:
+            warnings.append(
+                f"{where} was written for revision {usage['revision']}; the latest is"
+                f" {latest['version']}. Review it, then update its revision."
+            )
+        example, problems = usage.get("example"), usage.get("errors") or []
+        if not example and not problems:
+            errors.append(f"{where}: give an example, errors, or both")
+        if example:
+            if not (example.get("scenario") or "").strip():
+                errors.append(f"{where}: the example needs a scenario")
+            for row in example.get("params") or []:
+                if ("name" in row) == ("field" in row):
+                    errors.append(f"{where}: each example row takes name or field, not both")
+                elif "name" in row and row["name"] not in params:
+                    errors.append(f"{where}: revision {latest['version']} has no param {row['name']!r}")
+                if not str(row.get("value") or "").strip():
+                    errors.append(f"{where}: example row {row.get('name') or row.get('field')!r} has no value")
+            for block in example.get("code") or []:
+                if block.get("for") not in params:
+                    errors.append(f"{where}: code block for unknown param {block.get('for')!r}")
+                if not (block.get("text") or "").strip():
+                    errors.append(f"{where}: code block for {block.get('for')!r} is empty")
+            for row in example.get("results") or []:
+                # As Flow checks a reference: a task that declares no results may return any.
+                if declared and row.get("name") not in declared:
+                    errors.append(f"{where}: revision {latest['version']} declares no result {row.get('name')!r}")
+            note = example.get("note")
+            if note and note.get("level", "note") not in ("note", "warning"):
+                errors.append(f"{where}: the example note's level must be note or warning")
+        for problem in problems:
+            missing = [k for k in ("symptom", "cause", "fix") if not (problem.get(k) or "").strip()]
+            if missing:
+                errors.append(f"{where}: a problem has no {', '.join(missing)}")
+    if errors:
+        raise CatalogueError("\n".join(errors))
+
+
+def gated(entry, default_image, slug, what, skipped):
+    """False, with a warning, when an entry is only true while the default image is another one."""
+    wanted = entry.get("defaultImage")
+    if wanted and wanted != default_image:
+        skipped.append(
+            f"{slug}: {what} for default image {wanted} skipped; the seed's is {default_image}."
+            " Review or remove it."
+        )
+        return False
+    return True
+
+
 def notes_for(slug, item, notes, default_image, applied, skipped):
     out = []
     for note in notes.get("tasks", {}).get(slug, []):
-        wanted = note.get("defaultImage")
-        if wanted and wanted != default_image:
-            skipped.append(
-                f"{slug}: note for default image {wanted} skipped; the seed's is {default_image}."
-                " Review or remove it."
-            )
+        if not gated(note, default_image, slug, "note", skipped):
             continue
         out.append(note)
         applied.append(slug)
@@ -251,6 +315,19 @@ def cell(text):
 def prose(text):
     text = (text or "").replace("\r\n", "\n").strip()
     return text.replace("<", "&lt;")
+
+
+def md_cell(text):
+    """Hand-written Markdown for a table cell: pipes escaped, line breaks kept, nothing else."""
+    text = str(text or "").replace("\r\n", "\n").strip().replace("|", "\\|")
+    return re.sub(r"\n+", "<br>", text)
+
+
+def fenced(text, lang):
+    text = (text or "").replace("\r\n", "\n").strip("\n")
+    ticks = max([3] + [len(m) + 1 for m in re.findall(r"`{3,}", text)])
+    fence = "`" * ticks
+    return [f"{fence}{lang or 'text'}", text, fence]
 
 
 def code(value, in_table=True):
@@ -343,8 +420,7 @@ def render_task(item, task_notes, artifact_image):
         "",
     ]
     for note in task_notes:
-        label = "Warning" if note.get("level") == "warning" else "Note"
-        lines += [f"> **{label}:** {note['text']}", ""]
+        lines += alert(note.get("level"), note["text"])
 
     params = spec.get("params") or []
     if params:
@@ -375,8 +451,59 @@ def render_task(item, task_notes, artifact_image):
     return lines
 
 
-def frontmatter(title, order, description):
-    return ["---", f"title: {title}", f"order: {order}", f"description: {description}", "---", ""]
+def render_usage(slug, usage, item, default_image, skipped):
+    """The task's "Example" and "Common problems" subsections, from notes.json's usage."""
+    labels = {p.get("name"): p.get("label") or p.get("name")
+              for p in (item["latest"].get("spec") or {}).get("params") or []}
+    lines = []
+    example = usage.get("example")
+    if example:
+        lines += ["### Example", ""]
+        note = example.get("note")
+        if note and gated(note, default_image, slug, "example note", skipped):
+            lines += alert(note.get("level"), note["text"])
+        lines += [example["scenario"].strip(), ""]
+        rows = example.get("params") or []
+        if rows:
+            lines += ["| Field | Value |", "| --- | --- |"]
+            for row in rows:
+                field = row.get("field") or f"**{cell(row.get('label') or labels[row['name']])}**"
+                lines.append(f"| {md_cell(field)} | {md_cell(row['value'])} |")
+            lines.append("")
+        for block in example.get("code") or []:
+            lines += [f"**{cell(labels[block['for']])}**", ""]
+            lines += fenced(block["text"], block.get("lang")) + [""]
+        results = example.get("results") or []
+        if results:
+            lines += ["The task returns:", "", "| Result | Value |", "| --- | --- |"]
+            for row in results:
+                lines.append(f"| {code(row['name'])} | {md_cell(row['value'])} |")
+            lines.append("")
+        if (example.get("outcome") or "").strip():
+            lines += [example["outcome"].strip(), ""]
+
+    problems = [p for p in usage.get("errors") or []
+                if gated(p, default_image, slug, "problem", skipped)]
+    if problems:
+        lines += ["### Common problems", "", "| Symptom | Cause | Fix |", "| --- | --- | --- |"]
+        for p in problems:
+            lines.append(f"| {md_cell(p['symptom'])} | {md_cell(p['cause'])} | {md_cell(p['fix'])} |")
+        lines.append("")
+    return lines
+
+
+def frontmatter(title, order, description, tag, sidebar=None):
+    lines = ["---", f"title: {title}"]
+    if sidebar:
+        lines.append(f"sidebarTitle: {sidebar}")
+    return lines + [f"order: {order}", f"description: {description}", f'verified: "{tag}"', "---", ""]
+
+
+def alert(level, text):
+    """A GitHub alert: the marker on its own line, then every line of the text quoted."""
+    kind = "WARNING" if level == "warning" else "NOTE"
+    body = [f"> {line}" if line.strip() else ">" for line in text.strip().split("\n")]
+    return [f"> [!{kind}]"] + body + [""]
 
 
 def marker(tag):
@@ -388,12 +515,13 @@ def count_phrase(n, word="task"):
 
 
 def render_category(category, order, items, notes, tag, default_image, artifact_image,
-                    applied, skipped):
+                    applied, skipped, used):
     shown = [i for i in items if in_palette(i)]
     hidden = [i for i in items if not in_palette(i)]
     lines = frontmatter(
         category, order,
         f"The {category} tasks in the Flow catalogue, with each task's parameters, results and image.",
+        tag,
     )
     lines += [marker(tag), "", f"# {category}", ""]
     intro = f"The {category} category has {count_phrase(len(items))}"
@@ -406,12 +534,16 @@ def render_category(category, order, items, notes, tag, default_image, artifact_
     lines += [intro, ""]
     page_note = notes.get("categories", {}).get(category, {}).get("page")
     if page_note:
-        level = notes["categories"][category].get("level", "note")
-        lines += [f"> **{'Warning' if level == 'warning' else 'Note'}:** {page_note}", ""]
+        lines += alert(notes["categories"][category].get("level", "note"), page_note)
 
     for item in shown:
-        task_notes = notes_for(item["task"]["name"], item, notes, default_image, applied, skipped)
+        slug = item["task"]["name"]
+        task_notes = notes_for(slug, item, notes, default_image, applied, skipped)
         lines += render_task(item, task_notes, artifact_image)
+        usage = notes.get("usage", {}).get(slug)
+        if usage:
+            lines += render_usage(slug, usage, item, default_image, skipped)
+            used.append(slug)
 
     if hidden:
         lines += [
@@ -433,7 +565,7 @@ def render_category(category, order, items, notes, tag, default_image, artifact_
         lines.append("")
         for item in hidden:
             for note in notes_for(item["task"]["name"], item, notes, default_image, applied, skipped):
-                lines += [f"> **Note:** {item['latest']['displayName']}: {note['text']}", ""]
+                lines += alert("note", f"{item['latest']['displayName']}: {note['text']}")
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -441,8 +573,9 @@ def render_overview(ordered, grouped, notes, tag, default_image):
     total = sum(len(grouped[c]) for c in ordered)
     shown = sum(1 for c in ordered for i in grouped[c] if in_palette(i))
     lines = frontmatter(
-        "Overview", 1,
+        "Task catalogue", 1,
         "The tasks Flow ships in its catalogue, by palette category, and how to read each entry.",
+        tag, sidebar="Overview",
     )
     lines += [marker(tag), "", "# Task catalogue", ""]
     intro = (
@@ -478,7 +611,7 @@ def render_overview(ordered, grouped, notes, tag, default_image):
 
     for category, category_notes in notes.get("categories", {}).items():
         if category_notes.get("overview"):
-            lines += [f"> **Note:** {category_notes['overview']}", ""]
+            lines += alert("note", category_notes["overview"])
 
     lines += [
         "## Reading an entry",
@@ -499,8 +632,14 @@ def render_overview(ordered, grouped, notes, tag, default_image):
         " parameter reference, such as `$(workspace.params.github-token)`. See"
         " [Credentials in catalogue tasks](../fundamentals/tasks#credentials-in-catalogue-tasks).",
         "- **Results:** the values a later task reads as `$(tasks.<name>.results.<result>)`.",
-        "",
     ]
+    if notes.get("usage"):
+        lines.append(
+            "- **Example** and **Common problems:** for the most-used tasks, the fields you'd set"
+            " for a typical job and what the task returns, then the failures people hit most, each"
+            " with its cause and fix."
+        )
+    lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -518,7 +657,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
 
     out = Path(args.out)
-    warnings, applied, skipped = [], [], []
+    warnings, applied, skipped, used = [], [], [], []
     try:
         notes = json.loads(Path(args.notes).read_text())
         catalogue = load_catalogue(args.flow_repo, args.tag, notes, warnings)
@@ -536,6 +675,7 @@ def main(argv=None):
             items.sort(key=by_display_name)
         ordered = palette_order(grouped)
         check_notes(notes, catalogue, grouped)
+        check_usage(notes, catalogue, warnings)
 
         pages = {"overview.md": render_overview(ordered, grouped, notes, args.tag, default_image)}
         for order, category in enumerate(ordered, start=2):
@@ -543,7 +683,7 @@ def main(argv=None):
             if name in pages or name == "index.md":
                 raise CatalogueError(f"category {category!r} collides with page {name}")
             pages[name] = render_category(category, order, grouped[category], notes, args.tag,
-                                          default_image, artifact_image, applied, skipped)
+                                          default_image, artifact_image, applied, skipped, used)
     except (CatalogueError, json.JSONDecodeError, KeyError) as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
@@ -575,7 +715,8 @@ def main(argv=None):
     revisions = sum(len(i["revisions"]) for i in catalogue.values())
     print(
         f"Wrote {len(pages)} pages to {out} from {args.tag}: {total} tasks ({shown} in the palette)"
-        f" in {len(ordered)} categories, {revisions} revisions; {len(applied)} task notes applied."
+        f" in {len(ordered)} categories, {revisions} revisions; {len(applied)} task notes applied;"
+        f" {count_phrase(len(used), 'task')} with an example or common problems."
     )
     return 0
 

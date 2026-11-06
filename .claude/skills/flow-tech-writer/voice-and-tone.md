@@ -85,7 +85,7 @@ Never use a company "we" for product behaviour: "We expose a series of RESTful A
 
 **Lists and tables.** Use a table to compare options (`Option | Use when | Trade-off`) and a numbered list for an ordered procedure. Use prose when an explanation needs its reasons kept together.
 
-**Callouts.** Use a blockquote: `> **Note:**` for a useful aside and `> **Warning:**` for data loss, an irreversible step or a security exposure. Use them sparingly; a page full of notes has none.
+**Callouts.** Use GitHub alerts: `> [!NOTE]` for a useful aside, and `> [!WARNING]` for data loss, an irreversible step or a security exposure. Use them sparingly; a page full of notes has none.
 
 **Links.** Name the destination: "How parameters resolve", never "Learn more" or "click here".
 

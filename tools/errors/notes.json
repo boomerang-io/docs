@@ -1,0 +1,1157 @@
+{
+  "_about": "Hand-kept input to tools/errors/generate.py, keyed by the reason the API returns (errors) and by the status reason (statusReasons). Review every entry at each release: see tools/errors/README.md.",
+  "errors": {
+    "WORKFLOW_INVALID_REFERENCE": {
+      "why": "No workflow with that name or ID is in the workspace, or you can't reach it. Flow answers the same way for both, so the answer doesn't reveal a workflow you can't see. A webhook or event whose `ref` names no workflow the token can reach gets this answer too.",
+      "do": "Check the workflow's name, which is its slug, such as `deploy-service`, and the workspace the request names. For a webhook or event, check that the token can reach that workspace.",
+      "related": [
+        {
+          "text": "Triggers: Webhook",
+          "link": "../fundamentals/triggers#webhook"
+        },
+        {
+          "text": "A webhook or event didn't start a run",
+          "link": "./troubleshooting#a-webhook-or-event-didnt-start-a-run"
+        }
+      ]
+    },
+    "WORKFLOW_NOT_ACTIVE": {
+      "why": "The workflow's status is `inactive`, so Flow won't run it. The status icon on its card shows **Inactive**.",
+      "do": "Set the workflow's `status` back to `active` with `PUT /api/v2/workspace/{workspace}/workflow`. The webapp doesn't change a workflow's status.",
+      "related": [
+        {
+          "text": "What a card shows",
+          "link": "../fundamentals/workflows#what-a-card-shows"
+        },
+        {
+          "text": "Update a workflow",
+          "link": "../apis/WorkflowsRoute#update-replace-or-create-new-workflow"
+        }
+      ]
+    },
+    "WORKFLOW_INVALID_REQ": {
+      "why": "Part of the request is blank, missing or out of range. Common causes: a new workflow with no name, or with the name of a workflow the workspace already has; a **Concurrency limit** below 1; a task's **Retries** outside 0 to 10, or a retry wait below 1 second; a CloudEvent Flow can't read, or one without a `ref` whose `subject` names no workflow.",
+      "do": "Correct the field. The message doesn't name it, so compare the request with the route in the API reference.",
+      "related": [
+        {
+          "text": "Configure a workflow",
+          "link": "../guides/configure-workflow#set-the-timeout-retries-and-concurrency"
+        },
+        {
+          "text": "Workflows API",
+          "link": "../apis/WorkflowsRoute"
+        }
+      ]
+    },
+    "WORKFLOW_NON_UNIQUE_TASK_NAME": {
+      "why": "Two nodes in the workflow have the same **Task name**. Flow uses the name to tell nodes apart, as in `$(tasks.<name>.results.<result>)`.",
+      "do": "Give each node its own **Task name**, then save.",
+      "related": [
+        {
+          "text": "Configure a task",
+          "link": "../guides/workflow-editor#configure-a-task"
+        }
+      ]
+    },
+    "WORKFLOW_INVALID_TASK_REF": {
+      "why": "A node uses a task that isn't in the workspace or the catalogue, such as one deleted since the node was added. For a **Run Workflow** node, the workflow it names isn't in the workspace. The message names the node and the reference.",
+      "do": "Replace the node with a task from the palette, or choose a workflow that exists, then save.",
+      "related": [
+        {
+          "text": "Add a task",
+          "link": "../guides/workflow-editor#add-a-task"
+        }
+      ]
+    },
+    "WORKFLOW_MISSING_TASK_REF": {
+      "why": "A node names no task: its `taskRef` is blank. This comes from a workflow written through the API or imported, not from the editor.",
+      "do": "Set `taskRef` on the node, or delete the node and add the task again from the palette.",
+      "related": [
+        {
+          "text": "Workflow editor",
+          "link": "../guides/workflow-editor"
+        }
+      ]
+    },
+    "WORKFLOW_INVALID_TASK_PARAM": {
+      "why": "A node sets a parameter its task version doesn't declare. The message names the node and the undeclared parameters. Flow matches names ignoring case.",
+      "do": "Remove the parameter from the node, or move the node to a task version that declares it.",
+      "related": [
+        {
+          "text": "Update a task to its latest version",
+          "link": "../guides/workflow-editor#update-a-task-to-its-latest-version"
+        }
+      ]
+    },
+    "WORKFLOW_INVALID_CHILD_PARAM": {
+      "why": "A **Run Workflow** node passes a parameter the child workflow doesn't declare. The message names the node, the child workflow and the parameters.",
+      "do": "Declare the parameter on the child workflow and save it, or remove it from the node.",
+      "related": [
+        {
+          "text": "Child workflows",
+          "link": "../fundamentals/runs#child-workflows"
+        }
+      ]
+    },
+    "WORKFLOW_INVALID_TASK_FOREACH": {
+      "why": "A node's for-each setting can't run. The message ends with the cause: the task type can't repeat per item; the items aren't a JSON array or one reference such as `$(params.items)`; a typed array has more entries than **Maximum For-Each Items**, 256 by default; or the task declares a parameter named `item` or `index`, which Flow gives each item.",
+      "do": "Fix what the message names, then save.",
+      "related": [
+        {
+          "text": "Repeat a task for each item: Limits",
+          "link": "../guides/repeat-a-task-for-each-item#limits"
+        }
+      ]
+    },
+    "WORKFLOW_INVALID_TASK_NAME": {
+      "why": "A node's name ends in `[`, digits and `]`, such as `deploy[2]`. Flow names each for-each item that way, so the form is reserved.",
+      "do": "Rename the node. Other brackets, such as `Deploy [prod]`, are allowed.",
+      "related": [
+        {
+          "text": "Repeat a task for each item",
+          "link": "../guides/repeat-a-task-for-each-item"
+        }
+      ]
+    },
+    "WORKFLOW_STORAGE_REMOVED": {
+      "why": "The workflow came from Flow 3 with Workflow storage on, and hasn't been saved since. Flow 5 has no Workflow storage, so it won't run the workflow until you save it.",
+      "do": "Open the workflow in the editor and save a new version. To keep files between runs, use **Upload Artifact** and **Download Artifact** with the scope `workflow`.",
+      "related": [
+        {
+          "text": "Keep files between runs",
+          "link": "../guides/keep-files-between-runs"
+        },
+        {
+          "text": "Upgrade from v3: Update workflows",
+          "link": "../hosting/upgrading#update-workflows"
+        }
+      ]
+    },
+    "WORKFLOW_INVALID_FINALLY": {
+      "why": "A finally task is linked wrongly. A finally task has exactly one link, from the end, and nothing may depend on it. The message names the task and the rule it breaks.",
+      "do": "Link the finally task from the end only, and remove any link that leaves it.",
+      "related": [
+        {
+          "text": "Run a task after the run ends",
+          "link": "../guides/workflow-editor#run-a-task-after-the-run-ends"
+        }
+      ]
+    },
+    "WORKFLOW_INVALID_TASK_RETRY": {
+      "why": "A node asks for retries, but its type is never retried. Only tasks that run as a container retry: catalogue and workspace tasks, script tasks, **Run Custom Task**, the AI tasks and the artifact tasks. A **Run Workflow** node's retries belong on the tasks of the workflow it runs.",
+      "do": "Set **Retries** on that node to 0, or leave it blank.",
+      "related": [
+        {
+          "text": "Let a task retry its own failures",
+          "link": "../guides/retry-a-run#let-a-task-retry-its-own-failures"
+        }
+      ]
+    },
+    "WORKFLOWRUN_INVALID_REFERENCE": {
+      "why": "No run with that ID exists, or you can't reach it. A callback whose `ref` names no run gets this too. Flow deletes finished runs after **Activity Retention (days)**, 365 days by default.",
+      "do": "Check the run ID. For a callback, send the ID from `$(context.params.workflowrun-ref)`.",
+      "related": [
+        {
+          "text": "Resume a waiting run with a callback",
+          "link": "../fundamentals/triggers#resume-a-waiting-run-with-a-callback"
+        },
+        {
+          "text": "How long runs are kept",
+          "link": "../fundamentals/runs#how-long-runs-are-kept"
+        }
+      ]
+    },
+    "WORKFLOWRUN_INVALID_PHASE": {
+      "why": "A start request names a run that isn't waiting to start: it's already running or completed, or it's parked for a slot under its workflow's concurrency limit.",
+      "do": "Start only a run submitted with `start=false`. A parked run starts on its own when a slot frees.",
+      "related": [
+        {
+          "text": "Limit how many runs overlap",
+          "link": "../fundamentals/runs#limit-how-many-runs-overlap"
+        }
+      ]
+    },
+    "WORKFLOWRUN_TRIGGER_DISABLED": {
+      "why": "The run came through a trigger that's off for this workflow: **Manual**, **Scheduler**, **Webhook**, **Events** or **GitHub**. An event or GitHub delivery also gets this answer when one of the trigger's filters doesn't match. The workflow card shows **Trigger disabled** when **Manual** is off.",
+      "do": "Turn the trigger on under **Configure › Triggers**, then select **Create new version**. For **Events**, check each filter row: an **in** row never matches at this release.",
+      "related": [
+        {
+          "text": "Triggers",
+          "link": "../fundamentals/triggers"
+        },
+        {
+          "text": "The Events trigger's in operation never matches",
+          "link": "./known-issues#the-events-triggers-in-operation-never-matches"
+        }
+      ]
+    },
+    "WORKFLOWRUN_TIMEOUT_TOO_SHORT": {
+      "why": "The run's timeout is shorter than the longest chain of task timeouts through the graph, so Flow refuses the run rather than let it time out partway. The message names where the timeout came from: the requested run timeout, the workflow's, the default, or the workspace maximum run duration that caps them. A waiting task's own timeout doesn't count toward the chain.",
+      "do": "Raise **Timeout** under **Configure › Run Options**, or lower the task timeouts on the longest path. If the message names the workspace maximum run duration, ask an admin to raise the **Run Duration** quota.",
+      "related": [
+        {
+          "text": "Runs: Timeouts",
+          "link": "../fundamentals/runs#timeouts"
+        }
+      ]
+    },
+    "WORKFLOWRUN_RETRY_INVALID": {
+      "why": "Flow can't build the retry you asked for, and the message ends with why: the run's workflow version no longer exists; a chosen task isn't in the workflow, or is its start or end; a chosen task sits between an **Acquire Lock** and its **Release Lock**; or you asked to retry the failed tasks of a run where none failed.",
+      "do": "Fix what the message names. To run a newer version of the workflow, start a new run with **Run it**.",
+      "related": [
+        {
+          "text": "Know what a retry keeps",
+          "link": "../guides/retry-a-run#know-what-a-retry-keeps"
+        }
+      ]
+    },
+    "ACTION_INVALID_APPROVERGROUP": {
+      "why": "The approval names an approver group that isn't in the workspace the request went through, or that no longer exists. A decision from someone outside the group isn't refused with this code: Flow doesn't record it.",
+      "do": "Answer the approval from the workspace that owns its run. To decide an approval that names a group, you must be a member: ask an owner or editor to add you under **Manage workspace › Approver Groups**.",
+      "related": [
+        {
+          "text": "Actions: Who can answer",
+          "link": "../fundamentals/actions#who-can-answer"
+        }
+      ]
+    },
+    "ACTION_UNABLE_TO_ACTION": {
+      "why": "Flow couldn't record the decision. The action already has every decision it needs, for example from another approver at the same moment, or the task behind it couldn't be ended, for example because its run already ended.",
+      "do": "Reload **Actions**: the action has probably been decided. When a run ends first, its open actions close with it.",
+      "related": [
+        {
+          "text": "When the run ends first",
+          "link": "../fundamentals/actions#when-the-run-ends-first"
+        }
+      ]
+    },
+    "SCHEDULE_INVALID_REQ": {
+      "why": "The schedule is missing a required field: a run-once schedule needs a date, a repeating one a cron expression, and every schedule a time zone. Flow answers the same when the workflow the schedule names isn't in the workspace.",
+      "do": "Fill in the missing field, or choose a workflow in this workspace.",
+      "related": [
+        {
+          "text": "Create a schedule",
+          "link": "../webapp/schedules#create-a-schedule"
+        }
+      ]
+    },
+    "SCHEDULE_INVALID_RUNONCE": {
+      "why": "You enabled a run-once schedule whose time has passed. Flow sets the schedule's status to error.",
+      "do": "Edit the schedule to a future date and time, then enable it.",
+      "related": [
+        {
+          "text": "Manage schedules",
+          "link": "../webapp/schedules#manage-schedules"
+        }
+      ]
+    },
+    "ARTIFACT_INVALID_REF": {
+      "why": "No artifact of that name is in the scope the task asks for: this run, for scope `run`, or an earlier run of the workflow, for scope `workflow`. **Download Artifact** then fails with the reason `ArtifactRefused` and this message, unless **Optional** is on.",
+      "do": "Check that **Artifact name** and **Scope** match the upload. For a download a first run won't find, turn on **Optional**: the task then succeeds with `found` set to `false`.",
+      "related": [
+        {
+          "text": "Artifacts",
+          "link": "../fundamentals/artifacts#artifacts"
+        }
+      ]
+    },
+    "ARTIFACT_INVALID_NAME": {
+      "why": "**Upload Artifact**'s **Artifact name** breaks the naming rule: letters, digits, `.`, `-` and `_`, starting with a letter or digit, up to 128 characters. The task fails with the reason `ArtifactRefused`.",
+      "do": "Change **Artifact name** to fit the rule.",
+      "related": [
+        {
+          "text": "Artifacts",
+          "link": "../fundamentals/artifacts#artifacts"
+        }
+      ]
+    },
+    "ARTIFACT_ALREADY_EXISTS": {
+      "why": "An earlier upload in this run used the same name. Names are unique within a run, whatever their scope. The task fails with the reason `ArtifactRefused`.",
+      "do": "Give each **Upload Artifact** in the workflow its own **Artifact name**.",
+      "related": [
+        {
+          "text": "Artifacts",
+          "link": "../fundamentals/artifacts#artifacts"
+        }
+      ]
+    },
+    "ARTIFACT_TOO_LARGE": {
+      "why": "The uploaded file is larger than **Admin › Settings › Artifacts › Largest Artifact (MB)**, 1,024 MB by default. Flow deletes the file and fails the task with the reason `ArtifactRefused`.",
+      "do": "Upload less, such as a compressed archive of only what later tasks need, or ask an admin to raise **Largest Artifact (MB)**.",
+      "related": [
+        {
+          "text": "Artifacts: Limits",
+          "link": "../fundamentals/artifacts#limits"
+        }
+      ]
+    },
+    "ARTIFACT_EXPIRED": {
+      "why": "The artifact's retention ran out, and Flow deleted its file. When the message says it expired on `replacement`, a newer upload of the same workflow-scoped artifact replaced it.",
+      "do": "Upload the file again. To keep a run-scoped artifact longer, set **Retention days** on **Upload Artifact**, up to **Maximum Retention (days)**.",
+      "related": [
+        {
+          "text": "How long is an artifact kept?",
+          "link": "../fundamentals/artifacts#how-long-is-an-artifact-kept"
+        }
+      ]
+    },
+    "ARTIFACTS_NOT_CONFIGURED": {
+      "why": "This install has no artifact store, so Flow can't keep artifacts or stored task logs.",
+      "do": "Ask your operator to connect one: `flow.artifacts.enabled` and the artifact store properties on service-core.",
+      "related": [
+        {
+          "text": "Connect the artifact store",
+          "link": "../hosting/configuring#connect-the-artifact-store"
+        }
+      ]
+    },
+    "TASK_INVALID_REFERENCE": {
+      "why": "No task of that name and version is in the workspace or the catalogue. The message shows the name, which is the task's slug, and the version, or `latest`. A node pinned to a version that doesn't exist gets this when the workflow is saved.",
+      "do": "Check the task's name and versions in Task Manager, or update the node to the task's latest version.",
+      "related": [
+        {
+          "text": "Update a task to its latest version",
+          "link": "../guides/workflow-editor#update-a-task-to-its-latest-version"
+        }
+      ]
+    },
+    "TASK_ALREADY_EXISTS": {
+      "why": "A task with that name is already in the workspace, or in the catalogue for a global task. A task's name is its slug, so it can't repeat.",
+      "do": "Choose another **Name**, or save a new version of the existing task instead.",
+      "related": [
+        {
+          "text": "Add the task in Task Manager",
+          "link": "../guides/tasks#add-the-task-in-task-manager"
+        }
+      ]
+    },
+    "TASK_INVALID_NAME": {
+      "why": "The task's **Name** is blank, or has a character other than letters, digits and `-`.",
+      "do": "Use letters, digits and hyphens only, such as `send-report`.",
+      "related": [
+        {
+          "text": "Add the task in Task Manager",
+          "link": "../guides/tasks#add-the-task-in-task-manager"
+        }
+      ]
+    },
+    "TASK_INACTIVE_STATUS": {
+      "why": "The task is archived. Flow refuses to save a workflow with a node that uses it, and to start a run of one. Updating an archived task gets this too, unless the update restores it.",
+      "do": "Select **Restore** on the task in Task Manager, or replace the node with an active task.",
+      "related": [
+        {
+          "text": "Change a task that workflows use",
+          "link": "../guides/tasks#change-a-task-that-workflows-use"
+        }
+      ]
+    },
+    "TASK_DELETE_IN_USE": {
+      "why": "A task run that uses the task is still pending, queued or running. Flow refuses the delete so that run doesn't lose the task's definition.",
+      "do": "Wait for those runs to end, or cancel them, then delete again. The webapp doesn't delete tasks: **Archive** retires one.",
+      "related": [
+        {
+          "text": "Change a task that workflows use",
+          "link": "../guides/tasks#change-a-task-that-workflows-use"
+        }
+      ]
+    },
+    "TASKRUN_INVALID_END_STATUS": {
+      "why": "A dispatcher ended a task with a `status` other than `succeeded`, `failed` or `invalid`. An absent `status` means `succeeded`.",
+      "do": "Send one of the three.",
+      "related": [
+        {
+          "text": "Dispatcher protocol reference: The end",
+          "link": "../extend/dispatcher-protocol#the-end"
+        }
+      ]
+    },
+    "TASKRUN_CLAIM_SUPERSEDED": {
+      "why": "A dispatcher sent a start, an end or a log for a task it no longer holds, usually because Flow requeued the attempt after its lease lapsed. Flow changed nothing.",
+      "do": "Nothing, for the task: its newer attempt stands. If it happens often, check that the dispatcher sends a heartbeat for every task it holds at least every 30 seconds.",
+      "related": [
+        {
+          "text": "Keep leases alive",
+          "link": "../extend/dispatcher-protocol#keep-leases-alive"
+        }
+      ]
+    },
+    "TASKRUN_LOG_TOO_LARGE": {
+      "why": "A finished task's log is over `flow.engine.task.log.max-bytes`, 10 MiB by default. Flow refuses the whole log rather than cut it short.",
+      "do": "Raise the property on service-core, or log less. The log stays readable from the pod while the pod exists.",
+      "related": [
+        {
+          "text": "Store finished logs",
+          "link": "../hosting/task-logs#store-finished-logs"
+        }
+      ]
+    },
+    "TASKRUN_LOGS_DISABLED": {
+      "why": "**Store Task Logs** is off in **Admin › Settings › Artifacts**, so Flow refuses a dispatcher's finished log.",
+      "do": "Turn **Store Task Logs** on. Logs already stored are served until they expire.",
+      "related": [
+        {
+          "text": "Store finished logs",
+          "link": "../hosting/task-logs#store-finished-logs"
+        }
+      ]
+    },
+    "DISPATCHER_NOT_REGISTERED": {
+      "why": "A dispatcher polled or sent a heartbeat under an ID Flow doesn't hold. Flow deletes a registration after 7 days without a connection, and a database reset loses every registration.",
+      "do": "Nothing, with Flow's dispatcher SDK: it registers again and repeats the call. A dispatcher of your own must do the same.",
+      "related": [
+        {
+          "text": "Dispatcher protocol reference: Registration",
+          "link": "../extend/dispatcher-protocol#registration"
+        }
+      ]
+    },
+    "DISPATCHER_INVALID_REQ": {
+      "why": "A dispatcher registered without a host.",
+      "do": "Send the dispatcher's host in the registration.",
+      "related": [
+        {
+          "text": "Dispatcher protocol reference: Registration",
+          "link": "../extend/dispatcher-protocol#registration"
+        }
+      ]
+    },
+    "QUOTA_EXCEEDED": {
+      "why": "A workspace quota is reached. The message names it, with the usage and the limit, such as `Number of runs (executions): 20 / 20`. It can name `Number of Workflows`, `Number of runs (executions)`, `Concurrent runs (executions)`, `Requested Workspace size`, `Workspace Size Limit` or `Artifact storage (bytes)`.",
+      "do": "Wait for a run to end or for the month to reset (UTC), delete workflows you no longer need, or ask an admin to raise the quota on **Manage workspace › Quotas**.",
+      "related": [
+        {
+          "text": "What happens at a limit?",
+          "link": "../webapp/quotas#what-happens-at-a-limit"
+        },
+        {
+          "text": "A run didn't start",
+          "link": "./troubleshooting#a-run-didnt-start"
+        }
+      ]
+    },
+    "WORKSPACE_INVALID_REF": {
+      "why": "No workspace with that name exists, or you aren't a member. On an install with `flow.workspace.single=true`, every workspace but `system` answers this.",
+      "do": "Check the workspace's name, which is its slug, in the URL or the request. If you need access, ask an owner to add you.",
+      "related": [
+        {
+          "text": "Manage workspace: Members",
+          "link": "../webapp/manage#members"
+        }
+      ]
+    },
+    "WORKSPACE_INVALID_REQ": {
+      "why": "Part of a workspace request is blank or not allowed: a blank name or display name, a blank approver group name, or creating or deleting a workspace on an install with `flow.workspace.single=true`.",
+      "do": "Fill in the blank field. A single-workspace install has only the `system` workspace.",
+      "related": [
+        {
+          "text": "Manage workspace",
+          "link": "../webapp/manage"
+        }
+      ]
+    },
+    "WORKSPACE_NON_UNIQUE_NAME": {
+      "why": "Another workspace already has that name, or the name is reserved: `home`, `admin`, `system`, `profile` and `connect` are. Flow compares names as slugs, so `My Team` and `my-team` collide.",
+      "do": "Choose another name.",
+      "related": [
+        {
+          "text": "Manage workspace: Settings",
+          "link": "../webapp/manage#settings"
+        }
+      ]
+    },
+    "WORKSPACE_INVALID_USER_ROLE": {
+      "why": "A member was given a role other than `owner`, `editor` or `reader`.",
+      "do": "Use one of the three.",
+      "related": [
+        {
+          "text": "What can each role do?",
+          "link": "../webapp/manage#what-can-each-role-do"
+        }
+      ]
+    },
+    "PARAM_NAME_COLLISION": {
+      "why": "Two parameter names differ only by case, `-` or `_`, such as `my-key` and `MY_KEY`. A task receives each parameter as the environment variable `PARAM_<NAME>`, and the two would become the same variable.",
+      "do": "Rename one, so the names differ by more than case and separators.",
+      "related": [
+        {
+          "text": "Parameters: Names",
+          "link": "../fundamentals/parameters#names"
+        }
+      ]
+    },
+    "PARAM_INVALID_NAME": {
+      "why": "The name breaks the naming rule: it starts with a letter or underscore, then has only letters, digits, `-` and `_`. `names` is reserved in any case, and `.` separates the parts of a reference.",
+      "do": "Use a name that fits the rule. A parameter's name can't change once created, so create a new one and update its references.",
+      "related": [
+        {
+          "text": "Parameters: Names",
+          "link": "../fundamentals/parameters#names"
+        }
+      ]
+    },
+    "PARAM_INVALID_TYPE": {
+      "why": "A run request gives a parameter a `type` other than `string`, `array`, `object` or `secret`, such as `password`.",
+      "do": "Use one of the four, or leave `type` out for `string`. A **Password** parameter's type is `secret`.",
+      "related": [
+        {
+          "text": "Parameters: Types",
+          "link": "../fundamentals/parameters#types"
+        }
+      ]
+    },
+    "PARAM_SECRET_NOT_STRING": {
+      "why": "A run request gives a secret parameter a value that isn't a string, such as a number or an object.",
+      "do": "Send the secret's value as a JSON string.",
+      "related": [
+        {
+          "text": "Secured parameters",
+          "link": "../fundamentals/parameters#secured-parameters"
+        }
+      ]
+    },
+    "PARAMS_INVALID_REFERENCE": {
+      "why": "No global or workspace parameter with that name exists.",
+      "do": "Check the name on the workspace's **Parameters** page, or in **Admin › Parameters**.",
+      "related": [
+        {
+          "text": "Where does a value come from?",
+          "link": "../fundamentals/parameters#where-does-a-value-come-from"
+        }
+      ]
+    },
+    "PARAMS_NON_UNIQUE_REFERENCE": {
+      "why": "A global parameter with that name already exists.",
+      "do": "Choose another name, or edit the existing parameter.",
+      "related": [
+        {
+          "text": "Admin: Parameters",
+          "link": "../webapp/administer#parameters"
+        }
+      ]
+    },
+    "PARAMS_MANAGED_BY_INTEGRATION": {
+      "why": "The workspace parameter belongs to an integration that shares its credentials, such as `github-token`. It shows **Managed by GitHub**, or the integration's name, and only the integration changes it.",
+      "do": "Stop sharing the credentials, or disconnect the integration, to remove it. To use another value in one task, type it into the task's field instead of the reference.",
+      "related": [
+        {
+          "text": "Parameters an integration manages",
+          "link": "../fundamentals/parameters#parameters-an-integration-manages"
+        }
+      ]
+    },
+    "PERMISSION_DENIED": {
+      "why": "Your credential reached the route but not what it acts on. Flow answers this for a few checks: reading the audit trail or platform-wide Insights, or changing another user, without a global grant; creating a workflow or task in a workspace you can't reach; creating a workspace while **Workspace creation by users** is off and you aren't an admin; sending a CloudEvent for a workflow you can't reach; and reading the log of a task in a run you can't reach. It carries code 403 but answers HTTP 401.",
+      "do": "Use a token or account with the access the route needs. Most routes answer a missing permission with a bare `403` and no body instead.",
+      "related": [
+        {
+          "text": "What can each role do?",
+          "link": "../architecture/security#what-can-each-role-do"
+        },
+        {
+          "text": "Read an error",
+          "link": "../apis/overview#read-an-error"
+        }
+      ]
+    },
+    "AUTH_REQUIRED": {
+      "why": "The request has no credential Flow accepts: no token, a token Flow doesn't hold, such as an expired or revoked one, or a kind of token the route doesn't take. The answer carries `WWW-Authenticate: Bearer`, and its message can say more than the one shown.",
+      "do": "Send a current token of a kind the route takes, as `Authorization: Bearer <token>`. In the webapp, sign in again.",
+      "related": [
+        {
+          "text": "Security: Tokens",
+          "link": "../architecture/security#tokens"
+        },
+        {
+          "text": "Machine tokens",
+          "link": "../hosting/machine-tokens"
+        }
+      ]
+    },
+    "AUTH_TOKEN_INVALID": {
+      "why": "Flow couldn't verify the id_token from your identity provider: its signature, issuer, audience, expiry or nonce doesn't check out, or it carries no email in `email`, `emailAddress` or an email-shaped `preferred_username`. Flow accepts only asymmetric signing algorithms.",
+      "do": "Check the client registration with your provider: the token's audience is Flow's client ID, the signing algorithm is in the RS, PS or ES families, and the id_token carries an email.",
+      "related": [
+        {
+          "text": "Sign in with OpenID Connect",
+          "link": "../hosting/sign-in#sign-in-with-openid-connect"
+        }
+      ]
+    },
+    "AUTH_NOT_CONFIGURED": {
+      "why": "An OIDC sign-in reached Flow, but **OIDC Issuer** or **OIDC Client ID** is empty, or Flow couldn't read the issuer's discovery document or signing keys.",
+      "do": "Set `FLOW_AUTH_OIDC_ISSUER` and `FLOW_AUTH_OIDC_CLIENT_ID`, or the settings in **Admin › Settings › Authentication**, and check that service-core can reach the issuer. Behind a forward proxy, set `proxy.host` and `proxy.port`.",
+      "related": [
+        {
+          "text": "Sign in with OpenID Connect",
+          "link": "../hosting/sign-in#sign-in-with-openid-connect"
+        }
+      ]
+    },
+    "AUTH_ACTIVATION_REQUIRED": {
+      "why": "Nobody has activated this install yet, and the sign-in carried no activation code. The webapp then shows the activation screen.",
+      "do": "Enter the activation code, the value of `FLOW_ACTIVATION_CODE`, on the activation screen.",
+      "related": [
+        {
+          "text": "Make the first admin with the activation code",
+          "link": "../hosting/sign-in#make-the-first-admin-with-the-activation-code"
+        }
+      ]
+    },
+    "AUTH_ACTIVATION_CODE_INVALID": {
+      "why": "The activation code doesn't match `FLOW_ACTIVATION_CODE`. Nobody is created.",
+      "do": "Enter the right code. With no code set, every code is refused: set `FLOW_ACTIVATION_CODE`, at least 32 characters, and restart service-core.",
+      "related": [
+        {
+          "text": "Make the first admin with the activation code",
+          "link": "../hosting/sign-in#make-the-first-admin-with-the-activation-code"
+        },
+        {
+          "text": "Sign-in fails",
+          "link": "./troubleshooting#sign-in-fails"
+        }
+      ]
+    },
+    "AUTH_USER_NOT_ADMITTED": {
+      "why": "**Auto-Create Users** is off and you aren't a user yet: no admin has added you to a workspace, and no admin claim admits you. The webapp shows **Sign-in didn't complete**.",
+      "do": "Ask an admin to add you by email in **Manage workspace › Members › Add members**, or to turn on **Auto-Create Users** in **Admin › Settings › Features**.",
+      "related": [
+        {
+          "text": "Decide who else may sign in",
+          "link": "../hosting/sign-in#decide-who-else-may-sign-in"
+        },
+        {
+          "text": "Sign-in fails",
+          "link": "./troubleshooting#sign-in-fails"
+        }
+      ]
+    },
+    "TOKEN_INVALID_REQ": {
+      "why": "The token request is missing its type or name, its principal for any kind but `global`, or its permissions for any kind but `user`.",
+      "do": "Fill in the missing field.",
+      "related": [
+        {
+          "text": "Machine tokens",
+          "link": "../hosting/machine-tokens"
+        }
+      ]
+    },
+    "TOKEN_INVALID_PERMISSION": {
+      "why": "A permission isn't `<resource>/<action>` in lowercase with a known resource. The message describes an older three-part format with uppercase actions, which Flow doesn't accept.",
+      "do": "Write each permission as `<resource>/<action>`, such as `workflow/read`, `workflowrun/action` or `workflow/**`.",
+      "related": [
+        {
+          "text": "Write permissions",
+          "link": "../hosting/machine-tokens#write-permissions"
+        },
+        {
+          "text": "The token permission error describes the wrong format",
+          "link": "./known-issues#the-token-permission-error-describes-the-wrong-format"
+        }
+      ]
+    },
+    "TOKEN_INVALID_CEILING": {
+      "why": "A `key` token asked for a global-scoped permission. A key token's permissions stay within the workspaces it's granted.",
+      "do": "Grant the key token permissions on its workspace only, or have an admin create a `global` token.",
+      "related": [
+        {
+          "text": "Which token kinds are there?",
+          "link": "../hosting/machine-tokens#which-token-kinds-are-there"
+        }
+      ]
+    },
+    "TOKEN_ADMIN_REQUIRED": {
+      "why": "Creating a `global` token needs a credential that already holds a global grant, such as an admin's. Asking which permissions you can grant for a workspace where you can grant none gets this too.",
+      "do": "Ask an admin to create the token, or create a token for your workspace under **Manage workspace › Tokens**.",
+      "related": [
+        {
+          "text": "Manage workspace: Tokens",
+          "link": "../webapp/manage#tokens"
+        },
+        {
+          "text": "Admin: Tokens",
+          "link": "../webapp/administer#tokens"
+        }
+      ]
+    },
+    "TOKEN_DECLARED": {
+      "why": "The token is declared in configuration, under `flow.security.tokens`, so the token API can't change or delete it.",
+      "do": "Remove its `FLOW_SECURITY_TOKENS_<NAME>_*` entries on every service-core instance and restart them. Flow revokes the token at the next start.",
+      "related": [
+        {
+          "text": "What service-core does with entries",
+          "link": "../hosting/machine-tokens#what-service-core-does-with-entries"
+        }
+      ]
+    },
+    "TOKEN_INVALID_ACTOR": {
+      "why": "The token's actor kind doesn't fit its kind: a `global` token takes `SERVICE`, `AGENT` or none; a `key` token takes `SERVICE`, `AGENT`, `WORKFLOW` or none; a `user` token takes none.",
+      "do": "Choose an actor kind the token's kind allows. A dispatcher's token is `global` with `SERVICE`.",
+      "related": [
+        {
+          "text": "Which token kinds are there?",
+          "link": "../hosting/machine-tokens#which-token-kinds-are-there"
+        }
+      ]
+    },
+    "USER_NOT_FOUND": {
+      "why": "Flow found no active user with that ID or email. A person an admin added by email stays inactive until their first sign-in, and Flow can't update them before then.",
+      "do": "Check the ID or email. For someone an admin added recently, ask them to sign in once, then try again.",
+      "related": [
+        {
+          "text": "Name the first admin with the bootstrap token",
+          "link": "../hosting/sign-in#name-the-first-admin-with-the-bootstrap-token"
+        }
+      ]
+    },
+    "USER_UNABLE_TO_DELETE": {
+      "why": "The user is a member of a workspace. Despite the message, one workspace is enough to refuse the delete.",
+      "do": "Remove the user from every workspace under **Manage workspace › Members**, then delete them.",
+      "related": [
+        {
+          "text": "Admin: Users",
+          "link": "../webapp/administer#users"
+        }
+      ]
+    },
+    "SETTINGS_INVALID_KEY": {
+      "why": "The body of a settings update isn't an object of groups, names a group or key the settings don't hold, or gives a value that isn't a single string, number or boolean. The message ends with the detail, such as `Unknown setting: features/autoCreate.`, and Flow writes nothing from the request.",
+      "do": "Check the group and key against `GET /api/v2/settings`, and send each value as a string, number or boolean.",
+      "related": [
+        {
+          "text": "Update the settings",
+          "link": "../apis/SystemRoute#update-boomerang-flow-settings"
+        },
+        {
+          "text": "Admin: Settings",
+          "link": "../webapp/administer#settings"
+        }
+      ]
+    },
+    "INTEGRATION_INVALID_STATE": {
+      "why": "The connection took more than 10 minutes from **Connect** to the end of the installation, or its state didn't check out, for example because **GitHub Private Key** changed during the install.",
+      "do": "Select **Connect** again.",
+      "related": [
+        {
+          "text": "Fix a failed connection",
+          "link": "../guides/connect-github#fix-a-failed-connection"
+        }
+      ]
+    },
+    "INTEGRATION_UNAUTHORIZED": {
+      "why": "You aren't a member of the workspace you're connecting, or you're disconnecting an installation that belongs to another workspace.",
+      "do": "Ask an owner to add you to the workspace, or to connect it.",
+      "related": [
+        {
+          "text": "Who can connect and share?",
+          "link": "../webapp/integrations#who-can-connect-and-share"
+        }
+      ]
+    },
+    "INTEGRATION_INSTALL_MISMATCH": {
+      "why": "Flow couldn't confirm that your GitHub account can see the installation. A wrong **GitHub Client ID** or **GitHub Client Secret** gives the same answer, because Flow then gets no access token for your account.",
+      "do": "Install with a GitHub account that can manage the installation. If that doesn't help, ask an admin to check **GitHub Client ID** and **GitHub Client Secret**.",
+      "related": [
+        {
+          "text": "Fix a failed connection",
+          "link": "../guides/connect-github#fix-a-failed-connection"
+        },
+        {
+          "text": "Fix a GitHub setup",
+          "link": "../hosting/integrations#fix-a-github-setup"
+        }
+      ]
+    },
+    "INTEGRATION_PARAM_EXISTS": {
+      "why": "The workspace already has a parameter that someone created, with the name the integration shares, such as `github-token`.",
+      "do": "Rename or delete that parameter on the workspace's **Parameters** page, then share again.",
+      "related": [
+        {
+          "text": "Share credentials with tasks",
+          "link": "../webapp/integrations#share-credentials-with-tasks"
+        }
+      ]
+    },
+    "INTEGRATION_PARAMS_DISABLED": {
+      "why": "**Admin › Settings › Features › Workspace Parameters** is off, so the credentials have nowhere to go.",
+      "do": "Ask an admin to turn on **Workspace Parameters**, then share again.",
+      "related": [
+        {
+          "text": "Share credentials with tasks",
+          "link": "../webapp/integrations#share-credentials-with-tasks"
+        }
+      ]
+    },
+    "INTEGRATION_TOKEN_FAILED": {
+      "why": "Flow asked GitHub or Slack for a token and got none. For GitHub, **GitHub App ID** or **GitHub Private Key** is wrong, or the App was uninstalled. For Slack, the client ID or secret is wrong, or the installation holds no token.",
+      "do": "Ask an admin to check the integration's settings, or install the app again.",
+      "related": [
+        {
+          "text": "Fix a GitHub setup",
+          "link": "../hosting/integrations#fix-a-github-setup"
+        },
+        {
+          "text": "Fix a Slack setup",
+          "link": "../hosting/integrations#fix-a-slack-setup"
+        }
+      ]
+    },
+    "INTEGRATION_ALREADY_LINKED": {
+      "why": "The workspace is already connected to a different Slack installation. A workspace has one connection per integration. At this release only Slack raises this code.",
+      "do": "Disconnect the current connection under **Manage**, then connect the other.",
+      "related": [
+        {
+          "text": "Disconnect",
+          "link": "../webapp/integrations#disconnect"
+        }
+      ]
+    },
+    "INTEGRATION_TOKEN_ROTATES": {
+      "why": "The Slack app has token rotation on, so its token expires within 12 hours. Flow doesn't refresh Slack tokens, so it won't share one.",
+      "do": "Turn token rotation off in the Slack app's settings, then install the app again.",
+      "related": [
+        {
+          "text": "Fix a Slack setup",
+          "link": "../hosting/integrations#fix-a-slack-setup"
+        }
+      ]
+    },
+    "INTEGRATION_NOT_CONFIGURED": {
+      "why": "**Slack Client ID** or **Slack Client Secret** isn't set, so Flow can't start the Slack install. The Slack card's **Connect** is disabled, with \"Not set up on this platform\".",
+      "do": "Ask an admin to set both in **Admin › Settings › Integrations**.",
+      "related": [
+        {
+          "text": "Fix a Slack setup",
+          "link": "../hosting/integrations#fix-a-slack-setup"
+        }
+      ]
+    },
+    "QUERY_INVALID_FILTERS": {
+      "why": "A filter or field in the request can't be read, and the message names it in the brackets, such as `labels`. Common causes: a `labels` entry that isn't `key=value`; a `statuses` or `phase` value Flow doesn't know; a callback `status` other than `succeeded` or `failed`; or a body field that fails validation.",
+      "do": "Correct what the message names. `labels` takes URL-encoded `key=value` entries, separated by commas.",
+      "related": [
+        {
+          "text": "Page through a list",
+          "link": "../apis/overview#page-through-a-list"
+        },
+        {
+          "text": "Resume a waiting run with a callback",
+          "link": "../fundamentals/triggers#resume-a-waiting-run-with-a-callback"
+        }
+      ]
+    },
+    "DATA_CONVERSION_FAILED": {
+      "why": "Flow couldn't convert data for the response. It's a server error, not a fault in your request.",
+      "do": "Try again. If it repeats, ask your operator to check the service-core log at that time.",
+      "related": [
+        {
+          "text": "Read an error",
+          "link": "../apis/overview#read-an-error"
+        }
+      ]
+    }
+  },
+  "statusReasons": {
+    "DispatchError": {
+      "meaning": "The dispatcher couldn't run the task, for example because it couldn't create the task's container. The task is **Failed**, and its **Message** says why.",
+      "do": "Read the **Message**. A `forbidden` message means the dispatcher lacks a Kubernetes permission: ask your operator. Otherwise correct the task's image or settings.",
+      "related": [
+        {
+          "text": "When a task can't start",
+          "link": "../hosting/dispatcher#when-a-task-cant-start"
+        }
+      ]
+    },
+    "DeadlineExceeded": {
+      "meaning": "The task or run used its timeout and ends **Timed Out**. A task that times out times out its run too. Time a task waits as **Ready** for a dispatcher counts.",
+      "do": "Raise **Timeout** under **Configure › Run Options**, or the task's own timeout. If the task waited long as **Ready**, ask your operator to check the dispatcher.",
+      "related": [
+        {
+          "text": "Runs: Timeouts",
+          "link": "../fundamentals/runs#timeouts"
+        },
+        {
+          "text": "A task timed out",
+          "link": "./troubleshooting#a-task-timed-out"
+        }
+      ]
+    },
+    "JobFailed": {
+      "meaning": "The task's container ran and failed, usually with a non-zero exit code. The task is **Failed**, and its **Message** carries the exit code and the end of its log.",
+      "do": "Read the log with **View Log**, fix the script or its input, and retry. For a failure that passes, such as a service that was down, set **Retries** on the task.",
+      "related": [
+        {
+          "text": "Retry a run",
+          "link": "../guides/retry-a-run"
+        }
+      ]
+    },
+    "JobDeleted": {
+      "meaning": "The task's Kubernetes Job or TaskRun was deleted before it finished.",
+      "do": "Retry the run. If it keeps happening, ask your operator what deletes task pods in the namespace.",
+      "related": [
+        {
+          "text": "Clean up finished tasks",
+          "link": "../hosting/dispatcher#clean-up-finished-tasks"
+        }
+      ]
+    },
+    "OOMKilled": {
+      "meaning": "The task's container ran out of memory and was killed.",
+      "do": "Use less memory in the task, or ask your operator to raise `kube.resource.limit.memory` on the dispatcher. A memory-backed `/data` counts against the limit.",
+      "related": [
+        {
+          "text": "Size and place task pods",
+          "link": "../hosting/dispatcher#size-and-place-task-pods"
+        }
+      ]
+    },
+    "ImagePull": {
+      "meaning": "The task's image couldn't be pulled: it doesn't exist, the tag is wrong, or the registry needs credentials the cluster doesn't have. The dispatcher fails the task after `kube.timeout.startFailureGraceSeconds`, 60 seconds by default.",
+      "do": "Correct the image on the task or node. For a private registry, ask your operator about the pull secret, `kube.image.pullSecret`.",
+      "related": [
+        {
+          "text": "When a task can't start",
+          "link": "../hosting/dispatcher#when-a-task-cant-start"
+        }
+      ]
+    },
+    "ImageNotAllowed": {
+      "meaning": "The dispatcher refused the task's image before creating anything. Flow's Kubernetes dispatcher runs an `ai` task only when its image starts with an allowed prefix, `boomerangio/task-ai` by default.",
+      "do": "Use an allowed image, or ask your operator to add your image's prefix to `flow.dispatcher.ai.image-prefixes`.",
+      "related": [
+        {
+          "text": "Run AI tasks",
+          "link": "../hosting/dispatcher#run-ai-tasks"
+        }
+      ]
+    },
+    "AdmissionDenied": {
+      "meaning": "An admission controller in the cluster refused the task's pod, such as a policy on images, resources or security settings.",
+      "do": "Read the task's **Message** for the policy, then correct the task, or ask your operator about the policy.",
+      "related": [
+        {
+          "text": "When a task can't start",
+          "link": "../hosting/dispatcher#when-a-task-cant-start"
+        }
+      ]
+    },
+    "ResultsTooLarge": {
+      "meaning": "The task's results are over the limit: 4096 bytes together on Flow's Kubernetes dispatcher, or 1,048,576 bytes that Flow stores. A for-each task also fails this way when its items' combined results pass 16 MB.",
+      "do": "Return less, and pass larger data by reference: a path on the run workspace, or an artifact. For an AI task, lower **Max tokens** or set **Output file**.",
+      "related": [
+        {
+          "text": "Stay within the size caps",
+          "link": "../guides/tasks#stay-within-the-size-caps"
+        }
+      ]
+    },
+    "ExceededQuota": {
+      "meaning": "The cluster had no room to create the task's pod, for example because a namespace quota refused it. The task never started.",
+      "do": "Nothing at first: Flow requeues the task with backoff. If it fails after the requeues, ask your operator about the namespace's resource quota.",
+      "related": [
+        {
+          "text": "When a task can't start",
+          "link": "../hosting/dispatcher#when-a-task-cant-start"
+        }
+      ]
+    },
+    "StartTimeout": {
+      "meaning": "The task's pod was created but didn't start within the dispatcher's start deadline, `kube.timeout.startMinutes`, 15 minutes by default. It usually stayed `Pending` with no node to run on.",
+      "do": "Nothing at first: Flow requeues the task. If it fails after the requeues, ask your operator about cluster capacity, node selectors and tolerations.",
+      "related": [
+        {
+          "text": "When a task can't start",
+          "link": "../hosting/dispatcher#when-a-task-cant-start"
+        }
+      ]
+    },
+    "RateLimited": {
+      "meaning": "The cluster, or a gateway in front of it, refused the task for rate. The task never started.",
+      "do": "Nothing at first: Flow requeues the task with backoff. If it keeps failing, ask your operator about the cluster's API rate limits.",
+      "related": [
+        {
+          "text": "Which end reasons requeue a task?",
+          "link": "../extend/dispatcher-protocol#which-end-reasons-requeue-a-task"
+        }
+      ]
+    },
+    "ClusterUnavailable": {
+      "meaning": "The dispatcher couldn't reach the Kubernetes API server: a timeout, a refused connection or a 5xx answer. The task never started.",
+      "do": "Nothing at first: Flow requeues the task. If it fails after the requeues, ask your operator to check the cluster's control plane and the dispatcher's route to it.",
+      "related": [
+        {
+          "text": "When a task can't start",
+          "link": "../hosting/dispatcher#when-a-task-cant-start"
+        }
+      ]
+    },
+    "DispatcherStopping": {
+      "meaning": "The dispatcher was stopping, for example in a rolling update, and handed the task back without starting it.",
+      "do": "Nothing: Flow requeues the task for the next dispatcher that polls.",
+      "related": [
+        {
+          "text": "How leases and heartbeats work",
+          "link": "../hosting/dispatcher#how-leases-and-heartbeats-work"
+        }
+      ]
+    },
+    "ConcurrencyLimit": {
+      "meaning": "On a run: the workflow's **Concurrency limit** was reached and **Over the limit** is **Skip the run**, so Flow ended the run **Cancelled** at once.",
+      "do": "Let the earlier runs finish, raise **Concurrency limit**, or choose **Queue until a run ends**.",
+      "related": [
+        {
+          "text": "Limit how many runs overlap",
+          "link": "../fundamentals/runs#limit-how-many-runs-overlap"
+        }
+      ]
+    },
+    "WorkflowInvalid": {
+      "meaning": "On a run: the workflow couldn't run, so the run ends **Invalid**. When the workflow has no task, or no path from the start to the end, no task starts and the message reads \"Failed to run workflow: incomplete, or invalid, workflow\". When Flow fails while queueing the run's tasks, the message reads \"Failed to run workflow: unable to process Workflow and queue all tasks.\"",
+      "do": "Fix the workflow in the editor, such as by linking a path from the start to the end, and save a new version.",
+      "related": [
+        {
+          "text": "Link tasks",
+          "link": "../guides/workflow-editor#link-tasks"
+        },
+        {
+          "text": "A run didn't start",
+          "link": "./troubleshooting#a-run-didnt-start"
+        }
+      ]
+    },
+    "FinallyFailed": {
+      "meaning": "On a run: the graph succeeded, but a finally task ended **Failed**, **Timed Out** or **Invalid**, or the finally tasks exceeded their timeout. The run ends **Failed**, and its message names the finally task.",
+      "do": "Read the finally task's **Message** and log, fix it, and run again.",
+      "related": [
+        {
+          "text": "Run a task after the run ends",
+          "link": "../guides/workflow-editor#run-a-task-after-the-run-ends"
+        }
+      ]
+    },
+    "DispatchPrepareFailed": {
+      "meaning": "Flow couldn't prepare the task for its dispatcher after the claim, so the task failed before it started. The **Message** says why.",
+      "do": "Read the **Message**. When the cause has passed, retry the run; otherwise ask your operator to check the service-core log.",
+      "related": [
+        {
+          "text": "Retry a run",
+          "link": "../guides/retry-a-run"
+        }
+      ]
+    },
+    "SpecFillFailed": {
+      "meaning": "A workspace or global parameter that the task's script, command, arguments or environment references was deleted between the task's admission and its claim.",
+      "do": "Recreate the parameter, or change the reference, then retry the run.",
+      "related": [
+        {
+          "text": "When do values resolve?",
+          "link": "../fundamentals/parameters#when-do-values-resolve"
+        }
+      ]
+    },
+    "DispatcherGone": {
+      "meaning": "The dispatcher holding the task sent no poll or heartbeat for 60 seconds, so Flow treats it as gone. Flow requeues a container task up to {requeueBudget} times for this, then ends it **Timed Out**.",
+      "do": "Nothing at first. If tasks keep ending this way, ask your operator to check that the dispatcher is running and can reach service-core.",
+      "related": [
+        {
+          "text": "How leases and heartbeats work",
+          "link": "../hosting/dispatcher#how-leases-and-heartbeats-work"
+        }
+      ]
+    },
+    "LeaseExpired": {
+      "meaning": "The dispatcher holding the task didn't renew its lease in time: 90 seconds by default, renewed by a heartbeat every 30 seconds. Flow requeues a container task up to {requeueBudget} times for this, then ends it **Timed Out**.",
+      "do": "Nothing at first. If tasks keep ending this way, ask your operator to check the dispatcher's heartbeat, `flow.dispatcher.lease.beat-ms`, against `flow.dispatcher.lease-ms`.",
+      "related": [
+        {
+          "text": "How leases and heartbeats work",
+          "link": "../hosting/dispatcher#how-leases-and-heartbeats-work"
+        }
+      ]
+    },
+    "ChildRunFailed": {
+      "meaning": "A **Run Workflow** task waited for its child run, and the child ended other than **Succeeded**. The task is **Failed**.",
+      "do": "Open the child run from the task's **View Activity**, and fix why it ended that way.",
+      "related": [
+        {
+          "text": "Child workflows",
+          "link": "../fundamentals/runs#child-workflows"
+        }
+      ]
+    },
+    "NestingDepthExceeded": {
+      "meaning": "A **Run Workflow** task is at the nesting limit, **Maximum Child Workflow Nesting Depth**, 5 levels by default, so it started nothing.",
+      "do": "Shorten the chain of child workflows, or ask an admin to raise **Admin › Settings › Run limits › Maximum Child Workflow Nesting Depth**.",
+      "related": [
+        {
+          "text": "Child workflows",
+          "link": "../fundamentals/runs#child-workflows"
+        }
+      ]
+    },
+    "ItemFailed": {
+      "meaning": "At least one item of a for-each task didn't succeed, which fails the whole task. The message counts them, such as \"2 of 10 items did not succeed.\" The other items still finish.",
+      "do": "Select **Show items** on the run page to find the failed items. To carry on anyway, set the link after the task to always; to retry items, set **Retries** on the task.",
+      "related": [
+        {
+          "text": "When an item fails",
+          "link": "../guides/repeat-a-task-for-each-item#when-an-item-fails"
+        }
+      ]
+    },
+    "ForeachItemsInvalid": {
+      "meaning": "A for-each task's items didn't resolve to a JSON array when the task ran, so no item ran.",
+      "do": "Check the reference in the task's items, such as `$(params.items)`, and that its value is an array.",
+      "related": [
+        {
+          "text": "Repeat a task for each item: Limits",
+          "link": "../guides/repeat-a-task-for-each-item#limits"
+        }
+      ]
+    },
+    "ForeachTooManyItems": {
+      "meaning": "A for-each task's items resolved to more entries than **Maximum For-Each Items** allows, 256 by default, so no item ran.",
+      "do": "Split the list, or ask an admin to raise **Admin › Settings › Run limits › Maximum For-Each Items**.",
+      "related": [
+        {
+          "text": "Repeat a task for each item: Limits",
+          "link": "../guides/repeat-a-task-for-each-item#limits"
+        }
+      ]
+    },
+    "ParamUnresolved": {
+      "meaning": "A reference in the task's fields, script, command, arguments or environment names a parameter no layer declares, a task not in the workflow, or a result that task doesn't declare. The task fails before its container starts, and its **Message** names the field, the reference and why.",
+      "do": "Correct the reference, or declare the parameter. A credential such as `github-token` needs its integration connected and shared.",
+      "related": [
+        {
+          "text": "Why did a task fail with ParamUnresolved?",
+          "link": "../fundamentals/parameters#why-did-a-task-fail-with-paramunresolved"
+        },
+        {
+          "text": "A task failed with ParamUnresolved",
+          "link": "./troubleshooting#a-task-failed-with-paramunresolved"
+        }
+      ]
+    },
+    "ArtifactNotFound": {
+      "meaning": "A **Download Artifact** task with **Optional** on found no artifact of that name. The task still ends **Succeeded**, with its `found` result set to `false`.",
+      "do": "Nothing, when a missing file is expected, as on a first run. Otherwise check **Artifact name** and **Scope** against the upload.",
+      "related": [
+        {
+          "text": "Artifacts",
+          "link": "../fundamentals/artifacts#artifacts"
+        }
+      ]
+    },
+    "ArtifactRefused": {
+      "meaning": "Flow refused an **Upload Artifact** or **Download Artifact** task: the name is invalid or taken, the file is too large, the workspace's **Artifact Storage** quota is full, the artifact has expired or doesn't exist, or nothing was uploaded. The task's **Message** is the matching error message.",
+      "do": "Search this page for the **Message**: the artifact errors are under [Runs](#runs), and a full quota is `QUOTA_EXCEEDED`.",
+      "related": [
+        {
+          "text": "Artifacts: Limits",
+          "link": "../fundamentals/artifacts#limits"
+        }
+      ]
+    }
+  }
+}

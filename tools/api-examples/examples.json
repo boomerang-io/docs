@@ -1,0 +1,736 @@
+{
+  "_about": "Docs-side examples for the API reference, keyed by \"METHOD path\" as the contract writes it. inject.py renders them under each operation; prepare.py makes the operation's curl request send `body` as body.json and add `query` to its URL. See README.md.",
+  "_captured": "Responses marked \"live\" were captured on 6 November 2026 from a Flow stack built from main at f23d276b1 (5.0.0-beta.39-26), in example-workspace: trimmed to one or two array items, tokens redacted, `trigger` left out of runs, and members the 5.0.0-beta.39 schemas don't declare removed. Bodies marked \"code\" were read from service-core at 5.0.0-beta.39 and not run.",
+  "GET /api/v2/workspace/{workspace}/workflowrun/{workflowRunId}": {
+    "source": "live",
+    "response": [
+      {
+        "status": 200,
+        "json": {
+          "id": "6aed1feb739ea20d87d5b99e",
+          "creationDate": "2026-11-06T00:31:39.357Z",
+          "status": "succeeded",
+          "phase": "completed",
+          "paused": false,
+          "startTime": "2026-11-06T00:31:39.465Z",
+          "duration": 10506,
+          "timeout": 30,
+          "workflowRef": "6aecfc46755e5fc7e99bebd7",
+          "workflowRevisionRef": "6aecfc46755e5fc7e99bebd8",
+          "labels": {},
+          "annotations": {
+            "boomerang.io/kind": "WorkflowRun",
+            "boomerang.io/generation": "4"
+          },
+          "params": [],
+          "tasks": [
+            {
+              "annotations": {},
+              "attempt": 1,
+              "creationDate": "2026-11-06T00:31:39.411Z",
+              "duration": 10399,
+              "id": "6aed1feb739ea20d87d5b9a0",
+              "labels": {},
+              "name": "Execute Shell",
+              "params": [
+                {
+                  "name": "path",
+                  "type": "string",
+                  "value": ""
+                },
+                {
+                  "name": "shell",
+                  "type": "string",
+                  "value": ""
+                },
+                {
+                  "name": "script",
+                  "type": "string",
+                  "value": "echo \"Hello from Boomerang Flow\""
+                }
+              ],
+              "phase": "completed",
+              "results": [],
+              "spec": {
+                "arguments": [
+                  "shell",
+                  "execute"
+                ],
+                "command": [],
+                "debug": true,
+                "deletion": "Always",
+                "envs": null,
+                "image": "boomerangio/task-flow:3.3.0",
+                "script": null,
+                "timeout": 0,
+                "workingDir": null
+              },
+              "startTime": "2026-11-06T00:31:39.565Z",
+              "status": "succeeded",
+              "statusMessage": "Task (6aed1feb739ea20d87d5b9a0) has been executed successfully.",
+              "taskRef": "execute-shell",
+              "taskVersion": 2,
+              "timeout": 30,
+              "type": "script",
+              "workflowRef": "6aecfc46755e5fc7e99bebd7",
+              "workflowRevisionRef": "6aecfc46755e5fc7e99bebd8",
+              "workflowRunRef": "6aed1feb739ea20d87d5b99e"
+            }
+          ],
+          "awaitingApproval": false,
+          "debug": true,
+          "initiatedByName": "api-quickstart",
+          "initiatedByRef": "api-quickstart",
+          "results": [],
+          "workflowDisplayName": "Hello Flow",
+          "workflowName": "hello-flow",
+          "workflowVersion": 1
+        }
+      },
+      {
+        "status": 404,
+        "title": "for a run ID that doesn't exist",
+        "json": {
+          "cause": null,
+          "code": 1301,
+          "message": "Invalid WorkflowRun reference has been provided.",
+          "reason": "WORKFLOWRUN_INVALID_REFERENCE",
+          "status": "404 NOT_FOUND",
+          "timestamp": "2026-11-06T00:41:39.831Z"
+        }
+      }
+    ]
+  },
+  "GET /api/v2/workspace/{workspace}/workflowrun/query": {
+    "source": "live",
+    "response": [
+      {
+        "status": 200,
+        "json": {
+          "content": [
+            {
+              "id": "6aed1feb739ea20d87d5b99e",
+              "creationDate": "2026-11-06T00:31:39.357Z",
+              "status": "succeeded",
+              "phase": "completed",
+              "paused": false,
+              "startTime": "2026-11-06T00:31:39.465Z",
+              "duration": 10506,
+              "timeout": 30,
+              "workflowRef": "6aecfc46755e5fc7e99bebd7",
+              "workflowRevisionRef": "6aecfc46755e5fc7e99bebd8",
+              "labels": {},
+              "annotations": {
+                "boomerang.io/kind": "WorkflowRun",
+                "boomerang.io/generation": "4"
+              },
+              "params": [],
+              "awaitingApproval": false,
+              "debug": true,
+              "initiatedByName": "api-quickstart",
+              "initiatedByRef": "api-quickstart",
+              "results": [],
+              "workflowDisplayName": "Hello Flow",
+              "workflowName": "hello-flow",
+              "workflowVersion": 1
+            }
+          ],
+          "number": 0,
+          "size": 2,
+          "totalElements": 20,
+          "pageable": {
+            "offset": 0,
+            "pageNumber": 0,
+            "pageSize": 2,
+            "paged": true,
+            "sort": {
+              "empty": false,
+              "sorted": true,
+              "unsorted": false
+            },
+            "unpaged": false
+          },
+          "last": false,
+          "totalPages": 10,
+          "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+          },
+          "first": true,
+          "numberOfElements": 2,
+          "empty": false
+        }
+      },
+      {
+        "status": 400,
+        "title": "for a status that doesn't exist, such as `statuses=finished`",
+        "json": {
+          "cause": null,
+          "code": 1001,
+          "message": "Invalid query filters(status) have been provided.",
+          "reason": "QUERY_INVALID_FILTERS",
+          "status": "400 BAD_REQUEST",
+          "timestamp": "2026-11-06T00:41:39.796Z"
+        }
+      }
+    ]
+  },
+  "GET /api/v2/workspace/{workspace}/taskrun/query": {
+    "source": "live",
+    "query": {
+      "workflowruns": "$RUN_ID"
+    },
+    "response": {
+      "status": 200,
+      "json": {
+        "content": [
+          {
+            "creationDate": "2026-11-06T00:31:39.410Z",
+            "duration": 0,
+            "id": "6aed1feb739ea20d87d5b99f",
+            "labels": {},
+            "name": "start",
+            "phase": "completed",
+            "status": "succeeded",
+            "type": "start",
+            "workflowRef": "6aecfc46755e5fc7e99bebd7",
+            "workflowRunRef": "6aed1feb739ea20d87d5b99e"
+          },
+          {
+            "attempt": 1,
+            "creationDate": "2026-11-06T00:31:39.411Z",
+            "duration": 10399,
+            "id": "6aed1feb739ea20d87d5b9a0",
+            "labels": {},
+            "name": "Execute Shell",
+            "phase": "completed",
+            "startTime": "2026-11-06T00:31:39.565Z",
+            "status": "succeeded",
+            "taskRef": "execute-shell",
+            "type": "script",
+            "workflowRef": "6aecfc46755e5fc7e99bebd7",
+            "workflowRunRef": "6aed1feb739ea20d87d5b99e"
+          }
+        ],
+        "number": 0,
+        "size": 2,
+        "totalElements": 3,
+        "pageable": {
+          "offset": 0,
+          "pageNumber": 0,
+          "pageSize": 2,
+          "paged": true,
+          "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+          },
+          "unpaged": false
+        },
+        "last": false,
+        "totalPages": 2,
+        "sort": {
+          "empty": false,
+          "sorted": true,
+          "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 2,
+        "empty": false
+      }
+    }
+  },
+  "GET /api/v2/workspace/{workspace}/workflow/{name}": {
+    "source": "live",
+    "response": {
+      "status": 200,
+      "json": {
+        "name": "hello-flow",
+        "displayName": "Hello Flow",
+        "status": "active",
+        "version": 1,
+        "creationDate": "2026-11-05T21:59:34.347Z",
+        "description": "Says hello from an Execute Shell task.",
+        "labels": {},
+        "annotations": {
+          "boomerang.io/kind": "Workflow",
+          "boomerang.io/generation": "4"
+        },
+        "params": [],
+        "tasks": [
+          {
+            "name": "start",
+            "type": "start",
+            "dependencies": [],
+            "annotations": {},
+            "labels": {},
+            "params": [],
+            "results": [],
+            "unknownFields": {},
+            "upgradesAvailable": false
+          },
+          {
+            "name": "Execute Shell",
+            "type": "script",
+            "dependencies": [
+              {
+                "executionCondition": "always",
+                "taskRef": "start"
+              }
+            ],
+            "annotations": {},
+            "labels": {},
+            "params": [
+              {
+                "name": "script",
+                "value": "echo \"Hello from Boomerang Flow\""
+              }
+            ],
+            "results": [],
+            "taskRef": "execute-shell",
+            "taskVersion": 2,
+            "unknownFields": {},
+            "upgradesAvailable": false
+          },
+          {
+            "name": "end",
+            "type": "end",
+            "dependencies": [
+              {
+                "executionCondition": "always",
+                "taskRef": "Execute Shell"
+              }
+            ],
+            "annotations": {},
+            "labels": {},
+            "params": [],
+            "results": [],
+            "unknownFields": {},
+            "upgradesAvailable": false
+          }
+        ],
+        "changelog": {
+          "author": "6aecf30e755e5fc7e99bea28",
+          "date": "2026-11-05T21:59:34.347Z",
+          "reason": "Initial Workflow"
+        },
+        "triggers": {
+          "event": {
+            "enabled": false,
+            "conditions": []
+          },
+          "github": {
+            "enabled": false,
+            "conditions": []
+          },
+          "manual": {
+            "enabled": true,
+            "conditions": []
+          },
+          "schedule": {
+            "enabled": false,
+            "conditions": []
+          },
+          "webhook": {
+            "enabled": false,
+            "conditions": []
+          }
+        },
+        "type": "workflow",
+        "upgradesAvailable": false
+      }
+    }
+  },
+  "GET /api/v2/workspace/{workspace}": {
+    "source": "live",
+    "response": {
+      "status": 200,
+      "json": {
+        "approverGroups": [],
+        "creationDate": "2026-11-05T21:23:47.310Z",
+        "displayName": "Example workspace",
+        "externalRef": null,
+        "id": "6aecf3e3755e5fc7e99bea30",
+        "labels": {},
+        "members": [
+          {
+            "email": "grace.hopper@flow.local",
+            "id": "6aecf30e755e5fc7e99bea28",
+            "name": "Grace Hopper",
+            "role": "owner"
+          }
+        ],
+        "name": "example-workspace",
+        "parameters": [
+          {
+            "description": "The deploy service's API token.",
+            "hiddenValue": true,
+            "label": "Deploy token",
+            "name": "deploy-token",
+            "readOnly": false,
+            "type": "password",
+            "value": "*****"
+          }
+        ],
+        "quotas": {
+          "artifactRetentionDays": 30,
+          "currentArtifactStorage": 145,
+          "currentConcurrentRuns": 3,
+          "currentRunAverageDuration": 54060,
+          "currentRunTotalDuration": 1135265,
+          "currentRuns": 21,
+          "currentWorkflowCount": 18,
+          "maxArtifactStorage": 5,
+          "maxConcurrentRuns": 4,
+          "maxWorkflowCount": 20,
+          "maxWorkflowRunDuration": 30,
+          "maxWorkflowRunMonthly": 100,
+          "maxWorkspaceStorage": 2,
+          "monthlyResetDate": "2026-12-01T00:00:00.000Z"
+        },
+        "status": "active",
+        "type": null,
+        "workflows": []
+      }
+    }
+  },
+  "GET /api/v2/workspace/{workspace}/schedule/query": {
+    "source": "live",
+    "response": {
+      "status": 200,
+      "json": {
+        "content": [
+          {
+            "creationDate": "2026-11-06T00:41:39.712Z",
+            "cronSchedule": "0 3 * * 0",
+            "description": "Clears old artifacts early on Sunday.",
+            "id": "6aecfc6b755e5fc7e99bec3b",
+            "labels": {},
+            "name": "Weekly clean-up",
+            "nextFireAt": "2026-11-07T16:00:00.000Z",
+            "nextScheduleDate": "2026-11-07T16:00:00.000Z",
+            "params": [],
+            "retryCount": 0,
+            "status": "active",
+            "timezone": "Australia/Melbourne",
+            "type": "cron",
+            "workflowRef": "clean-up-artifacts"
+          }
+        ],
+        "empty": false,
+        "first": true,
+        "last": true,
+        "number": 0,
+        "numberOfElements": 3,
+        "pageable": {
+          "offset": 0,
+          "pageNumber": 0,
+          "pageSize": 10,
+          "paged": true,
+          "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+          },
+          "unpaged": false
+        },
+        "size": 10,
+        "sort": {
+          "empty": false,
+          "sorted": true,
+          "unsorted": false
+        },
+        "totalElements": 3,
+        "totalPages": 1
+      }
+    }
+  },
+  "POST /api/v2/parameters": {
+    "source": "live",
+    "body": {
+      "name": "slack-channel",
+      "type": "text",
+      "label": "Slack channel",
+      "description": "Where build notices go.",
+      "value": "#builds"
+    },
+    "response": {
+      "status": 200,
+      "json": {
+        "description": "Where build notices go.",
+        "label": "Slack channel",
+        "name": "slack-channel",
+        "readOnly": false,
+        "type": "text",
+        "value": "#builds"
+      }
+    }
+  },
+  "DELETE /api/v2/parameters/{name}": {
+    "source": "live",
+    "response": {
+      "status": 200
+    }
+  },
+  "POST /api/v2/token": {
+    "source": "live",
+    "body": {
+      "type": "key",
+      "name": "docs-api-check",
+      "description": "Reads runs for the API docs check.",
+      "principal": "6aecf3e3755e5fc7e99bea30",
+      "permissions": [
+        "workspace/read",
+        "workflow/read",
+        "workflowrun/read",
+        "taskrun/read",
+        "schedule/read"
+      ]
+    },
+    "response": {
+      "status": 200,
+      "json": {
+        "actorKind": null,
+        "expirationDate": null,
+        "id": "6aed2289739ea20d87d5b9b1",
+        "token": "bfk_<redacted>",
+        "type": "key"
+      }
+    }
+  },
+  "PATCH /api/v2/parameters/{name}": {
+    "source": "code",
+    "body": {
+      "value": "#deployments"
+    }
+  },
+  "PATCH /api/v2/settings": {
+    "source": "code",
+    "body": {
+      "artifacts": {
+        "retention.default.days": "14"
+      }
+    }
+  },
+  "POST /api/v2/workspace": {
+    "source": "code",
+    "body": {
+      "name": "my-workspace",
+      "displayName": "My workspace"
+    }
+  },
+  "PATCH /api/v2/workspace/{workspace}": {
+    "source": "code",
+    "body": {
+      "displayName": "Platform workspace"
+    }
+  },
+  "POST /api/v2/workspace/validate-name": {
+    "source": "code",
+    "body": {
+      "name": "my-workspace"
+    }
+  },
+  "POST /api/v2/workspace/{workspace}/workflow": {
+    "source": "code",
+    "body": {
+      "name": "my-workflow",
+      "displayName": "My workflow"
+    }
+  },
+  "PATCH /api/v2/workspace/{workspace}/workflow/{name}": {
+    "source": "code",
+    "body": {
+      "type": "workflow"
+    }
+  },
+  "POST /api/v2/workspace/{workspace}/workflow/{name}/submit": {
+    "source": "code",
+    "body": {
+      "trigger": "manual",
+      "labels": {
+        "ticket": "OPS-12"
+      }
+    }
+  },
+  "PUT /api/v2/workspace/{workspace}/workflowrun/{workflowRunId}/retry": {
+    "source": "code",
+    "body": {
+      "scope": "failed"
+    }
+  },
+  "POST /api/v2/workspace/{workspace}/schedule": {
+    "source": "code",
+    "body": {
+      "name": "Weekday mornings",
+      "workflowRef": "my-workflow",
+      "type": "cron",
+      "cronSchedule": "0 9 * * 1-5",
+      "timezone": "Australia/Melbourne"
+    }
+  },
+  "POST /api/v2/webhook": {
+    "source": "code",
+    "query": {
+      "workspace": "$WORKSPACE",
+      "ref": "$WORKFLOW"
+    },
+    "body": {
+      "tag": "1.4.2"
+    }
+  },
+  "POST /api/v2/callback": {
+    "source": "code",
+    "body": {
+      "approved": true
+    }
+  },
+  "POST /api/v2/event": {
+    "source": "code",
+    "contentType": "application/cloudevents+json",
+    "query": {
+      "workspace": "$WORKSPACE",
+      "ref": "$WORKFLOW"
+    },
+    "body": {
+      "specversion": "1.0",
+      "id": "build-42",
+      "source": "/ci",
+      "type": "io.example.build.finished",
+      "datacontenttype": "application/json",
+      "data": {
+        "tag": "1.4.2"
+      }
+    }
+  },
+  "PUT /api/v2/activate": {
+    "source": "code",
+    "body": {
+      "otc": "<activation code, 32 or more characters>"
+    }
+  },
+  "POST /api/v2/integration/github/unlink": {
+    "source": "code",
+    "body": {
+      "workspace": "my-workspace",
+      "ref": "<installation id>"
+    }
+  },
+  "POST /api/v2/integration/{integration}/share": {
+    "source": "code",
+    "body": {
+      "workspace": "my-workspace",
+      "shared": true
+    }
+  },
+  "POST /api/v2/task": {
+    "source": "code",
+    "body": {
+      "name": "hello-world",
+      "displayName": "Hello world",
+      "type": "template",
+      "spec": {
+        "image": "alpine:3.20",
+        "command": [
+          "echo"
+        ],
+        "arguments": [
+          "Hello from Flow"
+        ]
+      }
+    }
+  },
+  "PUT /api/v2/task/{name}": {
+    "source": "code",
+    "body": {
+      "name": "hello-world",
+      "displayName": "Hello world",
+      "type": "template",
+      "spec": {
+        "image": "alpine:3.20",
+        "command": [
+          "echo"
+        ],
+        "arguments": [
+          "Hello from Flow"
+        ]
+      }
+    }
+  },
+  "POST /api/v2/workspace/{workspace}/task": {
+    "source": "code",
+    "body": {
+      "name": "hello-world",
+      "displayName": "Hello world",
+      "type": "template",
+      "spec": {
+        "image": "alpine:3.20",
+        "command": [
+          "echo"
+        ],
+        "arguments": [
+          "Hello from Flow"
+        ]
+      }
+    }
+  },
+  "PUT /api/v2/workspace/{workspace}/task/{name}": {
+    "source": "code",
+    "body": {
+      "name": "hello-world",
+      "displayName": "Hello world",
+      "type": "template",
+      "spec": {
+        "image": "alpine:3.20",
+        "command": [
+          "echo"
+        ],
+        "arguments": [
+          "Hello from Flow"
+        ]
+      }
+    }
+  },
+  "PUT /api/v2/workspace/{workspace}/action": {
+    "source": "code",
+    "body": [
+      {
+        "id": "<action id>",
+        "approved": true,
+        "comments": "Looks good"
+      }
+    ]
+  },
+  "DELETE /api/v2/workspace/{workspace}/approvers": {
+    "source": "code",
+    "body": [
+      "<approver group id>"
+    ]
+  },
+  "DELETE /api/v2/workspace/{workspace}/members": {
+    "source": "code",
+    "body": [
+      {
+        "id": "<user id>"
+      }
+    ]
+  },
+  "PUT /api/v2/workspace/{workspace}/schedule": {
+    "source": "code",
+    "body": {
+      "id": "<schedule id>",
+      "name": "Weekday mornings",
+      "workflowRef": "my-workflow",
+      "type": "cron",
+      "cronSchedule": "0 9 * * 1-5",
+      "timezone": "Australia/Melbourne"
+    }
+  },
+  "DELETE /api/v2/token/{id}": {
+    "source": "live",
+    "response": {
+      "status": 200
+    }
+  }
+}

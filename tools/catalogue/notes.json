@@ -53,7 +53,23 @@
       {
         "revisions": "all",
         "level": "warning",
-        "text": "Every revision calls a Slack method that Slack has retired, so the task fails. For a text file, Send Slack Message with File Contents posts the file's contents through an incoming webhook. See [Upload Slack File with Message fails](../introduction/known-issues#upload-slack-file-with-message-fails)."
+        "text": "Every revision calls a Slack method that Slack has retired, so the task fails. To post text through an incoming webhook, use Send Custom Slack Message. See [Upload Slack File with Message fails](../introduction/known-issues#upload-slack-file-with-message-fails)."
+      }
+    ],
+    "send-simple-slack-message": [
+      {
+        "revisions": "all",
+        "defaultImage": "boomerangio/task-flow:3.3.0",
+        "level": "warning",
+        "text": "Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook."
+      }
+    ],
+    "send-slack-message-with-file-contents": [
+      {
+        "revisions": "all",
+        "defaultImage": "boomerangio/task-flow:3.3.0",
+        "level": "warning",
+        "text": "Every revision sends nothing and ends `succeeded` on `boomerangio/task-flow:3.3.0`, the default task image: the task stops with `ReferenceError: datetime is not defined` in its log before it calls Slack. Send Custom Slack Message posts to the same kind of incoming webhook."
       }
     ],
     "manual-approval": [
@@ -68,6 +84,845 @@
         "text": "Revision 1 says **Timeout** is in seconds and defaults it to 300, but Flow reads it in milliseconds, so the lock expires after 300 milliseconds. Revision 2 says milliseconds and defaults to 300000, which is 5 minutes. Upgrade a node pinned to revision 1 in the editor."
       }
     ]
+  },
+  "usage": {
+    "execute-shell": {
+      "revision": 2,
+      "example": {
+        "scenario": "Make a file name from the workflow parameter `version` and return it as the result `filename`, for a later task to read. This is the `build` task in [Pass results between tasks with an approval](../tutorials/pass-results-with-an-approval).",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`build`"
+          },
+          {
+            "name": "path",
+            "value": "Blank, so the script runs in `/data`"
+          },
+          {
+            "name": "shell",
+            "value": "Blank, so BusyBox `sh` runs the script"
+          },
+          {
+            "name": "script",
+            "value": "The script below"
+          },
+          {
+            "field": "**Result Parameters**",
+            "value": "**Name** `filename`, **Description** `The file the build made`"
+          }
+        ],
+        "code": [
+          {
+            "for": "script",
+            "lang": "sh",
+            "text": "filename=\"my-app-$(params.version).tar.gz\"\necho \"Built $filename\"\nif [ -d \"$RESULTS_PATH\" ]; then\n  printf '%s' \"$filename\" > \"$RESULTS_PATH/filename\"\nelse\n  printf '{\"filename\":\"%s\"}' \"$filename\" > \"$RESULTS_PATH\"\nfi"
+          }
+        ],
+        "results": [
+          {
+            "name": "filename",
+            "value": "`my-app-1.4.2.tar.gz`, for a run started with `version` `1.4.2`"
+          }
+        ],
+        "outcome": "Flow replaces `$(params.version)` before the script runs, and a later task reads the result as `$(tasks.build.results.filename)`. `RESULTS_PATH` is a directory on the `tekton` executor and a file on `kube-jobs`, and the `if` covers both. The default task image has `bash`, `curl`, `sed`, `grep`, `tar` and Node.js, but not `jq`. To use `bash` syntax, set **Shell Interpreter** to `bash`."
+      },
+      "errors": [
+        {
+          "symptom": "A later task reads an empty value from the result",
+          "cause": "The script didn't write the result to `$RESULTS_PATH`, or the node doesn't declare it under **Result Parameters**. Flow keeps only declared results.",
+          "fix": "Declare each result on the node, and write it as the example does. See [Return results](../guides/tasks#return-results)."
+        },
+        {
+          "symptom": "A later task can't find a file the script wrote",
+          "cause": "**Directory Path** is blank, so the script ran in `/data`, scratch space that only this task sees.",
+          "fix": "Turn on **Shared workspace for each run** under **Configure › Workspace**, then set **Directory Path** to `/workspace`, or write to paths under it."
+        },
+        {
+          "symptom": "The task fails with `No such file or directory: /workspace/`",
+          "cause": "**Directory Path** must be an absolute path that exists, with no trailing slash. A relative path, a trailing `/`, or `/workspace` without the run workspace each fail.",
+          "fix": "Enter an absolute path such as `/workspace`."
+        },
+        {
+          "symptom": "The task succeeds although a command in the script failed",
+          "cause": "Only the exit status of the script's last command counts.",
+          "fix": "Start the script with `set -e`, so the first command that fails ends the task **Failed**."
+        }
+      ]
+    },
+    "sleep": {
+      "revision": 1,
+      "example": {
+        "scenario": "Wait 2 minutes after a deploy, so the service is up before a smoke test runs.",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`wait-for-start`"
+          },
+          {
+            "name": "duration",
+            "value": "`120000`, which is 2 minutes in milliseconds"
+          }
+        ],
+        "outcome": "The task shows **Waiting**, then **Succeeded** within about a second of its due time. The wait doesn't count towards the run's timeout. **Duration** can be a reference, such as `$(params.delay-ms)`. The task returns no results."
+      },
+      "errors": [
+        {
+          "symptom": "The sleep ends almost at once",
+          "cause": "**Duration** is in milliseconds, so `120` waits 120 milliseconds.",
+          "fix": "Multiply seconds by 1,000: `120000` is 2 minutes."
+        },
+        {
+          "symptom": "The task stays **Running** instead of **Waiting**, and never ends",
+          "cause": "**Duration** isn't a whole number: it's blank, has a unit such as `2m`, or is a reference that resolved to text.",
+          "fix": "Cancel the run. Enter digits only, then save a new version."
+        }
+      ]
+    },
+    "manual-approval": {
+      "revision": 2,
+      "example": {
+        "scenario": "Pause a release for one person's sign-off, then let a later task report who decided. This is the `approve` task in [Pass results between tasks with an approval](../tutorials/pass-results-with-an-approval).",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`approve`"
+          },
+          {
+            "name": "approverGroupId",
+            "value": "Blank, so any workspace owner or editor can decide"
+          },
+          {
+            "name": "numberOfApprovals",
+            "value": "Blank, so one decision completes the task"
+          }
+        ],
+        "results": [
+          {
+            "name": "approvalStatus",
+            "value": "`approved` or `rejected`"
+          },
+          {
+            "name": "approvalDate",
+            "value": "When the approver acted, in ISO 8601 UTC, such as `2026-11-04T05:12:44.120Z`"
+          },
+          {
+            "name": "approvalUserName",
+            "value": "The approver's name"
+          },
+          {
+            "name": "approvalUserEmail",
+            "value": "The approver's email address"
+          },
+          {
+            "name": "approvalComments",
+            "value": "The approver's comment, or empty"
+          }
+        ],
+        "outcome": "The run waits at `approve`, without using up its timeout, until someone selects **Approve** or **Reject** on **Actions**, on Home or on the run page. Approve ends the task **Succeeded** and Reject ends it **Failed**; both set all five results. A later task reads them as `$(tasks.approve.results.approvalStatus)`. See [Actions](../fundamentals/actions)."
+      },
+      "errors": [
+        {
+          "symptom": "After **Reject**, the next task shows **Skipped** and the run ends **Failed**",
+          "cause": "A rejection fails the task, and a success link runs the next task only when the task succeeds.",
+          "fix": "To carry on either way, use an always link and read `approvalStatus` in the next task. To act only on a rejection, use a failure link."
+        },
+        {
+          "symptom": "With no approver group, the approval waits for more decisions, such as **0/2 approvals**",
+          "cause": "Flow applies **Number of Approvals (optional)** with or without a group, although its hint says otherwise.",
+          "fix": "Leave it blank when one decision is enough. See [Number of Approvals applies without an approver group](../introduction/known-issues#number-of-approvals-applies-without-an-approver-group)."
+        },
+        {
+          "symptom": "Someone sees the approval but can't decide it",
+          "cause": "Readers can't decide. When the task names an approver group, only its members can, and never a machine token.",
+          "fix": "Give them the editor role, or add them to the group under **Manage workspace › Approver Groups**."
+        },
+        {
+          "symptom": "**Approver Group (optional)** is disabled and reads \"No approver groups configured for this workspace.\"",
+          "cause": "The workspace has no approver groups.",
+          "fix": "Create one under **Manage workspace › Approver Groups**, then choose it."
+        }
+      ]
+    },
+    "manual-task": {
+      "revision": 1,
+      "example": {
+        "scenario": "Ask someone to take a database snapshot by hand before a migration runs.",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`snapshot`"
+          },
+          {
+            "name": "instructions",
+            "value": "The steps below, in Markdown"
+          }
+        ],
+        "code": [
+          {
+            "for": "instructions",
+            "lang": "markdown",
+            "text": "Take a snapshot of the `orders` database before the migration.\n\n1. Name it `pre-migration-$(params.version)`.\n2. Wait until it shows **Available**.\n3. Select **Complete Successfully**. If the snapshot fails, select **Complete Unsuccessfully**."
+          }
+        ],
+        "outcome": "The run waits at `snapshot`, without using up its timeout, until an owner or editor opens it under **Actions › Manual Tasks** and selects **Complete Successfully**, which ends the task **Succeeded**, or **Complete Unsuccessfully**, which ends it **Failed**. Flow fills in `$(params.version)` before the instructions are shown. The task returns no results."
+      },
+      "errors": [
+        {
+          "symptom": "The run stays **Waiting** at the task",
+          "cause": "Nobody has completed it, and a manual task waits indefinitely.",
+          "fix": "An owner or editor completes it under **Actions › Manual Tasks**, or with **Action** on the run page."
+        },
+        {
+          "symptom": "After **Complete Unsuccessfully**, the next task shows **Skipped** and the run ends **Failed**",
+          "cause": "That choice fails the task, and a success link runs the next task only when the task succeeds.",
+          "fix": "Add a failure link to a task that handles it, such as a notification."
+        },
+        {
+          "symptom": "Someone sees the task but can't complete it",
+          "cause": "Readers can't complete manual tasks.",
+          "fix": "Give them the editor role in the workspace."
+        }
+      ]
+    },
+    "acquire-lock": {
+      "revision": 2,
+      "example": {
+        "scenario": "Let only one run in the workspace deploy to an environment at a time. A run that reaches the lock while another holds it waits its turn.",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`lock-env`"
+          },
+          {
+            "name": "key",
+            "value": "`deploy-$(params.environment)`"
+          },
+          {
+            "name": "timeout",
+            "value": "`900000`: 15 minutes in milliseconds, longer than the deploy takes"
+          }
+        ],
+        "outcome": "For a run with `environment` set to `production`, the lock is named `deploy-production`. A run that finds it held shows **Waiting** and tries again every 5 seconds, without using up its timeout. Link the deploy tasks after `lock-env`, then a **Release Lock** task with the same **Lock Name**. The lock is shared by every workflow in the workspace, and is freed when Release Lock runs, when the run ends, or when **Timeout** passes, whichever comes first. The task returns no results."
+      },
+      "errors": [
+        {
+          "symptom": "A second run gets the lock while the first is still working",
+          "cause": "**Timeout** passed. It's in milliseconds, although revision 1 says seconds, so `300` there lasts 300 milliseconds.",
+          "fix": "Set **Timeout** in milliseconds, longer than the locked tasks take. Upgrade a node that's still on revision 1."
+        },
+        {
+          "symptom": "The task stays **Waiting**",
+          "cause": "Another run in the workspace holds a lock of that name, from this workflow or any other.",
+          "fix": "Find the run holding it. The lock is freed when that run releases it or ends, or when its **Timeout** passes."
+        },
+        {
+          "symptom": "The task fails with `acquirelock requires a key and a timeout.`",
+          "cause": "**Timeout** has no value, or isn't a number once references resolve, such as a parameter that holds `15m`.",
+          "fix": "Give **Timeout** in milliseconds, in digits only."
+        }
+      ]
+    },
+    "release-lock": {
+      "revision": 1,
+      "example": {
+        "scenario": "Free the lock that the Acquire Lock task `lock-env` took, as soon as the deploy is done, so the next run can deploy.",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`unlock-env`"
+          },
+          {
+            "name": "key",
+            "value": "`deploy-$(params.environment)`, the same as on `lock-env`"
+          }
+        ],
+        "outcome": "Link `unlock-env` after the last task that needs the lock. It frees the lock only when this run holds it, whichever of the run's tasks took it, and succeeds whether or not it freed anything. If a task before it fails and Release Lock is skipped, the lock is still freed when the run ends. The task returns no results."
+      },
+      "errors": [
+        {
+          "symptom": "Release Lock succeeds, but the next run still waits for the lock",
+          "cause": "**Lock Name** doesn't match the Acquire Lock's exactly once references resolve, and Release Lock succeeds when it frees nothing.",
+          "fix": "Give both tasks the same value. Lock names are case-sensitive."
+        },
+        {
+          "symptom": "The lock stays held while the run waits at a later task, such as an approval",
+          "cause": "A lock is freed when Release Lock runs or the run ends, not when the locked tasks finish.",
+          "fix": "Link Release Lock straight after the last task that needs the lock."
+        }
+      ]
+    },
+    "run-workflow": {
+      "revision": 1,
+      "example": {
+        "scenario": "From a release workflow, start the workflow `deploy-service` for one environment, wait for it, and use the URL it returns.",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`deploy`"
+          },
+          {
+            "name": "workflowRef",
+            "label": "Workflow",
+            "value": "**Deploy service**, chosen from the list. Flow stores its name, `deploy-service`."
+          },
+          {
+            "name": "wait",
+            "value": "On"
+          },
+          {
+            "field": "The child's parameters, such as **Environment**",
+            "value": "`$(params.environment)`"
+          }
+        ],
+        "results": [
+          {
+            "name": "workflowRunRef",
+            "value": "The child run's ID"
+          },
+          {
+            "name": "url",
+            "value": "The `url` result the child set with a Set Result Parameter task, once the child succeeds"
+          }
+        ],
+        "outcome": "Once you choose a workflow, its parameters appear in the form. `deploy` shows **Waiting** until the child run ends, then takes its status, and a later task reads `$(tasks.deploy.results.url)`. With **Wait for the child run to finish** off, the task succeeds as soon as the child starts, with only `workflowRunRef`. See [Child workflows](../fundamentals/runs#child-workflows)."
+      },
+      "errors": [
+        {
+          "symptom": "The task succeeds at once, and a later task gets nothing from the child",
+          "cause": "**Wait for the child run to finish** is off, the default, so the task returns only `workflowRunRef`.",
+          "fix": "Turn it on."
+        },
+        {
+          "symptom": "The task fails with `ChildRunFailed`, and a message such as `Child run <id> ended failed`",
+          "cause": "With waiting on, the task takes the child's status, and the child didn't succeed.",
+          "fix": "Select **View Activity** on the task to open the child run and see why."
+        },
+        {
+          "symptom": "The child fails, or a task in it gets an empty value",
+          "cause": "The child gets only the values its node passes. The parent run's parameters aren't handed down.",
+          "fix": "Fill in the child's fields on the node, with references such as `$(params.environment)`. Pass a secret the same way."
+        },
+        {
+          "symptom": "The task fails with `NestingDepthExceeded` and starts nothing",
+          "cause": "Runs nest at most 5 deep by default.",
+          "fix": "Flatten the chain of workflows, or ask an admin to raise **Admin › Settings › Run limits › Maximum Child Workflow Nesting Depth**."
+        }
+      ]
+    },
+    "upload-artifact": {
+      "revision": 1,
+      "example": {
+        "scenario": "At the end of each run, save the folder `/workspace/state` for the next run of the workflow, with **Shared workspace for each run** on. This is the `save-state` task in [Keep files between runs](../guides/keep-files-between-runs).",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`save-state`"
+          },
+          {
+            "name": "name",
+            "value": "`state`"
+          },
+          {
+            "name": "path",
+            "value": "`state`, which resolves to `/workspace/state`"
+          },
+          {
+            "name": "scope",
+            "value": "`workflow`"
+          },
+          {
+            "name": "retention-days",
+            "value": "Blank: an upload with scope `workflow` can't set it"
+          },
+          {
+            "field": "**Upload link**, **Upload headers**",
+            "value": "Empty: Flow fills them in when the task runs"
+          }
+        ],
+        "outcome": "`state` is a folder, so the task uploads its contents as one `.tar.gz`. The artifact is listed under **Configure › Artifacts**, and is kept until a later upload of the same name replaces it. A Download Artifact task with the same name and scope restores it. The task returns no results."
+      },
+      "errors": [
+        {
+          "symptom": "The task fails with `Path does not exist: /workspace/state`",
+          "cause": "Nothing is at that path: the run workspace is off, an earlier task wrote somewhere else, or **Mount path** isn't `/workspace`.",
+          "fix": "Turn on **Shared workspace for each run**. If you changed **Mount path**, give an absolute path under it."
+        },
+        {
+          "symptom": "The task fails with `ARTIFACT_ALREADY_EXISTS`",
+          "cause": "An upload of that name already ran in this run, for example in an earlier for-each item.",
+          "fix": "Give each upload in a run its own **Artifact name**."
+        },
+        {
+          "symptom": "The task fails with `ARTIFACT_INVALID_SCOPE`",
+          "cause": "**Retention days** is set on an upload with scope `workflow`.",
+          "fix": "Leave **Retention days** blank for a workflow-scoped upload."
+        },
+        {
+          "symptom": "The task fails with `ArtifactRefused`",
+          "cause": "The file is larger than **Admin › Settings › Artifacts › Largest Artifact (MB)**, 1024 MB by default, or would take the workspace over its artifact storage quota.",
+          "fix": "Upload less, delete artifacts you no longer need, or ask an admin to raise the limit."
+        }
+      ]
+    },
+    "download-artifact": {
+      "revision": 1,
+      "example": {
+        "scenario": "At the start of each run, restore the folder that the last run saved as `state`, and carry on when there's nothing to restore yet. This is the `restore-state` task in [Keep files between runs](../guides/keep-files-between-runs).",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`restore-state`"
+          },
+          {
+            "name": "name",
+            "value": "`state`"
+          },
+          {
+            "name": "path",
+            "value": "`state`, which resolves to `/workspace/state`"
+          },
+          {
+            "name": "scope",
+            "value": "`workflow`"
+          },
+          {
+            "name": "optional",
+            "value": "On"
+          },
+          {
+            "field": "**Download link**, **Download headers**, **SHA-256**, **Content type**",
+            "value": "Empty: Flow fills them in when the task runs"
+          }
+        ],
+        "results": [
+          {
+            "name": "found",
+            "value": "`false` on the first run, and `true` once a run has uploaded `state`"
+          }
+        ],
+        "outcome": "The task checks the download's SHA-256 and unpacks the folder into `/workspace/state`. A later task can read `$(tasks.restore-state.results.found)` to tell a first run from the rest."
+      },
+      "errors": [
+        {
+          "symptom": "The task fails with `ArtifactRefused`",
+          "cause": "No artifact of that name exists in that scope, and **Optional** is off.",
+          "fix": "Check **Artifact name** and **Scope**, or turn on **Optional** so a first run carries on."
+        },
+        {
+          "symptom": "`found` is `false` on every run",
+          "cause": "The upload doesn't match: it uses another **Artifact name**, or scope `run`, the default, which a later run can't see.",
+          "fix": "Use the same name, and scope `workflow`, on both tasks."
+        },
+        {
+          "symptom": "The task fails with `ARTIFACTS_NOT_CONFIGURED`",
+          "cause": "Flow has no artifact store connected.",
+          "fix": "Ask your operator to connect one. See [Connect the artifact store](../hosting/configuring#connect-the-artifact-store)."
+        }
+      ]
+    },
+    "jsonpath-to-parameter": {
+      "revision": 3,
+      "example": {
+        "scenario": "An earlier task named `scan` returns a JSON report in its result `report`, such as `{\"findings\":[{\"id\":\"CVE-2026-1234\",\"severity\":\"high\"}],\"total\":1}`. Pick out the first finding's severity, for a later task to act on.",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`severity`"
+          },
+          {
+            "name": "json",
+            "value": "`$(tasks.scan.results.report)`"
+          },
+          {
+            "name": "query",
+            "value": "`$.findings[0].severity`"
+          }
+        ],
+        "results": [
+          {
+            "name": "evaluation",
+            "value": "`high`"
+          }
+        ],
+        "outcome": "The task returns the first value the expression matches. An array or object comes back as JSON text, and a number as its digits. For a plain path you don't need this task: a reference can follow a JSON path into a result, such as `$(tasks.scan.results.report.total)`. Use the task for an expression a reference can't take, such as a filter."
+      },
+      "errors": [
+        {
+          "symptom": "The task succeeds, but `evaluation` is empty, and the log shows `TypeError [ERR_INVALID_ARG_TYPE]`",
+          "cause": "The expression matched nothing.",
+          "fix": "Check it against the JSON. Expressions start at `$` and are case-sensitive."
+        },
+        {
+          "symptom": "The task fails with `Invalid JSON string passed to task`",
+          "cause": "**Json** isn't valid JSON, such as an object with unquoted keys.",
+          "fix": "Check what the earlier task returned, under **View Details** on the run page."
+        },
+        {
+          "symptom": "The task fails with `Invalid mandatory parameters. Check log for details`, after `The parameter 'query' is not defined or empty`",
+          "cause": "The task needs both **Json** and **Query Expression**, although the form marks neither as required.",
+          "fix": "Fill in both fields."
+        }
+      ]
+    },
+    "send-email-with-sendgrid": {
+      "revision": 3,
+      "example": {
+        "scenario": "Email the person who decided an approval with its outcome. This is the `email` task in [Use an approval's results](../tutorials/manual-approval-output).",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`email`"
+          },
+          {
+            "name": "apiKey",
+            "value": "`$(params.sendgrid-api-key)`, a workflow parameter of type **Password**"
+          },
+          {
+            "name": "to",
+            "value": "`$(tasks.approval.results.approvalUserEmail)`"
+          },
+          {
+            "name": "from",
+            "value": "Your SendGrid verified sender, such as `releases@example.com`"
+          },
+          {
+            "name": "subject",
+            "value": "`Approval $(tasks.approval.results.approvalStatus) by $(tasks.approval.results.approvalUserName)`"
+          },
+          {
+            "name": "contentType",
+            "value": "`Text`"
+          },
+          {
+            "name": "bodyContent",
+            "value": "The text below"
+          }
+        ],
+        "code": [
+          {
+            "for": "bodyContent",
+            "lang": "text",
+            "text": "The approval ended with these results:\n\n- status: $(tasks.approval.results.approvalStatus)\n- by: $(tasks.approval.results.approvalUserName)\n- comments: $(tasks.approval.results.approvalComments)"
+          }
+        ],
+        "outcome": "The task succeeds once SendGrid accepts the message, and returns no results. **To**, **CC** and **BCC** take several addresses separated by commas, with no spaces: the task doesn't trim them. **Attachments** takes one absolute path per line."
+      },
+      "errors": [
+        {
+          "symptom": "The task succeeds, but no email is sent",
+          "cause": "The node is on revision 1 or 2, which do nothing.",
+          "fix": "Select the node's yellow warning icon, then **Update task**, and save a new version. See [Some older task revisions do nothing](../introduction/known-issues#some-older-task-revisions-do-nothing)."
+        },
+        {
+          "symptom": "The task fails with `Email with Sendgrid was NOT sent. StatusCode: 401` or `StatusCode: 403`",
+          "cause": "SendGrid refused the request. 401 means the API key is wrong. 403 usually means **From** isn't a verified sender, or the key can't send mail.",
+          "fix": "Check the key your parameter holds, and verify the sender in SendGrid."
+        },
+        {
+          "symptom": "The task fails with `StatusCode: 400`",
+          "cause": "SendGrid couldn't accept the message, often because **Body Content** is blank or an address isn't valid.",
+          "fix": "Fill in **Body Content**, and check each address."
+        },
+        {
+          "symptom": "The email arrives without its attachment",
+          "cause": "A path in **Attachments** doesn't exist, or is relative. The task logs it and sends the email anyway.",
+          "fix": "Give absolute paths, such as `/workspace/report.pdf`, with **Shared workspace for each run** on."
+        }
+      ]
+    },
+    "send-custom-slack-message": {
+      "revision": 2,
+      "example": {
+        "scenario": "Post to a Slack channel through an incoming webhook when a build is ready.",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`notify`"
+          },
+          {
+            "name": "url",
+            "value": "`$(workspace.params.slack-webhook-url)`, a secured workspace parameter that holds the webhook's URL"
+          },
+          {
+            "name": "message",
+            "value": "The payload below"
+          }
+        ],
+        "code": [
+          {
+            "for": "message",
+            "lang": "json",
+            "text": "{\n  \"text\": \"Build $(params.version) is ready\",\n  \"blocks\": [\n    {\n      \"type\": \"section\",\n      \"text\": { \"type\": \"mrkdwn\", \"text\": \"*Build $(params.version)* is ready for review.\" }\n    }\n  ]\n}"
+          }
+        ],
+        "outcome": "The task posts the payload, as written, to the webhook, which posts to the channel it was created for. It returns no results. On the default task image, `boomerangio/task-flow:3.3.0`, Send Simple Slack Message and Send Slack Message with File Contents send nothing, so use this task for webhook messages."
+      },
+      "errors": [
+        {
+          "symptom": "The task succeeds, but nothing reaches Slack, and the log shows an error such as `Error: An HTTP protocol error occurred: statusCode = 404`",
+          "cause": "The task doesn't fail when Slack refuses the message or can't be reached: it logs the error and ends **Succeeded**. A 400 means Slack rejected the payload; a 403 or 404, that the webhook URL is wrong, revoked or turned off.",
+          "fix": "After a first run, check **View Log** on the task, and fix the payload or the URL."
+        },
+        {
+          "symptom": "The task succeeds, but the log shows `SyntaxError` and `is not valid JSON`",
+          "cause": "**Message Payload** isn't valid JSON. A reference inserts its value as written, so a quote or line break in the value breaks the JSON.",
+          "fix": "Correct the payload, and keep values that can hold quotes or line breaks out of it."
+        },
+        {
+          "symptom": "The task fails with `URL has not been set`",
+          "cause": "**URL** is blank.",
+          "fix": "Enter the webhook's URL, or a reference to a secured parameter that holds it."
+        }
+      ]
+    },
+    "create-github-issue": {
+      "revision": 1,
+      "example": {
+        "scenario": "Open an issue when a nightly check fails, with the token the workspace's GitHub integration shares. See [Create an issue from a workflow](../guides/connect-github#create-an-issue-from-a-workflow).",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`open-issue`"
+          },
+          {
+            "name": "url",
+            "value": "Leave `$(workspace.params.github-url)`"
+          },
+          {
+            "name": "token",
+            "value": "Leave `$(workspace.params.github-token)`"
+          },
+          {
+            "name": "owner",
+            "value": "`my-org`"
+          },
+          {
+            "name": "repo",
+            "value": "`website`"
+          },
+          {
+            "name": "title",
+            "value": "`Nightly check failed`"
+          },
+          {
+            "name": "body",
+            "value": "`The nightly check failed in run $(context.params.workflowrun-ref).`"
+          },
+          {
+            "name": "labels",
+            "value": "`bug,nightly`"
+          }
+        ],
+        "results": [
+          {
+            "name": "issueNumber",
+            "value": "The new issue's number, such as `42`"
+          },
+          {
+            "name": "issueUrl",
+            "value": "Its web address, such as `https://github.com/my-org/website/issues/42`"
+          },
+          {
+            "name": "issueId",
+            "value": "GitHub's numeric ID for the issue"
+          }
+        ],
+        "outcome": "Link `open-issue` from the check with a failure link, so it runs only when the check fails. A later task can post `$(tasks.open-issue.results.issueUrl)`."
+      },
+      "errors": [
+        {
+          "symptom": "The task fails before it runs, with `no such workspace param 'github-token'`",
+          "cause": "The workspace doesn't share the GitHub token. The editor warns about it when you save.",
+          "fix": "Share the token: see [Share the installation token with tasks](../guides/connect-github#share-the-installation-token-with-tasks). Or enter a personal access token in **Github Access Token**."
+        },
+        {
+          "symptom": "The task fails with `GitHub createIssue failed: HTTP 404: Not Found`",
+          "cause": "**Owner** or **Repository** is wrong, or the token can't see the repository: GitHub answers 404 for a private repository it hides from you.",
+          "fix": "Check both fields, and that the GitHub App is installed on the repository."
+        },
+        {
+          "symptom": "The task fails with `GitHub createIssue failed: HTTP 410: Issues are disabled for this repo`",
+          "cause": "The repository has issues turned off, as a fork does by default.",
+          "fix": "Turn on issues in the repository's settings on GitHub."
+        },
+        {
+          "symptom": "The issue is created without its labels or assignees",
+          "cause": "GitHub drops labels, assignees and milestone, without an error, when the token has no push access to the repository.",
+          "fix": "Use a token that can write to the repository."
+        }
+      ]
+    },
+    "ai-prompt": {
+      "revision": 2,
+      "example": {
+        "scenario": "Turn the list of changes in the workflow parameter `changes` into three release-note bullets. This is the `summarise` task in [Use AI tasks](../guides/use-ai-tasks).",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`summarise`"
+          },
+          {
+            "name": "model",
+            "value": "`openai/gpt-4o-mini`, or another model your endpoint serves"
+          },
+          {
+            "name": "systemPrompt",
+            "value": "`You write release notes for busy readers. Plain language, no marketing.`"
+          },
+          {
+            "name": "prompt",
+            "value": "The text below"
+          },
+          {
+            "name": "maxTokens",
+            "value": "`300`"
+          },
+          {
+            "name": "endpoint",
+            "value": "Blank, so the dispatcher's default applies"
+          },
+          {
+            "name": "token",
+            "value": "Blank, so the dispatcher's default applies"
+          }
+        ],
+        "code": [
+          {
+            "for": "prompt",
+            "lang": "text",
+            "text": "Summarise these changes as three short bullet points:\n\n$(params.changes)"
+          }
+        ],
+        "results": [
+          {
+            "name": "output",
+            "value": "The three bullets"
+          },
+          {
+            "name": "model",
+            "value": "The model the endpoint served, which can be more specific than the one you asked for"
+          },
+          {
+            "name": "totalTokens",
+            "value": "The tokens the call used"
+          }
+        ],
+        "outcome": "A later task reads the reply as `$(tasks.summarise.results.output)`, inserted as written. To use your own token, store it as a secured workspace parameter and enter its reference in **API token**, such as `$(workspace.params.ai-token)`."
+      },
+      "errors": [
+        {
+          "symptom": "The task fails with `MISSING_PARAM`",
+          "cause": "There's no **Prompt** or messages, or no endpoint or token from the task or the dispatcher.",
+          "fix": "Give **Prompt**, or set **Endpoint** and **API token**, or ask your operator for defaults."
+        },
+        {
+          "symptom": "The task fails with the reason `ResultsTooLarge`",
+          "cause": "The reply took the task's results past 4096 bytes, the limit on Flow's Kubernetes dispatcher.",
+          "fix": "Lower **Max tokens**, or set **Output file** and pass the file on through the run workspace."
+        },
+        {
+          "symptom": "The task fails with `INVALID_RESPONSE`",
+          "cause": "With **Response format** `json`, the reply wasn't JSON, or didn't match **JSON Schema**.",
+          "fix": "Tighten the prompt or the schema."
+        },
+        {
+          "symptom": "A shell task that reads `output` fails on a quote in the reply",
+          "cause": "Flow inserts the reply as written, quotes and line breaks included.",
+          "fix": "Read it in a quoted heredoc, as in [Use the reply in a later task](../guides/use-ai-tasks#use-the-reply-in-a-later-task)."
+        }
+      ]
+    },
+    "execute-advanced-http-call": {
+      "revision": 4,
+      "example": {
+        "note": {
+          "level": "warning",
+          "defaultImage": "boomerangio/task-flow:3.3.0",
+          "text": "This example works from task-flow 3.4.0, which isn't released. On `boomerangio/task-flow:3.3.0`, the default task image, the task sends no request: see the warning above."
+        },
+        "scenario": "Record a deployment with an internal API, and retry while the service restarts.",
+        "params": [
+          {
+            "field": "**Task name**",
+            "value": "`record-deploy`"
+          },
+          {
+            "name": "url",
+            "value": "`https://deploy.example.com/api/deployments`"
+          },
+          {
+            "name": "method",
+            "value": "`POST`"
+          },
+          {
+            "name": "header",
+            "value": "`Authorization: Bearer $(workspace.params.deploy-token)`"
+          },
+          {
+            "name": "contentType",
+            "value": "`application/json`"
+          },
+          {
+            "name": "body",
+            "value": "The JSON below"
+          },
+          {
+            "name": "retrycodes",
+            "value": "Leave `502,503`"
+          },
+          {
+            "name": "retrynumber",
+            "value": "Leave `3`"
+          },
+          {
+            "name": "retrydelay",
+            "value": "`2000`"
+          }
+        ],
+        "code": [
+          {
+            "for": "body",
+            "lang": "json",
+            "text": "{\"service\": \"$(params.service)\", \"version\": \"$(params.version)\"}"
+          }
+        ],
+        "results": [
+          {
+            "name": "statusCode",
+            "value": "The status received, such as `201`"
+          },
+          {
+            "name": "response",
+            "value": "The response body as text, such as `{\"id\":\"d-1042\"}`, when it's 3,000 bytes or less"
+          }
+        ],
+        "outcome": "A 502 or 503 is retried up to 3 times, 2 seconds apart. Any 2xx succeeds. Any other status not in **HTTP response codes for successful execution** fails the task, with `statusCode`, and `response` when it fits, still set. **Headers** takes one `Name: value` per line, and only the names reach the log. For a larger response, set **Response File Path** to an absolute path or one relative to `/workspace`; `response` is then empty."
+      },
+      "errors": [
+        {
+          "defaultImage": "boomerangio/task-flow:3.3.0",
+          "symptom": "The task succeeds at once, and `statusCode` and `response` are empty",
+          "cause": "On `boomerangio/task-flow:3.3.0`, the default task image, the HTTP command is switched off.",
+          "fix": "Until task-flow 3.4.0, call the API with `curl --fail` in **Execute Shell**. See [The HTTP Call tasks do nothing](../introduction/known-issues#the-http-call-tasks-do-nothing)."
+        },
+        {
+          "symptom": "The task fails, saying the response is more than a task result can carry",
+          "cause": "The body is over 3,000 bytes, and **Response File Path** is blank.",
+          "fix": "Set **Response File Path**, and read the file in a later task."
+        },
+        {
+          "symptom": "A `301` or `302` fails the task",
+          "cause": "The task doesn't follow redirects.",
+          "fix": "Call the final URL, or add the code to **HTTP response codes for successful execution**."
+        },
+        {
+          "symptom": "The task fails before sending, saying the body isn't valid JSON",
+          "cause": "**Content Type** is a JSON type, and **Body** isn't valid JSON, often because a reference inserted a quote.",
+          "fix": "Correct the body. The task sends it as written."
+        }
+      ]
+    }
   },
   "migrationTasks": [
     {
