@@ -1,6 +1,6 @@
 ---
 title: Machine tokens
-order: 4
+order: 5
 description: Give services and dispatchers their own Flow credentials, declare them in configuration, and rotate them without a gap.
 ---
 
@@ -187,5 +187,5 @@ Changing an entry's hash in place also rotates the token, but the old token stop
 
 - [Sign-in and the first admin](./sign-in): the activation code, Auto-Create Users and the admin claim.
 - [Security](../architecture/security): token kinds, roles and the dispatcher protocol inside Flow.
-- [Administer](../fundamentals/administer): **Admin › Tokens** and the other admin pages.
+- [Administer](../webapp/administer): **Admin › Tokens** and the other admin pages.
 - [Configuring](./configuring): the other properties service-core reads.

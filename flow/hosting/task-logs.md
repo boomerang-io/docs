@@ -1,6 +1,6 @@
 ---
 title: Task logs
-order: 7
+order: 9
 description: Keep finished task logs in the artifact store, follow running tasks through the dispatcher, and read live logs from Loki.
 ---
 

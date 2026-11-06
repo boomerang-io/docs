@@ -1,6 +1,6 @@
 ---
 title: Run the dispatcher
-order: 6
+order: 8
 description: Deploy Flow's Kubernetes dispatcher, choose its executor and task types, grant its permissions, and size, place and clean up task pods.
 ---
 
@@ -333,7 +333,7 @@ Flow's Kubernetes dispatcher splits work by task type only. Run one deployment p
 - **An AI zone:** see [Give AI tasks their own network zone](#give-ai-tasks-their-own-network-zone).
 - **An isolation tier or a size:** a deployment with its own `dispatcher.tasks.runtimeClassName` or `kube.resource.*`, registered for the types that need it.
 
-Two deployments registered for the same type both claim it, so remove a type from one when another should own it. Flow's Kubernetes dispatcher can't split by workflow label, by task or by workspace. Only a dispatcher built with the dispatcher SDK can, through its poll filters: see [Write a dispatcher](../extend/write-a-dispatcher). Even then, a dispatcher without filters still claims work a filtered one would take.
+Two deployments registered for the same type both claim it, so remove a type from one when another should own it. Flow's Kubernetes dispatcher can't split by workflow label, by task or by workspace. Only a dispatcher built with the dispatcher SDK can, through its poll filters: see [Filters](../extend/dispatcher-protocol#filters) in the dispatcher protocol reference. Even then, a dispatcher without filters still claims work a filtered one would take.
 
 **Replicas of one deployment** each register under the pod's host name and claim work. Each dispatcher process also accepts live log reads only with the bearer it generated at its own start. If `flow.dispatcher.logs.url` names a Service in front of several replicas, a live log read can land on the wrong one and be refused. Run one replica, or register each pod's own address:
 

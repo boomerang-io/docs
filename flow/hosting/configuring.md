@@ -8,7 +8,7 @@ description: Set the properties, routes and probes a Flow v5 deployment needs, a
 
 # Configuring
 
-This page covers what each Flow v5 image needs to start, how to route traffic to it, its health probes, and how Flow connects to its dispatcher. It's for operators deploying Flow.
+This page covers what each Flow v5 image needs to start, how to route traffic to it, its health probes, and how Flow connects to its dispatcher. It's for operators deploying Flow. The [Configuration reference](./configuration-reference) lists the properties by area, with their defaults.
 
 ## Before you start
 
@@ -17,7 +17,7 @@ This page covers what each Flow v5 image needs to start, how to route traffic to
 - **An S3-compatible bucket** for artifacts and stored task logs. Create it beforehand: S3 doesn't create a bucket on first upload.
 - **An OpenID Connect provider or an authenticating proxy** for sign-in. See [Sign-in](./sign-in).
 - **An exact release tag**, such as `5.0.0-beta.39`. Pin it: every beta sorts below every release candidate of the same version, so "highest version" can pick an older build.
-- **Upgrading from v3?** Read [Upgrading](./upgrading) first. The first start migrates the database, and the migration is forward-only.
+- **Upgrading from v3?** Read [Upgrade from v3](./upgrading) first. The first start migrates the database, and the migration is forward-only.
 
 ## What you deploy
 
@@ -62,16 +62,15 @@ bmrg-flow 6.0.1, the first chart for v5, needs Flow 5.0.0-beta.39 or later. It s
 
 Core and the dispatcher each read the `application.properties` inside their image, and an environment variable overrides any property: `flow.encrypt.secret` becomes `FLOW_ENCRYPT_SECRET`. The webapp reads only environment variables.
 
-Properties wire the deployment: addresses, credentials and switches, read at start. Behaviour an admin tunes while Flow runs, such as quotas, retention and the default task image, is a setting. Settings are stored in MongoDB and changed in **Admin › Settings** or with `PATCH /api/v2/settings`, without a restart. See [Administer](../fundamentals/administer).
+Properties wire the deployment: addresses, credentials and switches, read at start. Behaviour an admin tunes while Flow runs, such as quotas, retention and the default task image, is a setting. Settings are stored in MongoDB and changed in **Admin › Settings** or with `PATCH /api/v2/settings`, without a restart. See [Administer](../webapp/administer).
 
 Core needs these to start:
 
-| Property | Environment variable | Default | Meaning |
-| --- | --- | --- | --- |
-| `spring.mongodb.uri` | `SPRING_MONGODB_URI` | a `localhost` sample | MongoDB connection string. Always set it. |
-| `flow.encrypt.secret` | `FLOW_ENCRYPT_SECRET` | blank | Half of the key Flow encrypts stored secrets with. Required. |
-| `flow.encrypt.salt` | `FLOW_ENCRYPT_SALT` | blank | The other half of the key. Required. |
-| `flow.activation-code` | `FLOW_ACTIVATION_CODE` | blank | The code the first admin enters on an empty install. At least 32 characters. See [Sign-in](./sign-in). |
+- `SPRING_MONGODB_URI`: the MongoDB connection string. Always set it.
+- `FLOW_ENCRYPT_SECRET` and `FLOW_ENCRYPT_SALT`: the two halves of the key Flow encrypts stored secrets with.
+- `FLOW_ACTIVATION_CODE`: the code the first admin enters on an empty install, at least 32 characters. See [Sign-in](./sign-in).
+
+[Core](./configuration-reference#core) and [Security and sign-in](./configuration-reference#security-and-sign-in) in the configuration reference give each property and its default.
 
 Keep all four in a Kubernetes Secret, since the URI usually carries a password:
 
@@ -91,7 +90,7 @@ Core builds every index itself, in its migrations; nothing else creates them. It
 
 ### Keep the encryption key
 
-Flow encrypts secured settings, secret parameter values and stored integration tokens with `flow.encrypt.secret` and `flow.encrypt.salt`. Any string works for either. A v3 upgrade reads a second pair once, `mongo.encrypt.*`: see [Upgrading](./upgrading).
+Flow encrypts secured settings, secret parameter values and stored integration tokens with `flow.encrypt.secret` and `flow.encrypt.salt`. Any string works for either. A v3 upgrade reads a second pair once, `mongo.encrypt.*`: see [Upgrade from v3](./upgrading#set-the-encryption-keys).
 
 > **Warning:** Never change the pair after the first start. Nothing re-encrypts stored values under a new key, so every stored secret stops decrypting. Keep a copy of the Secret outside the cluster. If the pair was changed, put the original back. If it's lost, every secret has to be entered again.
 
@@ -99,16 +98,7 @@ Flow encrypts secured settings, secret parameter values and stored integration t
 
 Artifacts and stored task logs live in an S3-compatible store, such as AWS S3, MinIO or Cloud Storage in S3 mode. The store is off by default. Until it's on, every artifact call answers `ARTIFACTS_NOT_CONFIGURED`, and a finished task's log lasts only as long as its pod (see [Task logs](./task-logs)).
 
-| Property | Environment variable | Default | Meaning |
-| --- | --- | --- | --- |
-| `flow.artifacts.enabled` | `FLOW_ARTIFACTS_ENABLED` | `false` | Turn the artifact store on |
-| `flow.artifacts.store.endpoint` | `FLOW_ARTIFACTS_STORE_ENDPOINT` | blank | The store address core uses |
-| `flow.artifacts.store.link-endpoint` | `FLOW_ARTIFACTS_STORE_LINK_ENDPOINT` | blank | The store address task pods use, when it differs from core's |
-| `flow.artifacts.store.bucket` | `FLOW_ARTIFACTS_STORE_BUCKET` | `flow-artifacts` | The bucket |
-| `flow.artifacts.store.region` | `FLOW_ARTIFACTS_STORE_REGION` | `us-east-1` | The region |
-| `flow.artifacts.store.access-key` | `FLOW_ARTIFACTS_STORE_ACCESS_KEY` | blank | Access key. Keep it in the Secret. |
-| `flow.artifacts.store.secret-key` | `FLOW_ARTIFACTS_STORE_SECRET_KEY` | blank | Secret key. Keep it in the Secret. |
-| `flow.artifacts.store.path-style` | `FLOW_ARTIFACTS_STORE_PATH_STYLE` | `true` | Path-style addressing |
+Turn it on with `FLOW_ARTIFACTS_ENABLED=true`, then set the store's endpoint, bucket and region, and its access key and secret key, which belong in the Secret. When task pods reach the store at a different address from core, set that address as `FLOW_ARTIFACTS_STORE_LINK_ENDPOINT`. [Artifacts](./configuration-reference#artifacts) in the configuration reference lists each property and its default.
 
 Task pods transfer files through signed links valid for 15 minutes (`flow.artifacts.link-ttl-minutes`). Retention, the largest artifact and the storage quota are settings, under **Admin › Settings › Artifacts** and **Quotas**.
 
@@ -139,14 +129,7 @@ The browser talks only to the webapp, and the webapp's server calls core. Each o
 
 Behind a reverse proxy or ingress, forward the `Host` header with its port (nginx: `proxy_set_header Host $http_host;`, not `$host`). The webapp checks each form submission's `Origin` against that host. Without the port, every form submission fails with HTTP 400. The REST API is unaffected.
 
-The webapp takes these environment variables:
-
-| Variable | Example | Meaning |
-| --- | --- | --- |
-| `CORE_SERVICE_INTERNAL_ORIGIN` | `http://flow-core:7700` | Core's address from the webapp's server. Unset, the webapp has no address for core. |
-| `APP_ROOT` | `/apps/flow` | The base path. Keep `/apps/flow`: it's fixed when the image is built. |
-| `PORT` | `3000` | The port the webapp listens on |
-| `PRODUCT_SERVICE_ENV_URL` | `/api/v2` | The API address shown in copyable webhook and event URLs. A relative value uses the webapp's own host, so route `/api/v2/` there too, or give a full URL. |
+The webapp reads only environment variables. Set `CORE_SERVICE_INTERNAL_ORIGIN` to core's address from the webapp's server, such as `http://flow-core:7700`: unset, the webapp has no address for core. `PRODUCT_SERVICE_ENV_URL` is the API address shown in copyable webhook and event URLs. A relative value, such as `/api/v2`, uses the webapp's own host, so route `/api/v2/` there too, or give a full URL. [Webapp](./configuration-reference#webapp) in the configuration reference lists every variable.
 
 ## Configure health probes
 
@@ -175,18 +158,11 @@ Both paths answer without a token on a secured install.
 - **Use HTTP probes.** There's no shell for an `exec` probe.
 - **A passing probe doesn't mean MongoDB is reachable.** Core's health doesn't check the database.
 - **If core restarts before it logs `Started Application`,** the startup probe is too short. Lengthen it.
-- **Replicas that start together** wait on the migration lock for up to 30 minutes. Roll out one replica first, and for a v3 upgrade size the probe for the largest run history: see [Upgrading](./upgrading).
+- **Replicas that start together** wait on the migration lock for up to 30 minutes. Roll out one replica first, and for a v3 upgrade size the probe for the largest run history: see [Upgrade from v3](./upgrading#size-the-startup-probe).
 
 ## Connect the dispatcher
 
-Set these on the dispatcher:
-
-| Property | Environment variable | Default | Meaning |
-| --- | --- | --- | --- |
-| `flow.engine.url` | `FLOW_ENGINE_URL` | `http://localhost:7700` | Core's base URL from the dispatcher, such as `http://flow-core:7700` |
-| `flow.engine.dispatcher.token` | `FLOW_ENGINE_DISPATCHER_TOKEN` | blank | The token the dispatcher sends to core: a global machine token. See [Machine tokens](./machine-tokens). |
-| `kube.namespace` | `KUBE_NAMESPACE` | blank | The namespace for task pods, claims and ConfigMaps. Blank uses the service account's namespace. |
-| `dispatcher.executor` | `DISPATCHER_EXECUTOR` | `tekton` | `tekton` or `kube-jobs` |
+On the dispatcher, set `FLOW_ENGINE_URL` to core's base URL, such as `http://flow-core:7700`, and `FLOW_ENGINE_DISPATCHER_TOKEN` to a global machine token (see [Machine tokens](./machine-tokens)). `KUBE_NAMESPACE` is the namespace for task pods, claims and ConfigMaps, and `DISPATCHER_EXECUTOR` is `tekton`, the default, or `kube-jobs`. [Dispatcher link](./configuration-reference#dispatcher-link) in the configuration reference gives each property and its default.
 
 Upgrading from an earlier release? `flow.engine.service.host` is gone: set `flow.engine.url`, with its scheme and port.
 
@@ -221,12 +197,7 @@ To stop handing out work, for maintenance, set `flow.queue.enabled=false` on cor
 
 ## Choose a deployment shape
 
-Two properties on core set the shape:
-
-| Property | Environment variable | Default | Effect |
-| --- | --- | --- | --- |
-| `flow.security.enabled` | `FLOW_SECURITY_ENABLED` | `true` | Authentication and authorisation, together. `false` runs every request as an admin. |
-| `flow.workspace.single` | `FLOW_WORKSPACE_SINGLE` | `false` | `true` serves only the seeded `system` workspace; workspaces can't be created or deleted. |
+Two properties on core set the shape. `flow.security.enabled` turns authentication and authorisation on together; `false` runs every request as an admin. `flow.workspace.single=true` serves only the seeded `system` workspace, and workspaces can't be created or deleted. See [Deployment shape](./configuration-reference#deployment-shape) in the configuration reference.
 
 | Shape | `flow.security.enabled` | `flow.workspace.single` | Use for |
 | --- | --- | --- | --- |
@@ -239,15 +210,7 @@ A secured install that no person signs in to takes its first credential from `fl
 
 ## Send status events and traces
 
-Core can send a CloudEvent for every workflow run and task run status change. It's off by default.
-
-| Property | Environment variable | Default | Meaning |
-| --- | --- | --- | --- |
-| `flow.events.sink.enabled` | `FLOW_EVENTS_SINK_ENABLED` | `false` | Send status events |
-| `flow.events.sink.urls` | `FLOW_EVENTS_SINK_URLS` | blank | Receiver URLs, comma-separated |
-| `flow.events.sink.destinations[0].url`, `.header-name`, `.header-value` | `FLOW_EVENTS_SINK_DESTINATIONS_0_URL`, and so on | header name `Authorization` | A receiver that authenticates with a request header |
-| `flow.events.sink.payload` | `FLOW_EVENTS_SINK_PAYLOAD` | `thin` | `thin`: IDs, status, phase, labels and timings. `full`: the whole run, with secrets redacted. |
-| `flow.events.sink.types`, `.statuses`, `.phases` | `FLOW_EVENTS_SINK_STATUSES`, and so on | blank (no filter) | Filters. `statuses=terminal` sends only ends; `phases=completed` is the true end of a run with finally tasks. |
+Core can send a CloudEvent for every workflow run and task run status change. It's off by default. Turn it on with `flow.events.sink.enabled`, and name the receivers in `flow.events.sink.urls`, or in `flow.events.sink.destinations[0].*` for a receiver that authenticates with a request header. [Events and tracing](./configuration-reference#events-and-tracing) in the configuration reference lists the payload and filter properties.
 
 A secret in a bare URL travels in the query string, where proxies and access logs record it. Use a destination with a header, and take the value from a Secret:
 
@@ -266,12 +229,7 @@ Delivery is at least once. Every core instance sends from an outbox every 5 seco
 
 <!-- UNVERIFIED: flow.events.outbox.interval-ms (5000) is read in code but not declared in application.properties; not documented. -->
 
-Core can also export its own request spans over OTLP:
-
-| Property | Environment variable | Default | Meaning |
-| --- | --- | --- | --- |
-| `management.tracing.export.enabled` | `MANAGEMENT_TRACING_EXPORT_ENABLED` | `false` | Export core's request spans |
-| `management.opentelemetry.tracing.export.otlp.endpoint` | `MANAGEMENT_OPENTELEMETRY_TRACING_EXPORT_OTLP_ENDPOINT` | not set | The OTLP collector to send them to |
+Core can also export its own request spans over OTLP: set `management.tracing.export.enabled=true`, and point `management.opentelemetry.tracing.export.otlp.endpoint` at your collector.
 
 Core emits no run or task spans. Each task gets a `TRACEPARENT` derived from its run, so tasks that export their own spans land in one trace per run. On the dispatcher, `flow.dispatcher.ai.otel.endpoint` points `ai` task pods at a collector. Flow stores no traces.
 
@@ -298,10 +256,12 @@ Settings take effect without a restart. For example, a change to **Admin › Set
 
 ## Next steps
 
+- [Configuration reference](./configuration-reference): the properties on this page, grouped by area, with their defaults.
 - [Sign-in](./sign-in): OpenID Connect or an authenticating proxy, and the first admin.
 - [Machine tokens](./machine-tokens): the dispatcher's token and the bootstrap token.
 - [Dispatcher](./dispatcher): executors, task pods and run workspaces.
 - [Task logs](./task-logs): live and stored task logs.
-- [Upgrading](./upgrading): moving a v3 install to v5.
+- [Upgrade from v3](./upgrading): moving a v3 install to v5.
+- [Upgrade between v5 releases](./rolling-upgrades): rolling out a later v5 release.
 - [Security](../architecture/security): how Flow authenticates and authorises callers.
-- [Administer](../fundamentals/administer): the settings an admin changes while Flow runs.
+- [Administer](../webapp/administer): the settings an admin changes while Flow runs.

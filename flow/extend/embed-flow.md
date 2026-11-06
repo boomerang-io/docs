@@ -1,6 +1,6 @@
 ---
 title: Embed Flow
-order: 3
+order: 4
 description: Use Flow as the workflow engine inside a host product, choose a deployment shape, call it with flow-sdk, run its tasks and read results back.
 ---
 

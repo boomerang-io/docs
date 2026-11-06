@@ -1,4 +1,4 @@
 ---
 title: Self Hosting
-order: 6
+order: 8
 ---

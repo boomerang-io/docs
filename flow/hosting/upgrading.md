@@ -1,14 +1,14 @@
 ---
-title: Upgrading
-order: 5
-description: Upgrade a Flow v3 installation to v5 in place, then roll out each later v5 release.
+title: Upgrade from v3
+order: 6
+description: Upgrade a Flow v3 installation to v5 in place.
 ---
 
 <!-- Written against flow.service.workflow 5.0.0-beta.39 (3960b0a79). v3 chart facts are from the charts repository: bmrg-flow 4.14.3 (the last v3 chart) and 5.5.4 (the last released chart). The v5 chart facts are from charts#92 (bmrg-flow 6.0.0). -->
 
-# Upgrading
+# Upgrade from v3
 
-This page takes a Flow v3 installation to v5 in place, then covers rolling out each later v5 release. It's for operators. The upgrade is forward-only: a failed upgrade is recovered from the backup, not rolled back.
+This page takes a Flow v3 installation to v5 in place. It's for operators. The upgrade is forward-only: a failed upgrade is recovered from the backup, not rolled back. To roll out a later v5 release on a v5 install, see [Upgrade between v5 releases](./rolling-upgrades).
 
 A v3 upgrade runs in this order:
 
@@ -401,7 +401,7 @@ v3 tokens don't carry over: the upgrade drops v3's `tokens` collection. Every ca
   - the Drive tasks reach shared drives, the mail, ServiceNow and Slack tasks work when `HTTP_PROXY` is set, and JSONPath To Parameter no longer crashes with `module is not defined`;
   - task logs no longer print param values, and Google errors no longer include the request's bearer token.
 - **New task revisions.** The upgrade adds a revision of each Slack task that takes its bot token and webhook URL as password fields, and of each GitHub and Slack API task whose token defaults to the integration's shared workspace parameter (`$(workspace.params.github-token)`, `$(workspace.params.slack-token)`). Workflows keep the revision they pin until you upgrade it in the editor. A task moved to the new revision and left on its default fails at admission in a workspace that doesn't share the token; the editor warns at save.
-- **Quotas.** In v5 a quota of `0` is unlimited, and an absent quota inherits the platform default. v3 enforced `0` as a limit of zero, so the upgrade drops each v3 `0` and that workspace inherits the default. Check any workspace that relied on a zero limit. Kept artifacts count toward `max.artifact.storage` until they're replaced or deleted. See [Quotas](../fundamentals/quotas).
+- **Quotas.** In v5 a quota of `0` is unlimited, and an absent quota inherits the platform default. v3 enforced `0` as a limit of zero, so the upgrade drops each v3 `0` and that workspace inherits the default. Check any workspace that relied on a zero limit. Kept artifacts count toward `max.artifact.storage` until they're replaced or deleted. See [Quotas](../webapp/quotas).
 - **AI task (5.0 betas).** The seeded `ai` task is removed in favour of `ai-prompt` and `ai-agent`. An upgraded database keeps its `ai` definition, but nothing maintains it: move nodes to `ai-prompt`, whose params have the same names. `temperature` and `maxTokens` have no default.
 
 ### Update API clients
@@ -452,33 +452,9 @@ No Helm chart for Flow v5 is released yet; bmrg-flow 5.5.4 installs Flow 4.0.0. 
 - **Without v3's pair**, set `core.migration.resetUnreadableSettings: true`.
 - **The dispatcher** gets `FLOW_ENGINE_URL` and its own Role. Its executor, `dispatcher.executor`, defaults to `kube-jobs` in the chart.
 
-## Every later v5 release
-
-Later v5 releases upgrade with a rolling update. The new release migrates in its first pod while the previous release keeps serving.
-
-1. Read the release's **Upgrading** notes.
-2. Back up the database.
-3. Deploy all three images at the new tag, with core rolling one pod at a time:
-
-   ```yaml
-   strategy:
-     type: RollingUpdate
-     rollingUpdate:
-       maxSurge: 1
-       maxUnavailable: 0
-   ```
-
-   One new pod runs the migrations while the old pods serve. Once it's ready, the rest replace the old pods one at a time and start against the migrated database without waiting.
-
-- **Mixed versions.** During the rollout, the previous release keeps serving against the migrated database: every migration stays compatible with the previous release. That holds between v5 releases only. A v3 upgrade stops v3 first.
-  <!-- UNVERIFIED: the compatibility rule is the maintainer's; no source in the product repository states or tests it. -->
-- **Startup probe.** The new pod is starting for the whole of its migration. Keep the probe sized for the largest migration the release notes describe.
-- **When a migration fails,** the new pod doesn't start, and the rollout stalls with the old pods serving. Read its log with `kubectl logs <new-pod> -n <namespace>`, fix the cause, and delete the pod. The interrupted step runs again on the next start. Never edit `flow_sys_migration_changelog`.
-- **Turning migrations off.** `flamingock.enabled=false` (`FLAMINGOCK_ENABLED=false`) starts core without running migrations. Core then runs against whatever shape the database has. Migrations are the only thing that builds indexes and seeds settings, roles and catalogue changes, so a release started this way against a database its migrations haven't reached can fail requests, or run without its indexes. Use it only for a replica of a release whose migrations have already run against this database.
-  <!-- UNVERIFIED: when to use flamingock.enabled=false isn't documented in the product; the property is Flamingock's (1.4.4) and named in application.properties' comment. The risk follows from spring.data.mongodb.auto-index-creation=false and seeding by change units. -->
-
 ## Next steps
 
+- [Upgrade between v5 releases](./rolling-upgrades): rolling out each later v5 release.
 - [Configuring](./configuring): the properties, routes and probes each image needs.
 - [Dispatcher](./dispatcher): running tasks on Kubernetes.
 - [Machine tokens](./machine-tokens): tokens for the dispatcher and other callers.

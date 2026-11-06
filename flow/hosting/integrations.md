@@ -1,6 +1,6 @@
 ---
 title: Integrations
-order: 8
+order: 10
 description: Set up the platform's GitHub App and Slack app, and what the Google and Microsoft integrations need.
 ---
 
@@ -9,7 +9,7 @@ description: Set up the platform's GitHub App and Slack app, and what the Google
 
 # Integrations
 
-GitHub and Slack connect through one app each, which a platform admin sets up once for the whole install. Google and Microsoft need nothing on the platform. This page is for operators and admins. Workspace owners connect their own workspaces: see [Integrations](../fundamentals/integrations) and [Connect GitHub](../guides/connect-github).
+GitHub and Slack connect through one app each, which a platform admin sets up once for the whole install. Google and Microsoft need nothing on the platform. This page is for operators and admins. Workspace owners connect their own workspaces: see [Integrations](../webapp/integrations) and [Connect GitHub](../guides/connect-github).
 
 ## Before you start
 
@@ -214,7 +214,7 @@ Send Teams Message posts through a Teams Workflows webhook and doesn't use the i
 
 ## Next steps
 
-- [Integrations](../fundamentals/integrations): what each integration adds to a workspace, and sharing credentials.
+- [Integrations](../webapp/integrations): what each integration adds to a workspace, and sharing credentials.
 - [Connect GitHub](../guides/connect-github): the workspace side of the GitHub App.
 - [Machine tokens](./machine-tokens): declaring and rotating the delivery token.
 - [Triggers](../fundamentals/triggers): the GitHub trigger's events and filters.

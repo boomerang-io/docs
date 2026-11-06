@@ -1,6 +1,6 @@
 ---
 title: Sign-in and the first admin
-order: 3
+order: 4
 description: Choose how people sign in to Flow, make the first admin, and decide who else may sign in.
 ---
 
@@ -208,5 +208,5 @@ The claim works when a member of `flow-admins` signs in and sees **Admin** in th
 
 - [Machine tokens](./machine-tokens): the bootstrap token, declared tokens and rotation.
 - [Security](../architecture/security): how sign-in, tokens and roles work inside Flow.
-- [Administer](../fundamentals/administer): settings and users in **Admin**.
+- [Administer](../webapp/administer): settings and users in **Admin**.
 - [Configuring](./configuring): the other properties service-core reads.
